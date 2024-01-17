@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Cute+Font&family=Open+Sans:wght@400;600&display=swap");
+
+/* Fill me in :) */
+.welcome {
+  text-align: center;
+  font-family: "Cute Font", sans-serif;
+  font-size: 40px;
+}
+.room {
+  background-color: #eeface;
+  margin: 10% 10% 10% 10%;
+  padding: 10% 10% 10% 10%;
+}
+#roomdisplay {
+  width: 100%;
+}
