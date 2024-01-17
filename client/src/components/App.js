@@ -5,12 +5,13 @@ import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
+import Room from "./pages/Room.js";
 
 import "../utilities.css";
 
 import { socket } from "../client-socket.js";
 
-import { get, post } from "../utilities";
+import { get, post } from "../utilities.js";
 
 /**
  * Define the "App" component
@@ -26,11 +27,13 @@ const App = () => {
       }
     });
   }, []);
-
+  const [userName, setUserName] = useState(undefined);
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
     const decodedCredential = jwt_decode(userToken);
     console.log(`Logged in as ${decodedCredential.name}`);
+    setUserName(decodedCredential.name);
+    console.log(userName);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
       post("/api/initsocket", { socketid: socket.id });
@@ -43,20 +46,13 @@ const App = () => {
   };
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Skeleton
-            path="/"
-            handleLogin={handleLogin}
-            handleLogout={handleLogout}
-            userId={userId}
-          />
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <Routes>
+        <Route path="/" element={<Room path="/" userId={userId} name={userName} />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 };
 
