@@ -18,16 +18,17 @@ import { get, post } from "../utilities.js";
  */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
-
+  const [userName, setUserName] = useState(undefined);
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
+        setUserName(user.name);
       }
     });
   }, []);
-  const [userName, setUserName] = useState(undefined);
+
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
     const decodedCredential = jwt_decode(userToken);
