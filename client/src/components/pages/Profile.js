@@ -7,8 +7,15 @@ const Profile = ({ userId, name }) => {
     <div>
       {userId ? (
         <>
-          <div className="name">Hello, {name}</div>
-          <img src="https://i.ibb.co/4FNF9LY/bear.webp" alt="bear" className="avatar-image" />
+          <section className="container">
+            <div className="left-half">
+              <div className="board" />
+            </div>
+            <div className="right-half">
+              <img src="https://i.ibb.co/4FNF9LY/bear.webp" alt="bear" className="avatar-image" />
+              <div className="name">{name}</div>
+            </div>
+          </section>
         </>
       ) : (
         <>

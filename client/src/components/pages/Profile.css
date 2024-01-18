@@ -4,19 +4,40 @@
   font-size: 40px;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.left-half {
+  flex: 1;
+  padding: 1rem;
+}
+
+.right-half {
+  flex: 1;
+  padding: 1rem;
+}
+
+.board {
+  background: #b38977;
+  padding: 5px;
+  width: 400px;
+  height: 550px;
+  margin: auto;
+  margin-top: 10%;
+  border: 8px solid #594038;
+}
+
 .name {
-  text-align: right;
   font-family: "Cute Font", sans-serif;
-  font-size: 40px;
-  padding: 10% 20%;
+  font-size: 3.2vw;
+  text-align: center;
 }
 
 .avatar-image {
-  width: 25%;
-  max-width: 50%;
-  height: auto;
+  width: 50%;
   display: block;
-
-  padding: 0% 30% 0% 60%;
-  /* div height to be the same as width*/
+  margin: auto;
+  margin-top: 28%;
 }
