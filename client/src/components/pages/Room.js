@@ -7,15 +7,14 @@ import Display from "./Display.js";
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com";
 
-const Room = ({ userId, name }) => {
-  const [open, setOpen] = useState("room");
+const Room = ({ userId, name, open }) => {
   console.log(name);
   return (
     <div>
       <div className="welcome">
         {userId ? (
           <>
-            <h1 className="textdisplay">Welcome, {name}</h1>
+            <h1 className="textdisplay">{name}'s Room</h1>
             <Display open={open} />
           </>
         ) : (

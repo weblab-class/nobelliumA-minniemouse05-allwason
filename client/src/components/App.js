@@ -54,11 +54,14 @@ const App = () => {
     <>
       <NavBar path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Room userId={userId} name={userName} />} />
+        <Route path="/" element={<Room open={"room"} userId={userId} name={userName} />} />
         <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
         <Route path="/leaderboard" element={<Leaderboard userId={userId} name={userName} />} />
-        <Route path="/todo" element={<Todo userId={userId} />} />
-        <Route path="/notebook" element={<Notebook userId={userId} />} />
+        <Route path="/todo" element={<Room open={"todo"} userId={userId} name={userName} />} />
+        <Route
+          path="/notebook"
+          element={<Room open={"notebook"} userId={userId} name={userName} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
