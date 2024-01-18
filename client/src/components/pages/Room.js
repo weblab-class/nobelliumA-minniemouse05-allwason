@@ -14,11 +14,12 @@ const Room = ({ userId, name }) => {
         {userId ? (
           <>
             <h1>Welcome, {name}</h1>
-            <div className="room">
+            <div className="room button-overlay">
               <img
                 id="roomdisplay"
                 src="https://img.itch.zone/aW1nLzEwNDk3Mzc3LnBuZw==/original/oZFusP.png"
               />
+              <button>notebook</button>
             </div>
           </>
         ) : (

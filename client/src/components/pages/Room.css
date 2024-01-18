@@ -6,11 +6,20 @@
   font-family: "Cute Font", sans-serif;
   font-size: 40px;
 }
-.room {
+
+#roomdisplay {
+  width: 100%;
+}
+.button-overlay {
+  position: relative;
+  display: inline-block;
   background-color: #eeface;
   margin: 10% 10% 10% 10%;
   padding: 10% 10% 10% 10%;
 }
-#roomdisplay {
-  width: 100%;
+.button-overlay button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
