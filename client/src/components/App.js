@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound.js";
 import NavBar from "./modules/NavBar.js";
 import Room from "./pages/Room.js";
 import Profile from "./pages/Profile.js";
+import Leaderboard from "./pages/Leaderboard.js";
 
 import "../utilities.css";
 
@@ -53,6 +54,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Room userId={userId} name={userName} />} />
         <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
+        <Route path="/leaderboard" element={<Leaderboard userId={userId} name={userName} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

@@ -1,0 +1,13 @@
+.login {
+  text-align: center;
+  font-family: "Cute Font", sans-serif;
+  font-size: 40px;
+}
+
+.ranking {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+}

@@ -5,7 +5,15 @@ import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/goo
 import "../../utilities.css";
 import "./NavBar.css";
 
-//TODO: REPLACE WITH YOUR OWN CLIENT_ID
+/**
+ * NavBar is a component for displaying navigation bar
+ *
+ * Proptypes
+ * @param {string} userId
+ * @param {function} handleLogout
+ * @param {function} handleLogin
+ */
+
 const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com";
 
 const NavBar = ({ userId, handleLogin, handleLogout }) => {
@@ -21,6 +29,12 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
         {userId && (
           <Link to={`/profile/${userId}`} className="NavBar-link">
             Profile
+          </Link>
+        )}
+
+        {userId && (
+          <Link to="/leaderboard" className="NavBar-link">
+            Leaderboard
           </Link>
         )}
 
