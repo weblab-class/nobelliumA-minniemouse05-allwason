@@ -4,8 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
-import NavBar from "./pages/NavBar.js";
+import NavBar from "./modules/NavBar.js";
 import Room from "./pages/Room.js";
+import Profile from "./pages/Profile.js";
 
 import "../utilities.css";
 
@@ -50,7 +51,8 @@ const App = () => {
     <>
       <NavBar path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Room path="/" userId={userId} name={userName} />} />
+        <Route path="/" element={<Room userId={userId} name={userName} />} />
+        <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

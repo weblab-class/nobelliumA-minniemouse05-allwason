@@ -1,0 +1,29 @@
+/* Fill me in :) */
+.NavBar {
+  background-color: #b38977;
+}
+
+.NavBar-linkContainer {
+  margin-left: var(--l);
+  font-family: "Cute Font", sans-serif;
+  font-size: 30px;
+}
+
+.NavBar-link,
+.NavBar-link:visited {
+  color: var(--white);
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+.NavBar-link:hover {
+  opacity: 0.8;
+}
+
+.NavBar-link.NavBar-login {
+  opacity: 1;
+}
+
+.NavBar-link + .NavBar-link {
+  margin-left: var(--m);
+}

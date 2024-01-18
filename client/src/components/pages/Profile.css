@@ -1,0 +1,22 @@
+.login {
+  text-align: center;
+  font-family: "Cute Font", sans-serif;
+  font-size: 40px;
+}
+
+.name {
+  text-align: right;
+  font-family: "Cute Font", sans-serif;
+  font-size: 40px;
+  padding: 10% 20%;
+}
+
+.avatar-image {
+  width: 25%;
+  max-width: 50%;
+  height: auto;
+  display: block;
+
+  padding: 0% 30% 0% 60%;
+  /* div height to be the same as width*/
+}
