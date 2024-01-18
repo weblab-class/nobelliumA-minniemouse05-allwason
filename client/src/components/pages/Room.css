@@ -10,17 +10,21 @@
 #roomdisplay {
   width: 100%;
 }
+.textdisplay {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .button-overlay {
   position: relative;
   display: inline-block;
 
-  margin: 5% 5% 5% 5%;
-  padding: 2% 2% 2% 2%;
+  margin: 0% 20% 0% 20%;
+  padding: 0% 8% 0% 8%;
 }
 .button-overlay #notebook {
   position: absolute;
   top: 45%;
-  left: 72%;
+  left: 67%;
   transform: translate(-50%, -50%);
   border: 7px solid #000000;
   cursor: pointer;

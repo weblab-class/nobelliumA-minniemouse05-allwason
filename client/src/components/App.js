@@ -8,6 +8,8 @@ import NavBar from "./modules/NavBar.js";
 import Room from "./pages/Room.js";
 import Profile from "./pages/Profile.js";
 import Leaderboard from "./pages/Leaderboard.js";
+import Todo from "./pages/Todo.js";
+import Notebook from "./pages/Notebook.js";
 
 import "../utilities.css";
 
@@ -55,6 +57,8 @@ const App = () => {
         <Route path="/" element={<Room userId={userId} name={userName} />} />
         <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
         <Route path="/leaderboard" element={<Leaderboard userId={userId} name={userName} />} />
+        <Route path="/todo" element={<Todo />} />
+        <Route path="/notebook" element={<Notebook />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
