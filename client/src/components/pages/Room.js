@@ -15,11 +15,9 @@ const Room = ({ userId, name }) => {
           <>
             <h1>Welcome, {name}</h1>
             <div className="room button-overlay">
-              <img
-                id="roomdisplay"
-                src="https://img.itch.zone/aW1nLzEwNDk3Mzc3LnBuZw==/original/oZFusP.png"
-              />
-              <button>notebook</button>
+              <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
+              <button id="notebook">notebook</button>
+              <button id="todo">To do List</button>
             </div>
           </>
         ) : (
