@@ -20,24 +20,22 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar ">
       <div className="NavBar-linkContainer u-inlineBlock">
+        RoomCraft
         {userId && (
           <Link to="/" className="NavBar-link">
             Home
           </Link>
         )}
-
         {userId && (
           <Link to={`/profile/${userId}`} className="NavBar-link">
             Profile
           </Link>
         )}
-
         {userId && (
           <Link to="/leaderboard" className="NavBar-link">
             Leaderboard
           </Link>
         )}
-
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           {userId ? (
             <button

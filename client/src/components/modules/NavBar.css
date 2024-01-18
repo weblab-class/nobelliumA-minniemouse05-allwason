@@ -1,6 +1,7 @@
 /* Fill me in :) */
 .NavBar {
   background-color: #b38977;
+  border-bottom: 2px solid #000;
 }
 
 .NavBar-linkContainer {
