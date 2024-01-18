@@ -57,8 +57,8 @@ const App = () => {
         <Route path="/" element={<Room userId={userId} name={userName} />} />
         <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
         <Route path="/leaderboard" element={<Leaderboard userId={userId} name={userName} />} />
-        <Route path="/todo" element={<Todo />} />
-        <Route path="/notebook" element={<Notebook />} />
+        <Route path="/todo" element={<Todo userId={userId} />} />
+        <Route path="/notebook" element={<Notebook userId={userId} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
