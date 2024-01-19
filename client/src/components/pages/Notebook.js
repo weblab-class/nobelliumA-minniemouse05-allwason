@@ -9,7 +9,7 @@ const Notebook = ({ userId }) => {
   const navigate = useNavigate;
   return userId ? (
     <div id="entry-container">
-      <NotebookEntry />
+      <NotebookEntry _id={userId} />
     </div>
   ) : (
     { navigate }
