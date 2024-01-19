@@ -8,9 +8,7 @@ import NavBar from "./modules/NavBar.js";
 import Room from "./pages/Room.js";
 import Profile from "./pages/Profile.js";
 import Leaderboard from "./pages/Leaderboard.js";
-import Todo from "./pages/Todo.js";
-import Notebook from "./pages/Notebook.js";
-
+import { useNavigate } from "react-router-dom";
 import "../utilities.css";
 
 import { socket } from "../client-socket.js";
@@ -50,6 +48,17 @@ const App = () => {
     post("/api/logout");
   };
 
+  var ESCAPE_KEY = 27;
+  const navigate = useNavigate();
+  useEffect(() => {
+    document.addEventListener("keydown", _handleKeyDown, true);
+  }, []);
+  const _handleKeyDown = (event) => {
+    if (event.keyCode === ESCAPE_KEY) {
+      navigate("/");
+      console.log("back to home");
+    }
+  };
   return (
     <>
       <NavBar path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />

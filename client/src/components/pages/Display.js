@@ -5,20 +5,7 @@ import "./Room.css";
 import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
 const Display = ({ open }) => {
-  var ESCAPE_KEY = 27;
-  const navigate = useNavigate();
-  useEffect(() => {
-    document.addEventListener("keydown", _handleKeyDown, true);
-  });
-  const _handleKeyDown = (event) => {
-    switch (event.keyCode) {
-      case ESCAPE_KEY:
-        navigate("/");
-        break;
-      default:
-        break;
-    }
-  };
+  console.log(open);
 
   if (open === "room") {
     return (

@@ -8,7 +8,6 @@ import Display from "./Display.js";
 const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com";
 
 const Room = ({ userId, name, open }) => {
-  console.log(name);
   return (
     <div>
       <div className="welcome">
