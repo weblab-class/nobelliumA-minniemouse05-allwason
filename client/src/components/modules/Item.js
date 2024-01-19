@@ -5,15 +5,15 @@ import "./Item.css";
 
 const Item = (props) => {
   return (
-    <li>
-      <div className="u-flex u-flex-alignCenter">
+    <li className="">
+      <div className="">
         <input
           id={props.id}
           type="checkbox"
           defaultChecked={props.completed}
           onChange={() => props.toggleTaskCompleted(props.id)}
         />
-        <span>{props.name} </span>
+        <span className="">{props.name} </span>
       </div>
 
       <div className="">
