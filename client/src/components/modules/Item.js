@@ -5,28 +5,23 @@ import "./Item.css";
 
 const Item = (props) => {
   return (
-    <li className="todo stack-small">
-      <div className="c-cb">
+    <li>
+      <div className="u-flex u-flex-alignCenter">
         <input
           id={props.id}
           type="checkbox"
           defaultChecked={props.completed}
           onChange={() => props.toggleTaskCompleted(props.id)}
         />
-        <label className="todo-label" htmlFor="todo-0">
-          {props.name}
-        </label>
+        <span>{props.name} </span>
       </div>
-      <div className="btn-group">
-        <button type="button" className="btn">
-          Edit <span className="visually-hidden">{props.name}</span>
+
+      <div className="">
+        <button type="" className="">
+          Edit <span className="">{props.name}</span>
         </button>
-        <button
-          type="button"
-          className="btn btn__danger"
-          onClick={() => props.deleteTask(props.id)}
-        >
-          Delete <span className="visually-hidden">{props.name} </span>
+        <button type="button" className="" onClick={() => props.deleteTask(props.id)}>
+          Delete <span className="">{props.name} </span>
         </button>
       </div>
     </li>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 import "../../utilities.css";
+import "./Form.css";
 
 const Form = (props) => {
   const [name, setName] = useState("");
@@ -16,22 +17,24 @@ const Form = (props) => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="label-wrapper">
-        <label htmlFor="new-todo-input" className="label__lg">
+      <h2 className="">
+        <label htmlFor="new-todo-input" className="">
           What needs to be done?
         </label>
       </h2>
-      <input
-        type="text"
-        id="new-todo-input"
-        className="input input__lg"
-        name="text"
-        autoComplete="off"
-        onChange={handleChange}
-      />
-      <button type="submit" className="btn btn__primary btn__lg">
-        Add
-      </button>
+      <div className="align">
+        <input
+          className="input-box"
+          type="text"
+          id="new-todo-input"
+          name="text"
+          autoComplete="off"
+          onChange={handleChange}
+        />
+        <button type="submit" className="add_button">
+          Add
+        </button>
+      </div>
     </form>
   );
 };

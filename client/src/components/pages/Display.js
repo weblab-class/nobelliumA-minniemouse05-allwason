@@ -38,7 +38,9 @@ const Display = ({ userId, open }) => {
         <div className="room button-overlay">
           <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
           <div className="display-box">
-            <Todo userId={userId} tasks={itemData} />
+            <div className="inner-todo-list">
+              <Todo userId={userId} tasks={itemData} />
+            </div>
           </div>
         </div>
       </>
