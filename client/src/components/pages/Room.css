@@ -4,15 +4,18 @@
 .welcome {
   text-align: center;
   font-family: "Cute Font", sans-serif;
-  font-size: 40px;
+  font-size: var(--l);
 }
 
 #roomdisplay {
-  width: 100%;
+  width: 90%;
 }
 .login {
   margin: 10% auto 10% auto;
   width: 80%;
+}
+.display {
+  padding-top: 30%;
 }
 .key_img {
   width: 10%;
@@ -28,7 +31,7 @@
   display: inline-block;
 
   margin: 0% 20% 0% 20%;
-  padding: 0% 8% 0% 8%;
+  padding: 0% 10% 0% 10%;
 }
 .button-overlay #notebook {
   position: absolute;

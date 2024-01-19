@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Cute+Font&family=Open+Sans:wght@400;600&display=swap");
+@import "../../utilities.css";
+input {
+  border: 0;
+  font-family: "Cute Font", sans-serif;
+  font-size: var(--xl);
+  width: 100%;
+}
+.container {
+  border: var(--xs) solid var(--black);
+  padding: 1%;
+}

@@ -5,8 +5,8 @@ import "./Room.css";
 import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
-
-const Display = ({ open }) => {
+import Notebook from "./Notebook.js";
+const Display = ({ open, userId }) => {
   console.log(open);
 
   if (open === "room") {
@@ -42,7 +42,7 @@ const Display = ({ open }) => {
       <div className="room button-overlay">
         <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
         <div className="display-box">
-          <h1>Notebook</h1>
+          <Notebook userId={userId} />
         </div>
       </div>
     );

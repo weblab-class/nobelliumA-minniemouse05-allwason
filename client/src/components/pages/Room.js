@@ -14,12 +14,11 @@ const Room = ({ userId, name, open, handleLogin, handleLogout }) => {
       <div className="welcome">
         {userId ? (
           <>
-            <h1 className="textdisplay">{name}'s Room</h1>
-            <Display open={open} />
+            <Display className="display" open={open} userId={userId} />
           </>
         ) : (
           <div className="u-flex u-flex-justifyCenter u-flex-alignCenter login">
-            <img className="key_img pr-6" src={key} />
+            <img className="key_img pr-15" src={key} />
             <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
               <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
             </GoogleOAuthProvider>

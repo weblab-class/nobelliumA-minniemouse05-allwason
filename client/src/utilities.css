@@ -120,3 +120,6 @@ button {
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
 }
+.u-overflow-scroll {
+  overflow: scroll;
+}

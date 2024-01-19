@@ -3,16 +3,16 @@
 .NavBar {
   background-color: var(--primary--dim);
 }
-.pr-6 {
+.pr-15 {
   padding-right: 1.5rem;
 }
-.pl-6 {
+.pl-15 {
   padding-left: 1.5rem;
 }
-.pr-8 {
+.pr-20 {
   padding-right: 2rem;
 }
-.pl-8 {
+.pl-20 {
   padding-left: 2rem;
 }
 .u-space {

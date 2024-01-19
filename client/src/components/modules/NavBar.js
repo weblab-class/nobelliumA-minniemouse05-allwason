@@ -19,25 +19,25 @@ const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.goo
 const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar">
-      <div className="NavBar-linkContainer u-flex u-flex-alignCenter">
-        <h1 className="u-xlarge u-primary pl-8 pr-8">RoomCraft</h1>
+      <div className="NavBar-linkContainer u-flex u-flex-alignCenter ">
+        <h1 className="u-xlarge u-primary pl-20 pr-20">RoomCraft</h1>
         {userId && (
-          <Link to="/" className="NavBar-link pl-6 pr-6">
+          <Link to="/" className="NavBar-link pl-15 pr-15">
             Home
           </Link>
         )}
 
         {userId && (
-          <Link to={`/profile/${userId}`} className="NavBar-link pl-6 pr-6">
+          <Link to={`/profile/${userId}`} className="NavBar-link pl-15 pr-15">
             Profile
           </Link>
         )}
         {userId && (
-          <Link to="/leaderboard" className="NavBar-link pl-6 pr-6">
+          <Link to="/leaderboard" className="NavBar-link pl-15 pr-15">
             Leaderboard
           </Link>
         )}
-        <div className="pl-6 pr-6">
+        <div className="pl-15 pr-15">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
             {userId ? (
               <button
