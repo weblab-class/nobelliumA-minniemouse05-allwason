@@ -12,7 +12,11 @@ const Profile = ({ userId, name }) => {
               <div className="board" />
             </div>
             <div className="right-half">
-              <img src="https://i.ibb.co/4FNF9LY/bear.webp" alt="bear" className="avatar-image" />
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
+                alt="bear"
+                className="avatar-image"
+              />
               <div className="name">{name}</div>
             </div>
           </section>

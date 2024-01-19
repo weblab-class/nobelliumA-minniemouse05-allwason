@@ -2,7 +2,6 @@
 /* Fill me in :) */
 .NavBar {
   background-color: var(--primary--dim);
-  border-bottom: 2px solid #000;
 }
 .pr-6 {
   padding-right: 1.5rem;

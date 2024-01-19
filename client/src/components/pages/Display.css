@@ -15,7 +15,6 @@
   transform: translate(-50%, -50%);
   border: var(--xs) solid #000000;
   cursor: pointer;
-  border-radius: var(--xs);
   padding: var(--xs) var(--xs);
   font-family: "Cute Font", sans-serif;
   background: var(--white);
@@ -41,7 +40,7 @@
   border: var(--xs) solid var(--black);
   cursor: pointer;
   border-radius: 6px;
-  padding: 20% 20%;
+  padding: 10% 10%;
   font-family: "Cute Font", sans-serif;
   background: var(--white);
   opacity: 80%;
