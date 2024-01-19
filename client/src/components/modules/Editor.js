@@ -21,6 +21,7 @@ export const Editor = (props) => {
 
   useEffect(() => {
     setState({ value: props.value });
+    console.log(props.value);
   }, []);
   return (
     <div className="text-editor">

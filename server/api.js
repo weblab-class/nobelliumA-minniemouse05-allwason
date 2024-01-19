@@ -43,8 +43,12 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 //reference https://docs.google.com/presentation/d/1-096jf5d_j9RhdTW_1PsGPb2rre7fSY_tmhFqhMVpWE/edit#slide=id.p1
-
-router.post("/saveEntry", (req, res) => {
+router.get("/entry", (req, res) => {
+  Entry.find({ _id: req.query._id }).then((contents) => {
+    res.send(contents);
+  });
+});
+router.post("/entry", (req, res) => {
   const update = {
     $set: {
       _id: req.body._id,
