@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 
 import "../../utilities.css";
 import "./Leaderboard.css";
-
+import { useNavigate } from "react-router-dom";
 const Leaderboard = ({ userId }) => {
+  const navigate = useNavigate();
   return (
     <div>
       {userId ? (
@@ -13,9 +14,7 @@ const Leaderboard = ({ userId }) => {
           </a>
         </div>
       ) : (
-        <div className="login">
-          <h1>login</h1>
-        </div>
+        <div className="login">{navigate("/")}</div>
       )}
     </div>
   );

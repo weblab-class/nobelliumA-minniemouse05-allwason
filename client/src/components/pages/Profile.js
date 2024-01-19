@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../../utilities.css";
 import "./Profile.css";
-
+import { useNavigate } from "react-router-dom";
 const Profile = ({ userId, name }) => {
+  const navigate = useNavigate();
   return (
     <div>
       {userId ? (
@@ -23,9 +24,7 @@ const Profile = ({ userId, name }) => {
         </>
       ) : (
         <>
-          <div className="login">
-            <h1>login</h1>
-          </div>
+          <div className="login">{navigate("/")}</div>
         </>
       )}
     </div>
