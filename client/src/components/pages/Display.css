@@ -43,6 +43,7 @@
   border-radius: 6px;
   padding: 5% 5%;
   font-family: "Cute Font", sans-serif;
+  width: 50%;
   background: var(--white);
   opacity: 95%;
   transition: 0.3s;
