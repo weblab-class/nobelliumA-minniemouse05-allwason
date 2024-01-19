@@ -4,6 +4,8 @@ import "../../utilities.css";
 import "./Room.css";
 import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
+import Todo from "./Todo.js";
+
 const Display = ({ open }) => {
   console.log(open);
 
@@ -26,6 +28,7 @@ const Display = ({ open }) => {
           <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
           <div className="display-box">
             <h1>Todo</h1>
+            <Todo> </Todo>
           </div>
         </div>
       </>
