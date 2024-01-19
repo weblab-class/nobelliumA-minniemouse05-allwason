@@ -2,6 +2,4 @@ client/dist/bundle.js
 node_modules/
 .DS_Store
 .env
-SESSION_SECRET="102579e191efe232125744741348c637"
-MONGO_SRV="mongodb+srv://jasshone:4FhpAOdnAeuf6pTU@roomcraft.wghvamt.mongodb.net/?retryWrites=true&w=majority"
 
