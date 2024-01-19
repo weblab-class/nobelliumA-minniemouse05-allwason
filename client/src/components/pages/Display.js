@@ -5,6 +5,7 @@ import "./Room.css";
 import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
+import Notebook from "./Notebook.js";
 
 const Display = ({ userId, open }) => {
   const itemData = [

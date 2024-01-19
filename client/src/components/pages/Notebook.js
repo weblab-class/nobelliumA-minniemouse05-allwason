@@ -8,7 +8,7 @@ import NotebookEntry from "../modules/NotebookEntry.js";
 const Notebook = ({ userId }) => {
   const navigate = useNavigate;
   return userId ? (
-    <div>
+    <div id="entry-container">
       <NotebookEntry />
     </div>
   ) : (
