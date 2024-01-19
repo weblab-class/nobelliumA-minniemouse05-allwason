@@ -47,6 +47,7 @@ const Todo = (props) => {
 
   const tasksNoun = taskList.length !== 1 ? "tasks" : "task";
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
+  const congratsMessage = taskList.length !== 0 ? " " : "Hip hip hooray!";
 
   return props.userId ? (
     <>
@@ -59,6 +60,7 @@ const Todo = (props) => {
           <FilterButton />
         </div>
         <h2 id="list-heading">{headingText}</h2>
+        <h2 id="list-heading">{congratsMessage}</h2>
         <ul
           role="list"
           className="todo-list stack-large stack-exception"
