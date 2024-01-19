@@ -6,7 +6,13 @@ import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
 
-const Display = ({ open }) => {
+const Display = ({ userId, open }) => {
+  const itemData = [
+    { id: "todo-0", name: "Eat", completed: true },
+    { id: "todo-1", name: "Sleep", completed: false },
+    { id: "todo-2", name: "Repeat", completed: false },
+  ];
+
   console.log(open);
 
   if (open === "room") {
@@ -20,7 +26,7 @@ const Display = ({ open }) => {
         </Link>
         <Link to="/todo">
           <button className="room-button" id="todo">
-            To do List
+            to-do list
           </button>
         </Link>
       </div>
@@ -31,8 +37,7 @@ const Display = ({ open }) => {
         <div className="room button-overlay">
           <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
           <div className="display-box">
-            <h1>Todo</h1>
-            <Todo />
+            <Todo userId={userId} tasks={itemData} />
           </div>
         </div>
       </>

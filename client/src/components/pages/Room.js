@@ -15,7 +15,7 @@ const Room = ({ userId, name, open, handleLogin, handleLogout }) => {
         {userId ? (
           <>
             <h1 className="textdisplay">{name}'s Room</h1>
-            <Display open={open} />
+            <Display userId={userId} open={open} />
           </>
         ) : (
           <div className="u-flex u-flex-justifyCenter u-flex-alignCenter login">
