@@ -45,9 +45,21 @@ router.post("/initsocket", (req, res) => {
 //reference https://docs.google.com/presentation/d/1-096jf5d_j9RhdTW_1PsGPb2rre7fSY_tmhFqhMVpWE/edit#slide=id.p1
 
 router.post("/saveEntry", (req, res) => {
-  // do nothing if user not logged in
-  const newEntry = new Entry({ _id: req.body._id, content: req.body.content });
-  newEntry.save();
+  const update = {
+    $set: {
+      _id: req.body._id,
+      content: req.body.content,
+    },
+  };
+  const query = {
+    _id: req.body._id,
+  };
+  const options = {
+    upsert: true,
+  };
+  Entry.updateOne(query, update, options).then(() => {
+    console.log("saved");
+  });
 });
 
 // anything else falls to this "not found" case

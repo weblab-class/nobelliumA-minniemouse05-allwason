@@ -7,26 +7,23 @@ import Header from "./Header";
 import QuillToolbar from "./EditorToolbar.js";
 import Editor from "./Editor.js";
 import { Quill } from "react-quill";
-
+import { post } from "../../utilities";
 const NotebookEntry = (props) => {
-  const express = require("express");
-  const router = express.Router();
+  const [value, setValue] = useState("");
   //Quill reference from: https://medium.com/@mircea.calugaru/react-quill-editor-with-full-toolbar-options-and-custom-buttons-undo-redo-176d79f8d375
   // reference from https://docs.google.com/presentation/d/1YdqKZHpXFjCzGkahZLPItHKyvqIcskcJJAZHKTf28BE/edit#slide=id.g28e8818bc95_0_55
+  const submitEntry = () => {
+    post("/api/saveEntry", { _id: props._id, content: Editor.value });
+  };
   return (
     <div id="full_editor">
       <QuillToolbar />
-      <Header></Header>
+      <Header />
 
       <div id="scrollDiv">
-        <Editor id="#quill" />
+        <Editor id="#quill" value={value} />
       </div>
-
-      <button
-        onClick={router.post("/api/saveEntry", { _id: props._id, content: Editor.getContents() })}
-      >
-        Save
-      </button>
+      <button onClick={submitEntry}>Save</button>
     </div>
   );
 };
