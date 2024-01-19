@@ -49,7 +49,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
                 Logout
               </button>
             ) : (
-              <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
+              <></>
             )}
           </GoogleOAuthProvider>
         </div>

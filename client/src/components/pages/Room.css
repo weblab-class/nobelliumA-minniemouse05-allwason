@@ -10,6 +10,9 @@
 #roomdisplay {
   width: 100%;
 }
+.login {
+  margin-top: 30%;
+}
 .textdisplay {
   margin-top: 0%;
   margin-bottom: 0%;

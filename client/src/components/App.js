@@ -63,13 +63,43 @@ const App = () => {
     <>
       <NavBar path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Room open={"room"} userId={userId} name={userName} />} />
+        <Route
+          path="/"
+          element={
+            <Room
+              open={"room"}
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              userId={userId}
+              name={userName}
+            />
+          }
+        />
         <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
         <Route path="/leaderboard" element={<Leaderboard userId={userId} name={userName} />} />
-        <Route path="/todo" element={<Room open={"todo"} userId={userId} name={userName} />} />
+        <Route
+          path="/todo"
+          element={
+            <Room
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              open={"todo"}
+              userId={userId}
+              name={userName}
+            />
+          }
+        />
         <Route
           path="/notebook"
-          element={<Room open={"notebook"} userId={userId} name={userName} />}
+          element={
+            <Room
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              open={"notebook"}
+              userId={userId}
+              name={userName}
+            />
+          }
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
