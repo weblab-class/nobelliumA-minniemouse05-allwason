@@ -14,10 +14,14 @@ const Display = ({ open }) => {
       <div className="room button-overlay">
         <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
         <Link to="/notebook">
-          <button id="notebook">notebook</button>
+          <button className="room-button" id="notebook">
+            notebook
+          </button>
         </Link>
         <Link to="/todo">
-          <button id="todo">To do List</button>
+          <button className="room-button" id="todo">
+            To do List
+          </button>
         </Link>
       </div>
     );
@@ -28,7 +32,7 @@ const Display = ({ open }) => {
           <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
           <div className="display-box">
             <h1>Todo</h1>
-            <Todo> </Todo>
+            <Todo />
           </div>
         </div>
       </>

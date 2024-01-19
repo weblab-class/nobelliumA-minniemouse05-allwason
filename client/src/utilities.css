@@ -15,33 +15,59 @@
 */
 
 /* TODO: REPLACE WITH YOUR OWN FONT! */
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cute+Font&family=Open+Sans:wght@400;600&display=swap");
 
 :root {
-  --primary: #396dff;
-  --primary--dim: #6987db;
-  --darkgrey: #d4d4d4;
+  --primary: #eeface;
+  --primary--dim: #a0c273;
+  --brown: #b38977;
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
   --white: #fff;
+  --black: #000000;
 
   --xs: 4px;
   --s: 8px;
   --m: 16px;
-  --l: 24px;
+  --l: 28px;
+  --xl: 36px;
 }
-
+.u-space-between {
+  justify-content: space-between;
+}
+.u-primary {
+  color: var(--primary);
+}
+.u-primary--dim {
+  color: var(--primary--dim);
+}
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Cute Font", sans-serif;
   font-weight: 300;
+  background-color: var(--primary);
 }
 
 form {
   flex-grow: 1;
 }
-
+.u-xlarge {
+  font-size: 3rem;
+  line-height: 2rem;
+}
+.u-large {
+  font-size: var(--l);
+}
+.u-medium {
+  font-size: var(--m);
+}
+.u-small {
+  font-size: var(--s);
+}
+.u-xsmall {
+  font-size: var(--xs);
+}
 .u-flex {
   display: flex;
 }
@@ -87,4 +113,10 @@ form {
 
 .u-link:hover {
   color: var(--primary--dim);
+}
+button {
+  padding: var(--xs);
+  border-radius: var(--s);
+  font-family: "Cute Font", sans-serif;
+  font-size: var(--l);
 }

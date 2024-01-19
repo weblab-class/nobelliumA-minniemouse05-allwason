@@ -1,3 +1,4 @@
+@import "../../utilities.css";
 .button-overlay {
   position: relative;
   display: inline-block;
@@ -6,72 +7,44 @@
   padding: 0% 8% 0% 8%;
 }
 .button-overlay #notebook {
-  position: absolute;
   top: 45%;
   left: 67%;
+}
+.button-overlay .room-button {
+  position: absolute;
   transform: translate(-50%, -50%);
-  border: 7px solid #000000;
+  border: var(--xs) solid #000000;
   cursor: pointer;
-  border-radius: 6px;
-  padding: 5px 5px;
+  border-radius: var(--xs);
+  padding: var(--xs) var(--xs);
   font-family: "Cute Font", sans-serif;
-  background: #ffffff;
+  background: var(--white);
   opacity: 80%;
   transition: 0.3s;
-  font-size: 20px;
+  font-size: var(--m);
 }
 .button-overlay #todo {
-  position: absolute;
   top: 31%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  border: 7px solid #000000;
-  cursor: pointer;
-  border-radius: 6px;
-  padding: 5px 5px;
-  font-family: "Cute Font", sans-serif;
-  background: #ffffff;
-  opacity: 80%;
-  transition: 0.3s;
-  font-size: 20px;
 }
-.button-overlay #todo:hover {
-  background: #a0c273;
-  border-color: #000000;
+.button-overlay .room-button:hover {
+  background: var(--primary--dim);
+  border-color: var(--black);
   opacity: 100%;
 }
-.button-overlay #notebook:hover {
-  background: #a0c273;
-  border-color: #000000;
-  opacity: 100%;
-}
-.button-overlay #display-todo {
-  position: absolute;
-  top: 31%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 7px solid #000000;
-  cursor: pointer;
-  border-radius: 6px;
-  padding: 5px 5px;
-  font-family: "Cute Font", sans-serif;
-  background: #ffffff;
-  opacity: 80%;
-  transition: 0.3s;
-  font-size: 20px;
-}
+
 .button-overlay .display-box {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 7px solid #000000;
+  border: var(--xs) solid var(--black);
   cursor: pointer;
   border-radius: 6px;
   padding: 20% 20%;
   font-family: "Cute Font", sans-serif;
-  background: #ffffff;
+  background: var(--white);
   opacity: 80%;
   transition: 0.3s;
-  font-size: 20px;
+  font-size: var(--l);
 }

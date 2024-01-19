@@ -1,15 +1,33 @@
+@import "../../utilities.css";
 /* Fill me in :) */
 .NavBar {
-  background-color: #b38977;
+  background-color: var(--primary--dim);
   border-bottom: 2px solid #000;
 }
-
+.pr-6 {
+  padding-right: 1.5rem;
+}
+.pl-6 {
+  padding-left: 1.5rem;
+}
+.pr-8 {
+  padding-right: 2rem;
+}
+.pl-8 {
+  padding-left: 2rem;
+}
+.u-space {
+  margin-left: var(--l);
+}
 .NavBar-linkContainer {
   margin-left: var(--l);
   font-family: "Cute Font", sans-serif;
-  font-size: 30px;
+  font-size: var(--l);
 }
 
+.u-inline {
+  display: inline-block;
+}
 .NavBar-link,
 .NavBar-link:visited {
   color: var(--white);
@@ -18,7 +36,9 @@
 }
 
 .NavBar-link:hover {
-  opacity: 0.8;
+  opacity: 0.9;
+
+  text-decoration: underline;
 }
 
 .NavBar-link.NavBar-login {
