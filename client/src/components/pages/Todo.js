@@ -34,6 +34,16 @@ const Todo = (props) => {
     setTasks(updatedTasks);
   };
 
+  const editTask = (id, newName) => {
+    const editedTaskList = tasks.map((task) => {
+      if (task.id == id) {
+        return { ...task, name: newName };
+      }
+      return task;
+    });
+    setTasks(editedTaskList);
+  };
+
   const taskList = tasks?.map((task) => (
     <Item
       id={task.id}
@@ -42,6 +52,7 @@ const Todo = (props) => {
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
+      editTask={editTask}
     />
   ));
 
