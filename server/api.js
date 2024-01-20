@@ -101,11 +101,12 @@ router.post("/todoItem", (req, res) => {
   console.log(req.body.name);
   console.log("starting post");
   const NewTodoItem = new TodoItem({
-    _id: req.body._id,
     userId: req.body.userId,
     name: req.body.name,
     completed: req.body.completed,
   });
+  console.log("made new item");
+  console.log(NewTodoItem);
 
   NewTodoItem.save()
     .then(() => {
@@ -113,6 +114,7 @@ router.post("/todoItem", (req, res) => {
       res.send({});
     })
     .catch(() => {
+      console.log("catched");
       res.send({});
     });
 });

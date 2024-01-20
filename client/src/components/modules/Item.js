@@ -13,7 +13,7 @@ const Item = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.editTask(props.id, newName);
+    props.editTask(props._id, newName);
     setNewName("");
     setEditing(false);
   }
@@ -25,7 +25,7 @@ const Item = (props) => {
           New name for {props.name}
         </label>
         <input
-          id={props.id}
+          _id={props._id}
           className="edit-input-box"
           type="text"
           value={newName}
@@ -43,7 +43,7 @@ const Item = (props) => {
     </form>
   );
   useEffect(() => {
-    console.log("props._id", props._id);
+    console.log("item.js props._id", props._id);
   }, []);
 
   const viewTemplate = (
@@ -51,10 +51,10 @@ const Item = (props) => {
       <div className="checkbox-container">
         <input
           className="checkbox-style"
-          id={props.id}
+          _id={props._id}
           type="checkbox"
           defaultChecked={props.completed}
-          onChange={() => props.toggleTaskCompleted(props.id)}
+          onChange={() => props.toggleTaskCompleted(props._id)}
         />
         <label className="" htmlFor={props.id}>
           {props.name}

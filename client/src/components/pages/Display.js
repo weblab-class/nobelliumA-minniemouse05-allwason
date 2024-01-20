@@ -15,11 +15,13 @@ const Display = (props) => {
   //   { id: "todo-2", name: "Repeat", completed: false },
   // ];
 
+  //console.log(props.open);
   const [itemData, setItemData] = useState([]);
   //console.log("userId");
   //console.log(props.userId);
 
   useEffect(() => {
+    console.log("useEffect todo.js", props.userId);
     //console.log("in display.js");
     //console.log(props.userId);
     get("/api/todoItem", { userId: props.userId }).then((itemData) => {
@@ -28,8 +30,6 @@ const Display = (props) => {
       setItemData(itemData);
     });
   });
-
-  //console.log(props.open);
 
   if (props.open === "room") {
     return (

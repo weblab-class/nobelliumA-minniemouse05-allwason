@@ -8,6 +8,7 @@ import FilterButton from "../modules/FilterButton";
 
 import "../../utilities.css";
 import "./Todo.css";
+import { get } from "../../utilities";
 
 const FILTER_MAP = {
   All: () => true,
@@ -18,18 +19,34 @@ const FILTER_MAP = {
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 const Todo = (props) => {
+  // const [itemData, setItemData] = useState([]);
+  // //console.log("userId");
+  // //console.log(props.userId);
+
+  // useEffect(() => {
+  //   console.log("useEffect todo.js", props.userId);
+  //   //console.log("in display.js");
+  //   //console.log(props.userId);
+  //   get("/api/todoItem", { userId: props.userId }).then((itemData) => {
+  //     //console.log("useEffect");
+  //     //console.log(props.userId);
+  //     setItemData(itemData);
+  //   });
+  // });
+
   const [tasks, setTasks] = useState(props.tasks);
   const [filter, setFilter] = useState("All");
 
   const addTask = (name) => {
-    const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
+    //const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
+    const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
     setTasks([...tasks, newTask]);
   };
 
-  const toggleTaskCompleted = (id) => {
+  const toggleTaskCompleted = (_id) => {
     console.log(tasks);
     const updatedTasks = tasks.map((task) => {
-      if (task.id == id) {
+      if (task._id == _id) {
         return { ...task, completed: !task.completed };
       }
       return task;
@@ -44,9 +61,9 @@ const Todo = (props) => {
     setTasks(updatedTasks);
   };
 
-  const editTask = (id, newName) => {
+  const editTask = (_id, newName) => {
     const editedTaskList = tasks.map((task) => {
-      if (task.id == id) {
+      if (task._id == _id) {
         return { ...task, name: newName };
       }
       return task;
@@ -73,7 +90,7 @@ const Todo = (props) => {
         _id={task._id}
         name={task.name}
         completed={task.completed}
-        key={task.id}
+        key={task._id}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
         editTask={editTask}
@@ -87,11 +104,6 @@ const Todo = (props) => {
   const tasksNoun = taskList.length !== 1 ? "tasks" : "task";
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
   const congratsMessage = taskList.length !== 0 ? " " : "Hip hip hooray!";
-
-  useEffect(() => {
-    console.log("Todo.js");
-    console.log(props.userId);
-  }, []);
 
   return props.userId ? (
     <>

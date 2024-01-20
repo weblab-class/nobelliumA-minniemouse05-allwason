@@ -16,7 +16,7 @@ const Form = (props) => {
     setName("");
   };
 
-  const submitTodo = (event) => {
+  const submitTodo = () => {
     console.log("Form.js / submitTodo");
     console.log(props.userId);
     post("/api/todoItem", { userId: props.userId, name: name, completed: false }).then(
