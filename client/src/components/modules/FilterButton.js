@@ -2,14 +2,19 @@ import React, { useEffect } from "react";
 import "../../utilities.css";
 import "./FilterButton.css";
 
-const FilterButton = () => {
+function FilterButton(props) {
   return (
-    <button type="button" className="" aria-pressed="true">
-      <span className="">Show </span>
-      <span>all </span>
-      <span className=""> tasks</span>
+    <button
+      type="button"
+      className="btn toggle-btn"
+      aria-pressed={props.isPressed}
+      onClick={() => props.setFilter(props.name)}
+    >
+      <span className="visually-hidden">Show </span>
+      <span>{props.name}</span>
+      <span className="visually-hidden"> tasks</span>
     </button>
   );
-};
+}
 
 export default FilterButton;

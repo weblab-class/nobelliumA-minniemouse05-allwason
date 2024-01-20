@@ -52,10 +52,8 @@ const Display = (props) => {
       <>
         <div className="room button-overlay">
           <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
-          <div className="display-box">
-            <div className="inner-todo-list">
-              <Todo userId={props.userId} tasks={itemData} />
-            </div>
+          <div className="width-todo-list display-box u-flex-justifyCenter u-flex-alignCenter">
+            <Todo userId={props.userId} tasks={itemData} />
           </div>
         </div>
       </>
