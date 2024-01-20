@@ -6,17 +6,32 @@ import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
 import Notebook from "./Notebook.js";
+import { get } from "../../utilities";
 
-const Display = ({ userId, open }) => {
-  const itemData = [
-    { id: "todo-0", name: "Eat", completed: true },
-    { id: "todo-1", name: "Sleep", completed: false },
-    { id: "todo-2", name: "Repeat", completed: false },
-  ];
+const Display = (props) => {
+  // const itemData = [
+  //   { id: "todo-0", name: "Eat", completed: true },
+  //   { id: "todo-1", name: "Sleep", completed: false },
+  //   { id: "todo-2", name: "Repeat", completed: false },
+  // ];
 
-  console.log(open);
+  const [itemData, setItemData] = useState([]);
+  //console.log("userId");
+  //console.log(props.userId);
 
-  if (open === "room") {
+  useEffect(() => {
+    //console.log("in display.js");
+    //console.log(props.userId);
+    get("/api/todoItem", { userId: props.userId }).then((itemData) => {
+      //console.log("useEffect");
+      //console.log(props.userId);
+      setItemData(itemData);
+    });
+  });
+
+  //console.log(props.open);
+
+  if (props.open === "room") {
     return (
       <div className="room button-overlay">
         <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
@@ -32,25 +47,25 @@ const Display = ({ userId, open }) => {
         </Link>
       </div>
     );
-  } else if (open === "todo") {
+  } else if (props.open === "todo") {
     return (
       <>
         <div className="room button-overlay">
           <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
           <div className="display-box">
             <div className="inner-todo-list">
-              <Todo userId={userId} tasks={itemData} />
+              <Todo userId={props.userId} tasks={itemData} />
             </div>
           </div>
         </div>
       </>
     );
-  } else if (open === "notebook") {
+  } else if (props.open === "notebook") {
     return (
       <div className="room button-overlay">
         <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
         <div className="notebook display-box u-flex">
-          <Notebook userId={userId} />
+          <Notebook userId={props.userId} />
         </div>
       </div>
     );

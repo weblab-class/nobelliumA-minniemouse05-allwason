@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-
+import { post } from "../../utilities";
 import "../../utilities.css";
 import "./Form.css";
 
@@ -15,6 +15,18 @@ const Form = (props) => {
     props.addTask(name);
     setName("");
   };
+
+  const submitTodo = (event) => {
+    console.log("Form.js / submitTodo");
+    console.log(props.userId);
+    post("/api/todoItem", { userId: props.userId, name: name, completed: false }).then(
+      console.log("posted")
+    );
+    console.log("submitTodo");
+    console.log(name);
+    // console.log(completed);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="">
@@ -31,7 +43,7 @@ const Form = (props) => {
           autoComplete="off"
           onChange={handleChange}
         />
-        <button type="submit" className="add_button">
+        <button type="submit" className="add_button" onClick={submitTodo}>
           Add
         </button>
       </div>

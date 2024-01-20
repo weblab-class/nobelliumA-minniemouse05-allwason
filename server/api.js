@@ -7,9 +7,11 @@
 |
 */
 const express = require("express");
-const Entry = require("./models/Entry");
+
 // import models so we can interact with the database
 const User = require("./models/user");
+const Entry = require("./models/Entry");
+const TodoItem = require("./models/TodoItem");
 
 // import authentication library
 const auth = require("./auth");
@@ -62,9 +64,41 @@ router.post("/entry", (req, res) => {
   const options = {
     upsert: true,
   };
-  Entry.updateOne(query, update, options).then(() => {
-    console.log("saved");
+  Entry.updateOne(query, update, options)
+    .then(() => {
+      console.log("saved");
+      res.send({});
+    })
+    .catch(() => {
+      res.send({});
+    });
+});
+
+router.get("/todoItem", (req, res) => {
+  //console.log("getting from router");
+  TodoItem.find({ userId: req.query.userId }).then((contents) => {
+    res.send(contents);
   });
+});
+
+router.post("/todoItem", (req, res) => {
+  console.log(req.body.userId);
+  console.log(req.body.name);
+  console.log("starting post");
+  const NewTodoItem = new TodoItem({
+    userId: req.body.userId,
+    name: req.body.name,
+    completed: req.body.completed,
+  });
+
+  NewTodoItem.save()
+    .then(() => {
+      console.log("saved");
+      res.send({});
+    })
+    .catch(() => {
+      res.send({});
+    });
 });
 
 // anything else falls to this "not found" case
