@@ -86,6 +86,7 @@ router.post("/todoItem", (req, res) => {
   console.log(req.body.name);
   console.log("starting post");
   const NewTodoItem = new TodoItem({
+    _id: req.body._id,
     userId: req.body.userId,
     name: req.body.name,
     completed: req.body.completed,

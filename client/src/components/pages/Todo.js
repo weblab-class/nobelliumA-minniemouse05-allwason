@@ -27,7 +27,7 @@ const Todo = (props) => {
   };
 
   const toggleTaskCompleted = (id) => {
-    console.log(tasks[0]);
+    console.log(tasks);
     const updatedTasks = tasks.map((task) => {
       if (task.id == id) {
         return { ...task, completed: !task.completed };
@@ -37,9 +37,10 @@ const Todo = (props) => {
     setTasks(updatedTasks);
   };
 
-  const deleteTask = (id) => {
-    console.log(id);
-    const updatedTasks = tasks.filter((task) => id !== task.id);
+  const deleteTask = (_id) => {
+    console.log("deleteTask");
+    console.log(_id);
+    const updatedTasks = tasks.filter((task) => _id !== task._id);
     setTasks(updatedTasks);
   };
 
@@ -69,7 +70,7 @@ const Todo = (props) => {
     ?.filter(FILTER_MAP[filter])
     .map((task) => (
       <Item
-        id={task.id}
+        _id={task._id}
         name={task.name}
         completed={task.completed}
         key={task.id}

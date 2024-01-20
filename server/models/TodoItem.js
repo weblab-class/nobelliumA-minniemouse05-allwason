@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const ToDoItemSchema = new mongoose.Schema({
   userId: String,
+  _id: String,
   name: String,
   completed: Boolean,
 });

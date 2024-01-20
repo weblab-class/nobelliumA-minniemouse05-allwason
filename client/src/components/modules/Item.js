@@ -42,6 +42,10 @@ const Item = (props) => {
       </div>
     </form>
   );
+  useEffect(() => {
+    console.log("props._id", props._id);
+  }, []);
+
   const viewTemplate = (
     <div className="todo-container">
       <div className="checkbox-container">
@@ -60,7 +64,7 @@ const Item = (props) => {
         <button type="button" className="" onClick={() => setEditing(true)}>
           Edit
         </button>
-        <button type="button" className="" onClick={() => props.deleteTask(props.id)}>
+        <button type="button" className="" onClick={() => props.deleteTask(props._id)}>
           Delete
         </button>
       </div>
