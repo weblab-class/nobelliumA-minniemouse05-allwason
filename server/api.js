@@ -46,14 +46,14 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 //reference https://docs.google.com/presentation/d/1-096jf5d_j9RhdTW_1PsGPb2rre7fSY_tmhFqhMVpWE/edit#slide=id.p1
 router.get("/entry", (req, res) => {
-  Entry.find({ _id: req.query._id }).then((contents) => {
+  Entry.find({ user_id: req.query.user_id }).then((contents) => {
     res.send(contents);
   });
 });
 router.post("/entry", (req, res) => {
   const update = {
     $set: {
-      _id: req.body._id,
+      user_id: req.body.user_id,
       text: req.body.text,
       header: req.body.header,
     },

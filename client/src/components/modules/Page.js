@@ -12,6 +12,11 @@ const Page = (props) => {
     props.changeMode("page");
     props.setIndex(props.index);
   };
+  const handleHeader = () => {
+    console.log("onblur");
+    props.changeHeader(text);
+  };
+  //https://stackoverflow.com/questions/38791919/call-a-function-after-leaving-input-field#:~:text=You%20can%20use%20onblur(),out%20of%20that%20text%20field.
   return (
     <>
       <button className="chapter" onClick={handlePage}>
@@ -19,7 +24,12 @@ const Page = (props) => {
           <p>{order}</p>
         </div>
       </button>
-      <input className="page-title" value={text} onChange={handleChange}></input>
+      <input
+        onBlur={handleHeader}
+        className="page-title"
+        value={text}
+        onChange={handleChange}
+      ></input>
     </>
   );
 };
