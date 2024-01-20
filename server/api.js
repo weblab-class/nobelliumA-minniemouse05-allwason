@@ -80,9 +80,13 @@ router.post("/entry", (req, res) => {
     upsert: false,
   };
   Entry.updateOne(query, update, options)
-    .then((entry) => {
-      console.log("saved");
-      res.send(entry);
+    .then(() => {
+      res.send({
+        _id: req.body._id,
+        user_id: req.body.user_id,
+        text: req.body.text,
+        header: req.body.header,
+      });
     })
     .catch(() => {
       res.send({});

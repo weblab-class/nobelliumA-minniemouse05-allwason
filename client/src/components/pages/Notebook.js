@@ -16,23 +16,22 @@ const Notebook = ({ userId }) => {
   const newEntry = (props) => {
     post("/api/newEntry", { user_id: userId, text: "", header: props.header }).then((entry) => {
       setEntries(entries.concat([entry]));
-      //console.log(entries);
-      //console.log(entry);
+      console.log(entries);
+      console.log(entries.concat([entry]));
     });
   };
   const changeMode = (value) => {
     setMode(value);
   };
-  const updateEntries = (value) => {
-    setEntries((entries) => entries.map((entry, i) => (i === index ? value : entry)));
+  const updateEntries = (value, entry_index) => {
+    setEntries((entries) => entries.map((entry, i) => (i === entry_index ? value : entry)));
   };
   const changeHeader = (value) => {
-    setEntries((entries) =>
-      entries.map((entry, i) => (i === index ? { text: entry.text, header: value } : entry))
-    );
-    console.log(index);
-    console.log(entries);
-    post("/api/entry", { user_id: userId, header: value, text: entries[index].text });
+    post("/api/entry", { user_id: userId, header: value, text: entries[index].text }).then(() => {
+      setEntries((entries) =>
+        entries.map((entry, i) => (i === index ? { text: entry.text, header: value } : entry))
+      );
+    });
   };
 
   useEffect(() => {
@@ -53,6 +52,8 @@ const Notebook = ({ userId }) => {
           entry={entries[index]}
           user_id={userId}
           changePage={changeMode}
+          index={index}
+          entries={entries}
         />
       );
     } else {
