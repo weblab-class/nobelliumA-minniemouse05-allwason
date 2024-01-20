@@ -67,10 +67,11 @@ export const formats = [
   "indent",
   "link",
   "video",
-  "image",
+
   "color",
   "code-block",
 ];
+//add image in other cases
 
 // code referenced https://quilljs.com/docs/formats/
 // code referenced for video, https://codepen.io/alexkrolick/pen/evGLwW
@@ -120,7 +121,9 @@ export const QuillToolbar = () => (
     </span>
     <span className="ql-formats">
       <button className="ql-link" />
-      <button className="ql-image" />
+      {
+        //<button className="ql-image" />
+      }
       <button className="ql-video" />
     </span>
     <span className="ql-formats">

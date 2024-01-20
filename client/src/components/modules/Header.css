@@ -8,5 +8,5 @@ input {
 }
 .container {
   border: var(--xs) solid var(--black);
-  padding: 1%;
+  padding: 0.5%;
 }

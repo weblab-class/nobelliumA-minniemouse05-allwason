@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const EntrySchema = new mongoose.Schema({
   _id: String,
-  content: JSON,
+  text: String,
+  header: String,
 });
 module.exports = mongoose.model("Entry", EntrySchema);

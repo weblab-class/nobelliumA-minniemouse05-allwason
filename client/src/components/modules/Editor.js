@@ -9,25 +9,22 @@ import { useEffect } from "react";
 import { useQuill } from "react-quill";
 
 export const Editor = (props) => {
-  const [state, setState] = React.useState({ value: null });
+  //const [state, setState] = React.useState({ value: null });
+  const text = props.text;
   const handleChange = (value) => {
-    setState({ value });
+    props.changeText(value);
   };
   const updateDoc = {
     $set: {
-      content: state.value,
+      content: props.text,
     },
   };
 
-  useEffect(() => {
-    setState({ value: props.value });
-    console.log(props.value);
-  }, []);
   return (
     <div className="text-editor">
       <ReactQuill
         theme="snow"
-        value={state.value}
+        value={text}
         onChange={handleChange}
         placeholder={"Type here..."}
         modules={modules}

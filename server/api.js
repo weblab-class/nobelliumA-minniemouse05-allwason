@@ -52,7 +52,8 @@ router.post("/entry", (req, res) => {
   const update = {
     $set: {
       _id: req.body._id,
-      content: req.body.content,
+      text: req.body.text,
+      header: req.body.header,
     },
   };
   const query = {
