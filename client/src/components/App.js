@@ -76,6 +76,7 @@ const App = () => {
           }
         />
         <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
+
         <Route path="/leaderboard" element={<Leaderboard userId={userId} name={userName} />} />
         <Route
           path="/todo"
