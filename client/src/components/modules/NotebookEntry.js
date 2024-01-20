@@ -23,9 +23,10 @@ const NotebookEntry = (props) => {
   //Quill reference from: https://medium.com/@mircea.calugaru/react-quill-editor-with-full-toolbar-options-and-custom-buttons-undo-redo-176d79f8d375
   // reference from https://docs.google.com/presentation/d/1YdqKZHpXFjCzGkahZLPItHKyvqIcskcJJAZHKTf28BE/edit#slide=id.g28e8818bc95_0_55
   const submitEntry = () => {
-    post("/api/entry", { user_id: props.user_id, text: text, header: header }).then(
-      console.log("posted")
-    );
+    post("/api/entry", { user_id: props.user_id, text: text, header: header })
+      .then
+      //console.log("posted")
+      ();
     props.updateEntries({ user_id: props.user_id, text: text, header: header });
     //console.log(state);
   };

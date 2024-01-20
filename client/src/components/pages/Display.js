@@ -21,7 +21,7 @@ const Display = (props) => {
   //console.log(props.userId);
 
   useEffect(() => {
-    console.log("useEffect todo.js", props.userId);
+    //console.log("useEffect todo.js", props.userId);
     //console.log("in display.js");
     //console.log(props.userId);
     get("/api/todoItem", { userId: props.userId }).then((itemData) => {
@@ -29,7 +29,7 @@ const Display = (props) => {
       //console.log(props.userId);
       setItemData(itemData);
     });
-  });
+  }, []);
 
   if (props.open === "room") {
     return (

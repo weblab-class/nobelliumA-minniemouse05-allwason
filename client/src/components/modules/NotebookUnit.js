@@ -4,11 +4,16 @@ import Page from "./Page.js";
 import React from "react";
 import { useEffect, useState } from "react";
 const NotebookUnit = (props) => {
-  console.log(props);
+  //console.log(props);
   const [toggle, setToggle] = useState(false);
   let new_Content = <></>;
-
+  const [text, setText] = useState("");
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
   const makePage = (index) => {
+    //console.log(index);
+    //console.log("mkaing");
     return (
       <Page
         header={props.entries[index].header}
@@ -17,6 +22,7 @@ const NotebookUnit = (props) => {
         setIndex={props.setIndex}
         changeHeader={props.changeHeader}
         newEntry={props.newEntry}
+        changeIndex={props.changeIndex}
       />
     );
   };
@@ -27,14 +33,20 @@ const NotebookUnit = (props) => {
     <div className="u-flex-vertical u-flex-justifyCenter u-space-between chapter-container">
       <div>
         {props.entries.map((_, ind) => {
-          console.log(ind);
+          //console.log(ind);
           return makePage(ind);
         })}
       </div>
       {toggle && (
         <div className="u-flex">
-          <input className="" />
-          <button onClick={props.newEntry}>done</button>
+          <input className="" value={text} onChange={handleChange} />
+          <button
+            onClick={() => {
+              props.newEntry({ header: text });
+            }}
+          >
+            done
+          </button>
         </div>
       )}
       <button className="add-button" onClick={handleNewEntry}>
