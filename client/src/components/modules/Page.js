@@ -4,24 +4,22 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 const Page = (props) => {
   const order = "Page 1";
-  const [text, setText] = useState("");
+  const [text, setText] = useState(props.header);
   const handleChange = (e) => {
     setText(e.target.value);
   };
+  const handlePage = () => {
+    props.changeMode("page");
+    props.setIndex(props.index);
+  };
   return (
     <>
-      <Link>
-        <button className="chapter">
-          <div className="u-flex-vertical">
-            <p>{order}</p>
-
-            <input value={text} onChange={handleChange}></input>
-            <div>
-              <p></p>
-            </div>
-          </div>
-        </button>
-      </Link>
+      <button className="chapter" onClick={handlePage}>
+        <div className="u-flex-vertical">
+          <p>{order}</p>
+        </div>
+      </button>
+      <input className="page-title" value={text} onChange={handleChange}></input>
     </>
   );
 };

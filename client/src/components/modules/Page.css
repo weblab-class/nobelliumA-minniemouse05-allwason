@@ -6,3 +6,7 @@
   border: 5 solid var(--primary--dim);
   border-radius: 0;
 }
+.page-title {
+  background-color: var(--primary--dim);
+  text-align: center;
+}

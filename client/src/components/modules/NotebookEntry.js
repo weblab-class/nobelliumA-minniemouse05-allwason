@@ -10,8 +10,9 @@ import { Quill } from "react-quill";
 import { get, post } from "../../utilities";
 const NotebookEntry = (props) => {
   //entryIndex
-  const [text, setText] = useState("");
-  const [header, setHeader] = useState("");
+  const [text, setText] = useState(props.entry.text);
+  const [header, setHeader] = useState(props.entry.header);
+
   const changeText = (value) => {
     setText(value);
     console.log(`value: ${value}`);
@@ -23,17 +24,10 @@ const NotebookEntry = (props) => {
   // reference from https://docs.google.com/presentation/d/1YdqKZHpXFjCzGkahZLPItHKyvqIcskcJJAZHKTf28BE/edit#slide=id.g28e8818bc95_0_55
   const submitEntry = () => {
     post("/api/entry", { _id: props._id, text: text, header: header }).then(console.log("posted"));
+    props.updateEntries({ _id: props._id, text: text, header: header });
     //console.log(state);
   };
-  useEffect(() => {
-    get("/api/entry", { _id: props._id }).then((entry) => {
-      setText(entry[props.entryIndex].text);
-      setHeader(entry[props.entryIndex].header);
-      console.log("entry retrieved");
-      console.log(entry[0].content);
-      console.log(entry[0].header);
-    });
-  }, []);
+
   const handleBack = () => {
     props.changePage("pages");
   };
