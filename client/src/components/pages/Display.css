@@ -32,7 +32,7 @@
   opacity: 100%;
 }
 
-.button-overlay .display-box {
+.button-overlay .display-box .notebook {
   margin-top: 0%;
   position: absolute;
   top: 50%;
@@ -48,6 +48,26 @@
   opacity: 95%;
   transition: 0.3s;
   font-size: var(--l);
+}
+.button-overlay .display-box {
+  margin-top: 0%;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: var(--xs) solid var(--black);
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 5% 5%;
+  font-family: "Cute Font", sans-serif;
+
+  background: var(--white);
+  opacity: 95%;
+  transition: 0.3s;
+  font-size: var(--l);
+}
+.notebook {
+  width: 80vw;
 }
 
 .button-overlay .display-box .inner-todo-list {

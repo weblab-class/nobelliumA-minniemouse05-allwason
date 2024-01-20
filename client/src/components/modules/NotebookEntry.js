@@ -9,6 +9,7 @@ import Editor from "./Editor.js";
 import { Quill } from "react-quill";
 import { get, post } from "../../utilities";
 const NotebookEntry = (props) => {
+  //entryIndex
   const [text, setText] = useState("");
   const [header, setHeader] = useState("");
   const changeText = (value) => {
@@ -26,13 +27,16 @@ const NotebookEntry = (props) => {
   };
   useEffect(() => {
     get("/api/entry", { _id: props._id }).then((entry) => {
-      setText(entry[0].text);
-      setHeader(entry[0].header);
+      setText(entry[props.entryIndex].text);
+      setHeader(entry[props.entryIndex].header);
       console.log("entry retrieved");
       console.log(entry[0].content);
       console.log(entry[0].header);
     });
   }, []);
+  const handleBack = () => {
+    props.changePage("pages");
+  };
   return (
     <div id="full_editor">
       <QuillToolbar />
@@ -41,7 +45,10 @@ const NotebookEntry = (props) => {
       <div id="scrollDiv">
         <Editor id="#quill" text={text} changeText={changeText} />
       </div>
-      <button onClick={submitEntry}>Save</button>
+      <div className="u-flex">
+        <button onClick={submitEntry}>Save</button>
+        <button onClick={handleBack}>Back</button>
+      </div>
     </div>
   );
 };

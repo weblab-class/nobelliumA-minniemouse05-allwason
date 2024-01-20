@@ -49,7 +49,7 @@ const Display = ({ userId, open }) => {
     return (
       <div className="room button-overlay">
         <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
-        <div className="display-box">
+        <div className="notebook display-box u-flex">
           <Notebook userId={userId} />
         </div>
       </div>

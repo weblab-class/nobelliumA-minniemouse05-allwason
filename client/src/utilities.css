@@ -110,7 +110,9 @@ form {
   text-decoration: none;
   cursor: pointer;
 }
-
+.u-margin-xs {
+  margin: var(--xs);
+}
 .u-link:hover {
   color: var(--primary--dim);
 }
@@ -122,4 +124,25 @@ button {
 }
 .u-overflow-scroll {
   overflow: scroll;
+}
+.pr-15 {
+  padding-right: 1.5rem;
+}
+.pl-15 {
+  padding-left: 1.5rem;
+}
+.pt-15 {
+  padding-top: 1.5rem;
+}
+.pb-15 {
+  padding-bottom: 1.5rem;
+}
+.pr-20 {
+  padding-right: 2rem;
+}
+.pl-20 {
+  padding-left: 2rem;
+}
+.u-space {
+  margin-left: var(--l);
 }

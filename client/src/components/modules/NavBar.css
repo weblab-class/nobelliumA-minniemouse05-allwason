@@ -3,21 +3,7 @@
 .NavBar {
   background-color: var(--primary--dim);
 }
-.pr-15 {
-  padding-right: 1.5rem;
-}
-.pl-15 {
-  padding-left: 1.5rem;
-}
-.pr-20 {
-  padding-right: 2rem;
-}
-.pl-20 {
-  padding-left: 2rem;
-}
-.u-space {
-  margin-left: var(--l);
-}
+
 .NavBar-linkContainer {
   margin-left: var(--l);
   font-family: "Cute Font", sans-serif;
