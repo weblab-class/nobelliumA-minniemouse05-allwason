@@ -50,6 +50,21 @@ router.get("/entry", (req, res) => {
     res.send(contents);
   });
 });
+router.post("/newEntry", (req, res) => {
+  const newEntry = new Entry({
+    user_id: req.body.user_id,
+    text: req.body.text,
+    header: req.body.header,
+  });
+  newEntry
+    .save()
+    .then((entry) => {
+      res.send(entry);
+    })
+    .catch(() => {
+      res.send({});
+    });
+});
 router.post("/entry", (req, res) => {
   const update = {
     $set: {
@@ -62,12 +77,12 @@ router.post("/entry", (req, res) => {
     _id: req.body._id,
   };
   const options = {
-    upsert: true,
+    upsert: false,
   };
   Entry.updateOne(query, update, options)
-    .then(() => {
+    .then((entry) => {
       console.log("saved");
-      res.send({});
+      res.send(entry);
     })
     .catch(() => {
       res.send({});

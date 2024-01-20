@@ -24,12 +24,14 @@ const Page = (props) => {
           <p>{order}</p>
         </div>
       </button>
-      <input
-        onBlur={handleHeader}
-        className="page-title"
-        value={text}
-        onChange={handleChange}
-      ></input>
+      <div className="u-flex">
+        <input
+          onBlur={handleHeader}
+          className="page-title"
+          value={text}
+          onChange={handleChange}
+        ></input>
+      </div>
     </>
   );
 };

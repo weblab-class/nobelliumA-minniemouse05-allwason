@@ -14,8 +14,9 @@ const Notebook = ({ userId }) => {
   const navigate = useNavigate;
 
   const newEntry = () => {
-    post("/api/entry", { user_id: userId, text: "", header: "" });
-    setEntries(entries.concat([{ user_id: userId, text: "", header: "" }]));
+    post("/api/newEntry", { user_id: userId, text: "", header: "" }).then((entry) => {
+      setEntries(entries.concat([entry]));
+    });
   };
   const changeMode = (value) => {
     setMode(value);
@@ -29,9 +30,6 @@ const Notebook = ({ userId }) => {
     );
     post("/api/entry", { user_id: userId, header: value, text: entries[index].text });
   };
-  useEffect(() => {
-    console.log("entries", entries);
-  }, [entries]);
 
   useEffect(() => {
     console.log(entries);
