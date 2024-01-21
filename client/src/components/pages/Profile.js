@@ -8,7 +8,7 @@ const Profile = ({ userId, name }) => {
     <div>
       {userId ? (
         <>
-          <section className="container">
+          <div className="profile-container">
             <div className="left-half">
               <div className="board" />
             </div>
@@ -20,7 +20,7 @@ const Profile = ({ userId, name }) => {
               />
               <div className="name">{name}</div>
             </div>
-          </section>
+          </div>
         </>
       ) : (
         <>

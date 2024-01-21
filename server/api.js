@@ -102,6 +102,42 @@ router.post("/entry", (req, res) => {
     });
 });
 
+/////////////////////// PROFILE ///////////////////////
+router.get("/achievements", (req, res) => {
+  //console.log("getting from router");
+  User.find({ googleid: req.query.googleid }).then((achievements) => {
+    res.send(achievements);
+  });
+});
+
+router.post("/addAchievement/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const newAchievement = req.body.achievement; // Assuming the achievement details are sent in the request body
+
+    // Find the user by ID
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Add the new achievement to the array
+    user.achievements.push(newAchievement);
+
+    // Save the updated user document
+    const updatedUser = await user.save();
+
+    console.log("Achievement added successfully:", updatedUser);
+    res
+      .status(200)
+      .json({ success: true, message: "Achievement added successfully", user: updatedUser });
+  } catch (error) {
+    console.error("Error adding achievement:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
 /////////////////////// TO DO ///////////////////////
 
 router.get("/todoItem", (req, res) => {
@@ -115,11 +151,13 @@ router.post("/todoItem", (req, res) => {
   console.log(req.body.userId);
   console.log(req.body.name);
   console.log("starting post");
+
   const NewTodoItem = new TodoItem({
     userId: req.body.userId,
     name: req.body.name,
     completed: req.body.completed,
   });
+
   console.log("made new item");
   console.log(NewTodoItem);
 
