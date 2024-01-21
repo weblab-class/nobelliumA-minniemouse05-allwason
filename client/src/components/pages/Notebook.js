@@ -16,10 +16,28 @@ const Notebook = ({ userId }) => {
   const newEntry = (props) => {
     post("/api/newEntry", { user_id: userId, text: "", header: props.header }).then((entry) => {
       setEntries(entries.concat([entry]));
-      console.log(entries);
+
       console.log(entries.concat([entry]));
     });
   };
+  const deleteEntry = (index) => {
+    post("/api/deleteEntry", entries[index])
+      .then(() => {
+        //console.log(entries);
+        //console.log(entries[index]);
+        console.log(index);
+        console.log(entries.filter((_, ind, b) => index !== ind));
+
+        const filtered = entries.filter((_, ind, b) => index !== ind);
+        console.log(filtered);
+        setEntries((entries) => entries.filter((_, ind, b) => index !== ind));
+        console.log(entries);
+      })
+      .catch(console.log("oops"));
+  };
+  useEffect(() => {
+    console.log(entries);
+  }, [entries]);
   const changeMode = (value) => {
     setMode(value);
   };
@@ -68,6 +86,7 @@ const Notebook = ({ userId }) => {
         changeMode={changeMode}
         newEntry={newEntry}
         changeIndex={setIndex}
+        deleteEntry={deleteEntry}
       />
     );
   }

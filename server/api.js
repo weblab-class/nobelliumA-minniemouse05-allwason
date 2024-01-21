@@ -65,6 +65,15 @@ router.post("/newEntry", (req, res) => {
       res.send({});
     });
 });
+router.post("/deleteEntry", (req, res) => {
+  console.log(req.body._id);
+  Entry.deleteOne({ _id: req.body._id })
+    .then(res.send({}))
+    .catch((e) => {
+      console.log(e);
+      res.send(e);
+    });
+});
 router.post("/entry", (req, res) => {
   const update = {
     $set: {

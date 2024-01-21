@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 const NotebookUnit = (props) => {
   //console.log(props);
   const [toggle, setToggle] = useState(false);
-  let new_Content = <></>;
   const [text, setText] = useState("");
   const handleChange = (e) => {
     setText(e.target.value);
@@ -23,6 +22,7 @@ const NotebookUnit = (props) => {
         changeHeader={props.changeHeader}
         newEntry={props.newEntry}
         changeIndex={props.changeIndex}
+        deleteEntry={props.deleteEntry}
       />
     );
   };
@@ -33,7 +33,7 @@ const NotebookUnit = (props) => {
     <div className="u-flex-vertical u-flex-justifyCenter u-space-between chapter-container">
       <div>
         {props.entries.map((_, ind) => {
-          //console.log(ind);
+          console.log(ind);
           return makePage(ind);
         })}
       </div>

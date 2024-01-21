@@ -18,6 +18,9 @@ const Page = (props) => {
     console.log(props.index);
     props.changeHeader(text);
   };
+  const handleDelete = () => {
+    props.deleteEntry(props.index);
+  };
   //https://stackoverflow.com/questions/38791919/call-a-function-after-leaving-input-field#:~:text=You%20can%20use%20onblur(),out%20of%20that%20text%20field.
   return (
     <>
@@ -26,7 +29,9 @@ const Page = (props) => {
           <p>{order}</p>
         </div>
       </button>
+
       <div className="u-flex">
+        <button onClick={handleDelete}>x</button>
         <input
           onFocus={() => {
             props.changeIndex(props.index);
