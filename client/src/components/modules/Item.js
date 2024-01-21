@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { get, post } from "../../utilities.js";
 
 import "../../utilities.css";
 import "./Item.css";
@@ -18,6 +19,32 @@ const Item = (props) => {
     setEditing(false);
   }
 
+  const updateCheck = () => {
+    post("/api/updateItemCheck", { _id: props._id, completed: !props.completed }).then(
+      console.log("updated checkbox")
+    );
+    console.log("updateCheck, props.name", props.name);
+    console.log("updateCheck props._id", props._id);
+    // console.log(completed);
+  };
+
+  const updateName = () => {
+    post("/api/updateItemName", { _id: props._id, name: newName }).then(
+      console.log("updated name")
+    );
+    console.log("updateName, props.name", props.name);
+    console.log("updateName, newName", newName);
+    // console.log(completed);
+  };
+  // const deleteItemDB = () => {
+  //   post("/api/deleteItem", { userId: props.userId, name: props.name, completed: false }).then(
+  //     console.log("delete")
+  //   );
+  //   console.log("deleteItemDB");
+  //   console.log(props.name);
+  //   // console.log(completed);
+  // };
+
   const editingTemplate = (
     <form className="" onSubmit={handleSubmit}>
       <div className="">
@@ -36,7 +63,7 @@ const Item = (props) => {
         <button type="button" className="" onClick={() => setEditing(false)}>
           Cancel
         </button>
-        <button type="submit" className="">
+        <button type="submit" className="" onClick={updateName}>
           Save
         </button>
       </div>
@@ -54,6 +81,7 @@ const Item = (props) => {
           _id={props._id}
           type="checkbox"
           defaultChecked={props.completed}
+          onClick={updateCheck}
           onChange={() => props.toggleTaskCompleted(props._id)}
         />
         <label className="" htmlFor={props.id}>

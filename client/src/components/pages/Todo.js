@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { get, post } from "../../utilities.js";
 
 import Item from "../modules/Item.js";
 import Form from "../modules/Form";
@@ -8,8 +9,6 @@ import FilterButton from "../modules/FilterButton";
 
 import "../../utilities.css";
 import "./Todo.css";
-import { get } from "../../utilities";
-
 const FILTER_MAP = {
   All: () => true,
   Active: (task) => !task.completed,
@@ -39,6 +38,7 @@ const Todo = (props) => {
 
   const addTask = (name) => {
     //const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
+    //const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
     const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
     setTasks([...tasks, newTask]);
   };
@@ -55,10 +55,12 @@ const Todo = (props) => {
   };
 
   const deleteTask = (_id) => {
-    console.log("deleteTask");
-    console.log(_id);
+    console.log("Todo.js deleteTask _id", _id);
     const updatedTasks = tasks.filter((task) => _id !== task._id);
     setTasks(updatedTasks);
+
+    post("/api/deleteItem", { _id: _id, userId: props.userId }).then(console.log("delete"));
+    // console.log(completed);
   };
 
   const editTask = (_id, newName) => {

@@ -17,11 +17,12 @@ const Form = (props) => {
   };
 
   const submitTodo = () => {
-    console.log("Form.js / submitTodo");
-    console.log(props.userId);
-    post("/api/todoItem", { userId: props.userId, name: name, completed: false }).then(
-      console.log("posted")
-    );
+    console.log("Form.js / submitTodo userID, _id", props.userId);
+    post("/api/todoItem", {
+      userId: props.userId,
+      name: name,
+      completed: false,
+    }).then(console.log("posted"));
     console.log("submitTodo");
     console.log(name);
     // console.log(completed);
