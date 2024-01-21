@@ -1,13 +1,17 @@
 @import "../../utilities.css";
 /* Fill me in :) */
+/*
 .NavBar {
   background-color: var(--primary--dim);
+}*/
+#collapse {
+  background-color: transparent;
+  border: none;
 }
-
 .NavBar-linkContainer {
   margin-left: var(--l);
   font-family: "Cute Font", sans-serif;
-  font-size: var(--l);
+  font-size: var(--xl);
 }
 
 .u-inline {
@@ -15,15 +19,63 @@
 }
 .NavBar-link,
 .NavBar-link:visited {
-  color: var(--white);
+  color: var(--black);
   opacity: 0.6;
   text-decoration: none;
 }
 
 .material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 10, "opsz" 24;
 }
 
+.tooltip {
+  position: relative;
+  border-bottom: 1 pm dashed #000;
+}
+.tooltip:before {
+  content: attr(data-text); /* here's the magic */
+  position: absolute;
+
+  /* horizontally center */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* move to bottom */
+  bottom: 60%;
+  margin-bottom: 15px; /* and add a small left margin */
+
+  /* basic styles */
+  width: 60px;
+  padding: 5px;
+  border-radius: var(--xs);
+  background: #000;
+  color: #fff;
+  text-align: center;
+  font-size: var(--m);
+  display: none; /* hide by default */
+}
+.tooltip:after {
+  content: "";
+  position: absolute;
+
+  /* position tooltip correctly */
+  bottom: 60%;
+  margin-bottom: 0px;
+
+  /* vertically center */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* the arrow */
+  border: 10px solid #000;
+  border-color: black transparent transparent transparent;
+
+  display: none;
+}
+.tooltip:hover:before,
+.tooltip:hover:after {
+  display: block;
+}
 .NavBar-link:hover {
   opacity: 0.9;
 
