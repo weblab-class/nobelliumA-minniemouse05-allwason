@@ -60,7 +60,8 @@
   transition: 0.3s;
   font-size: var(--l);
 }
-.notebook {
+.button-overlay .notebook {
+  top: 75%;
   width: 80vw;
   height: 80vh;
   transform: translate(-50%, -65%);

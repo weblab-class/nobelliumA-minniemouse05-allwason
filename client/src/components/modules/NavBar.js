@@ -33,6 +33,11 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
           </Link>
         )}
         {userId && (
+          <Link to="/" className="NavBar-link pl-15 pr-15">
+            <span class="material-symbols-outlined">group</span>
+          </Link>
+        )}
+        {userId && (
           <Link to="/leaderboard" className="NavBar-link pl-15 pr-15">
             Leaderboard
           </Link>

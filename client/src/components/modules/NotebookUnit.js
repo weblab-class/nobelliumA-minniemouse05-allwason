@@ -10,11 +10,12 @@ const NotebookUnit = (props) => {
   const handleChange = (e) => {
     setText(e.target.value);
   };
-  const makePage = (index) => {
+  const makePage = (_id, index) => {
     //console.log(index);
     //console.log("mkaing");
     return (
       <Page
+        key={_id}
         header={props.entries[index].header}
         index={index}
         changeMode={props.changeMode}
@@ -32,9 +33,9 @@ const NotebookUnit = (props) => {
   return (
     <div className="u-flex-vertical u-flex-justifyCenter u-space-between chapter-container">
       <div>
-        {props.entries.map((_, ind) => {
-          console.log(ind);
-          return makePage(ind);
+        {props.entries.map((entry, ind) => {
+          //console.log(ind);
+          return makePage(entry._id, ind);
         })}
       </div>
       {toggle && (
