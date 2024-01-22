@@ -1,0 +1,6 @@
+@import "../../utilities.css";
+.friend-list {
+  overflow-y: scroll;
+  height: 80vh;
+  background-color: var(--primary--dim);
+}
