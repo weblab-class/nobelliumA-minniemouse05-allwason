@@ -69,4 +69,6 @@
 
 .width-todo-list {
   width: 60vw;
+  overflow-y: scroll;
+  max-height: 80%;
 }
