@@ -11,11 +11,12 @@ const Friends = ({ userId }) => {
     <div>
       {userId ? (
         <>
-          <div className="u-flex ">
-            <h1 className="pl-15 pr-20">Find Friend:</h1>
-            <div className="pt-15">
-              <input className="pr-20"></input>
+          <div className="u-flex find">
+            <h1 className="pr-15">Enter Friend UserID:</h1>
+            <div className="search-field">
+              <input></input>
             </div>
+            <button>search</button>
           </div>
 
           <div className="friend-list u-flex-justifyCenter u-flex-vertical ">

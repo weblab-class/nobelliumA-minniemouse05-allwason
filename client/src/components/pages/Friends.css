@@ -1,6 +1,16 @@
 @import "../../utilities.css";
 .friend-list {
   overflow-y: scroll;
-  height: 80vh;
+  height: 75vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  border: var(--xs) solid black;
   background-color: var(--primary--dim);
+}
+.find {
+  align-items: center;
+  justify-content: center;
+}
+.search-field {
+  margin-right: 1.5vw;
 }

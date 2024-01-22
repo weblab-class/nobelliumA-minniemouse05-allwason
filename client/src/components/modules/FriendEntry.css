@@ -3,7 +3,8 @@
 
 .FriendEntry {
   font-size: var(--xl);
-  height: 10%;
+  height: 5vh;
+  width: 67vw;
   padding: 4%;
   margin: 4%;
   background-color: var(--primary);
