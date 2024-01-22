@@ -18,6 +18,7 @@ import "./Todo.css";
  * @param {String} userId
  * @param {Array of objects} tasks
  * @param {String} name
+ * @param {Number} totalExp
  * 
   //   { id: "todo-0", name: "Eat", completed: true },
   //   { id: "todo-1", name: "Sleep", completed: false },
@@ -54,7 +55,6 @@ const Todo = (props) => {
 
   const addTask = (name) => {
     //const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
-    //const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
     const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
     setTasks([...tasks, newTask]);
   };
@@ -89,18 +89,6 @@ const Todo = (props) => {
     setTasks(editedTaskList);
   };
 
-  // const taskList = tasks?.map((task) => (
-  //   <Item
-  //     id={task.id}
-  //     name={task.name}
-  //     completed={task.completed}
-  //     key={task.id}
-  //     toggleTaskCompleted={toggleTaskCompleted}
-  //     deleteTask={deleteTask}
-  //     editTask={editTask}
-  //   />
-  // ));
-
   const taskList = tasks
     ?.filter(FILTER_MAP[filter])
     .map((task) => (
@@ -128,7 +116,7 @@ const Todo = (props) => {
     <>
       <div className="todoapp stack-large">
         <h1>To-Do List</h1>
-        <ExpTracker userId={props.userId} name={props.name} totalExp={0} />
+        <ExpTracker userId={props.userId} name={props.name} totalExp={props.totalExp} />
         <Form addTask={addTask} userId={props.userId} />
         <div className="filters btn-group stack-exception">{filterList}</div>
         <h2 id="list-heading">{headingText}</h2>

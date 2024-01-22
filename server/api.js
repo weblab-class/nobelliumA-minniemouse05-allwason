@@ -112,6 +112,14 @@ router.post("/entry", (req, res) => {
 //   });
 // });
 
+router.get("/exp", (req, res) => {
+  //console.log("getting from router");
+  UserProfile.findOne({ userId: req.query.userId }).then((contents) => {
+    console.log("contents in /exp", contents);
+    res.send(contents);
+  });
+});
+
 router.post("/updateExp", async (req, res) => {
   const existingUser = await UserProfile.findOne({ userId: req.body.userId });
 

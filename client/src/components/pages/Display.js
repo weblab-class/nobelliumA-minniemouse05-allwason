@@ -18,6 +18,8 @@ import Notebook from "./Notebook.js";
  */
 
 const Display = (props) => {
+  const [totalExp, setTotalExp] = useState(0);
+
   useEffect(() => {
     console.log("Room.js useEffect", props.name, props.userId);
     post("/api/updateExp", { name: props.name, userId: props.userId, totalExp: 0 });
@@ -29,23 +31,27 @@ const Display = (props) => {
   //   { id: "todo-2", name: "Repeat", completed: false },
   // ];
 
-  //console.log(props.open);
   const [itemData, setItemData] = useState([]);
-  //console.log("userId");
-  //console.log(props.userId);
 
   useEffect(() => {
-    //console.log("useEffect Display.js", props._id);
-    //console.log("in display.js");
-    //console.log(props.userId);
     get("/api/todoItem", { userId: props.userId })
       .then((itemData) => {
-        //console.log("useEffect");
-        //console.log(props.userId);
         setItemData(itemData);
       })
       .catch((error) => {
         console.error("Error when running get for api/todoItem:", error);
+      });
+  });
+
+  useEffect(() => {
+    console.log("inside of useEffect in userprofiles display.js");
+    get("/api/exp", { userId: props.userId })
+      .then((userprofiles) => {
+        console.log("userprofiles display.js", userprofiles.totalExp);
+        setTotalExp(userprofiles.totalExp);
+      })
+      .catch((error) => {
+        console.error("Error when running get for api/exp:", error);
       });
   });
 
@@ -71,7 +77,7 @@ const Display = (props) => {
         <div className="room button-overlay">
           <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
           <div className="width-todo-list display-box u-flex-justifyCenter u-flex-alignCenter">
-            <Todo userId={props.userId} tasks={itemData} name={props.name} />
+            <Todo userId={props.userId} tasks={itemData} name={props.name} totalExp={totalExp} />
           </div>
         </div>
       </>
