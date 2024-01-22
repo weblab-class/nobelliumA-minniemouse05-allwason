@@ -105,12 +105,12 @@ router.post("/entry", (req, res) => {
 });
 
 ///////////////////////////      PROFILE      ///////////////////////////
-router.get("/achievements", (req, res) => {
-  //console.log("getting from router");
-  Achievements.find({ userId: req.query.userId }).then((awardContents) => {
-    res.send(awardContents);
-  });
-});
+// router.get("/achievements", (req, res) => {
+//   //console.log("getting from router");
+//   Achievements.find({ userId: req.query.userId }).then((awardContents) => {
+//     res.send(awardContents);
+//   });
+// });
 
 router.post("/updateExp", async (req, res) => {
   const existingUser = await UserProfile.findOne({ userId: req.body.userId });
