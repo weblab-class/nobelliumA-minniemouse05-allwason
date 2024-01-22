@@ -1,16 +1,16 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-// const AwardSchema = new mongoose.Schema({
-//   award: String,
-//   hasAttained: Boolean,
-//   expValue: Number,
-// });
+const SingleAchievementSchema = new mongoose.Schema({
+  award: String,
+  hasAttained: Boolean,
+  expValue: Number,
+});
 
-// const AchievementsSchema = new mongoose.Schema({
-//   userId: String,
-//   exp: Number,
-//   achievements: [AwardSchema], //array of a bunch of award
-// });
+const AchievementsSchema = new mongoose.Schema({
+  name: String, //name of user
+  userId: String,
+  achievements: [SingleAchievementSchema], //array of comments
+});
 
-// // compile model from schema
-// module.exports = mongoose.model("user", AchievementsSchema);
+// compile model from schema
+module.exports = mongoose.model("Achievements", AchievementsSchema);

@@ -23,11 +23,12 @@
   background: #b38977;
   padding: 5px;
   width: 75%;
-  height: 90%;
+  max-height: 65%;
   margin: auto;
   margin-top: 4%;
   border: 8px solid #594038;
   border-radius: 15px;
+  overflow-y: scroll;
 }
 
 .name {
@@ -41,4 +42,13 @@
   display: block;
   margin: auto;
   margin-top: 28%;
+}
+
+.comment {
+  height: 10%;
+  padding: 4%;
+  margin: 4%;
+  background-color: #ffff;
+  color: black;
+  font-size: 2.2vw;
 }

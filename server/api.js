@@ -12,6 +12,7 @@ const express = require("express");
 const User = require("./models/user");
 const Entry = require("./models/Entry");
 const TodoItem = require("./models/TodoItem");
+const Achievements = require("./models/Achievements");
 
 // import authentication library
 const auth = require("./auth");
@@ -102,10 +103,10 @@ router.post("/entry", (req, res) => {
     });
 });
 
-/////////////////////// PROFILE ///////////////////////
+///////////////////////////      PROFILE      ///////////////////////////
 router.get("/achievements", (req, res) => {
   //console.log("getting from router");
-  User.find({ googleid: req.query.googleid }).then((achievements) => {
+  Achievements.find({ userId: req.query.userId }).then((achievements) => {
     res.send(achievements);
   });
 });
@@ -116,7 +117,7 @@ router.post("/addAchievement/:userId", async (req, res) => {
     const newAchievement = req.body.achievement; // Assuming the achievement details are sent in the request body
 
     // Find the user by ID
-    const user = await UserModel.findById(userId);
+    const user = await Achievements.findById(userId);
 
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
