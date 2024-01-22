@@ -21,9 +21,12 @@ const Profile = (props) => {
   const navigate = useNavigate();
 
   const [achievementData, setAchievementData] = useState([
-    { award: "Joined RoomCraft", hasAttained: true, expValue: 50 },
-    { award: "Created 1st To-Do List", hasAttained: false, expValue: 50 },
-    { award: "Created 1st Notebook", hasAttained: false, expValue: 50 },
+    { award: "Join RoomCraft", hasAttained: true, expValue: 50 },
+    { award: "Create 1st To-Do List", hasAttained: false, expValue: 50 },
+    { award: "Create 1st Notebook", hasAttained: false, expValue: 50 },
+    { award: "Reach 42 exp", hasAttained: false, expValue: 42 },
+    { award: "Reach 314 exp", hasAttained: false, expValue: 314 },
+    { award: "Reach 420 exp", hasAttained: false, expValue: 420 },
   ]);
 
   // useEffect(() => {
