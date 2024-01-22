@@ -29,7 +29,7 @@ const NotebookEntry = (props) => {
     console.log(props);
     post("/api/entry", {
       _id: props.entry._id,
-      user_id: props.user_id,
+      userId: props.userId,
       text: text,
       header: header,
     }).then((entry) => {

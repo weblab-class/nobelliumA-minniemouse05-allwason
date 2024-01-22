@@ -7,25 +7,54 @@ import FriendEntry from "../modules/FriendEntry.js";
 import { Link, useNavigate } from "react-router-dom";
 const Friends = ({ userId }) => {
   const navigate = useNavigate();
+  const [UserFriends, setUserFriends] = useState([]);
+  const [text, setText] = useState("");
+  const findFriend = () => {
+    get("/api/user", { _id: text }).then((friend) => {
+      if (friend.name != undefined) {
+        console.log(`Friend found: ${friend}`);
+      } else {
+        console.log(`Friend not found`);
+        console.log(text);
+        console.log(friend);
+      }
+    });
+  };
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+  useEffect(() => {
+    get("/api/friends", { userId: userId }).then((content) => {
+      if (content.length > 0) {
+        setUserFriends(content.friends);
+      }
+
+      console.log(content);
+    });
+  }, []);
+  const makeFriendEntry = (id, index) => {
+    return <FriendEntry key={id} index={index} />;
+  };
   return (
     <div>
       {userId ? (
-        <>
-          <div className="u-flex find">
-            <h1 className="pr-15">Enter Friend UserID:</h1>
-            <div className="search-field">
-              <input></input>
-            </div>
-            <button>search</button>
+        <div className="u-flex find">
+          <h1 className="pr-15">Enter Friend UserID:</h1>
+          <div className="search-field">
+            <input value={text} onChange={handleChange}></input>
           </div>
-
+          <button onClick={findFriend}>search</button>
+        </div>
+      ) : (
+        <></>
+      )}
+      {userId ? (
+        <>
           <div className="friend-list u-flex-justifyCenter u-flex-vertical ">
-            <FriendEntry />
-            <FriendEntry />
-            <FriendEntry />
-            <FriendEntry />
-            <FriendEntry />
-            <FriendEntry />
+            {UserFriends.map((friend_id, ind) => {
+              //console.log(ind);
+              return makeFriendEntry(friend_id, ind);
+            })}
           </div>
         </>
       ) : (

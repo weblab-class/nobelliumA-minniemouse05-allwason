@@ -11,6 +11,7 @@ const express = require("express");
 // import models so we can interact with the database
 const User = require("./models/user");
 const Entry = require("./models/Entry");
+const FriendList = require("./models/FriendList");
 const TodoItem = require("./models/TodoItem");
 // const Achievements = require("./models/Achievements");
 const UserProfile = require("./models/UserProfile");
@@ -47,14 +48,24 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 //reference https://docs.google.com/presentation/d/1-096jf5d_j9RhdTW_1PsGPb2rre7fSY_tmhFqhMVpWE/edit#slide=id.p1
+router.get("/user", (req, res) => {
+  User.find({ _id: req._id }).then((user) => {
+    res.send({ user });
+  });
+});
+router.get("/friends", (req, res) => {
+  FriendList.find({ userId: req.query.userId }).then((contents) => {
+    res.send(contents);
+  });
+});
 router.get("/entry", (req, res) => {
-  Entry.find({ user_id: req.query.user_id }).then((contents) => {
+  Entry.find({ userId: req.query.userId }).then((contents) => {
     res.send(contents);
   });
 });
 router.post("/newEntry", (req, res) => {
   const newEntry = new Entry({
-    user_id: req.body.user_id,
+    userId: req.body.userId,
     text: req.body.text,
     header: req.body.header,
   });
@@ -79,7 +90,7 @@ router.post("/deleteEntry", (req, res) => {
 router.post("/entry", (req, res) => {
   const update = {
     $set: {
-      user_id: req.body.user_id,
+      userId: req.body.userId,
       text: req.body.text,
       header: req.body.header,
     },
@@ -94,7 +105,7 @@ router.post("/entry", (req, res) => {
     .then(() => {
       res.send({
         _id: req.body._id,
-        user_id: req.body.user_id,
+        userId: req.body.userId,
         text: req.body.text,
         header: req.body.header,
       });
