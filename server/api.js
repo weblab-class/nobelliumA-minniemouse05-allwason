@@ -146,12 +146,14 @@ router.post("/updateExp", async (req, res) => {
 
 router.post("/addExp", async (req, res) => {
   try {
+    const amtToUpdate = req.body.amtToUpdate;
     const taskIdToUpdate = req.body.userId; // Assuming taskId is sent in the request body
     console.log("addExp userId totalExp", taskIdToUpdate);
+    console.log("addExp userId totalExp", req.body.amtToUpdate);
 
     const userToAdd = await UserProfile.findOne({ userId: req.body.userId });
     console.log("userToAdd", userToAdd);
-    userToAdd.totalExp += 5;
+    userToAdd.totalExp += amtToUpdate;
     userToAdd
       .save()
       .then(() => {

@@ -35,7 +35,11 @@ const Item = (props) => {
     post("/api/updateItemCheck", { _id: props._id, completed: !props.completed })
       .then(() => {
         if (props.completed === false) {
-          post("/api/addExp", { userId: props.userId }).then(() => {
+          post("/api/addExp", { userId: props.userId, amtToUpdate: 5 }).then(() => {
+            console.log("updated add Exp");
+          });
+        } else {
+          post("/api/addExp", { userId: props.userId, amtToUpdate: -5 }).then(() => {
             console.log("updated add Exp");
           });
         }
