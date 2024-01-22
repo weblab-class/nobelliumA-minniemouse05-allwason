@@ -50,6 +50,7 @@ router.post("/initsocket", (req, res) => {
 //reference https://docs.google.com/presentation/d/1-096jf5d_j9RhdTW_1PsGPb2rre7fSY_tmhFqhMVpWE/edit#slide=id.p1
 router.get("/user", (req, res) => {
   User.find({ _id: req._id }).then((user) => {
+    console.log(req._id);
     res.send({ user });
   });
 });

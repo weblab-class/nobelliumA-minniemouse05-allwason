@@ -17,6 +17,7 @@ const Friends = ({ userId }) => {
         console.log(`Friend not found`);
         console.log(text);
         console.log(friend);
+        console.log(friend.name);
       }
     });
   };
