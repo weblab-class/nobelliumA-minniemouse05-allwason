@@ -38,11 +38,15 @@ const Display = (props) => {
     //console.log("useEffect Display.js", props._id);
     //console.log("in display.js");
     //console.log(props.userId);
-    get("/api/todoItem", { userId: props.userId }).then((itemData) => {
-      //console.log("useEffect");
-      //console.log(props.userId);
-      setItemData(itemData);
-    });
+    get("/api/todoItem", { userId: props.userId })
+      .then((itemData) => {
+        //console.log("useEffect");
+        //console.log(props.userId);
+        setItemData(itemData);
+      })
+      .catch((error) => {
+        console.error("Error when running get for api/todoItem:", error);
+      });
   });
 
   if (props.open === "room") {

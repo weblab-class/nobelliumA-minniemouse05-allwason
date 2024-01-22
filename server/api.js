@@ -136,6 +136,30 @@ router.post("/updateExp", async (req, res) => {
   }
 });
 
+router.post("/addExp", async (req, res) => {
+  try {
+    const taskIdToUpdate = req.body.userId; // Assuming taskId is sent in the request body
+    console.log("addExp userId totalExp", taskIdToUpdate);
+
+    const userToAdd = await UserProfile.findOne({ userId: req.body.userId });
+    console.log("userToAdd", userToAdd);
+    userToAdd.totalExp += 5;
+    userToAdd
+      .save()
+      .then(() => {
+        console.log("saved NewUserProfile, exp:", userToAdd.totalExp);
+        res.send({});
+      })
+      .catch(() => {
+        console.log("catched NewUserProfile");
+        res.send({});
+      });
+  } catch (error) {
+    console.error("Error running addExp:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
 // router.post("/addAchievement", (req, res) => {
 //   console.log("addAchievement running");
 //   try {

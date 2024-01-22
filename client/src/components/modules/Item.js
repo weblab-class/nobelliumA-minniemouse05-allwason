@@ -32,21 +32,18 @@ const Item = (props) => {
   }
 
   const updateCheck = () => {
-    post("/api/updateItemCheck", { _id: props._id, completed: !props.completed }).then(
-      console.log("updated checkbox")
-    );
-    // post("/api/addAchievement", {
-    //   userId: props.userId,
-    //   achievement: {
-    //     award: "Completed First To-Do List",
-    //     hasAttained: true,
-    //     expValue: 50,
-    //   },
-    // }).then(console.log("updated add achievement"));
-
-    console.log("updateCheck, props.name", props.name);
-    console.log("updateCheck props._id", props._id);
-    // console.log(completed);
+    post("/api/updateItemCheck", { _id: props._id, completed: !props.completed })
+      .then(() => {
+        if (props.completed === false) {
+          post("/api/addExp", { userId: props.userId }).then(() => {
+            console.log("updated add Exp");
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching updateItemCheck:", error);
+        // Handle the error here
+      });
   };
 
   const updateName = () => {
@@ -55,16 +52,7 @@ const Item = (props) => {
     );
     console.log("updateName, props.name", props.name);
     console.log("updateName, newName", newName);
-    // console.log(completed);
   };
-  // const deleteItemDB = () => {
-  //   post("/api/deleteItem", { userId: props.userId, name: props.name, completed: false }).then(
-  //     console.log("delete")
-  //   );
-  //   console.log("deleteItemDB");
-  //   console.log(props.name);
-  //   // console.log(completed);
-  // };
 
   const editingTemplate = (
     <form className="" onSubmit={handleSubmit}>
