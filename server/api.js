@@ -13,6 +13,7 @@ const User = require("./models/user");
 const Entry = require("./models/Entry");
 const TodoItem = require("./models/TodoItem");
 const Achievements = require("./models/Achievements");
+const UserProfile = require("./models/UserProfile");
 
 // import authentication library
 const auth = require("./auth");
@@ -106,38 +107,55 @@ router.post("/entry", (req, res) => {
 ///////////////////////////      PROFILE      ///////////////////////////
 router.get("/achievements", (req, res) => {
   //console.log("getting from router");
-  Achievements.find({ userId: req.query.userId }).then((achievements) => {
-    res.send(achievements);
+  Achievements.find({ userId: req.query.userId }).then((awardContents) => {
+    res.send(awardContents);
   });
 });
 
-router.post("/addAchievement/:userId", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const newAchievement = req.body.achievement; // Assuming the achievement details are sent in the request body
+router.post("/updateExp", async (req, res) => {
+  const existingUser = await UserProfile.findOne({ userId: req.body.userId });
 
-    // Find the user by ID
-    const user = await Achievements.findById(userId);
+  if (!existingUser) {
+    const NewUserProfile = new UserProfile({
+      name: req.body.name, //name of user
+      userId: req.body.userId,
+      totalExp: req.body.totalExp,
+    });
 
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
+    console.log("updateExp", req.body.name, req.body.userId, req.body.totalExp);
 
-    // Add the new achievement to the array
-    user.achievements.push(newAchievement);
-
-    // Save the updated user document
-    const updatedUser = await user.save();
-
-    console.log("Achievement added successfully:", updatedUser);
-    res
-      .status(200)
-      .json({ success: true, message: "Achievement added successfully", user: updatedUser });
-  } catch (error) {
-    console.error("Error adding achievement:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    NewUserProfile.save()
+      .then(() => {
+        console.log("saved NewUserProfile");
+        res.send({});
+      })
+      .catch(() => {
+        console.log("catched NewUserProfile");
+        res.send({});
+      });
   }
 });
+
+// router.post("/addAchievement", (req, res) => {
+//   console.log("addAchievement running");
+//   try {
+//     const userId = req.body.userId;
+//     console.log("addAchievement userId", userId);
+//     const newAchievement = req.body.achievement; // Assuming the achievement details are sent in the request body
+//     console.log("addAchievement newAchievement", newAchievement);
+
+//     Achievements.findOne({ userId: userId }).then((res) => {
+//       if (res) {
+//         console.log("findOne Result:", res);
+//       } else {
+//         console.log("result not found", res);
+//       }
+//     });
+//   } catch (error) {
+//     console.error("Error adding achievement:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
 
 /////////////////////// TO DO ///////////////////////
 

@@ -28,7 +28,7 @@ const Profile = (props) => {
 
   // useEffect(() => {
   //   get("/api/achievements", { userId: props.userId }).then((achData) => {
-  //     setAchievementData(achievementData.concat([achData.achievements]));
+  //     setAchievementData(achData.achievements);
   //   });
   //   console.log("profile.js useEffect achievementData", achievementData);
   // }, []);
@@ -45,7 +45,7 @@ const Profile = (props) => {
                   <div class="comment-section">
                     {achievementData?.map((ach) => (
                       <SingleAchievement
-                        key={`SingleComment_${ach._id}`}
+                        key={`SingleAchievement_${ach._id}`}
                         award={ach.award}
                         hasAttained={ach.hasAttained}
                         expValue={ach.expValue}

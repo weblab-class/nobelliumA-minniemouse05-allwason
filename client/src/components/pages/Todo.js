@@ -9,6 +9,20 @@ import FilterButton from "../modules/FilterButton";
 
 import "../../utilities.css";
 import "./Todo.css";
+
+/**
+ * Parent: Display
+ *
+ * Proptypes
+ * @param {String} userId
+ * @param {Array of objects} tasks
+ * 
+  //   { id: "todo-0", name: "Eat", completed: true },
+  //   { id: "todo-1", name: "Sleep", completed: false },
+  //   { id: "todo-2", name: "Repeat", completed: false },
+  // ]
+ */
+
 const FILTER_MAP = {
   All: () => true,
   Active: (task) => !task.completed,
@@ -89,6 +103,7 @@ const Todo = (props) => {
     ?.filter(FILTER_MAP[filter])
     .map((task) => (
       <Item
+        userId={props.userId}
         _id={task._id}
         name={task.name}
         completed={task.completed}

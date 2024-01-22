@@ -21,6 +21,7 @@ import { get, post } from "../utilities.js";
 const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [userName, setUserName] = useState(undefined);
+
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
@@ -59,9 +60,16 @@ const App = () => {
       console.log("back to home");
     }
   };
+
   return (
     <>
-      <NavBar path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <NavBar
+        path="/"
+        userName={userName}
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        userId={userId}
+      />
       <Routes>
         <Route
           path="/"

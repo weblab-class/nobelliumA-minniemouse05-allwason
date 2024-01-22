@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { get, post } from "../../utilities.js";
-
 import "../../utilities.css";
 import "./Item.css";
+
+/**
+ * Parent: Todo
+ *
+ * Proptypes
+ * @param {String} _id
+ * @param {String} userId
+ * @param {Boolean} completed
+ * @param {String} key
+ * @param {Function} toggleTaskCompleted
+ * @param {Function} deleteTask
+ * @param {Function} editTask
+ */
 
 const Item = (props) => {
   const [isEditing, setEditing] = useState(false);
@@ -23,6 +35,15 @@ const Item = (props) => {
     post("/api/updateItemCheck", { _id: props._id, completed: !props.completed }).then(
       console.log("updated checkbox")
     );
+    // post("/api/addAchievement", {
+    //   userId: props.userId,
+    //   achievement: {
+    //     award: "Completed First To-Do List",
+    //     hasAttained: true,
+    //     expValue: 50,
+    //   },
+    // }).then(console.log("updated add achievement"));
+
     console.log("updateCheck, props.name", props.name);
     console.log("updateCheck props._id", props._id);
     // console.log(completed);

@@ -4,6 +4,14 @@ import { post } from "../../utilities";
 import "../../utilities.css";
 import "./Form.css";
 
+/**
+ * Parent: Todo
+ *
+ * Proptypes
+ * @param {String} userId
+ * @param {Function} addTask
+ */
+
 const Form = (props) => {
   const [name, setName] = useState("");
 

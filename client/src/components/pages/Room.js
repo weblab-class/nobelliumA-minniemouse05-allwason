@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { get, post } from "../../utilities.js";
 
 import "../../utilities.css";
 import "./Room.css";
@@ -8,13 +9,25 @@ import key from "./../../../dist/key-right.png";
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com";
 
+/**
+ * Parent: App
+ *
+ * Proptypes
+ * @param {String} name
+ * @param {String} userId
+ * @param open
+ * @param handleLogin
+ * @param handleLogout
+ * @param _id
+ */
+
 const Room = ({ userId, name, open, handleLogin, handleLogout, _id }) => {
   return (
     <div>
       <div className="welcome">
         {userId ? (
           <>
-            <Display className="display" open={open} userId={userId} />
+            <Display className="display" open={open} userId={userId} name={name} />
           </>
         ) : (
           <div className="u-flex u-flex-justifyCenter u-flex-alignCenter login">
