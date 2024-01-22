@@ -1,5 +1,8 @@
 import React from "react";
 
+import "../../utilities.css";
+import "./SingleAchievement.css";
+
 /**
  * Component to render a single comment
  *

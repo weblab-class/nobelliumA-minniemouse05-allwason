@@ -48,7 +48,6 @@ const Profile = (props) => {
                   <div class="comment-section">
                     {achievementData?.map((ach) => (
                       <SingleAchievement
-                        key={`SingleAchievement_${ach._id}`}
                         award={ach.award}
                         hasAttained={ach.hasAttained}
                         expValue={ach.expValue}
