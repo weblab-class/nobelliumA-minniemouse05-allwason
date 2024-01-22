@@ -16,7 +16,7 @@ import "./Form.css";
 const ExpTracker = (props) => {
   return (
     <div>
-      <span>{"you have earned " + props.totalExp + " exp"}</span>
+      <span>{"you have earned " + props.totalExp + " exp so far. keep going!"}</span>
     </div>
   );
 };
