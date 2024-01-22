@@ -6,6 +6,7 @@ import { get, post } from "../../utilities.js";
 import Item from "../modules/Item.js";
 import Form from "../modules/Form";
 import FilterButton from "../modules/FilterButton";
+import ExpTracker from "../modules/ExpTracker";
 
 import "../../utilities.css";
 import "./Todo.css";
@@ -16,6 +17,7 @@ import "./Todo.css";
  * Proptypes
  * @param {String} userId
  * @param {Array of objects} tasks
+ * @param {String} name
  * 
   //   { id: "todo-0", name: "Eat", completed: true },
   //   { id: "todo-1", name: "Sleep", completed: false },
@@ -126,6 +128,7 @@ const Todo = (props) => {
     <>
       <div className="todoapp stack-large">
         <h1>To-Do List</h1>
+        <ExpTracker userId={props.userId} name={props.name} totalExp={0} />
         <Form addTask={addTask} userId={props.userId} />
         <div className="filters btn-group stack-exception">{filterList}</div>
         <h2 id="list-heading">{headingText}</h2>

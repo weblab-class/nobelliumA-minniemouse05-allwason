@@ -12,7 +12,7 @@ const express = require("express");
 const User = require("./models/user");
 const Entry = require("./models/Entry");
 const TodoItem = require("./models/TodoItem");
-const Achievements = require("./models/Achievements");
+// const Achievements = require("./models/Achievements");
 const UserProfile = require("./models/UserProfile");
 
 // import authentication library
