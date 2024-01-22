@@ -8,6 +8,7 @@ import NavBar from "./modules/NavBar.js";
 import Room from "./pages/Room.js";
 import Profile from "./pages/Profile.js";
 import Leaderboard from "./pages/Leaderboard.js";
+import Friends from "./pages/Friends.js";
 import { useNavigate } from "react-router-dom";
 import "../utilities.css";
 
@@ -85,7 +86,11 @@ const App = () => {
         />
         <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
 
-        <Route path="/leaderboard" element={<Leaderboard userId={userId} name={userName} />} />
+        <Route
+          path="/leaderboard/:userId"
+          element={<Leaderboard userId={userId} name={userName} />}
+        />
+        <Route path="/friends/:userId" element={<Friends userId={userId} name={userName} />} />
         <Route
           path="/todo"
           element={

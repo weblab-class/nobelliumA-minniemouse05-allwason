@@ -39,36 +39,33 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
                 <span className="material-symbols-outlined">person</span>
               </span>
             </Link>
-            <Link to="/" className="NavBar-link pl-15 pr-15">
+            <Link to={`/friends/${userId}`} className="NavBar-link pl-15 pr-15">
               <span data-text="Friends" className="tooltip">
                 <span className="material-symbols-outlined">group</span>
               </span>
             </Link>
-            <Link to="/leaderboard" className="NavBar-link pl-15 pr-15">
+            <Link to={`/leaderboard/${userId}`} className="NavBar-link pl-15 pr-15">
               <span data-text="Leaderboard" className="tooltip">
                 <span className="material-symbols-outlined">leaderboard</span>
               </span>
             </Link>
+
+            <div className="pl-15 pr-15">
+              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+                <button
+                  onClick={() => {
+                    googleLogout();
+                    handleLogout();
+                  }}
+                >
+                  Logout
+                </button>
+              </GoogleOAuthProvider>
+            </div>
           </>
         )}
 
-        <div className="pl-15 pr-15">
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            {userId ? (
-              <button
-                onClick={() => {
-                  googleLogout();
-                  handleLogout();
-                }}
-              >
-                Logout
-              </button>
-            ) : (
-              <></>
-            )}
-          </GoogleOAuthProvider>
-        </div>
-        {userId && (
+        {userId && !collapse && (
           <button
             id="collapse"
             onClick={() => {
@@ -77,6 +74,17 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
             }}
           >
             <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+        )}
+        {userId && collapse && (
+          <button
+            id="collapse"
+            onClick={() => {
+              setCollapse(!collapse);
+              console.log(collapse);
+            }}
+          >
+            <span class="material-symbols-outlined">chevron_right</span>
           </button>
         )}
       </div>
