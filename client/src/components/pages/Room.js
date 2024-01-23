@@ -23,10 +23,10 @@ const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.goo
  */
 
 const Room = ({ totalExp, userId, name, open, handleLogin, handleLogout, _id }) => {
-  useEffect(() => {
-    console.log("Room.js useEffect", name, userId);
-    post("/api/updateExp", { name: name, userId: userId, totalExp: 0 });
-  }, []);
+  // useEffect(() => {
+  //   console.log("Room.js useEffect", name, userId);
+  //   post("/api/updateExp", { name: name, userId: userId, totalExp: 0 });
+  // }, []);
 
   return (
     <div>

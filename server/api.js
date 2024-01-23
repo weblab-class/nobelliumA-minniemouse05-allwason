@@ -204,56 +204,69 @@ router.post("/makeAchievement", (req, res) => {
 });
 /////////////////////////     EXP       /////////////////////////////
 
+// router.get("/exp", (req, res) => {
+//   //console.log("getting from router");
+//   UserProfile.findOne({ userId: req.query.userId }).then((contents) => {
+//     // console.log("contents in /exp", contents);
+//     res.send(contents);
+//   });
+// });
+
 router.get("/exp", (req, res) => {
-  //console.log("getting from router");
-  UserProfile.findOne({ userId: req.query.userId }).then((contents) => {
+  console.log("getting from router /exp");
+  User.findOne({ _id: req.query.userId }).then((contents) => {
     // console.log("contents in /exp", contents);
     res.send(contents);
   });
 });
 
-router.post("/updateExp", async (req, res) => {
-  const existingUser = await UserProfile.findOne({ userId: req.body.userId });
+//creates new userprofile with 0 exp
+// router.post("/updateExp", async (req, res) => {
+//   try {
+//     const existingUser = await UserProfile.findOne({ userId: req.body.userId });
 
-  if (!existingUser) {
-    const NewUserProfile = new UserProfile({
-      name: req.body.name, //name of user
-      userId: req.body.userId,
-      totalExp: req.body.totalExp,
-    });
+//     if (!existingUser) {
+//       const NewUserProfile = new UserProfile({
+//         name: req.body.name, //name of user
+//         userId: req.body.userId,
+//         totalExp: req.body.totalExp,
+//       });
 
-    console.log("updateExp", req.body.name, req.body.userId, req.body.totalExp);
+//       console.log("updateExp", req.body.name, req.body.userId, req.body.totalExp);
 
-    NewUserProfile.save()
-      .then(() => {
-        console.log("saved NewUserProfile");
-        res.send({});
-      })
-      .catch(() => {
-        console.log("catched NewUserProfile");
-        res.send({});
-      });
-  }
-});
+//       NewUserProfile.save()
+//         .then(() => {
+//           console.log("saved NewUserProfile");
+//           res.send({});
+//         })
+//         .catch(() => {
+//           console.log("catched NewUserProfile");
+//           res.send({});
+//         });
+//     }
+//   } catch (error) {
+//     console.error("Error running updateExp:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
 
 router.post("/addExp", async (req, res) => {
   try {
     const amtToUpdate = req.body.amtToUpdate;
-    const taskIdToUpdate = req.body.userId; // Assuming taskId is sent in the request body
     //console.log("addExp userId totalExp", taskIdToUpdate);
     //console.log("addExp userId totalExp", req.body.amtToUpdate);
 
-    const userToAdd = await UserProfile.findOne({ userId: req.body.userId });
+    const userToAdd = await User.findById({ _id: req.body.userId });
     //console.log("userToAdd", userToAdd);
     userToAdd.totalExp += amtToUpdate;
     userToAdd
       .save()
       .then(() => {
-        console.log("saved NewUserProfile, exp:", userToAdd.totalExp);
+        console.log("saved NewUser, exp:", userToAdd.totalExp);
         res.send({});
       })
       .catch(() => {
-        console.log("catched NewUserProfile");
+        console.log("catched NewUser");
         res.send({});
       });
   } catch (error) {
@@ -261,6 +274,32 @@ router.post("/addExp", async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
+
+// router.post("/addExp", async (req, res) => {
+//   try {
+//     const amtToUpdate = req.body.amtToUpdate;
+//     const taskIdToUpdate = req.body.userId; // Assuming taskId is sent in the request body
+//     //console.log("addExp userId totalExp", taskIdToUpdate);
+//     //console.log("addExp userId totalExp", req.body.amtToUpdate);
+
+//     const userToAdd = await UserProfile.findOne({ userId: req.body.userId });
+//     //console.log("userToAdd", userToAdd);
+//     userToAdd.totalExp += amtToUpdate;
+//     userToAdd
+//       .save()
+//       .then(() => {
+//         console.log("saved NewUserProfile, exp:", userToAdd.totalExp);
+//         res.send({});
+//       })
+//       .catch(() => {
+//         console.log("catched NewUserProfile");
+//         res.send({});
+//       });
+//   } catch (error) {
+//     console.error("Error running addExp:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
 
 // router.post("/addAchievement", (req, res) => {
 //   console.log("addAchievement running");

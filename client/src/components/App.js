@@ -63,14 +63,16 @@ const App = () => {
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
-      get("/api/exp", { userId: user._id })
-        .then((userprofiles) => {
-          //console.log("userprofiles display.js", userprofiles.totalExp);
-          setTotalExp(userprofiles.totalExp);
-        })
-        .catch((error) => {
-          console.error("Error when running get for api/exp:", error);
-        });
+      if (user._id) {
+        get("/api/exp", { userId: user._id })
+          .then((userInfo) => {
+            //console.log("userprofiles display.js", userprofiles.totalExp);
+            setTotalExp(userInfo.totalExp);
+          })
+          .catch((error) => {
+            console.error("Error when running get for api/exp:", error);
+          });
+      }
     });
   });
 

@@ -4,6 +4,7 @@ const UserSchema = new mongoose.Schema({
   name: String,
   googleid: String,
   achievementArray: [], // array of Achievement ids
+  totalExp: Number,
 });
 
 // compile model from schema
