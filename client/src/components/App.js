@@ -23,15 +23,56 @@ const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [userName, setUserName] = useState(undefined);
 
+  const [totalExp, setTotalExp] = useState(0);
+
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
+        console.log("running api/whoami in app.js");
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
         setUserName(user.name);
+        // post("/api/updateExp", { name: user.name, userId: user._id, totalExp: 0 });
+        // return user;
+        // } else {
+        //   post("/api/updateExp", { name: user.name, userId: user._id, totalExp: 0 });
+        //   return user;
+        // }
       }
     });
+    // .then((user) => {
+    //   console.log("user then", user);
+    //   if (user._id) {
+    //     post("/api/updateExp", { name: user.name, userId: user._id, totalExp: 0 });
+    //     return user;
+    //   }
+    // });
+    // .then((user) => {
+    //   if (user._id) {
+    //     console.log("running get(/api/exp in app.js");
+    //     get("/api/exp", { userId: user._id }).then((userprofiles) => {
+    //       console.log("App.js totalExp", userprofiles.totalExp);
+    //       setTotalExp(userprofiles.totalExp);
+    //     });
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.error("Error when running get for api/exp:", error);
+    // });
   }, []);
+
+  useEffect(() => {
+    get("/api/whoami").then((user) => {
+      get("/api/exp", { userId: user._id })
+        .then((userprofiles) => {
+          //console.log("userprofiles display.js", userprofiles.totalExp);
+          setTotalExp(userprofiles.totalExp);
+        })
+        .catch((error) => {
+          console.error("Error when running get for api/exp:", error);
+        });
+    });
+  });
 
   // useEffect(() => {
   //   post("/api/makeAchievement", {
@@ -103,10 +144,14 @@ const App = () => {
               handleLogout={handleLogout}
               userId={userId}
               name={userName}
+              totalExp={totalExp}
             />
           }
         />
-        <Route path="/profile/:userId" element={<Profile userId={userId} name={userName} />} />
+        <Route
+          path="/profile/:userId"
+          element={<Profile userId={userId} name={userName} totalExp={totalExp} />}
+        />
 
         <Route
           path="/leaderboard/:userId"
@@ -122,6 +167,7 @@ const App = () => {
               open={"todo"}
               userId={userId}
               name={userName}
+              totalExp={totalExp}
             />
           }
         />
@@ -134,6 +180,7 @@ const App = () => {
               open={"notebook"}
               userId={userId}
               name={userName}
+              totalExp={totalExp}
             />
           }
         />

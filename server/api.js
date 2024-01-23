@@ -133,13 +133,41 @@ router.post("/entry", (req, res) => {
 
 //gets achievement based on user id
 router.get("/userAchievements", (req, res) => {
-  //console.log("getting from router");
-  User.findById({ _id: req.query.userId }).then((allAchievements) => {
-    res.send(allAchievements);
+  console.log("running /userAchievements");
+  console.log("req.query._id", req.query._id);
+  User.findById({ _id: req.query._id }).then((allAchievements) => {
+    res.send(allAchievements.achievementArray);
   });
 });
 
-//gets the achievement entry based on the _id
+//finds user based on userID and then adds to the achievement array
+router.post("/addAchievement", async (req, res) => {
+  try {
+    const achievementIdToUpdate = req.body.achievementId; // Assuming achievementIdToUpdate is sent in the request body
+    console.log("addAchievement id", achievementIdToUpdate);
+
+    const userToAward = await User.findById({ _id: req.body._id });
+    console.log("userToAward", userToAward);
+    if (!userToAward.achievementArray.includes(achievementIdToUpdate)) {
+      userToAward.achievementArray.push(achievementIdToUpdate);
+      userToAward
+        .save()
+        .then(() => {
+          console.log("saved new achievement, exp:", userToAward.achievementArray);
+          res.send({});
+        })
+        .catch(() => {
+          console.log("catched new achievement");
+          res.send({});
+        });
+    }
+  } catch (error) {
+    console.error("Error running addAchievement:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+//gets the achievement entry based on the achievementId
 router.get("/getAchievement", (req, res) => {
   console.log("achievement Id:", req.query.achievementId);
   Achievement.find({ achievementId: req.query.achievementId }).then((achievementData) => {
@@ -148,7 +176,7 @@ router.get("/getAchievement", (req, res) => {
   });
 });
 
-//gets ALL
+//gets ALL achievements
 router.get("/getAllAchievement", (req, res) => {
   Achievement.find({}).then((achievementData) => {
     console.log("ALL achievementData", achievementData);
@@ -156,6 +184,7 @@ router.get("/getAllAchievement", (req, res) => {
   });
 });
 
+//just for initializing, not really needed anymore (but still keep)
 router.post("/makeAchievement", (req, res) => {
   const NewAchievement = new Achievement({
     achievementId: req.body.achievementId,
@@ -211,11 +240,11 @@ router.post("/addExp", async (req, res) => {
   try {
     const amtToUpdate = req.body.amtToUpdate;
     const taskIdToUpdate = req.body.userId; // Assuming taskId is sent in the request body
-    console.log("addExp userId totalExp", taskIdToUpdate);
-    console.log("addExp userId totalExp", req.body.amtToUpdate);
+    //console.log("addExp userId totalExp", taskIdToUpdate);
+    //console.log("addExp userId totalExp", req.body.amtToUpdate);
 
     const userToAdd = await UserProfile.findOne({ userId: req.body.userId });
-    console.log("userToAdd", userToAdd);
+    //console.log("userToAdd", userToAdd);
     userToAdd.totalExp += amtToUpdate;
     userToAdd
       .save()

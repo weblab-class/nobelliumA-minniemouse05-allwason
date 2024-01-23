@@ -14,29 +14,38 @@ import SingleAchievement from "../modules/SingleAchievement.js";
  * Proptypes
  * @param {string} userId
  * @param {string} name
+ * @param totalExp
  *
- * TO ADD!!!!!!!
- * @param {string} achievements //array
+ * TO ADD???!!!!!!!
+ * @param {string} achievementArray //array
  */
 
 const Profile = (props) => {
   const navigate = useNavigate();
 
-  const [achievementData, setAchievementData] = useState([
-    { award: "Join RoomCraft", hasAttained: true, expValue: 50 },
-    { award: "Create 1st To-Do List", hasAttained: false, expValue: 50 },
-    { award: "Create 1st Notebook", hasAttained: false, expValue: 50 },
-    { award: "Reach 42 exp", hasAttained: false, expValue: 42 },
-    { award: "Reach 314 exp", hasAttained: false, expValue: 314 },
-    { award: "Reach 420 exp", hasAttained: false, expValue: 420 },
-  ]);
+  // const [achievementData, setAchievementData] = useState([
+  //   { award: "Join RoomCraft", hasAttained: true, expValue: 50 },
+  //   { award: "Create 1st To-Do List", hasAttained: false, expValue: 50 },
+  //   { award: "Create 1st Notebook", hasAttained: false, expValue: 50 },
+  //   { award: "Reach 42 exp", hasAttained: false, expValue: 42 },
+  //   { award: "Reach 314 exp", hasAttained: false, expValue: 314 },
+  //   { award: "Reach 420 exp", hasAttained: false, expValue: 420 },
+  // ]);
 
-  // useEffect(() => {
-  //   get("/api/achievements", { userId: props.userId }).then((achData) => {
-  //     setAchievementData(achData.achievements);
-  //   });
-  //   console.log("profile.js useEffect achievementData", achievementData);
-  // }, []);
+  const [achievementData, setAchievementData] = useState([]);
+
+  useEffect(() => {
+    get("/api/userAchievements", { _id: props.userId }).then((achIdData) => {
+      console.log("profile.js achData", achIdData);
+      setAchievementData(achIdData);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (props.totalExp >= 10) {
+      post("/api/addAchievement", { achievementId: 0, _id: props.userId });
+    }
+  }, []);
 
   return (
     <div>
@@ -48,13 +57,19 @@ const Profile = (props) => {
                 <div class="custom-scrollbar">
                   <h1 class="u-textCenter">Achievements</h1>
                   <div class="comment-section">
-                    {achievementData?.map((ach) => (
-                      <SingleAchievement
-                        award={ach.award}
-                        hasAttained={ach.hasAttained}
-                        expValue={ach.expValue}
-                      />
-                    ))}
+                    {achievementData && achievementData.length > 0 ? (
+                      achievementData.map((ach) => (
+                        <SingleAchievement
+                          awardDescription={ach.awardDescription}
+                          awardName={ach.awardName}
+                          achievementId={ach.achievementId}
+                        />
+                      ))
+                    ) : (
+                      <h1 className="u-textCenter">
+                        No achievements collected so far. Keep going!
+                      </h1>
+                    )}
                   </div>
                 </div>
               </div>
