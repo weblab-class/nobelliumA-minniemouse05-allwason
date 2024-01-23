@@ -5,14 +5,14 @@ import "../../utilities.css";
 import "./FriendEntry.css";
 import exp from "./../../../dist/EXP.png";
 import { Link, useNavigate } from "react-router-dom";
-const FriendEntry = () => {
+const FriendEntry = (props) => {
   return (
     <div className="FriendEntry u-flex">
       <img
         className="friend-class-image pr-15"
         src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
       />
-      <h1 className="pr-20">Friend</h1>
+      <h1 className="pr-20">{props.value}</h1>
       <img className="friend-class-image pr-15" src={exp} />
       <h1 className="pr-20">10000000</h1>
       <img

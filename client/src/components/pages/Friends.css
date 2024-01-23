@@ -14,3 +14,10 @@
 .search-field {
   margin-right: 1.5vw;
 }
+.friend {
+  border: var(--xs) solid black;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-bottom: 2vh;
+  text-align: center;
+}

@@ -13,20 +13,26 @@ const Friends = ({ userId }) => {
   const [found, setFound] = useState(false);
   const [friendName, setFriendName] = useState("");
   const findFriend = () => {
-    get("/api/user", { _id: text }).then((response) => {
-      setSearched(true);
-      console.log(text);
-      console.log(response);
-      if (response.user[0].name != undefined) {
-        setFriendName(response.user[0].name);
-        setFound(true);
-        console.log(`Friend found: ${response.user[0].name}`);
-      } else {
+    get("/api/user", { _id: text })
+      .then((response) => {
+        setSearched(true);
+        console.log(text);
+        console.log(response);
+        if (response) {
+          setFriendName(response.user[0].name);
+          setFound(true);
+          console.log(`Friend found: ${response.user[0].name}`);
+        } else {
+          setFound(false);
+          console.log(`Friend not found`);
+          console.log(text);
+        }
+      })
+      .catch(() => {
         setFound(false);
         console.log(`Friend not found`);
         console.log(text);
-      }
-    });
+      });
   };
   const handleChange = (e) => {
     setText(e.target.value);
@@ -56,7 +62,13 @@ const Friends = ({ userId }) => {
       ) : (
         <></>
       )}
-      {userId && searched && found ? <p>{friendName}</p> : <></>}
+      {userId && searched && found ? (
+        <div className="friend">
+          <FriendEntry value={friendName} />
+        </div>
+      ) : (
+        <></>
+      )}
       {userId && searched && !found ? <p>Friend not found (check your inputted id!)</p> : <></>}
       {userId ? (
         <>

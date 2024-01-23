@@ -55,9 +55,13 @@ router.get("/user", (req, res) => {
   });
 });
 router.get("/friends", (req, res) => {
-  FriendList.find({ userId: req.query.userId }).then((contents) => {
-    res.send(contents);
-  });
+  FriendList.find({ userId: req.query.userId })
+    .then((contents) => {
+      res.send(contents);
+    })
+    .catch(() => {
+      res.send({});
+    });
 });
 router.get("/entry", (req, res) => {
   Entry.find({ userId: req.query.userId }).then((contents) => {
