@@ -52,6 +52,7 @@ const Todo = (props) => {
 
   const [tasks, setTasks] = useState(props.tasks);
   const [filter, setFilter] = useState("All");
+  const [tempEarnedExp, settempEarnedExp] = useState(0);
 
   const addTask = (name) => {
     //const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
@@ -63,6 +64,12 @@ const Todo = (props) => {
     console.log(tasks);
     const updatedTasks = tasks.map((task) => {
       if (task._id == _id) {
+        if (task.completed == false) {
+          settempEarnedExp(tempEarnedExp + 5);
+        }
+        if (task.completed == true) {
+          settempEarnedExp(tempEarnedExp - 5);
+        }
         return { ...task, completed: !task.completed };
       }
       return task;
@@ -116,7 +123,12 @@ const Todo = (props) => {
     <>
       <div className="todoapp stack-large">
         <h1>To-Do List</h1>
-        <ExpTracker userId={props.userId} name={props.name} totalExp={props.totalExp} />
+        <ExpTracker
+          userId={props.userId}
+          name={props.name}
+          totalExp={props.totalExp}
+          tempEarnedExp={tempEarnedExp}
+        />
         <Form addTask={addTask} userId={props.userId} />
         <div className="filters btn-group stack-exception">{filterList}</div>
         <h2 id="list-heading">{headingText}</h2>

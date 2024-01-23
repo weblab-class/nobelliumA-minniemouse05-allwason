@@ -36,19 +36,19 @@ const Profile = (props) => {
 
   useEffect(() => {
     get("/api/userAchievements", { _id: props.userId }).then((achIdData) => {
-      console.log("profile.js achData", achIdData);
+      //console.log("profile.js achData", achIdData);
       setAchievementData(achIdData);
     });
-  }, []);
+  });
 
   useEffect(() => {
-    if (props.totalExp >= 10) {
+    if (props.totalExp == 5) {
+      post("/api/addAchievement", { achievementId: 6, _id: props.userId });
+    } else if (props.totalExp == 10) {
       post("/api/addAchievement", { achievementId: 0, _id: props.userId });
-    }
-    if (props.totalExp >= 50) {
+    } else if (props.totalExp == 50) {
       post("/api/addAchievement", { achievementId: 2, _id: props.userId });
-    }
-    if (props.totalExp >= 125) {
+    } else if (props.totalExp == 125) {
       post("/api/addAchievement", { achievementId: 3, _id: props.userId });
     }
   }, []);
@@ -84,6 +84,7 @@ const Profile = (props) => {
                 className="avatar-image"
               />
               <div className="name">{props.name}</div>
+              <div className="exp">{"Total exp earned to date: " + props.totalExp}</div>
             </div>
           </div>
         </>

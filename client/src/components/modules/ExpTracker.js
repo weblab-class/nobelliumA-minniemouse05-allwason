@@ -11,12 +11,14 @@ import "./Form.css";
  * @param {String} userId
  * @param {String} name
  * @param {Number} totalExp
+ * @param {Number} tempEarnedExp
  */
 
 const ExpTracker = (props) => {
   return (
     <div>
-      <span>{"you have earned " + props.totalExp + " exp so far. keep going!"}</span>
+      <div>earn +5 exp for every task you complete.</div>
+      <div>{"you have just earned " + props.tempEarnedExp + " exp. keep going!"}</div>
     </div>
   );
 };

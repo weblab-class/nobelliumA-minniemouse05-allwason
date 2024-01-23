@@ -38,6 +38,12 @@
   margin-left: 14vw;
 }
 
+.exp {
+  font-family: "Cute Font", sans-serif;
+  font-size: 3.2vw;
+  margin-left: 7vw;
+}
+
 .avatar-image {
   width: 50%;
   display: block;

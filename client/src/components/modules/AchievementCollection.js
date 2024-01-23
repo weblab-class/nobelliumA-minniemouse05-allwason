@@ -7,7 +7,7 @@
 
 [{
     "achievementId": 0,
-    "awardName": "Hustle Harder",
+    "awardName": "Hustle Hero",
     "awardDescription": "Complete 5 tasks and prove that you can hustle harder than ever before!"
   },
   {
@@ -23,7 +23,7 @@
   {
     "achievementId": 3,
     "awardName": "Efficiency Expert",
-    "awardDescription": "Complete 25 tasks and and be recognized as the Efficiency Expert."
+    "awardDescription": "Complete 25 tasks and be recognized as the Efficiency Expert."
   },
   {
     "achievementId": 4,
@@ -36,6 +36,11 @@
     "awardName": "Social Butterfly",
     "awardDescription": "Make 5 new friends on the platform and spread those positive vibes!"
   }
+  {
+    "achievementId": 6,
+    "awardName": "Productivity Pioneer",
+    "awardDescription": "You've officially embarked on your journey to success by completing your very 1st to-do item with RoomCraft! "
+  },
 ]
 
  * 

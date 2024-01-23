@@ -56,6 +56,7 @@ router.get("/user", (req, res) => {
     })
     .catch(() => {
       res.send({});
+      console.log("catched after router.get for /user");
     });
 });
 
@@ -173,7 +174,7 @@ router.post("/addAchievement", async (req, res) => {
 
 //gets the achievement entry based on the achievementId
 router.get("/getAchievement", (req, res) => {
-  console.log("achievement Id:", req.query.achievementId);
+  //console.log("achievement Id:", req.query.achievementId);
   Achievement.findOne({ achievementId: req.query.achievementId }).then((achievementData) => {
     // console.log("achievementData", achievementData);
     res.send(achievementData);

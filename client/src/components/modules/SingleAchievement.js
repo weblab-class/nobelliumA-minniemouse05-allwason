@@ -26,7 +26,7 @@ const SingleAchievement = (props) => {
       .catch((error) => {
         console.error("Error when running get for api/getAchievement:", error);
       });
-  });
+  }, []);
 
   return (
     <div>
