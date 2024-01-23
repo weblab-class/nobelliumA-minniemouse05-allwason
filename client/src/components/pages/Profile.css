@@ -16,7 +16,8 @@
 
 .right-half {
   flex: 1;
-  padding: 1rem;
+
+  justify-content: center;
 }
 
 .board {
@@ -34,12 +35,22 @@
 .name {
   font-family: "Cute Font", sans-serif;
   font-size: 3.2vw;
-  text-align: center;
+  margin-left: 15vw;
 }
 
 .avatar-image {
   width: 50%;
   display: block;
-  margin: auto;
-  margin-top: 28%;
+  font-size: 3.2vw;
+  margin-left: 7vw;
+  justify-content: center;
+}
+.userId {
+  margin-left: 0vw;
+  margin-right: 10vw;
+  margin-bottom: 1vw;
+  font-size: 1.5vw;
+  padding-left: 1.5vw;
+  background-color: var(--primary--dim);
+  border: var(--xs) solid black;
 }
