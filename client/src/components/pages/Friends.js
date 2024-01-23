@@ -47,7 +47,7 @@ const Friends = ({ userId }) => {
     });
   }, []);
   const makeFriendEntry = (id, index) => {
-    return <FriendEntry key={id} index={index} />;
+    return <FriendEntry key={id} index={index} add={false} />;
   };
   return (
     <div>
@@ -64,12 +64,16 @@ const Friends = ({ userId }) => {
       )}
       {userId && searched && found ? (
         <div className="friend">
-          <FriendEntry value={friendName} />
+          <FriendEntry value={friendName} add={true} />
         </div>
       ) : (
         <></>
       )}
-      {userId && searched && !found ? <p>Friend not found (check your inputted id!)</p> : <></>}
+      {userId && searched && !found ? (
+        <h1 className="not-found">Friend not found (check your inputted id!)</h1>
+      ) : (
+        <></>
+      )}
       {userId ? (
         <>
           <div className="friend-list u-flex-justifyCenter u-flex-vertical ">

@@ -15,6 +15,10 @@
   align-items: center;
   justify-content: center;
 }
+.add-button {
+  margin-right: 4vw;
+  margin-top: 0vw;
+}
 .FriendEntry .friend-class-image {
   width: 10%;
 }
