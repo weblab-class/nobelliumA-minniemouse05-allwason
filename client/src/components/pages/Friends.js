@@ -7,18 +7,32 @@ import FriendEntry from "../modules/FriendEntry.js";
 import { Link, useNavigate } from "react-router-dom";
 const Friends = ({ userId }) => {
   const navigate = useNavigate();
-  const [UserFriends, setUserFriends] = useState([]);
+  const [userFriends, setUserFriends] = useState([]);
   const [text, setText] = useState("");
+  const [searched, setSearched] = useState(false);
+  const [found, setFound] = useState(false);
+  const [friendName, setFriendName] = useState("");
   const findFriend = () => {
-    get("/api/user", { _id: text }).then((friend) => {
-      if (friend.name != undefined) {
-        console.log(`Friend found: ${friend}`);
-      } else {
+    get("/api/user", { _id: text })
+      .then((response) => {
+        setSearched(true);
+        console.log(text);
+        console.log(response);
+        if (response) {
+          setFriendName(response.user[0].name);
+          setFound(true);
+          console.log(`Friend found: ${response.user[0].name}`);
+        } else {
+          setFound(false);
+          console.log(`Friend not found`);
+          console.log(text);
+        }
+      })
+      .catch(() => {
+        setFound(false);
         console.log(`Friend not found`);
         console.log(text);
-        console.log(friend);
-      }
-    });
+      });
   };
   const handleChange = (e) => {
     setText(e.target.value);
@@ -33,7 +47,7 @@ const Friends = ({ userId }) => {
     });
   }, []);
   const makeFriendEntry = (id, index) => {
-    return <FriendEntry key={id} index={index} />;
+    return <FriendEntry key={id} index={index} add={false} />;
   };
   return (
     <div>
@@ -48,10 +62,22 @@ const Friends = ({ userId }) => {
       ) : (
         <></>
       )}
+      {userId && searched && found ? (
+        <div className="friend">
+          <FriendEntry value={friendName} add={true} />
+        </div>
+      ) : (
+        <></>
+      )}
+      {userId && searched && !found ? (
+        <h1 className="not-found">Friend not found (check your inputted id!)</h1>
+      ) : (
+        <></>
+      )}
       {userId ? (
         <>
           <div className="friend-list u-flex-justifyCenter u-flex-vertical ">
-            {UserFriends.map((friend_id, ind) => {
+            {userFriends.map((friend_id, ind) => {
               //console.log(ind);
               return makeFriendEntry(friend_id, ind);
             })}

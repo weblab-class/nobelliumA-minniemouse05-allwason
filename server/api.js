@@ -9,7 +9,7 @@
 const express = require("express");
 
 // import models so we can interact with the database
-const User = require("./models/user");
+const User = require("./models/User");
 const Entry = require("./models/Entry");
 const FriendList = require("./models/FriendList");
 const TodoItem = require("./models/TodoItem");
@@ -49,14 +49,28 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 //reference https://docs.google.com/presentation/d/1-096jf5d_j9RhdTW_1PsGPb2rre7fSY_tmhFqhMVpWE/edit#slide=id.p1
 router.get("/user", (req, res) => {
-  User.find({ _id: req._id }).then((user) => {
-    res.send({ user });
-  });
+  User.find({ _id: req.query._id })
+    .then((user) => {
+      console.log(req.query._id);
+      res.send({ user });
+    })
+    .catch(() => {
+      res.send({});
+    });
 });
+
 router.get("/friends", (req, res) => {
-  FriendList.find({ userId: req.query.userId }).then((contents) => {
-    res.send(contents);
-  });
+  FriendList.findOne({ userId: req.query.userId })
+    .then((contents) => {
+      if (!contents) {
+        res.send({});
+      } else {
+        res.send(contents);
+      }
+    })
+    .catch(() => {
+      res.send({});
+    });
 });
 router.get("/entry", (req, res) => {
   Entry.find({ userId: req.query.userId }).then((contents) => {

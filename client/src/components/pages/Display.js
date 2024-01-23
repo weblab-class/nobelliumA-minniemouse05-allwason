@@ -53,7 +53,7 @@ const Display = (props) => {
       .catch((error) => {
         console.error("Error when running get for api/exp:", error);
       });
-  });
+  }, []);
 
   if (props.open === "room") {
     return (

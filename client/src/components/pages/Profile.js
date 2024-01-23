@@ -60,6 +60,9 @@ const Profile = (props) => {
               </div>
             </div>
             <div className="right-half">
+              <div className="userId u-flex">
+                <h1>UserId: {props.userId}</h1>
+              </div>
               <img
                 src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
                 alt="bear"
