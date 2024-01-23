@@ -14,7 +14,9 @@ import SingleAchievement from "../modules/SingleAchievement.js";
  * Proptypes
  * @param {string} userId
  * @param {string} name
- * @param {string}
+ *
+ * TO ADD!!!!!!!
+ * @param {string} achievements //array
  */
 
 const Profile = (props) => {

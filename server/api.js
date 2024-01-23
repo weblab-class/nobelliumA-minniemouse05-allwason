@@ -13,7 +13,7 @@ const User = require("./models/user");
 const Entry = require("./models/Entry");
 const FriendList = require("./models/FriendList");
 const TodoItem = require("./models/TodoItem");
-// const Achievements = require("./models/Achievements");
+const Achievement = require("./models/Achievement");
 const UserProfile = require("./models/UserProfile");
 
 // import authentication library
@@ -115,18 +115,56 @@ router.post("/entry", (req, res) => {
     });
 });
 
-///////////////////////////      PROFILE      ///////////////////////////
-// router.get("/achievements", (req, res) => {
-//   //console.log("getting from router");
-//   Achievements.find({ userId: req.query.userId }).then((awardContents) => {
-//     res.send(awardContents);
-//   });
-// });
+///////////////////////////      PROFILE      /////////////////////////////
+
+//gets achievement based on user id
+router.get("/userAchievements", (req, res) => {
+  //console.log("getting from router");
+  User.findById({ _id: req.query.userId }).then((allAchievements) => {
+    res.send(allAchievements);
+  });
+});
+
+//gets the achievement entry based on the _id
+router.get("/getAchievement", (req, res) => {
+  console.log("achievement Id:", req.query.achievementId);
+  Achievement.find({ achievementId: req.query.achievementId }).then((achievementData) => {
+    console.log("achievementData", achievementData);
+    res.send(achievementData);
+  });
+});
+
+//gets ALL
+router.get("/getAllAchievement", (req, res) => {
+  Achievement.find({}).then((achievementData) => {
+    console.log("ALL achievementData", achievementData);
+    res.send(achievementData);
+  });
+});
+
+router.post("/makeAchievement", (req, res) => {
+  const NewAchievement = new Achievement({
+    achievementId: req.body.achievementId,
+    awardDescription: req.body.awardDescription,
+    awardName: req.body.awardName,
+  });
+
+  NewAchievement.save()
+    .then(() => {
+      console.log("saved NewAchievement");
+      res.send({});
+    })
+    .catch(() => {
+      console.log("catched NewAchievement");
+      res.send({});
+    });
+});
+/////////////////////////     EXP       /////////////////////////////
 
 router.get("/exp", (req, res) => {
   //console.log("getting from router");
   UserProfile.findOne({ userId: req.query.userId }).then((contents) => {
-    console.log("contents in /exp", contents);
+    // console.log("contents in /exp", contents);
     res.send(contents);
   });
 });

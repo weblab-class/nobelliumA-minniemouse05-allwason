@@ -44,10 +44,10 @@ const Display = (props) => {
   });
 
   useEffect(() => {
-    console.log("inside of useEffect in userprofiles display.js");
+    //console.log("inside of useEffect in userprofiles display.js");
     get("/api/exp", { userId: props.userId })
       .then((userprofiles) => {
-        console.log("userprofiles display.js", userprofiles.totalExp);
+        //console.log("userprofiles display.js", userprofiles.totalExp);
         setTotalExp(userprofiles.totalExp);
       })
       .catch((error) => {
