@@ -45,6 +45,12 @@ const Profile = (props) => {
     if (props.totalExp >= 10) {
       post("/api/addAchievement", { achievementId: 0, _id: props.userId });
     }
+    if (props.totalExp >= 50) {
+      post("/api/addAchievement", { achievementId: 2, _id: props.userId });
+    }
+    if (props.totalExp >= 125) {
+      post("/api/addAchievement", { achievementId: 3, _id: props.userId });
+    }
   }, []);
 
   return (
@@ -55,16 +61,10 @@ const Profile = (props) => {
             <div className="left-half">
               <div className="board">
                 <div class="custom-scrollbar">
-                  <h1 class="u-textCenter">Achievements</h1>
+                  <h1 class="u-textCenter u-xlarge">Achievements Earned</h1>
                   <div class="comment-section">
                     {achievementData && achievementData.length > 0 ? (
-                      achievementData.map((ach) => (
-                        <SingleAchievement
-                          awardDescription={ach.awardDescription}
-                          awardName={ach.awardName}
-                          achievementId={ach.achievementId}
-                        />
-                      ))
+                      achievementData.map((ach) => <SingleAchievement achievementId={ach} />)
                     ) : (
                       <h1 className="u-textCenter">
                         No achievements collected so far. Keep going!

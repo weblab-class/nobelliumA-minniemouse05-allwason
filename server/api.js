@@ -170,8 +170,8 @@ router.post("/addAchievement", async (req, res) => {
 //gets the achievement entry based on the achievementId
 router.get("/getAchievement", (req, res) => {
   console.log("achievement Id:", req.query.achievementId);
-  Achievement.find({ achievementId: req.query.achievementId }).then((achievementData) => {
-    console.log("achievementData", achievementData);
+  Achievement.findOne({ achievementId: req.query.achievementId }).then((achievementData) => {
+    // console.log("achievementData", achievementData);
     res.send(achievementData);
   });
 });
@@ -179,7 +179,7 @@ router.get("/getAchievement", (req, res) => {
 //gets ALL achievements
 router.get("/getAllAchievement", (req, res) => {
   Achievement.find({}).then((achievementData) => {
-    console.log("ALL achievementData", achievementData);
+    //console.log("ALL achievementData", achievementData);
     res.send(achievementData);
   });
 });

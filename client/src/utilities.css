@@ -23,6 +23,7 @@
   --brown: #b38977;
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
+  --grey: #909090;
   --white: #fff;
   --black: #000000;
 
@@ -55,6 +56,10 @@ form {
 .u-xlarge {
   font-size: 3rem;
   line-height: 2rem;
+}
+.u-med-large {
+  font-size: 24px;
+  color: var(--grey);
 }
 .u-large {
   font-size: var(--l);
