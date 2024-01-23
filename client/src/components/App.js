@@ -32,6 +32,7 @@ const App = () => {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
         setUserName(user.name);
+        setTotalExp(user.totalExp);
         // post("/api/updateExp", { name: user.name, userId: user._id, totalExp: 0 });
         // return user;
         // } else {
@@ -61,6 +62,7 @@ const App = () => {
     // });
   }, []);
 
+  ////////////////
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
@@ -74,7 +76,8 @@ const App = () => {
           });
       }
     });
-  }, []);
+  });
+  ////////////////////
 
   // useEffect(() => {
   //   post("/api/makeAchievement", {
