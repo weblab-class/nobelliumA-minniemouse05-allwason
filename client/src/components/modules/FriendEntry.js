@@ -6,18 +6,22 @@ import "./FriendEntry.css";
 import exp from "./../../../dist/EXP.png";
 import { Link, useNavigate } from "react-router-dom";
 const FriendEntry = (props) => {
-  const addFriend = () => {
-    //add post request
-  };
+  let button = <></>;
+  if (props.add && !props.requested) {
+    button = (
+      <button className="add-button" onClick={props.addFriend}>
+        +
+      </button>
+    );
+  } else if (props.requested) {
+    button = (
+      <button className="add-button" onClick={props.removeRequest}>
+        Requested
+      </button>
+    );
+  }
   return (
     <div className="FriendEntry u-flex">
-      {props.add ? (
-        <button className="add-button" onClick={props.addFriend}>
-          +
-        </button>
-      ) : (
-        <></>
-      )}
       <img
         className="friend-class-image pr-15"
         src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
@@ -30,6 +34,7 @@ const FriendEntry = (props) => {
         src="https://static.vecteezy.com/system/resources/previews/027/517/434/original/pixel-art-golden-soccer-cup-icon-2-png.png"
       />
       <h1>20</h1>
+      {button}
     </div>
   );
 };

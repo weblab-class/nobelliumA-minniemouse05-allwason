@@ -14,6 +14,8 @@ const Friends = (props) => {
   const [friendName, setFriendName] = useState("");
   const [friendId, setFriendId] = useState("");
   const [userId, setUserId] = useState(undefined);
+  const [requests, setRequests] = useState([]);
+  const [requested, setRequested] = useState([]);
   const findFriend = () => {
     get("/api/user", { _id: text })
       .then((response) => {
@@ -37,45 +39,103 @@ const Friends = (props) => {
         console.log(text);
       });
   };
-  const addFriend = () => {
+  const addFriend = (async) => {
     //https://www.w3schools.com/jsref/jsref_includes_array.asp
-    console.log(!userFriends.includes(friendId));
-    console.log(userFriends);
-    console.log(friendId);
-    if (!userFriends.includes(friendId)) {
-      post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
+    if (!requests.includes(friendId)) {
+      async function updateRequests() {
+        if (!requests) {
+          requests = [];
+        }
+        let req = await post("/api/friend_request", {
+          userId: props.userId,
+          requests: requests.concat(friendId),
+        });
+        let friend_requested = await get("/api/friends", { userId: friendId });
+
+        if (!friend_requested.requested) {
+          friend_requested = { requested: [] };
+        }
+        console.log(friend_requested);
+        let final = await post("/api/friend_requested", {
+          userId: friendId,
+          requested: friend_requested.requested.concat(userId),
+        });
+        setRequests(requests.concat(friendId));
+      }
+      updateRequests();
+    } else {
+      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
         () => {
           setUserFriends(userFriends.concat(friendId));
         }
-      );
-    } else {
+      );*/
       alert("friend already added!");
     }
   };
   const handleChange = (e) => {
     setText(e.target.value);
   };
-  useEffect(() => {
-    console.log(props.userId);
-  }, [props.useEffect]);
+  const removeRequest = (async) => {
+    //https://www.w3schools.com/jsref/jsref_includes_array.asp
+    if (requests.includes(friendId)) {
+      async function updateRequests() {
+        if (!userFriends) {
+          userFriends = [];
+        }
+        let req = await post("/api/friend_request", {
+          userId: props.userId,
+          requests: requests.filter(function (person) {
+            return person !== friendId;
+          }),
+        });
+        let friend_requested = await get("/api/friends", { userId: friendId });
+
+        if (!friend_requested.requested) {
+          friend_requested = { requested: [] };
+        }
+        console.log(friend_requested);
+        let final = await post("/api/friend_requested", {
+          userId: friendId,
+          requested: requests.filter(function (person) {
+            return person !== userId;
+          }),
+        });
+        setRequests(
+          requests.filter(function (person) {
+            return person !== friendId;
+          })
+        );
+      }
+      updateRequests();
+    } else {
+      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
+        () => {
+          setUserFriends(userFriends.concat(friendId));
+        }
+      );*/
+      alert("friend already added!");
+    }
+  };
+
   useEffect(() => {
     setUserId(props.userId);
-    console.log("useEffect time");
-    console.log(props.userId);
-    if (userFriends.length == 0) {
+    if (userFriends.length == 0 || requests.length == 0) {
       get("/api/friends", { userId: props.userId }).then((content) => {
-        console.log(content);
         if (content.friends) {
           setUserFriends(content.friends);
         }
-
-        console.log(content);
+        if (content.requests) {
+          setRequests(content.requests);
+        }
+        if (content.requested) {
+          setRequested(content.requested);
+        }
       });
     }
   });
 
-  const makeFriendEntry = (id, index) => {
-    return <FriendEntry key={id} index={index} add={false} />;
+  const makeFriendEntry = (id, index, request) => {
+    return <FriendEntry key={id} index={index} add={false} request={request} />;
   };
   return (
     <div>
@@ -94,8 +154,14 @@ const Friends = (props) => {
         <div className="friend">
           <FriendEntry
             value={friendName}
-            add={!userFriends.includes(friendId) && friendId !== props.userId}
+            add={
+              !userFriends.includes(friendId) &&
+              !requests.includes(friendId) &&
+              friendId !== props.userId
+            }
+            requested={requests.includes(friendId)}
             addFriend={addFriend}
+            removeRequest={removeRequest}
           />
         </div>
       ) : (
@@ -107,11 +173,21 @@ const Friends = (props) => {
         <></>
       )}
       {props.userId || userId ? (
+        <div>
+          {requested.map((friend_id, ind) => {
+            //console.log(ind);
+            return makeFriendEntry(friend_id, ind, true);
+          })}
+        </div>
+      ) : (
+        <></>
+      )}
+      {props.userId || userId ? (
         <>
           <div className="friend-list u-flex-justifyCenter u-flex-vertical ">
             {userFriends.map((friend_id, ind) => {
               //console.log(ind);
-              return makeFriendEntry(friend_id, ind);
+              return makeFriendEntry(friend_id, ind, false);
             })}
           </div>
         </>
