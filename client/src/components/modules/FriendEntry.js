@@ -11,7 +11,13 @@ const FriendEntry = (props) => {
   };
   return (
     <div className="FriendEntry u-flex">
-      {props.add ? <button className="add-button">+</button> : <></>}
+      {props.add ? (
+        <button className="add-button" onClick={props.addFriend}>
+          +
+        </button>
+      ) : (
+        <></>
+      )}
       <img
         className="friend-class-image pr-15"
         src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"

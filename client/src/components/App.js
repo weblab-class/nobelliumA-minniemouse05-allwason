@@ -74,7 +74,7 @@ const App = () => {
           });
       }
     });
-  });
+  }, []);
 
   // useEffect(() => {
   //   post("/api/makeAchievement", {
@@ -126,7 +126,9 @@ const App = () => {
       console.log("back to home");
     }
   };
-
+  useEffect(() => {
+    console.log(userId);
+  }, [userId]);
   return (
     <>
       <NavBar
@@ -159,7 +161,7 @@ const App = () => {
           path="/leaderboard/:userId"
           element={<Leaderboard userId={userId} name={userName} />}
         />
-        <Route path="/friends/:userId" element={<Friends userId={userId} name={userName} />} />
+        <Route path="/friends/:userId" element={<Friends userId={userId} />} />
         <Route
           path="/todo"
           element={

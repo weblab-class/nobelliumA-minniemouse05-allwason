@@ -61,6 +61,7 @@ router.get("/user", (req, res) => {
 });
 
 router.get("/friends", (req, res) => {
+  console.log(req.query.userId);
   FriendList.findOne({ userId: req.query.userId })
     .then((contents) => {
       if (!contents) {
@@ -68,6 +69,32 @@ router.get("/friends", (req, res) => {
       } else {
         res.send(contents);
       }
+    })
+    .catch(() => {
+      console.log(req.query.userId);
+      res.send({});
+    });
+});
+router.post("/friends", (req, res) => {
+  const update = {
+    $set: {
+      userId: req.body.userId,
+      friends: req.body.friends,
+    },
+  };
+  const query = {
+    userId: req.body.userId,
+  };
+  const options = {
+    upsert: true,
+  };
+  console.log(req.body);
+  FriendList.updateOne(query, update, options)
+    .then(() => {
+      res.send({
+        userId: req.body.userId,
+        friends: req.body.friends,
+      });
     })
     .catch(() => {
       res.send({});

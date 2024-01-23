@@ -31,7 +31,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
           <>
             <Link to="/" className="NavBar-link pl-15 pr-15">
               <span data-text="Home" className="tooltip">
-                <span class="material-symbols-outlined">home</span>
+                <span className="material-symbols-outlined">home</span>
               </span>
             </Link>
             <Link to={`/profile/${userId}`} className="NavBar-link pl-15 pr-15">
@@ -73,7 +73,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
               console.log(collapse);
             }}
           >
-            <span class="material-symbols-outlined">chevron_left</span>
+            <span className="material-symbols-outlined">chevron_left</span>
           </button>
         )}
         {userId && collapse && (
@@ -84,7 +84,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
               console.log(collapse);
             }}
           >
-            <span class="material-symbols-outlined">chevron_right</span>
+            <span className="material-symbols-outlined">chevron_right</span>
           </button>
         )}
       </div>
