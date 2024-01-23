@@ -14,7 +14,7 @@ const Entry = require("./models/Entry");
 const FriendList = require("./models/FriendList");
 const TodoItem = require("./models/TodoItem");
 const Achievement = require("./models/Achievement");
-const UserProfile = require("./models/UserProfile");
+//const UserProfile = require("./models/UserProfile");
 
 // import authentication library
 const auth = require("./auth");
