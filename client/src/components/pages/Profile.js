@@ -44,11 +44,14 @@ const Profile = (props) => {
   useEffect(() => {
     if (props.totalExp >= 5) {
       post("/api/addAchievement", { achievementId: 6, _id: props.userId });
-    } else if (props.totalExp >= 10) {
+    }
+    if (props.totalExp >= 10) {
       post("/api/addAchievement", { achievementId: 0, _id: props.userId });
-    } else if (props.totalExp >= 50) {
+    }
+    if (props.totalExp >= 50) {
       post("/api/addAchievement", { achievementId: 2, _id: props.userId });
-    } else if (props.totalExp >= 125) {
+    }
+    if (props.totalExp >= 125) {
       post("/api/addAchievement", { achievementId: 3, _id: props.userId });
     }
   }, []);
