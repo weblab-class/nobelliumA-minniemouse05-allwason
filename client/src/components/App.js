@@ -33,6 +33,28 @@ const App = () => {
     });
   }, []);
 
+  // useEffect(() => {
+  //   post("/api/makeAchievement", {
+  //     achievementId: 42,
+  //     awardDescription: "test",
+  //     awardName: "test",
+  //   }).then((achievementData) => {
+  //     console.log("achievementData in App.js", achievementData);
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   get("/api/getAchievement", { achievementId: 0 }).then((achievementData) => {
+  //     console.log("achievementData in App.js", achievementData);
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   get("/api/getAllAchievement").then((achievementData) => {
+  //     console.log("achievementData in App.js", achievementData);
+  //   });
+  // }, []);
+
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
     const decodedCredential = jwt_decode(userToken);
