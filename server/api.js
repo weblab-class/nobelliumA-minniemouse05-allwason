@@ -135,9 +135,13 @@ router.post("/entry", (req, res) => {
 router.get("/userAchievements", (req, res) => {
   console.log("running /userAchievements");
   console.log("req.query._id", req.query._id);
-  User.findById({ _id: req.query._id }).then((allAchievements) => {
-    res.send(allAchievements.achievementArray);
-  });
+  User.findById({ _id: req.query._id })
+    .then((allAchievements) => {
+      res.send(allAchievements.achievementArray);
+    })
+    .catch(() => {
+      res.send({});
+    });
 });
 
 //finds user based on userID and then adds to the achievement array
