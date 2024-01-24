@@ -14,7 +14,7 @@ import SingleAchievement from "../modules/SingleAchievement.js";
  * Proptypes
  * @param {string} userId
  * @param {string} name
- * @param totalExp
+ * @param {number} totalExp
  *
  */
 
@@ -36,20 +36,20 @@ const Profile = (props) => {
     });
   }, [props.userId]);
 
-  useEffect(() => {
-    if (props.totalExp >= 0) {
-      post("/api/addAchievement", { achievementId: 6, _id: props.userId });
-    }
-    if (props.totalExp >= 0) {
-      post("/api/addAchievement", { achievementId: 0, _id: props.userId });
-    }
-    if (props.totalExp >= 0) {
-      post("/api/addAchievement", { achievementId: 2, _id: props.userId });
-    }
-    if (props.totalExp >= 0) {
-      post("/api/addAchievement", { achievementId: 3, _id: props.userId });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (props.totalExp >= 0) {
+  //     post("/api/addAchievement", { achievementId: 6, _id: props.userId });
+  //   }
+  //   if (props.totalExp >= 0) {
+  //     post("/api/addAchievement", { achievementId: 0, _id: props.userId });
+  //   }
+  //   if (props.totalExp >= 0) {
+  //     post("/api/addAchievement", { achievementId: 2, _id: props.userId });
+  //   }
+  //   if (props.totalExp >= 0) {
+  //     post("/api/addAchievement", { achievementId: 3, _id: props.userId });
+  //   }
+  // }, [props.userId]);
 
   useEffect(() => {
     console.log("use effect for achievementData", achievementData);
