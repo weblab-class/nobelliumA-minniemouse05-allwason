@@ -272,7 +272,7 @@ const Friends = (props) => {
     if (userDict[friend_id] === undefined) {
       get("/api/user", { _id: friend_id }).then((response) => {
         let newDict = { ...userDict };
-        newDict[text] = response.user[0];
+        newDict[friend_id] = response.user[0];
         setUserDict(newDict);
         console.log(userDict);
       });
@@ -281,7 +281,7 @@ const Friends = (props) => {
 
   useEffect(() => {
     setUserId(props.userId);
-    if (userFriends.length == 0 || requests.length == 0) {
+    if (userFriends.length == 0 && requests.length == 0 && requested.length == 0) {
       get("/api/friends", { userId: props.userId }).then((content) => {
         if (content.friends) {
           setUserFriends(content.friends);
@@ -291,7 +291,6 @@ const Friends = (props) => {
         }
 
         if (content.requests) {
-          console.log(content.requests);
           setRequests(content.requests);
           for (let i = 0; i < content.requests.length; i++) {
             populateInfo(content.requests[i]);
@@ -299,9 +298,11 @@ const Friends = (props) => {
         }
 
         if (content.requested) {
+          console.log(content.requested);
           setRequested(content.requested);
           for (let i = 0; i < content.requested.length; i++) {
             populateInfo(content.requested[i]);
+            console.log(content.requested[i]);
           }
         }
       });
