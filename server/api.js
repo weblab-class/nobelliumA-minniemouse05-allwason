@@ -242,17 +242,17 @@ router.post("/addAchievement", async (req, res) => {
       res.send({});
     }
   } catch (error) {
-    console.log("catching error in addAchivement");
-    console.error("Error running addAchievement:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('catching error in router.post("/addAchievement"');
+    //console.error("Error running addAchievement:", error);
+    //res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
 
 //gets the achievement entry based on the achievementId
 router.get("/getAchievement", (req, res) => {
-  console.log("getAchievement, achievementId= ", req.query.achievementId);
+  //console.log("getAchievement, achievementId= ", req.query.achievementId);
   Achievement.findOne({ achievementId: req.query.achievementId }).then((achievementData) => {
-    console.log("getAchievement, achievementData= ", achievementData);
+    //console.log("getAchievement, achievementData= ", achievementData);
     res.send(achievementData);
   });
 });
@@ -294,7 +294,7 @@ router.post("/makeAchievement", (req, res) => {
 // });
 
 router.get("/exp", (req, res) => {
-  console.log("getting from router /exp");
+  //console.log("getting from router /exp");
   User.findOne({ _id: req.query.userId }).then((contents) => {
     // console.log("contents in /exp", contents);
     res.send(contents);

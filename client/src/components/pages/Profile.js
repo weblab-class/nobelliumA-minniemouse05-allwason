@@ -32,34 +32,34 @@ const Profile = (props) => {
 
     get("/api/userAchievements", { _id: props.userId }).then((achIdData) => {
       setAchievementData(achIdData);
-      console.log("just setAchievementData", achievementData);
+      //console.log("just setAchievementData", achievementData);
     });
   }, [props.userId]);
 
-  // useEffect(() => {
-  //   if (props.totalExp >= 0) {
-  //     post("/api/addAchievement", { achievementId: 6, _id: props.userId });
-  //   }
-  //   if (props.totalExp >= 0) {
-  //     post("/api/addAchievement", { achievementId: 0, _id: props.userId });
-  //   }
-  //   if (props.totalExp >= 0) {
-  //     post("/api/addAchievement", { achievementId: 2, _id: props.userId });
-  //   }
-  //   if (props.totalExp >= 0) {
-  //     post("/api/addAchievement", { achievementId: 3, _id: props.userId });
-  //   }
-  // }, [props.userId]);
+  useEffect(() => {
+    if (props.totalExp >= 5) {
+      post("/api/addAchievement", { achievementId: 6, _id: props.userId });
+    }
+    if (props.totalExp >= 25) {
+      post("/api/addAchievement", { achievementId: 0, _id: props.userId });
+    }
+    if (props.totalExp >= 50) {
+      post("/api/addAchievement", { achievementId: 2, _id: props.userId });
+    }
+    if (props.totalExp >= 125) {
+      post("/api/addAchievement", { achievementId: 3, _id: props.userId });
+    }
+  }, [props.userId, props.totalExp]);
 
   useEffect(() => {
-    console.log("use effect for achievementData", achievementData);
-    console.log("props.userId in 3rd useEffect", props.userId);
+    //console.log("use effect for achievementData", achievementData);
+    //console.log("props.userId in 3rd useEffect", props.userId);
 
     // Create an array to store promises
     const fetchPromises = achievementData.map((achId) => {
       return get("/api/getAchievement", { achievementId: achId })
         .then((fetchedAward) => {
-          console.log("fetchedAward= ", fetchedAward);
+          //console.log("fetchedAward= ", fetchedAward);
           return fetchedAward; // Return the fetched data
         })
         .catch((error) => {
@@ -74,7 +74,7 @@ const Profile = (props) => {
       .then((fetchedAwards) => {
         // Use the fetched awards to update the state
         setAchievementInfo((prevInfo) => [...prevInfo, ...fetchedAwards]);
-        console.log("newAchievementInfo", achievementInfo);
+        //console.log("newAchievementInfo", achievementInfo);
       })
       .catch((error) => {
         console.error("Error when fetching achievements:", error);
