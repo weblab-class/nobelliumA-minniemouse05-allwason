@@ -198,7 +198,7 @@ const App = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {pomodoro ? <Pomodoro togglePomodoro={togglePomodoro} /> : <></>}
+      <Pomodoro togglePomodoro={togglePomodoro} pomodoro={pomodoro} />
     </>
   );
 };
