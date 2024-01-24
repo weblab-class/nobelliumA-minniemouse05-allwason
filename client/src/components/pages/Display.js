@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
 import Notebook from "./Notebook.js";
 import room from "./../../../dist/room.png";
+import Pomodoro from "../modules/Pomodoro.js";
 
 /**
  * Parent: Room
@@ -20,6 +21,10 @@ import room from "./../../../dist/room.png";
  */
 
 const Display = (props) => {
+  const [pomodoro, setPomodoro] = useState(false);
+  const togglePomodoro = () => {
+    setPomodoro(!pomodoro);
+  };
   // const [totalExp, setTotalExp] = useState(0);
 
   // useEffect(() => {
@@ -56,11 +61,10 @@ const Display = (props) => {
   //       console.error("Error when running get for api/exp:", error);
   //     });
   // }, []);
-
+  let content = <></>;
   if (props.open === "room") {
-    return (
-      <div className="room button-overlay">
-        <img id="roomdisplay" src={room} />
+    content = (
+      <>
         <Link to="/notebook">
           <button className="room-button" id="notebook">
             <div className="button-text">notebook</div>
@@ -71,33 +75,33 @@ const Display = (props) => {
             <div className="button-text">to-do list</div>
           </button>
         </Link>
-      </div>
-    );
-  } else if (props.open === "todo") {
-    return (
-      <>
-        <div className="room button-overlay">
-          <img id="roomdisplay" src={room} />
-          <div className="width-todo-list display-box u-flex-justifyCenter u-flex-alignCenter">
-            <Todo
-              userId={props.userId}
-              tasks={itemData}
-              name={props.name}
-              totalExp={props.totalExp}
-            />
-          </div>
-        </div>
+        <button className="room-button" id="pomodoro" onClick={togglePomodoro}>
+          <div className="button-text">pomodoro</div>
+        </button>
       </>
     );
+  } else if (props.open === "todo") {
+    content = (
+      <div className="width-todo-list display-box u-flex-justifyCenter u-flex-alignCenter">
+        <Todo userId={props.userId} tasks={itemData} name={props.name} totalExp={props.totalExp} />
+      </div>
+    );
   } else if (props.open === "notebook") {
-    return (
-      <div className="room button-overlay">
-        <img id="roomdisplay" src={room} />
-        <div className="notebook display-box u-flex">
-          <Notebook userId={props.userId} />
-        </div>
+    content = (
+      <div className="notebook display-box u-flex">
+        <Notebook userId={props.userId} />
       </div>
     );
   }
+  return (
+    <>
+      <div className="room button-overlay">
+        <img id="roomdisplay" src={room} />
+        {content}
+      </div>
+      {pomodoro ? <Pomodoro /> : <></>}
+    </>
+  );
 };
+
 export default Display;
