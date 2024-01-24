@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
 import Notebook from "./Notebook.js";
 import room from "./../../../dist/room.png";
-import Pomodoro from "../modules/Pomodoro.js";
 
 /**
  * Parent: Room
@@ -75,7 +74,7 @@ const Display = (props) => {
             <div className="button-text">to-do list</div>
           </button>
         </Link>
-        <button className="room-button" id="pomodoro" onClick={togglePomodoro}>
+        <button className="room-button" id="pomodoro" onClick={props.togglePomodoro}>
           <div className="button-text">pomodoro</div>
         </button>
       </>
@@ -99,7 +98,6 @@ const Display = (props) => {
         <img id="roomdisplay" src={room} />
         {content}
       </div>
-      {pomodoro ? <Pomodoro /> : <></>}
     </>
   );
 };

@@ -1,4 +1,30 @@
-.button {
+@import "../../utilities.css";
+.buttons {
   justify-content: center;
   align-items: center;
+  margin-left: 5vw;
+}
+.p-button {
+  width: 5vw;
+  padding: 1vw;
+  background-color: transparent;
+  border: none;
+}
+.material-symbols-outlined {
+  vertical-align: middle;
+}
+.pomodoro {
+  position: absolute;
+  bottom: 0;
+  background-color: var(--primary--dim);
+  width: 100%;
+  align-items: center;
+  border-top: var(--xs) solid black;
+}
+.hide-button {
+  margin-right: 5vw;
+  margin-left: 15vw;
+}
+.time {
+  margin: auto;
 }

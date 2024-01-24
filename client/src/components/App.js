@@ -9,6 +9,7 @@ import Room from "./pages/Room.js";
 import Profile from "./pages/Profile.js";
 import Leaderboard from "./pages/Leaderboard.js";
 import Friends from "./pages/Friends.js";
+import Pomodoro from "./modules/Pomodoro.js";
 import { useNavigate } from "react-router-dom";
 import "../utilities.css";
 
@@ -100,6 +101,7 @@ const App = () => {
   //     console.log("achievementData in App.js", achievementData);
   //   });
   // }, []);
+  const [pomodoro, setPomodoro] = useState(false);
 
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
@@ -112,7 +114,9 @@ const App = () => {
       post("/api/initsocket", { socketid: socket.id });
     });
   };
-
+  const togglePomodoro = () => {
+    setPomodoro(!pomodoro);
+  };
   const handleLogout = () => {
     setUserId(undefined);
     post("/api/logout");
@@ -152,6 +156,7 @@ const App = () => {
               userId={userId}
               name={userName}
               totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
             />
           }
         />
@@ -193,6 +198,7 @@ const App = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {pomodoro ? <Pomodoro togglePomodoro={togglePomodoro} /> : <></>}
     </>
   );
 };

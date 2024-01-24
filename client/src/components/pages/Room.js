@@ -23,7 +23,7 @@ const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.goo
  * @param totalExp
  */
 
-const Room = ({ totalExp, userId, name, open, handleLogin, handleLogout, _id }) => {
+const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handleLogout, _id }) => {
   // useEffect(() => {
   //   console.log("Room.js useEffect", name, userId);
   //   post("/api/updateExp", { name: name, userId: userId, totalExp: 0 });
@@ -40,6 +40,7 @@ const Room = ({ totalExp, userId, name, open, handleLogin, handleLogout, _id }) 
               userId={userId}
               name={name}
               totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
             />
           </>
         ) : (

@@ -1,7 +1,7 @@
 @import "../../utilities.css";
 .friend-list {
   overflow-y: scroll;
-  height: 75vh;
+  height: 50vh;
   margin-left: 10vw;
   margin-right: 10vw;
   border: var(--xs) solid black;
