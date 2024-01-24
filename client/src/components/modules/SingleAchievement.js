@@ -14,25 +14,25 @@ import "./SingleAchievement.css";
  * @param {Number} expValue of the award
  */
 const SingleAchievement = (props) => {
-  const [awardData, setAwardData] = useState([]);
+  //const [awardData, setAwardData] = useState([]);
 
-  useEffect(() => {
-    get("/api/getAchievement", { achievementId: props.achievementId })
-      .then((fetchedAward) => {
-        setAwardData(fetchedAward);
-        //console.log("fetchedAward", fetchedAward);
-        //console.log("awardData", awardData.awardName);
-      })
-      .catch((error) => {
-        console.error("Error when running get for api/getAchievement:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   get("/api/getAchievement", { achievementId: props.achievementId })
+  //     .then((fetchedAward) => {
+  //       setAwardData(fetchedAward);
+  //       //console.log("fetchedAward", fetchedAward);
+  //       //console.log("awardData", awardData.awardName);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error when running get for api/getAchievement:", error);
+  //     });
+  // }, []);
 
   return (
     <div>
       <div className="comment">
-        <div className="u-bold u-large ">{awardData.awardName}</div>
-        <div className="u-med-large">{awardData.awardDescription}</div>
+        <div className="u-bold u-large ">{props.awardName}</div>
+        <div className="u-med-large">{props.awardDescription}</div>
       </div>
     </div>
   );

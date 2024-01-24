@@ -16,45 +16,85 @@ import SingleAchievement from "../modules/SingleAchievement.js";
  * @param {string} name
  * @param totalExp
  *
- * TO ADD???!!!!!!!
- * @param {string} achievementArray //array
  */
 
 const Profile = (props) => {
   const navigate = useNavigate();
 
-  // const [achievementData, setAchievementData] = useState([
-  //   { award: "Join RoomCraft", hasAttained: true, expValue: 50 },
-  //   { award: "Create 1st To-Do List", hasAttained: false, expValue: 50 },
-  //   { award: "Create 1st Notebook", hasAttained: false, expValue: 50 },
-  //   { award: "Reach 42 exp", hasAttained: false, expValue: 42 },
-  //   { award: "Reach 314 exp", hasAttained: false, expValue: 314 },
-  //   { award: "Reach 420 exp", hasAttained: false, expValue: 420 },
-  // ]);
-
+  //achievementData: array of ID's
   const [achievementData, setAchievementData] = useState([]);
+  const [achievementInfo, setAchievementInfo] = useState([]);
+  // [{awardName: test, awardDescription: test}]
+  //array of objects
 
   useEffect(() => {
+    console.log("props.userId in 1st useEffect", props.userId);
+
     get("/api/userAchievements", { _id: props.userId }).then((achIdData) => {
-      //console.log("profile.js achData", achIdData);
       setAchievementData(achIdData);
+      console.log("just setAchievementData", achievementData);
     });
-  });
+  }, [props.userId]);
 
   useEffect(() => {
-    if (props.totalExp >= 5) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 6, _id: props.userId });
     }
-    if (props.totalExp >= 10) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 0, _id: props.userId });
     }
-    if (props.totalExp >= 50) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 2, _id: props.userId });
     }
-    if (props.totalExp >= 125) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 3, _id: props.userId });
     }
   }, []);
+
+  useEffect(() => {
+    console.log("use effect for achievementData", achievementData);
+    console.log("props.userId in 3rd useEffect", props.userId);
+
+    // Create an array to store promises
+    const fetchPromises = achievementData.map((achId) => {
+      return get("/api/getAchievement", { achievementId: achId })
+        .then((fetchedAward) => {
+          console.log("fetchedAward= ", fetchedAward);
+          return fetchedAward; // Return the fetched data
+        })
+        .catch((error) => {
+          console.log("setting fetchedAwards as none");
+          console.error("Error when running get for api/getAchievement:", error);
+          return null; // Handle errors by returning null or an appropriate value
+        });
+    });
+
+    // Use Promise.all to wait for all fetches to complete
+    Promise.all(fetchPromises)
+      .then((fetchedAwards) => {
+        // Use the fetched awards to update the state
+        setAchievementInfo((prevInfo) => [...prevInfo, ...fetchedAwards]);
+        console.log("newAchievementInfo", achievementInfo);
+      })
+      .catch((error) => {
+        console.error("Error when fetching achievements:", error);
+      });
+  }, [achievementData, props.userId]);
+
+  const makeSingleAchievement = (achievementId, awardDescription, awardName) => {
+    return (
+      <SingleAchievement
+        key={achievementId}
+        achievementId={achievementId}
+        awardDescription={awardDescription}
+        awardName={awardName}
+      />
+    );
+  };
+
+  // useEffect(() => {
+  //   console.log("props.userId", props.userId);
+  // }, [props.userId]);
 
   return (
     <div>
@@ -63,11 +103,18 @@ const Profile = (props) => {
           <div className="profile-container">
             <div className="left-half">
               <div className="board">
-                <div class="custom-scrollbar">
-                  <h1 class="u-textCenter u-xlarge">Achievements Earned</h1>
-                  <div class="comment-section">
-                    {achievementData && achievementData.length > 0 ? (
-                      achievementData.map((ach) => <SingleAchievement achievementId={ach} />)
+                <div className="custom-scrollbar">
+                  <h1 className="u-textCenter u-xlarge">Achievements Earned</h1>
+                  <div className="comment-section">
+                    {achievementInfo && achievementInfo.length > 0 ? (
+                      achievementInfo.map((ach, index) =>
+                        makeSingleAchievement(
+                          ach.achievementId,
+                          ach.awardDescription,
+                          ach.awardName,
+                          index
+                        )
+                      )
                     ) : (
                       <h1 className="u-textCenter">
                         No achievements collected so far. Keep going!

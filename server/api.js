@@ -224,7 +224,7 @@ router.post("/addAchievement", async (req, res) => {
     console.log("addAchievement id", achievementIdToUpdate);
 
     const userToAward = await User.findById({ _id: req.body._id });
-    console.log("userToAward", userToAward);
+    //console.log("userToAward", userToAward);
     if (!userToAward.achievementArray.includes(achievementIdToUpdate)) {
       userToAward.achievementArray.push(achievementIdToUpdate);
       userToAward
@@ -246,9 +246,9 @@ router.post("/addAchievement", async (req, res) => {
 
 //gets the achievement entry based on the achievementId
 router.get("/getAchievement", (req, res) => {
-  //console.log("achievement Id:", req.query.achievementId);
+  console.log("getAchievement, achievementId= ", req.query.achievementId);
   Achievement.findOne({ achievementId: req.query.achievementId }).then((achievementData) => {
-    // console.log("achievementData", achievementData);
+    console.log("getAchievement, achievementData= ", achievementData);
     res.send(achievementData);
   });
 });
