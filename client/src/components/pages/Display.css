@@ -8,7 +8,11 @@
 }
 .button-overlay #notebook {
   top: 60%;
-  left: 83%;
+  left: 82.5%;
+  padding-top: 8vh;
+  padding-bottom: 8vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
   background-color: transparent;
   border: none;
 }
@@ -22,26 +26,32 @@
   /*background: var(--white);*/
   opacity: 0%;
   transition: 0.3s;
-  font-size: var(--m);
+  font-size: 2vw;
   color: transparent;
+}
+.button-text {
+  background-color: var(--primary);
+  border: var(--xs) solid black;
+  padding: 1vw;
+  border-radius: var(--xs);
 }
 .button-overlay #todo {
   top: 60%;
   left: 40%;
-  padding-right: 1vw;
-  padding-left: 1vw;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+  padding-right: 1.5vw;
+  padding-left: 1.5vw;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
   background-color: transparent;
   border: none;
 }
 .button-overlay .room-button:hover {
-  background: var(--primary--dim);
-  opacity: 70%;
   color: black;
+  opacity: 100%;
 }
 
 .notebook {
+  margin-top: -2vh;
   border: var(--xs) solid var(--black);
   cursor: pointer;
   border-radius: 6px;
@@ -50,14 +60,15 @@
   background: var(--white);
   opacity: 95%;
   transition: 0.3s;
-  font-size: var(--l);
+  font-size: 3vw;
 }
 .button-overlay .display-box {
-  margin-top: 0%;
+  font-size: 3vw;
+  top: 0;
+  right: 0;
   position: absolute;
-  top: 70%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
   border: var(--xs) solid var(--black);
   cursor: pointer;
   border-radius: 6px;
@@ -67,17 +78,15 @@
   background: var(--white);
   opacity: 95%;
   transition: 0.3s;
-  font-size: var(--l);
 }
 .button-overlay .notebook {
-  top: 75%;
   width: 80vw;
   height: 80vh;
-  transform: translate(-50%, -65%);
 }
 
 .width-todo-list {
   width: 60vw;
   overflow-y: scroll;
-  max-height: 80%;
+  max-height: 100%;
+  height: 90vw;
 }

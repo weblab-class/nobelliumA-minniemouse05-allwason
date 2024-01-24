@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { get, post } from "../../utilities.js";
 
 import "../../utilities.css";
-import "./Room.css";
+
 import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
@@ -63,12 +63,12 @@ const Display = (props) => {
         <img id="roomdisplay" src={room} />
         <Link to="/notebook">
           <button className="room-button" id="notebook">
-            notebook
+            <div className="button-text">notebook</div>
           </button>
         </Link>
         <Link to="/todo">
           <button className="room-button" id="todo">
-            to-do list
+            <div className="button-text">to-do list</div>
           </button>
         </Link>
       </div>
