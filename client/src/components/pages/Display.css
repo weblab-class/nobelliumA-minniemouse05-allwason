@@ -16,6 +16,16 @@
   background-color: transparent;
   border: none;
 }
+.button-overlay #pomodoro {
+  top: 37%;
+  left: 25%;
+  padding-top: 8vh;
+  padding-bottom: 8vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  background-color: transparent;
+  border: none;
+}
 .button-overlay .room-button {
   position: absolute;
   transform: translate(-50%, -50%);

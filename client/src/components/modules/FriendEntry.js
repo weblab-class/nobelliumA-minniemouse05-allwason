@@ -4,6 +4,7 @@ import { get, post } from "../../utilities.js";
 import "../../utilities.css";
 import "./FriendEntry.css";
 import exp from "./../../../dist/EXP.png";
+import medal from "./../../../dist/medal.png";
 import { Link, useNavigate } from "react-router-dom";
 const FriendEntry = (props) => {
   let button = <></>;
@@ -71,10 +72,7 @@ const FriendEntry = (props) => {
       <h1 className="pr-20">{name}</h1>
       <img className="friend-class-image pr-15" src={exp} />
       <h1 className="pr-20">{totalexp}</h1>
-      <img
-        className="friend-class-image"
-        src="https://static.vecteezy.com/system/resources/previews/027/517/434/original/pixel-art-golden-soccer-cup-icon-2-png.png"
-      />
+      <img className="friend-class-image" src={medal} />
       <h1>{achievements}</h1>
       {button}
     </div>
