@@ -28,7 +28,9 @@ const FriendEntry = (props) => {
         </button>
       </div>
     );
-  } else if (props.add && !props.requested) {
+  } else if (props.add && !props.requested && props.userId !== props.requestId) {
+    console.log(props.userId);
+    console.log(props.requestId);
     button = (
       <button className="add-button" onClick={props.addFriend}>
         +
@@ -40,7 +42,7 @@ const FriendEntry = (props) => {
         Requested
       </button>
     );
-  } else {
+  } else if (props.userId !== props.requestId) {
     button = (
       <button
         className="x-button"
@@ -52,20 +54,28 @@ const FriendEntry = (props) => {
       </button>
     );
   }
+  let name = "unnamed friend";
+  let achievements = 0;
+  let totalexp = 0;
+  if (props.info) {
+    name = props.info.name;
+    achievements = props.info.achievementArray.length;
+    totalexp = props.info.totalExp;
+  }
   return (
     <div className="FriendEntry u-flex">
       <img
         className="friend-class-image pr-15"
         src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
       />
-      <h1 className="pr-20">{props.value}</h1>
+      <h1 className="pr-20">{name}</h1>
       <img className="friend-class-image pr-15" src={exp} />
-      <h1 className="pr-20">10000000</h1>
+      <h1 className="pr-20">{totalexp}</h1>
       <img
         className="friend-class-image"
         src="https://static.vecteezy.com/system/resources/previews/027/517/434/original/pixel-art-golden-soccer-cup-icon-2-png.png"
       />
-      <h1>20</h1>
+      <h1>{achievements}</h1>
       {button}
     </div>
   );

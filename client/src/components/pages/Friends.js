@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { get, post } from "../../utilities.js";
-
+import { useRef } from "react";
 import "../../utilities.css";
 import "./Friends.css";
 import FriendEntry from "../modules/FriendEntry.js";
@@ -16,29 +16,34 @@ const Friends = (props) => {
   const [userId, setUserId] = useState(undefined);
   const [requests, setRequests] = useState([]);
   const [requested, setRequested] = useState([]);
+  const [userDict, setUserDict] = useState({});
+  const userDictRef = useRef();
+  userDictRef.current = userDict;
   const findFriend = () => {
-    get("/api/user", { _id: text })
-      .then((response) => {
-        setSearched(true);
-        console.log(text);
-        console.log(response);
-        if (response) {
-          setFriendName(response.user[0].name);
-          setFriendId(response.user[0]._id);
-          setFound(true);
-          console.log(`Friend found: ${response.user[0].name}`);
-        } else {
-          setFound(false);
-          console.log(`Friend not found`);
-          console.log(text);
-        }
-      })
-      .catch(() => {
+    get("/api/user", { _id: text }).then((response) => {
+      setSearched(true);
+      console.log(text);
+      console.log(response);
+      if (response) {
+        setFriendName(response.user[0].name);
+        setFriendId(response.user[0]._id);
+        setFound(true);
+        console.log(`Friend found: ${response.user[0].name}`);
+        console.log(response.user[0]);
+        let newDict = { ...userDict };
+        newDict[text] = response.user[0];
+        setUserDict(newDict);
+        console.log(userDict);
+      } else {
         setFound(false);
         console.log(`Friend not found`);
         console.log(text);
-      });
+      }
+    });
   };
+  useEffect(() => {
+    console.log(userDict[text]);
+  }, []);
   const addFriend = (async) => {
     //https://www.w3schools.com/jsref/jsref_includes_array.asp
     if (!requests.includes(friendId)) {
@@ -262,6 +267,17 @@ const Friends = (props) => {
       updateRequests();
     }
   };
+  const populateInfo = (friend_id) => {
+    console.log(friend_id);
+    if (userDict[friend_id] === undefined) {
+      get("/api/user", { _id: friend_id }).then((response) => {
+        let newDict = { ...userDict };
+        newDict[text] = response.user[0];
+        setUserDict(newDict);
+        console.log(userDict);
+      });
+    }
+  };
 
   useEffect(() => {
     setUserId(props.userId);
@@ -269,12 +285,24 @@ const Friends = (props) => {
       get("/api/friends", { userId: props.userId }).then((content) => {
         if (content.friends) {
           setUserFriends(content.friends);
+          for (let i = 0; i < content.friends.length; i++) {
+            populateInfo(content.friends[i]);
+          }
         }
+
         if (content.requests) {
+          console.log(content.requests);
           setRequests(content.requests);
+          for (let i = 0; i < content.requests.length; i++) {
+            populateInfo(content.requests[i]);
+          }
         }
+
         if (content.requested) {
           setRequested(content.requested);
+          for (let i = 0; i < content.requested.length; i++) {
+            populateInfo(content.requested[i]);
+          }
         }
       });
     }
@@ -295,6 +323,8 @@ const Friends = (props) => {
         setFriendId={setFriendId}
         removeFriend={removeFriend}
         requestId={userFriends[index]}
+        info={userDict[id]}
+        userId={userId}
       />
     );
   };
@@ -310,9 +340,13 @@ const Friends = (props) => {
         acceptRequest={acceptRequest}
         denyRequest={denyRequest}
         removeFriend={removeFriend}
+        info={userDict[id]}
+        userId={userId}
       />
     );
   };
+  //console.log(`text:${text}, friendId: ${friendId}, userDict: ${userDict} userDict[text]`);
+  //console.log(userDictRef.current[text]);
   return (
     <div>
       {props.userId || userId ? (
@@ -350,11 +384,15 @@ const Friends = (props) => {
             requested={requests.includes(friendId)}
             request={requests.includes(friendId)}
             addFriend={addFriend}
+            acceptRequest={acceptRequest}
+            removeFriend={removeFriend}
             removeRequest={removeRequest}
             isRequest={requested.includes(friendId)}
             requestId={friendId}
             denyRequest={denyRequest}
-            removeFriend={removeFriend}
+            info={userDict[friendId]}
+            userId={props.userId}
+            key={friendId}
           />
         </div>
       ) : (
