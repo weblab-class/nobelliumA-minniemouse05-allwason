@@ -7,29 +7,38 @@
   padding: 0% 0% 0% 0%;
 }
 .button-overlay #notebook {
-  top: 45%;
-  left: 67%;
+  top: 60%;
+  left: 83%;
+  background-color: transparent;
+  border: none;
 }
 .button-overlay .room-button {
   position: absolute;
   transform: translate(-50%, -50%);
-  border: var(--xs) solid #000000;
+  /*border: var(--xs) solid #000000;*/
   cursor: pointer;
-  padding: var(--xs) var(--xs);
+
   font-family: "Cute Font", sans-serif;
-  background: var(--white);
-  opacity: 80%;
+  /*background: var(--white);*/
+  opacity: 0%;
   transition: 0.3s;
   font-size: var(--m);
+  color: transparent;
 }
 .button-overlay #todo {
-  top: 31%;
-  left: 50%;
+  top: 60%;
+  left: 40%;
+  padding-right: 1vw;
+  padding-left: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: transparent;
+  border: none;
 }
 .button-overlay .room-button:hover {
   background: var(--primary--dim);
-  border-color: var(--black);
-  opacity: 100%;
+  opacity: 70%;
+  color: black;
 }
 
 .notebook {

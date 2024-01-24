@@ -6,6 +6,7 @@ import "./Room.css";
 import Display from "./Display.js";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import key from "./../../../dist/key-right.png";
+import room from "./../../../dist/room.png";
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com";
 

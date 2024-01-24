@@ -7,6 +7,7 @@ import "./Display.css";
 import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
 import Notebook from "./Notebook.js";
+import room from "./../../../dist/room.png";
 
 /**
  * Parent: Room
@@ -59,7 +60,7 @@ const Display = (props) => {
   if (props.open === "room") {
     return (
       <div className="room button-overlay">
-        <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
+        <img id="roomdisplay" src={room} />
         <Link to="/notebook">
           <button className="room-button" id="notebook">
             notebook
@@ -76,7 +77,7 @@ const Display = (props) => {
     return (
       <>
         <div className="room button-overlay">
-          <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
+          <img id="roomdisplay" src={room} />
           <div className="width-todo-list display-box u-flex-justifyCenter u-flex-alignCenter">
             <Todo
               userId={props.userId}
@@ -91,7 +92,7 @@ const Display = (props) => {
   } else if (props.open === "notebook") {
     return (
       <div className="room button-overlay">
-        <img id="roomdisplay" src="https://i.redd.it/s7i5m1g62if61.png" />
+        <img id="roomdisplay" src={room} />
         <div className="notebook display-box u-flex">
           <Notebook userId={props.userId} />
         </div>
