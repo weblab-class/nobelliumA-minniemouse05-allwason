@@ -24,7 +24,7 @@ const Friends = (props) => {
       setSearched(true);
       console.log(text);
       console.log(response);
-      if (response) {
+      if (response.user) {
         setFriendName(response.user[0].name);
         setFriendId(response.user[0]._id);
         setFound(true);
