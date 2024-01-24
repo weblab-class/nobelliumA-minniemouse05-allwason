@@ -32,3 +32,9 @@
   align-items: center;
   justify-content: center;
 }
+.x-button {
+  font-size: 3vw;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2vw;
+}

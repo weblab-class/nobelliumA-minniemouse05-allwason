@@ -40,6 +40,17 @@ const FriendEntry = (props) => {
         Requested
       </button>
     );
+  } else {
+    button = (
+      <button
+        className="x-button"
+        onClick={() => {
+          props.removeFriend(props.requestId);
+        }}
+      >
+        x
+      </button>
+    );
   }
   return (
     <div className="FriendEntry u-flex">

@@ -72,6 +72,48 @@ const Friends = (props) => {
       alert("friend already added!");
     }
   };
+  const removeFriend = async (reqId) => {
+    console.log("called");
+    console.log(reqId);
+    if (userFriends.includes(reqId)) {
+      async function remove() {
+        let req1 = await post("/api/friends", {
+          userId: props.userId,
+          friends: userFriends.filter(function (person) {
+            return person !== reqId;
+          }),
+        });
+        let friendlist = await get("/api/friends", {
+          userId: reqId,
+        });
+        if (!friendlist) {
+          friendlist = { friends: {} };
+        }
+        console.log(friendlist.friends);
+        console.log(
+          friendlist.friends.filter(function (person) {
+            return person !== props.userId;
+          })
+        );
+        console.log(props.userId);
+        console.log(reqId);
+        let req2 = await post("/api/friends", {
+          userId: reqId,
+          friends: friendlist.friends.filter(function (person) {
+            return person !== props.userId;
+          }),
+        });
+        setUserFriends(
+          userFriends.filter(function (person) {
+            return person !== reqId;
+          })
+        );
+      }
+      remove();
+    } else {
+      alert("user is not in friends");
+    }
+  };
   const denyRequest = async (acceptId) => {
     //https://www.w3schools.com/jsref/jsref_includes_array.asp
     console.log(requested);
@@ -136,7 +178,7 @@ const Friends = (props) => {
         console.log(friend);
         let final1 = await post("/api/friends", {
           userId: acceptId,
-          friends: friend.friends.concat(acceptId),
+          friends: friend.friends.concat(props.userId),
         });
         setRequests(userFriends.concat(acceptId));
         if (!userFriends) {
@@ -251,6 +293,8 @@ const Friends = (props) => {
         add={false}
         isRequest={isRequest}
         setFriendId={setFriendId}
+        removeFriend={removeFriend}
+        requestId={userFriends[index]}
       />
     );
   };
@@ -265,6 +309,7 @@ const Friends = (props) => {
         requestId={requested[index]}
         acceptRequest={acceptRequest}
         denyRequest={denyRequest}
+        removeFriend={removeFriend}
       />
     );
   };
@@ -309,6 +354,7 @@ const Friends = (props) => {
             isRequest={requested.includes(friendId)}
             requestId={friendId}
             denyRequest={denyRequest}
+            removeFriend={removeFriend}
           />
         </div>
       ) : (
