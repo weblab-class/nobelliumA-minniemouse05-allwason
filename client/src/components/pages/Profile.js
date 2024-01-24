@@ -28,6 +28,8 @@ const Profile = (props) => {
   //array of objects
 
   useEffect(() => {
+    console.log("props.userId in 1st useEffect", props.userId);
+
     get("/api/userAchievements", { _id: props.userId }).then((achIdData) => {
       setAchievementData(achIdData);
       console.log("just setAchievementData", achievementData);
@@ -35,22 +37,23 @@ const Profile = (props) => {
   }, [props.userId]);
 
   useEffect(() => {
-    if (props.totalExp >= 5) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 6, _id: props.userId });
     }
-    if (props.totalExp >= 10) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 0, _id: props.userId });
     }
-    if (props.totalExp >= 50) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 2, _id: props.userId });
     }
-    if (props.totalExp >= 125) {
+    if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 3, _id: props.userId });
     }
   }, [props.totalExp]);
 
   useEffect(() => {
     console.log("use effect for achievementData", achievementData);
+    console.log("props.userId in 3rd useEffect", props.userId);
 
     // Create an array to store promises
     const fetchPromises = achievementData.map((achId) => {
@@ -89,9 +92,9 @@ const Profile = (props) => {
     );
   };
 
-  useEffect(() => {
-    console.log("props.userId", props.userId);
-  }, [props.userId]);
+  // useEffect(() => {
+  //   console.log("props.userId", props.userId);
+  // }, [props.userId]);
 
   return (
     <div>
