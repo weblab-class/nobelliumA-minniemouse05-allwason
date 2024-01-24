@@ -49,7 +49,7 @@ const Profile = (props) => {
     if (props.totalExp >= 0) {
       post("/api/addAchievement", { achievementId: 3, _id: props.userId });
     }
-  }, [props.totalExp]);
+  }, []);
 
   useEffect(() => {
     console.log("use effect for achievementData", achievementData);
