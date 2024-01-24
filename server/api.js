@@ -51,7 +51,7 @@ router.post("/initsocket", (req, res) => {
 router.get("/user", (req, res) => {
   User.find({ _id: req.query._id })
     .then((user) => {
-      console.log(req.query._id);
+      console.log('running router.get("/user") ', req.query._id);
       res.send({ user });
     })
     .catch(() => {
@@ -206,13 +206,13 @@ router.post("/entry", (req, res) => {
 
 //gets achievement based on user id
 router.get("/userAchievements", (req, res) => {
-  console.log("running /userAchievements");
-  console.log("req.query._id", req.query._id);
-  User.findById({ _id: req.query._id })
+  console.log('running router.get("/userAchievements"), req.query._id= ', req.query._id);
+  User.findOne({ _id: req.query._id })
     .then((allAchievements) => {
       res.send(allAchievements.achievementArray);
     })
     .catch(() => {
+      console.log('catching through router.get("/userAchievements")');
       res.send({});
     });
 });
@@ -220,25 +220,29 @@ router.get("/userAchievements", (req, res) => {
 //finds user based on userID and then adds to the achievement array
 router.post("/addAchievement", async (req, res) => {
   try {
-    const achievementIdToUpdate = req.body.achievementId; // Assuming achievementIdToUpdate is sent in the request body
+    const achievementIdToUpdate = req.body.achievementId;
     console.log("addAchievement id", achievementIdToUpdate);
 
     const userToAward = await User.findById({ _id: req.body._id });
-    //console.log("userToAward", userToAward);
+
+    if (!userToAward) {
+      console.log("running inside !userToAward");
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
     if (!userToAward.achievementArray.includes(achievementIdToUpdate)) {
       userToAward.achievementArray.push(achievementIdToUpdate);
-      userToAward
-        .save()
-        .then(() => {
-          console.log("saved new achievement, exp:", userToAward.achievementArray);
-          res.send({});
-        })
-        .catch(() => {
-          console.log("catched new achievement");
-          res.send({});
-        });
+
+      await userToAward.save();
+
+      console.log("Saved new achievement, exp:", userToAward.achievementArray);
+      res.send({});
+    } else {
+      console.log("Achievement already exists for the user");
+      res.send({});
     }
   } catch (error) {
+    console.log("catching error in addAchivement");
     console.error("Error running addAchievement:", error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
