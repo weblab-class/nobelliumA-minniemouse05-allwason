@@ -72,12 +72,118 @@ const Friends = (props) => {
       alert("friend already added!");
     }
   };
+  const denyRequest = async (acceptId) => {
+    //https://www.w3schools.com/jsref/jsref_includes_array.asp
+    console.log(requested);
+    console.log(acceptId);
+
+    if (requested.includes(acceptId)) {
+      console.log(acceptId);
+      async function updateRequests() {
+        let req2 = await post("/api/friend_requested", {
+          userId: props.userId,
+          requested: requested.filter(function (person) {
+            return person !== acceptId;
+          }),
+        });
+        let friend_request = await get("/api/friends", { userId: acceptId });
+
+        if (!friend_request.requests) {
+          friend_request = { requests: [] };
+        }
+        console.log(friend_request);
+        console.log(props.userId);
+        console.log(acceptId);
+        let final2 = await post("/api/friend_request", {
+          userId: acceptId,
+          requests: friend_request.requests.filter(function (person) {
+            return person !== props.userId;
+          }),
+        });
+        setRequested(
+          requested.filter(function (person) {
+            return person !== acceptId;
+          })
+        );
+      }
+      updateRequests();
+    } else {
+      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
+        () => {
+          setUserFriends(userFriends.concat(friendId));
+        }
+      );*/
+      alert("friend already added!");
+    }
+  };
+  const acceptRequest = async (acceptId) => {
+    //https://www.w3schools.com/jsref/jsref_includes_array.asp
+    if (!userFriends.includes(acceptId)) {
+      console.log(acceptId);
+      async function updateRequests() {
+        if (!requests) {
+          requests = [];
+        }
+        let req1 = await post("/api/friends", {
+          userId: props.userId,
+          friends: userFriends.concat(acceptId),
+        });
+        let friend = await get("/api/friends", { userId: acceptId });
+
+        if (!friend.friends) {
+          friend = { friends: [] };
+        }
+        console.log(friend);
+        let final1 = await post("/api/friends", {
+          userId: acceptId,
+          friends: friend.friends.concat(acceptId),
+        });
+        setRequests(userFriends.concat(acceptId));
+        if (!userFriends) {
+          userFriends = [];
+        }
+        let req2 = await post("/api/friend_requested", {
+          userId: props.userId,
+          requested: requested.filter(function (person) {
+            return person !== acceptId;
+          }),
+        });
+        let friend_request = await get("/api/friends", { userId: acceptId });
+
+        if (!friend_request.requests) {
+          friend_request = { requests: [] };
+        }
+        console.log(friend_request);
+        console.log(props.userId);
+        console.log(acceptId);
+        let final2 = await post("/api/friend_request", {
+          userId: acceptId,
+          requests: friend_request.requests.filter(function (person) {
+            return person !== props.userId;
+          }),
+        });
+        setRequested(
+          requested.filter(function (person) {
+            return person !== acceptId;
+          })
+        );
+      }
+      updateRequests();
+    } else {
+      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
+        () => {
+          setUserFriends(userFriends.concat(friendId));
+        }
+      );*/
+      alert("friend already added!");
+    }
+  };
   const handleChange = (e) => {
     setText(e.target.value);
   };
   const removeRequest = (async) => {
     //https://www.w3schools.com/jsref/jsref_includes_array.asp
-    if (requests.includes(friendId)) {
+    if (requests.includes(friendId) || requested.includes(friendId)) {
       async function updateRequests() {
         if (!userFriends) {
           userFriends = [];
@@ -105,15 +211,13 @@ const Friends = (props) => {
             return person !== friendId;
           })
         );
+        setRequested(
+          requested.filter(function (person) {
+            return person !== friendId;
+          })
+        );
       }
       updateRequests();
-    } else {
-      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
-        () => {
-          setUserFriends(userFriends.concat(friendId));
-        }
-      );*/
-      alert("friend already added!");
     }
   };
 
@@ -133,9 +237,36 @@ const Friends = (props) => {
       });
     }
   });
-
-  const makeFriendEntry = (id, index, request) => {
-    return <FriendEntry key={id} index={index} add={false} request={request} />;
+  let friendText = "";
+  if (requested.length == 0) {
+    friendText = "No incoming friend requests.";
+  } else {
+    friendText = "Friend requests:";
+  }
+  const makeFriendEntry = (id, index, isRequest) => {
+    return (
+      <FriendEntry
+        key={id}
+        index={index}
+        add={false}
+        isRequest={isRequest}
+        setFriendId={setFriendId}
+      />
+    );
+  };
+  const makeRequestEntry = (id, index, isRequest) => {
+    return (
+      <FriendEntry
+        key={id}
+        index={index}
+        add={false}
+        isRequest={isRequest}
+        setFriendId={setFriendId}
+        requestId={requested[index]}
+        acceptRequest={acceptRequest}
+        denyRequest={denyRequest}
+      />
+    );
   };
   return (
     <div>
@@ -150,6 +281,18 @@ const Friends = (props) => {
       ) : (
         <></>
       )}
+
+      {props.userId || userId ? (
+        <div className="requests">
+          <h1>{friendText}</h1>
+          {requested.map((friend_id, ind) => {
+            //console.log(ind);
+            return makeRequestEntry(friend_id, ind, true);
+          })}
+        </div>
+      ) : (
+        <></>
+      )}
       {(props.userId || userId) && searched && found ? (
         <div className="friend">
           <FriendEntry
@@ -160,8 +303,12 @@ const Friends = (props) => {
               friendId !== props.userId
             }
             requested={requests.includes(friendId)}
+            request={requests.includes(friendId)}
             addFriend={addFriend}
             removeRequest={removeRequest}
+            isRequest={requested.includes(friendId)}
+            requestId={friendId}
+            denyRequest={denyRequest}
           />
         </div>
       ) : (
@@ -169,16 +316,6 @@ const Friends = (props) => {
       )}
       {(props.userId || userId) && searched && !found ? (
         <h1 className="not-found">Friend not found (check your inputted id!)</h1>
-      ) : (
-        <></>
-      )}
-      {props.userId || userId ? (
-        <div>
-          {requested.map((friend_id, ind) => {
-            //console.log(ind);
-            return makeFriendEntry(friend_id, ind, true);
-          })}
-        </div>
       ) : (
         <></>
       )}

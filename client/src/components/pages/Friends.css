@@ -24,3 +24,10 @@
 .not-found {
   text-align: center;
 }
+.requests {
+  margin-left: 10vw;
+  margin-right: 10vw;
+  text-align: center;
+  border: var(--xs) solid black;
+  margin-bottom: 5vh;
+}

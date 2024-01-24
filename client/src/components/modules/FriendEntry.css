@@ -22,3 +22,13 @@
 .FriendEntry .friend-class-image {
   width: 10%;
 }
+.accept {
+  font-size: 3vw;
+  align-items: center;
+  justify-content: center;
+}
+.deny {
+  font-size: 6vw;
+  align-items: center;
+  justify-content: center;
+}

@@ -7,7 +7,28 @@ import exp from "./../../../dist/EXP.png";
 import { Link, useNavigate } from "react-router-dom";
 const FriendEntry = (props) => {
   let button = <></>;
-  if (props.add && !props.requested) {
+  if (props.isRequest) {
+    button = (
+      <div className="u-flex">
+        <button
+          className="accept"
+          onClick={() => {
+            props.acceptRequest(props.requestId);
+          }}
+        >
+          ✓
+        </button>
+        <button
+          className="deny"
+          onClick={() => {
+            props.denyRequest(props.requestId);
+          }}
+        >
+          x
+        </button>
+      </div>
+    );
+  } else if (props.add && !props.requested) {
     button = (
       <button className="add-button" onClick={props.addFriend}>
         +
