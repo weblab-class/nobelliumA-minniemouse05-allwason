@@ -23,7 +23,7 @@
   border-top: var(--xs) solid black;
 }
 .hide-button {
-  margin-right: 5vw;
+  margin-right: 0vw;
   margin-left: 10vw;
 }
 .time {
@@ -32,4 +32,7 @@
 .mode {
   color: black;
   font-size: var(--xl);
+}
+.settings {
+  margin-right: 2vw;
 }

@@ -12,6 +12,8 @@ const Pomodoro = (props) => {
   const [state, setState] = useState("paused");
   const [mode, setMode] = useState("work");
   const [bannerColor, setBannerColor] = useState("#FF6978");
+  const workColor = "#B1EDE8";
+  const breakColor = "#FF6978";
   //https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascript
   //https://www.w3schools.com/jsref/jsref_tostring_number.asp
   //https://stackoverflow.com/questions/57137094/implementing-a-countdown-timer-in-react-with-hooks
@@ -19,10 +21,10 @@ const Pomodoro = (props) => {
   const changeMode = () => {
     if (mode == "work") {
       setMode("break");
-      setBannerColor("#B1EDE8");
+      setBannerColor(workColor);
     } else {
       setMode("work");
-      setBannerColor("#FF6978");
+      setBannerColor(breakColor);
     }
   };
   return (
@@ -68,11 +70,26 @@ const Pomodoro = (props) => {
             workSeconds={workSeconds}
             breakSeconds={breakSeconds}
           />
-          <h1 className="mode">{mode}</h1>
+          <button
+            onClick={() => {
+              changeMode();
+            }}
+          >
+            {mode}
+          </button>
           <button className="hide-button" onClick={props.togglePomodoro}>
             hide
           </button>
-          <div></div>
+
+          <button
+            className="p-button settings"
+            onClick={() => {
+              setState("paused");
+              console.log(state);
+            }}
+          >
+            <span class="material-symbols-outlined">settings</span>
+          </button>
         </div>
       ) : (
         <></>
