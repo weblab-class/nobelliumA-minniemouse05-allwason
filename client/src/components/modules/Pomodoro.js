@@ -1,37 +1,31 @@
 import "./Pomodoro.css";
 import React from "react";
 import { useState } from "react";
+import { useRef, useEffect } from "react";
+import Timer from "./Timer";
 const Pomodoro = (props) => {
-  const [seconds, setSeconds] = useState(1);
-  const [timer, setTimer] = useState(undefined);
+  const [seconds, setSeconds] = useState(600);
+  const [originalSeconds, setOriginalSeconds] = useState(600);
+  const [state, setState] = useState("paused");
   //https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascript
   //https://www.w3schools.com/jsref/jsref_tostring_number.asp
-  let remainder;
-  let time;
-  const runTimer = () => {
-    setTimer(setInterval(minusSecond, 1000));
+  //https://stackoverflow.com/questions/57137094/implementing-a-countdown-timer-in-react-with-hooks
+  const resetSeconds = () => {
+    setSeconds(originalSeconds);
   };
-  const minusSecond = () => {
-    console.log(seconds);
-    if (seconds > 0) {
-      setSeconds(seconds - 1);
-      remainder = (seconds % 60).toString();
-      if (remainder.length == 1) {
-        remainder = "0" + remainder;
-      }
-      time = Math.floor(seconds / 60).toString() + ":" + remainder;
-    } else {
-      alert("timer is done");
-      clearInterval(timer);
-    }
-  };
+  console.log(props.pomodoro);
   return (
     <>
       {props.pomodoro ? (
         <div className="pomodoro u-flex">
           <div className="buttons">
             <button className="p-button">
-              <span class="material-symbols-outlined" onClick={runTimer}>
+              <span
+                class="material-symbols-outlined"
+                onClick={() => {
+                  setState("start");
+                }}
+              >
                 play_arrow
               </span>
             </button>
@@ -42,7 +36,14 @@ const Pomodoro = (props) => {
               <span class="material-symbols-outlined">stop</span>
             </button>
           </div>
-          <h1 className="time">{time}</h1>
+          <Timer
+            resetSeconds={resetSeconds}
+            seconds={seconds}
+            setSeconds={(arg) => {
+              setSeconds(arg);
+            }}
+            state={state}
+          />
           <button className="hide-button" onClick={props.togglePomodoro}>
             hide
           </button>
@@ -54,4 +55,5 @@ const Pomodoro = (props) => {
     </>
   );
 };
+
 export default Pomodoro;
