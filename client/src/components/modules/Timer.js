@@ -9,19 +9,24 @@ const Timer = ({ workSeconds, breakSeconds, changeMode, mode, seconds, current_s
   let second = remain;
   //second debugging: https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately
   useEffect(() => {
+    console.log(mode);
     if (mode === "work") {
       setRemain(workSeconds);
       second = workSeconds;
       clearInterval(interval.current);
+
       if (current_state === "start") {
         interval.current = setInterval(minusSecond, 1000);
+        alert("time to work!");
       }
     } else {
       setRemain(breakSeconds);
       second = breakSeconds;
       clearInterval(interval.current);
+
       if (current_state === "start") {
         interval.current = setInterval(minusSecond, 1000);
+        alert("time to take a break!");
       }
     }
   }, [mode]);

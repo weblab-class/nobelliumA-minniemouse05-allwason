@@ -38,13 +38,11 @@ const Game = (props) => {
     draw();
   }, []);
   const canvasRef = useRef(null);
-
+  /*<img src={room} width="500" />*/
   return (
     <>
       <div>
-        <canvas id="room" alt="room" width="500" height="500">
-          <img src={room} width="500" />
-        </canvas>
+        <canvas id="room" alt="room" width="500" height="500"></canvas>
       </div>
     </>
   );

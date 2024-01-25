@@ -122,8 +122,9 @@ form {
   color: var(--primary--dim);
 }
 button {
+  border: 2px solid black;
   padding: var(--xs);
-  border-radius: var(--s);
+  border-radius: var(--xs);
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
 }

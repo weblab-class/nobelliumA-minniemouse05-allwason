@@ -14,10 +14,19 @@ const Pomodoro = (props) => {
   const [bannerColor, setBannerColor] = useState("#FF6978");
   const workColor = "#B1EDE8";
   const breakColor = "#FF6978";
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [buttonColor, setButtonColor] = useState("white");
+  const [value, setValue] = useState("");
+  const [value1, setValue1] = useState("");
   //https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascript
   //https://www.w3schools.com/jsref/jsref_tostring_number.asp
   //https://stackoverflow.com/questions/57137094/implementing-a-countdown-timer-in-react-with-hooks
-
+  const handleChange = (e) => {
+    if (!isNaN(Number(e.target.value))) setValue(e.target.value);
+  };
+  const handleChange1 = (e) => {
+    if (!isNaN(Number(e.target.value))) setValue1(e.target.value);
+  };
   const changeMode = () => {
     if (mode == "work") {
       setMode("break");
@@ -27,73 +36,112 @@ const Pomodoro = (props) => {
       setBannerColor(breakColor);
     }
   };
+  useEffect(() => {
+    if (settingsOpen) {
+      setButtonColor("white");
+    } else {
+      setButtonColor("black");
+    }
+  }, [settingsOpen]);
+  const changeTime = () => {
+    if (value !== "") {
+      setWorkSeconds(60 * Number(value));
+    }
+    if (value1 !== "") {
+      setBreakSeconds(60 * Number(value1));
+    }
+  };
+  let timer = (
+    <Timer
+      seconds={seconds}
+      current_state={state}
+      mode={mode}
+      changeMode={changeMode}
+      workSeconds={workSeconds}
+      breakSeconds={breakSeconds}
+    />
+  );
   return (
     <>
-      {props.pomodoro ? (
-        <div className="pomodoro u-flex banner" style={{ background: bannerColor }}>
-          <div className="buttons">
-            <button className="p-button">
-              <span
-                class="material-symbols-outlined"
-                onClick={() => {
-                  setState("start");
-                }}
-              >
-                play_arrow
-              </span>
-            </button>
-            <button
-              className="p-button"
-              onClick={() => {
-                setState("paused");
-                console.log(state);
-              }}
-            >
-              <span class="material-symbols-outlined">pause</span>
-            </button>
-            <button
-              className="p-button"
-              onClick={() => {
-                setState("reset");
-                console.log(state);
-              }}
-            >
-              <span class="material-symbols-outlined">stop</span>
-            </button>
+      {props.pomodoro && settingsOpen ? (
+        <>
+          <div className="settings-menu">
+            <div className="u-flex entry">
+              <h1 className="pr-15">work: </h1>
+              <input value={value} onChange={handleChange}></input>
+              <h1 className="pl-15"> minutes</h1>
+            </div>
+            <div className="u-flex entry">
+              <h1 className="pr-15">break:</h1>
+              <input value={value1} onChange={handleChange1}></input>
+              <h1 className="pl-15"> minutes</h1>
+            </div>
+            <h1>(press ok and then reset to update timer)</h1>
+            <div className="ok-button u-flex">
+              <button onClick={changeTime}>ok</button>
+            </div>
           </div>
-
-          <Timer
-            seconds={seconds}
-            current_state={state}
-            mode={mode}
-            changeMode={changeMode}
-            workSeconds={workSeconds}
-            breakSeconds={breakSeconds}
-          />
-          <button
-            onClick={() => {
-              changeMode();
-            }}
-          >
-            {mode}
+        </>
+      ) : (
+        <></>
+      )}
+      <div
+        className="pomodoro u-flex banner"
+        style={{ background: bannerColor, display: props.pomodoro ? "flex" : "none" }}
+      >
+        <div className="buttons">
+          <button className="p-button">
+            <span
+              class="material-symbols-outlined"
+              onClick={() => {
+                setState("start");
+              }}
+            >
+              play_arrow
+            </span>
           </button>
-          <button className="hide-button" onClick={props.togglePomodoro}>
-            hide
-          </button>
-
           <button
-            className="p-button settings"
+            className="p-button"
             onClick={() => {
               setState("paused");
               console.log(state);
             }}
           >
-            <span class="material-symbols-outlined">settings</span>
+            <span class="material-symbols-outlined">pause</span>
+          </button>
+          <button
+            className="p-button"
+            onClick={() => {
+              setState("reset");
+              console.log(state);
+            }}
+          >
+            <span class="material-symbols-outlined">stop</span>
           </button>
         </div>
-      ) : (
-        <></>
-      )}
+
+        {timer}
+        <button
+          onClick={() => {
+            changeMode();
+          }}
+        >
+          {mode}
+        </button>
+        <button className="hide-button" onClick={props.togglePomodoro}>
+          hide
+        </button>
+
+        <button
+          style={{ color: buttonColor }}
+          className="p-button settings"
+          onClick={() => {
+            setSettingsOpen(!settingsOpen);
+          }}
+        >
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+      </div>
     </>
   );
 };

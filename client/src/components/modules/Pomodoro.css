@@ -4,15 +4,29 @@
   justify-content: center;
   align-items: center;
   margin-left: 5vw;
+  margin-top: 1.5vh;
+  margin-bottom: 1.5vh;
 }
 .p-button {
   width: 5vw;
-  padding: 1vw;
+  padding: 1vh;
   background-color: transparent;
   border: none;
 }
 .material-symbols-outlined {
   vertical-align: middle;
+}
+input {
+  height: 6vh;
+}
+.ok-button {
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.entry {
+  margin-bottom: 1.5vh;
 }
 .pomodoro {
   position: absolute;
@@ -29,10 +43,27 @@
 .time {
   margin: auto;
 }
+.settings-menu {
+  position: absolute;
+  bottom: 10vh;
+  background-color: var(--primary--dim);
+  padding: 2vh;
+  margin-left: 6vw;
+  border: var(--xs) solid black;
+}
 .mode {
   color: black;
   font-size: var(--xl);
 }
 .settings {
   margin-right: 2vw;
+}
+.middle-display {
+  font-size: 48px;
+}
+.settings-open {
+  margin-right: 2vw;
+  color: white;
+  align-items: center;
+  justify-content: center;
 }
