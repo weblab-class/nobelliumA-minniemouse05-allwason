@@ -17,11 +17,12 @@ const Game = (props) => {
   };
   const draw = () => {
     const canvas = document.getElementById("room");
-    if (canvas.getContent) {
+    if (canvas.getContext) {
       const ctx = canvas.getContext("2d");
+
       ctx.fillStyle = "rgb(200 0 0)";
       ctx.fillRect(10, 10, 50, 50);
-
+      //ctx.drawImage(<img src={room} />, 500, 500);
       ctx.fillStyle = "rgb(0 0 200 / 50%)";
       ctx.fillRect(30, 30, 50, 50);
     }
@@ -42,7 +43,9 @@ const Game = (props) => {
   return (
     <>
       <div>
-        <canvas id="room" alt="room" width="500" height="500"></canvas>
+        <canvas id="room" alt="room" width="500" height="500">
+          <image id="room" src={room} />
+        </canvas>
       </div>
     </>
   );

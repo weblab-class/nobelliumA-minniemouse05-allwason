@@ -43,7 +43,7 @@ const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handl
               totalExp={totalExp}
               togglePomodoro={togglePomodoro}
             />
-            {/*<Game />*/}
+            <Game />
           </>
         ) : (
           <div className="u-flex u-flex-justifyCenter u-flex-alignCenter login">
