@@ -1,0 +1,7 @@
+.room {
+  overflow-x: hidden;
+}
+.canvas-div {
+  overflow-x: hidden;
+  width: 500px;
+}

@@ -92,7 +92,7 @@ const Pomodoro = (props) => {
         <div className="buttons">
           <button className="p-button">
             <span
-              class="material-symbols-outlined"
+              className="material-symbols-outlined"
               onClick={() => {
                 setState("start");
               }}

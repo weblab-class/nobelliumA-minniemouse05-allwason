@@ -35,14 +35,14 @@ const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handl
       <div className="welcome">
         {userId ? (
           <>
-            <Display
+            {/*<Display
               className="display"
               open={open}
               userId={userId}
               name={name}
               totalExp={totalExp}
               togglePomodoro={togglePomodoro}
-            />
+        />*/}
             <Game />
           </>
         ) : (
