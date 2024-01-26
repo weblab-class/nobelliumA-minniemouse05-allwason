@@ -174,7 +174,18 @@ const App = () => {
 
         <Route
           path="/leaderboard/:userId"
-          element={<Leaderboard userId={userId} name={userName} />}
+          element={
+            <>
+              <NavBar
+                path="/"
+                userName={userName}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+              />
+              <Leaderboard userId={userId} name={userName} />
+            </>
+          }
         />
         <Route
           path="/friends/:userId"

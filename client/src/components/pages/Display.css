@@ -55,16 +55,6 @@
   background-color: transparent;
   border: none;
 }
-.button-overlay #calendar {
-  top: 50%;
-  left: 63%;
-  padding-right: 1.5vw;
-  padding-left: 1.5vw;
-  padding-top: 1.5vh;
-  padding-bottom: 1.5vh;
-  background-color: transparent;
-  border: none;
-}
 .button-overlay .room-button:hover {
   color: black;
   opacity: 100%;
