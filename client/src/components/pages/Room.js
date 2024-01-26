@@ -37,7 +37,7 @@ const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handl
       <div className="welcome">
         {userId ? (
           <>
-            <Display
+            {/*<Display
               className="display"
               open={open}
               userId={userId}
@@ -45,7 +45,20 @@ const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handl
               totalExp={totalExp}
               togglePomodoro={togglePomodoro}
         />*/}
-            <Game />
+            <NavBar
+              path="/"
+              userName={name}
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              userId={userId}
+            />
+            <Game
+              open={open}
+              userId={userId}
+              name={name}
+              totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
+            />
           </>
         ) : (
           <div className="u-flex u-flex-justifyCenter u-flex-alignCenter login">
