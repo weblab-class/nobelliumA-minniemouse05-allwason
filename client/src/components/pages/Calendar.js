@@ -1,190 +1,108 @@
-import React, { useEffect } from "react";
-import "../../utilities.css";
+import React from "react";
+import ApiCalendar from "react-google-calendar-api";
+import { SyntheticEvent, useState } from "react";
 
-const CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com";
-const API_KEY = "AIzaSyD07iJMXLq6nv2X8SANYJsNT_mTTL88OKQ";
+const config = {
+  clientId: "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com",
+  apiKey: "AIzaSyD07iJMXLq6nv2X8SANYJsNT_mTTL88OKQ",
+  scope: "https://www.googleapis.com/auth/calendar",
+  discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+};
 
-// Discovery doc URL for APIs used by the quickstart
-const DISCOVERY_DOC = "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
+const apiCalendar = new ApiCalendar(config);
 
-// Authorization scopes required by the API; multiple scopes can be
-// included, separated by spaces.
-const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+const Calendar = () => {
+  const [events, setEvents] = useState([]);
+  const [show, setShow] = useState(true);
 
-const Calendar = (props) => {
-  let tokenClient;
-  let gapiInited = false;
-  let gisInited = false;
+  const [year, setYear] = useState();
+  const [month, setMonth] = useState();
+  const [day, setDay] = useState();
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
 
-  useEffect(() => {
-    document.getElementById("authorize_button");
-    document.getElementById("signout_button");
-  }, []);
+  //const [calendars, setCalendars] = useState([]);
 
-  function gapiLoaded() {
-    gapi.load("client", initializeGapiClient);
-  }
-
-  async function initializeGapiClient() {
-    await gapi.client.init({
-      apiKey: API_KEY,
-      discoveryDocs: [DISCOVERY_DOC],
-    });
-    gapiInited = true;
-    maybeEnableButtons();
-  }
-
-  function gisLoaded() {
-    try {
-      tokenClient = window.google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID,
-        scope: SCOPES,
-        callback: async (resp) => {
-          if (resp.error !== undefined) {
-            throw resp;
-          }
-          document.getElementById("signout_button").disabled = false;
-          document.getElementById("authorize_button").innerText = "Refresh";
-          await listUpcomingEvents();
-        },
-      });
-      gisInited = true;
-      maybeEnableButtons();
-    } catch (error) {
-      console.error("Error initializing token client:", error);
+  const handleItemClick = (event, name) => {
+    if (name === "sign-in") {
+      apiCalendar
+        .handleAuthClick()
+        .then(() => {
+          setShow(!show);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (name === "sign-out") {
+      apiCalendar.handleSignoutClick();
+      setShow(!show);
     }
-  }
-
-  function maybeEnableButtons() {
-    if (gapiInited && gisInited) {
-      document.getElementById("authorize_button").disabled = false;
-    }
-  }
-
-  /**
-   *  Sign in the user upon button click.
-   */
-  function handleAuthClick() {
-    // Ensure tokenClient is initialized before setting the callback
-    if (!tokenClient) {
-      console.error("Token client is not initialized.");
-      return;
-    }
-
-    tokenClient.callback = async (resp) => {
-      if (resp.error !== undefined) {
-        throw resp;
-      }
-      document.getElementById("signout_button").disabled = false;
-      document.getElementById("authorize_button").innerText = "Refresh";
-      await listUpcomingEvents();
-    };
-
-    if (gapi.client.getToken() === null) {
-      // Prompt the user to select a Google Account and ask for consent to share their data
-      // when establishing a new session.
-      tokenClient.requestAccessToken({ prompt: "consent" });
-    } else {
-      // Skip display of account chooser and consent dialog for an existing session.
-      tokenClient.requestAccessToken({ prompt: "" });
-    }
-  }
-
-  function handleSignoutClick() {
-    const token = gapi.client.getToken();
-    if (token !== null) {
-      window.google.accounts.oauth2.revoke(token.access_token);
-      gapi.client.setToken("");
-      document.getElementById("content").innerText = "";
-      document.getElementById("authorize_button").innerText = "Authorize";
-      document.getElementById("signout_button").disabled = true;
-    }
-  }
-
-  /**
-   * Print the summary and start datetime/date of the next ten events in
-   * the authorized user's calendar. If no events are found an
-   * appropriate message is printed.
-   */
-  async function listUpcomingEvents() {
-    let response;
-    try {
-      const request = {
-        calendarId: "primary",
-        timeMin: new Date().toISOString(),
-        showDeleted: false,
-        singleEvents: true,
-        maxResults: 10,
-        orderBy: "startTime",
-      };
-      response = await gapi.client.calendar.events.list(request);
-    } catch (err) {
-      document.getElementById("content").innerText = err.message;
-      return;
-    }
-
-    const events = response.result.items;
-    if (!events || events.length === 0) {
-      document.getElementById("content").innerText = "No events found.";
-      return;
-    }
-    // Flatten to string to display
-    const output = events.reduce(
-      (str, event) => `${str}${event.summary} (${event.start.dateTime || event.start.date})\n`,
-      "Events:\n"
-    );
-    document.getElementById("content").innerText = output;
-  }
-
-  useEffect(() => {
-    // Load Google API script
-    const gapiScript = document.createElement("script");
-    gapiScript.src = "https://apis.google.com/js/api.js";
-    gapiScript.async = true;
-    gapiScript.defer = true;
-    gapiScript.onload = gapiLoaded;
-    document.body.appendChild(gapiScript);
-
-    // Load Google Sign-In script
-    const gsiScript = document.createElement("script");
-    gsiScript.src = "https://accounts.google.com/gsi/client";
-    gsiScript.async = true;
-    gsiScript.defer = true;
-    gsiScript.onload = gisLoaded;
-    document.body.appendChild(gsiScript);
-
-    // Cleanup: remove scripts when the component unmounts
-    return () => {
-      document.body.removeChild(gapiScript);
-      document.body.removeChild(gsiScript);
-    };
-  }, []);
+  };
 
   return (
-    <>
-      <div>
-        <body>
-          <p>Google Calendar API Quickstart</p>
+    <div>
+      <div style={{ padding: "0.5em" }}>
+        {show ? (
+          <button onClick={(e) => handleItemClick(e, "sign-in")}>sign-in</button>
+        ) : (
+          <div>
+            <button onClick={(e) => handleItemClick(e, "sign-out")}>sign-out</button>
+            <div style={{ padding: "0.5em" }}>
+              <button
+                onClick={(e) => {
+                  const eventFromNow = {
+                    summary: "Hey!",
+                    start: {
+                      dateTime: new Date("January 28 2024 2:43").toISOString(),
+                      timeZone: "EST",
+                    },
+                    end: {
+                      dateTime: new Date(
+                        new Date("January 28 2024 14:43").getTime() + 3600000
+                      ).toISOString(),
+                      timeZone: "EST",
+                    },
+                  };
 
-          <script async defer src="https://apis.google.com/js/api.js" onLoad={gapiLoaded}></script>
-          <script
-            async
-            defer
-            src="https://accounts.google.com/gsi/client"
-            onLoad={gisLoaded}
-          ></script>
-
-          <button id="authorize_button" onClick={handleAuthClick}>
-            Authorize
-          </button>
-          <button id="signout_button" onClick={handleSignoutClick}>
-            Sign Out
-          </button>
-
-          <div id="content"></div>
-        </body>
+                  apiCalendar
+                    .createEvent(eventFromNow)
+                    .then((result) => {
+                      console.log(result);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                }}
+              >
+                Create Event from now
+              </button>
+            </div>
+            <div style={{ padding: "0.5em" }}>
+              <button
+                onClick={(e) => {
+                  apiCalendar.listUpcomingEvents(10).then(({ result }) => {
+                    console.log("result.items= ", result.items);
+                    setEvents(result.items);
+                  });
+                }}
+              >
+                List upcoming events
+              </button>
+              <div>
+                <h4>Events</h4>
+                {events.length === 0 && <p>No events to show</p>}
+                {events.map((event) => (
+                  <p key={event.id}>
+                    {`${event.summary} (${event.start.dateTime || event.start.date})\n`}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div style={{ padding: "0.5em" }}></div>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

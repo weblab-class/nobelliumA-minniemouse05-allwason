@@ -14,6 +14,8 @@ const Entry = require("./models/Entry");
 const FriendList = require("./models/FriendList");
 const TodoItem = require("./models/TodoItem");
 const Achievement = require("./models/Achievement");
+const TopThree = require("./models/TopThree");
+
 //const UserProfile = require("./models/UserProfile");
 
 // import authentication library
@@ -509,6 +511,46 @@ router.post("/updateItemName", async (req, res) => {
   //   console.error("Error updating task field:", error);
   //   res.status(500).json({ success: false, message: "Internal server error" });
   // }
+});
+
+/////////////////////// LEADERBOARD ///////////////////////
+
+router.get("/topThree", (req, res) => {
+  TopThree.findOne({ arrayId: req.query.arrayId }).then((contents) => {
+    res.send(contents.results);
+    console.log("get topThree, contets.results= ", contents.results);
+  });
+});
+
+router.post("/updateTopThree", async (req, res) => {
+  const TopThreeToUpdate = await TopThree.findById({ arrayId: req.body.arrayId });
+  const userToAdd = req.body.userId;
+  const nameToAdd = req.body.name;
+  const userExp = req.body.totalExp;
+  const newArrayElement = { userId: userToAdd, name: nameToAdd, exp: userExp };
+
+  const insertionIndex = TopThreeToUpdate.results.findIndex(
+    (obj) => newArrayElement.exp <= obj.size
+  );
+
+  // If insertionIndex is -1, it means the new element has the largest 'size' and should be inserted at the end
+  const finalIndex = insertionIndex !== -1 ? insertionIndex : TopThreeToUpdate.results.length;
+
+  // Insert the new element at the calculated index
+  TopThreeToUpdate.results.splice(finalIndex, 0, newArrayElement);
+
+  TopThreeToUpdate.results.pop();
+
+  TopThreeToUpdate.results += amtToUpdate;
+  TopThreeToUpdate.save()
+    .then(() => {
+      console.log("saved NewUser, exp:", userToAdd.totalExp);
+      res.send({});
+    })
+    .catch(() => {
+      console.log("catched NewUser");
+      res.send({});
+    });
 });
 
 // anything else falls to this "not found" case

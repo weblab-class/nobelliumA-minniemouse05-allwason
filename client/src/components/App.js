@@ -167,7 +167,7 @@ const App = () => {
 
         <Route
           path="/leaderboard/:userId"
-          element={<Leaderboard userId={userId} name={userName} />}
+          element={<Leaderboard userId={userId} name={userName} totalExp={totalExp} />}
         />
         <Route path="/friends/:userId" element={<Friends userId={userId} />} />
         <Route

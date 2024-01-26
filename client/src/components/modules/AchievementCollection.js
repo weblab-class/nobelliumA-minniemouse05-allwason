@@ -45,4 +45,16 @@
 
  * 
  * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ [{
+    "arrayId": 0,
+    "results": [{"userId": "65b17f21d53d3a2cb617b20a", name" "Minnie Liang", exp: 85}, 
+    {"userId": "65b43104c759b913d57d0435", name" "limina bean", exp: 35},
+    {"userId": "65b4309fd1aa33c5499ed5af", name" "Jasmine S", exp: 5} ]
+  }
+]
  */
