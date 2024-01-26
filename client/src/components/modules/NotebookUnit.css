@@ -3,7 +3,8 @@
   width: 70vw;
   align-items: center;
   align-content: center;
+  justify-content: center;
 }
-.add-button {
-  margin-top: 10%;
+.add-button-notebook {
+  margin-top: 2vw;
 }

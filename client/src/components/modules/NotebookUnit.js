@@ -50,7 +50,7 @@ const NotebookUnit = (props) => {
           </button>
         </div>
       )}
-      <button className="add-button" onClick={handleNewEntry}>
+      <button className="add-button-notebook" onClick={handleNewEntry}>
         Add Entry
       </button>
     </div>

@@ -41,7 +41,7 @@
   background-color: var(--primary--dim);
 }
 .display-box {
-  padding: 3% 3% 3% 3%;
+  padding: 0% 3% 3% 3%;
 
   justify-content: center;
 }
