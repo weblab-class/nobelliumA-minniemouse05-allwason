@@ -23,7 +23,7 @@ import { get, post } from "../utilities.js";
 const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [userName, setUserName] = useState(undefined);
-
+  const [open, setOpen] = useState("room");
   const [totalExp, setTotalExp] = useState(0);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const App = () => {
           });
       }
     });
-  });
+  }, []);
   ////////////////////
 
   // useEffect(() => {
@@ -134,17 +134,13 @@ const App = () => {
     }
   };
   useEffect(() => {
+    console.log(pomodoro);
+  });
+  useEffect(() => {
     console.log(userId);
   }, [userId]);
   return (
     <>
-      <NavBar
-        path="/"
-        userName={userName}
-        handleLogin={handleLogin}
-        handleLogout={handleLogout}
-        userId={userId}
-      />
       <Routes>
         <Route
           path="/"
@@ -162,14 +158,39 @@ const App = () => {
         />
         <Route
           path="/profile/:userId"
-          element={<Profile userId={userId} name={userName} totalExp={totalExp} />}
+          element={
+            <>
+              <NavBar
+                path="/"
+                userName={name}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+              />
+              <Profile userId={userId} name={userName} totalExp={totalExp} />
+            </>
+          }
         />
 
         <Route
           path="/leaderboard/:userId"
-          element={<Leaderboard userId={userId} name={userName} totalExp={totalExp} />}
+          element={<Leaderboard userId={userId} name={userName} />}
         />
-        <Route path="/friends/:userId" element={<Friends userId={userId} />} />
+        <Route
+          path="/friends/:userId"
+          element={
+            <>
+              <NavBar
+                path="/"
+                userName={userName}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+              />
+              <Friends userId={userId} />
+            </>
+          }
+        />
         <Route
           path="/todo"
           element={
@@ -193,6 +214,7 @@ const App = () => {
               userId={userId}
               name={userName}
               totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
             />
           }
         />
@@ -206,6 +228,7 @@ const App = () => {
               userId={userId}
               name={userName}
               totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
             />
           }
         />

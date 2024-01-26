@@ -1,3 +1,4 @@
+@import "../../utilities.css";
 .room {
   overflow-x: hidden;
 }
@@ -6,11 +7,61 @@
   width: 500px;
   position: relative;
 }
-.todo {
+.todo-button {
   position: absolute;
-  bottom: 50vh;
-  left: 50vw;
+  bottom: 35vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.calendar {
+  position: absolute;
+  bottom: 35vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.notes {
+  position: absolute;
+  bottom: 35vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.clock {
+  position: absolute;
+  bottom: 35vh;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 .bear {
   width: 20%;
+}
+.room-button {
+  background-color: white;
+}
+.room-button:hover {
+  background-color: var(--primary--dim);
+}
+.display-box {
+  padding: 0% 3% 3% 3%;
+
+  justify-content: center;
+}
+.content-layer {
+  padding: 3% 3% 3% 3%;
+  /*font-size: 3vw;*/
+  top: 10vh;
+  align-content: center;
+  width: 70vw;
+  bottom: 10vh;
+  overflow: scroll;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: var(--xs) solid var(--black);
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: "Cute Font", sans-serif;
+
+  background: var(--white);
+  opacity: 95%;
+  transition: 0.3s;
 }

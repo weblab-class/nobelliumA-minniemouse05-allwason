@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { get, post } from "../../utilities.js";
-
+import bear from "./../../../dist/bear.png";
 import "../../utilities.css";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
@@ -128,11 +128,7 @@ const Profile = (props) => {
               <div className="userId u-flex">
                 <h1>UserId: {props.userId}</h1>
               </div>
-              <img
-                src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
-                alt="bear"
-                className="avatar-image"
-              />
+              <img src={bear} alt="bear" className="avatar-image" />
               <div className="name">{props.name}</div>
               <div className="exp">{"Total exp earned to date: " + props.totalExp}</div>
             </div>
