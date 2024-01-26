@@ -196,6 +196,19 @@ const App = () => {
             />
           }
         />
+        <Route
+          path="/calendar"
+          element={
+            <Room
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              open={"calendar"}
+              userId={userId}
+              name={userName}
+              totalExp={totalExp}
+            />
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Pomodoro togglePomodoro={togglePomodoro} pomodoro={pomodoro} />

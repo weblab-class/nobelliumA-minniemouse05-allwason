@@ -72,6 +72,20 @@
   transition: 0.3s;
   font-size: 3vw;
 }
+
+.gcal {
+  margin-top: -2vh;
+  border: var(--xs) solid var(--black);
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 5% 5%;
+  font-family: "Cute Font", sans-serif;
+  background: var(--white);
+  opacity: 95%;
+  transition: 0.3s;
+  font-size: 3vw;
+}
+
 .button-overlay .display-box {
   font-size: 3vw;
   top: 0;

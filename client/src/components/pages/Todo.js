@@ -50,19 +50,19 @@ const Todo = (props) => {
   //   });
   // });
 
-  const [tasks, setTasks] = useState(props.tasks);
+  // const [tasks, setTasks] = useState(props.tasks);
   const [filter, setFilter] = useState("All");
   const [tempEarnedExp, settempEarnedExp] = useState(0);
 
   const addTask = (name) => {
     //const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
     const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
-    setTasks([...tasks, newTask]);
+    props.setTasks([...props.tasks, newTask]);
   };
 
   const toggleTaskCompleted = (_id) => {
-    console.log(tasks);
-    const updatedTasks = tasks.map((task) => {
+    console.log(props.tasks);
+    const updatedTasks = props.tasks.map((task) => {
       if (task._id == _id) {
         if (task.completed == false) {
           settempEarnedExp(tempEarnedExp + 5);
@@ -74,29 +74,29 @@ const Todo = (props) => {
       }
       return task;
     });
-    setTasks(updatedTasks);
+    props.setTasks(updatedTasks);
   };
 
   const deleteTask = (_id) => {
     console.log("Todo.js deleteTask _id", _id);
-    const updatedTasks = tasks.filter((task) => _id !== task._id);
-    setTasks(updatedTasks);
+    const updatedTasks = props.tasks.filter((task) => _id !== task._id);
+    props.setTasks(updatedTasks);
 
     post("/api/deleteItem", { _id: _id, userId: props.userId }).then(console.log("delete"));
     // console.log(completed);
   };
 
   const editTask = (_id, newName) => {
-    const editedTaskList = tasks.map((task) => {
+    const editedTaskList = props.tasks.map((task) => {
       if (task._id == _id) {
         return { ...task, name: newName };
       }
       return task;
     });
-    setTasks(editedTaskList);
+    props.setTasks(editedTaskList);
   };
 
-  const taskList = tasks
+  const taskList = props.tasks
     ?.filter(FILTER_MAP[filter])
     .map((task) => (
       <Item
@@ -129,7 +129,7 @@ const Todo = (props) => {
           totalExp={props.totalExp}
           tempEarnedExp={tempEarnedExp}
         />
-        <Form addTask={addTask} userId={props.userId} />
+        <Form addTask={addTask} userId={props.userId} setTasks={props.setTasks} />
         <div className="filters btn-group stack-exception">{filterList}</div>
         <h2 id="list-heading">{headingText}</h2>
         <h2 id="list-heading">{congratsMessage}</h2>

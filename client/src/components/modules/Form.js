@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { post } from "../../utilities";
+import { get, post } from "../../utilities";
 import "../../utilities.css";
 import "./Form.css";
 
@@ -18,11 +18,11 @@ const Form = (props) => {
   const handleChange = (event) => {
     setName(event.target.value);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.addTask(name);
-    setName("");
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   //props.addTask(name);
+  //   setName("");
+  // };
 
   const submitTodo = () => {
     console.log("Form.js / submitTodo userID, _id", props.userId);
@@ -30,14 +30,25 @@ const Form = (props) => {
       userId: props.userId,
       name: name,
       completed: false,
-    }).then(console.log("posted"));
+    }).then(() => {
+      setName("");
+      console.log("posted");
+      get("/api/todoItem", { userId: props.userId })
+        .then((itemData) => {
+          props.setTasks(itemData);
+          console.log("props have set tasks");
+        })
+        .catch((error) => {
+          console.error("Error when running get for api/todoItem:", error);
+        });
+    });
     console.log("submitTodo");
     console.log(name);
     // console.log(completed);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <h2 className="">
         <label htmlFor="new-todo-input" className="">
           What needs to be done?
@@ -51,12 +62,13 @@ const Form = (props) => {
           name="text"
           autoComplete="off"
           onChange={handleChange}
+          value={name}
         />
         <button type="submit" className="add_button" onClick={submitTodo}>
           Add
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
