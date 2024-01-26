@@ -7,9 +7,11 @@ const Game = (props) => {
   const [locationX, setLocationX] = useState(0);
   const [keyDown, setkeyDown] = useState(undefined);
   const intervalRef = useRef(null);
-
+  const [leftBound, setLeftBound] = useState(-1200);
+  const [todo, setTodo] = useState(false);
   const handleUp = (e) => {
-    intervalRef.current = clearInterval(intervalRef.current);
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight")
+      intervalRef.current = clearInterval(intervalRef.current);
   };
   const animateLeft = () => {
     intervalRef.current = setInterval(() => {
@@ -20,19 +22,15 @@ const Game = (props) => {
   const handleInput = (e, locX) => {
     console.log("widths", image.width, locX);
     const animateRight = () => {
-      if (locX >= 0 && locX <= image.width) {
-        setLocationX((previousLocation) => previousLocation - 1);
-      } else {
-        intervalRef.current = clearInterval(intervalRef.current);
-      }
+      setLocationX((previousLocation) => previousLocation - 1);
     };
     if (!intervalRef.current) {
       if (e.key === "ArrowLeft") {
-        if (locX >= 0 && locX <= image.width) {
+        if (locX >= leftBound && locX <= image.width) {
           animateLeft();
         }
       } else if (e.key === "ArrowRight") {
-        if (locX >= 0 && locX <= image.width) {
+        if (locX >= leftBound && locX <= leftBound + image.width) {
           intervalRef.current = setInterval(() => {
             animateRight();
           }, 1000 / (60 * 10));
@@ -47,6 +45,12 @@ const Game = (props) => {
   useEffect(() => {}, [keyDown]);
   useEffect(() => {
     init();
+    if (locationX < -149 && locationX > -430) {
+      console.log("todo");
+      setTodo(true);
+    } else {
+      setTodo(false);
+    }
   }, [locationX]);
   const canvasRef = useRef(null);
   const image = new Image();
@@ -58,9 +62,24 @@ const Game = (props) => {
   function init() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-
-    ctx.drawImage(image, locationX, 0);
-
+    if (locationX > leftBound + image.width) {
+      setLocationX(leftBound + image.width);
+    }
+    if (locationX < leftBound) {
+      setLocationX(leftBound);
+    }
+    ctx.drawImage(image, locationX, 0, image.width, window.innerHeight);
+    ctx.drawImage(
+      bear,
+      canvas.width / 2,
+      canvas.height - canvas.height / 5,
+      canvas.height / 5,
+      canvas.height / 5
+    );
+    /*if (todo) {
+      console.log("inside");
+      ctx.rect(locationX, 0, 100, 100);
+    }*/
     // Ensure the image is loaded before drawing it on the canvas
     // Set the canvas size to match the image size
   }
@@ -96,7 +115,12 @@ const Game = (props) => {
       <div id="canvas-div">
         <canvas id="canvas" ref={canvasRef} alt="room" width="500" height="500">
           <img id="room" src={room} />
+          <img
+            id="bear"
+            src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
+          />
         </canvas>
+        {todo ? <button className="todo">to-do list</button> : <></>}
       </div>
     </>
   );

@@ -4,4 +4,13 @@
 .canvas-div {
   overflow-x: hidden;
   width: 500px;
+  position: relative;
+}
+.todo {
+  position: absolute;
+  bottom: 50vh;
+  left: 50vw;
+}
+.bear {
+  width: 20%;
 }
