@@ -23,7 +23,7 @@ import { get, post } from "../utilities.js";
 const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [userName, setUserName] = useState(undefined);
-
+  const [open, setOpen] = useState("room");
   const [totalExp, setTotalExp] = useState(0);
 
   useEffect(() => {
@@ -134,17 +134,13 @@ const App = () => {
     }
   };
   useEffect(() => {
+    console.log(pomodoro);
+  });
+  useEffect(() => {
     console.log(userId);
   }, [userId]);
   return (
     <>
-      <NavBar
-        path="/"
-        userName={userName}
-        handleLogin={handleLogin}
-        handleLogout={handleLogout}
-        userId={userId}
-      />
       <Routes>
         <Route
           path="/"
@@ -193,6 +189,7 @@ const App = () => {
               userId={userId}
               name={userName}
               totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
             />
           }
         />
@@ -206,6 +203,7 @@ const App = () => {
               userId={userId}
               name={userName}
               totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
             />
           }
         />

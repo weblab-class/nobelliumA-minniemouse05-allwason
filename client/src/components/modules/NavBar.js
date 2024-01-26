@@ -26,7 +26,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar">
       <div className="NavBar-linkContainer u-flex u-flex-alignCenter ">
-        <h1 className="u-xlarge pl-20 pr-20">RoomCraft</h1>
+        <h1 className="u-xlarge pl-20 pr-20 website-card">RoomCraft</h1>
         {userId && !collapse && (
           <>
             <Link to="/" className="NavBar-link pl-15 pr-15">

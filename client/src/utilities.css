@@ -122,9 +122,9 @@ form {
   color: var(--primary--dim);
 }
 button {
-  border: 2px solid black;
+  border: var(--xs) solid black;
   padding: var(--xs);
-  border-radius: var(--xs);
+  border-radius: none;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
 }
@@ -132,22 +132,22 @@ button {
   overflow: scroll;
 }
 .pr-15 {
-  padding-right: 1.5rem;
+  padding-right: 1.5vw;
 }
 .pl-15 {
-  padding-left: 1.5rem;
+  padding-left: 1.5vw;
 }
 .pt-15 {
-  padding-top: 1.5rem;
+  padding-top: 1.5vw;
 }
 .pb-15 {
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.5vw;
 }
 .pr-20 {
-  padding-right: 2rem;
+  padding-right: 2vw;
 }
 .pl-20 {
-  padding-left: 2rem;
+  padding-left: 2vw;
 }
 .u-space {
   margin-left: var(--l);
