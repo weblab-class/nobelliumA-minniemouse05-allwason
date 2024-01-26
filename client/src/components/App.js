@@ -77,7 +77,7 @@ const App = () => {
           });
       }
     });
-  });
+  }, []);
   ////////////////////
 
   // useEffect(() => {
@@ -158,14 +158,50 @@ const App = () => {
         />
         <Route
           path="/profile/:userId"
-          element={<Profile userId={userId} name={userName} totalExp={totalExp} />}
+          element={
+            <>
+              <NavBar
+                path="/"
+                userName={name}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+              />
+              <Profile userId={userId} name={userName} totalExp={totalExp} />
+            </>
+          }
         />
 
         <Route
           path="/leaderboard/:userId"
-          element={<Leaderboard userId={userId} name={userName} />}
+          element={
+            <>
+              <NavBar
+                path="/"
+                userName={userName}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+              />
+              <Leaderboard userId={userId} name={userName} />
+            </>
+          }
         />
-        <Route path="/friends/:userId" element={<Friends userId={userId} />} />
+        <Route
+          path="/friends/:userId"
+          element={
+            <>
+              <NavBar
+                path="/"
+                userName={userName}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+              />
+              <Friends userId={userId} />
+            </>
+          }
+        />
         <Route
           path="/todo"
           element={
