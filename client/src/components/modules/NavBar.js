@@ -49,19 +49,21 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
                 <span className="material-symbols-outlined">leaderboard</span>
               </span>
             </Link>
-
-            <div className="pl-15 pr-15">
-              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-                <button
-                  onClick={() => {
-                    googleLogout();
-                    handleLogout();
-                  }}
-                >
-                  Logout
-                </button>
-              </GoogleOAuthProvider>
-            </div>
+            <span className="NavBar-link pl-15 pr-15">
+              <span data-text="Logout" className="tooltip">
+                <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+                  <button
+                    id="logout"
+                    onClick={() => {
+                      googleLogout();
+                      handleLogout();
+                    }}
+                  >
+                    <span className="material-symbols-outlined">logout</span>
+                  </button>
+                </GoogleOAuthProvider>
+              </span>
+            </span>
           </>
         )}
 

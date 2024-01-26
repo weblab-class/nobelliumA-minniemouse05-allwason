@@ -7,6 +7,7 @@ import Display from "./Display.js";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import key from "./../../../dist/key-right.png";
 import room from "./../../../dist/room.png";
+import Game from "./Game.js";
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.googleusercontent.com";
 
@@ -28,7 +29,7 @@ const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handl
   //   console.log("Room.js useEffect", name, userId);
   //   post("/api/updateExp", { name: name, userId: userId, totalExp: 0 });
   // }, []);
-
+  /* */
   return (
     <div>
       <div className="welcome">
@@ -42,6 +43,7 @@ const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handl
               totalExp={totalExp}
               togglePomodoro={togglePomodoro}
             />
+            <Game />
           </>
         ) : (
           <div className="u-flex u-flex-justifyCenter u-flex-alignCenter login">

@@ -13,7 +13,10 @@
   font-family: "Cute Font", sans-serif;
   font-size: var(--xl);
 }
-
+#logout {
+  background-color: transparent;
+  border: none;
+}
 .u-inline {
   display: inline-block;
 }
