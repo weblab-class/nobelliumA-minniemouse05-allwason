@@ -6,39 +6,48 @@ import "./Game.css";
 const Game = (props) => {
   const [locationX, setLocationX] = useState(0);
   const [keyDown, setkeyDown] = useState(undefined);
-  const intervalRef = useRef();
-  const velX = 5;
-  const aInterval = 50;
-  const handleInput = (e) => {
-    if (e.key === "ArrowLeft") {
-      if (!intervalRef.current) intervalRef.current = setInterval(animateLeft, aInterval);
+  const intervalRef = useRef(null);
 
-      console.log("left");
-    } else if (e.key === "ArrowRight") {
-      if (!intervalRef.current) intervalRef.current = setInterval(animateRight, aInterval);
-      console.log("right");
-    }
+  const handleUp = (e) => {
+    intervalRef.current = clearInterval(intervalRef.current);
   };
   const animateLeft = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    setLocationX((previousLocation) => previousLocation + velX);
-    ctx.drawImage(image, locationX, 0);
+    intervalRef.current = setInterval(() => {
+      setLocationX((previousLocation) => previousLocation + 1);
+    }, 1000 / (60 * 10));
   };
-  const animateRight = () => {
-    //console.log(image.width);
 
-    if (locationX >= 0 && locationX < image.width) {
-      console.log(locationX);
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      setLocationX((previousLocation) => previousLocation - velX);
-      ctx.drawImage(image, locationX, 0);
-    } else {
-      clearInterval(intervalRef.current);
+  const handleInput = (e, locX) => {
+    console.log("widths", image.width, locX);
+    const animateRight = () => {
+      if (locX >= 0 && locX <= image.width) {
+        setLocationX((previousLocation) => previousLocation - 1);
+      } else {
+        intervalRef.current = clearInterval(intervalRef.current);
+      }
+    };
+    if (!intervalRef.current) {
+      if (e.key === "ArrowLeft") {
+        if (locX >= 0 && locX <= image.width) {
+          animateLeft();
+        }
+      } else if (e.key === "ArrowRight") {
+        if (locX >= 0 && locX <= image.width) {
+          intervalRef.current = setInterval(() => {
+            animateRight();
+          }, 1000 / (60 * 10));
+        } else {
+          intervalRef.current = clearInterval(intervalRef.current);
+          console.log("clearing interval", intervalRef.current);
+        }
+      }
     }
   };
 
+  useEffect(() => {}, [keyDown]);
+  useEffect(() => {
+    init();
+  }, [locationX]);
   const canvasRef = useRef(null);
   const image = new Image();
   //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
@@ -64,17 +73,20 @@ const Game = (props) => {
       canvas.height = image.height;
       init();
     };
-
+    const keyDownEvent = (e) => {
+      handleInput(e, locationX);
+    };
     handleResize();
     window.addEventListener("resize", handleResize);
 
-    window.addEventListener("keydown", handleInput);
+    window.addEventListener("keydown", keyDownEvent);
+    window.addEventListener("keyup", handleUp);
     // remove event listener on unmount
     return () => {
-      window.removeEventListener("keydown", handleInput);
+      window.removeEventListener("keydown", keyDownEvent);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [locationX]);
   /*<img src={room} width="500" />*/
   useEffect(() => {
     init();
