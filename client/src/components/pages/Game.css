@@ -7,7 +7,7 @@
   width: 500px;
   position: relative;
 }
-.todo {
+.todo-button {
   position: absolute;
   bottom: 35vh;
   left: 50%;
@@ -41,16 +41,16 @@
   background-color: var(--primary--dim);
 }
 .display-box {
-  padding: 20% 20% 20% 20%;
+  padding: 3% 3% 3% 3%;
 
-  align-content: center;
+  justify-content: center;
 }
 .content-layer {
-  padding: 5% 5% 5% 5%;
+  padding: 3% 3% 3% 3%;
   font-size: 3vw;
   top: 10vh;
-  height: 70vh;
-  width: 50vw;
+  align-content: center;
+  width: 70vw;
   bottom: 10vh;
   overflow: scroll;
   position: absolute;

@@ -32,7 +32,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       .catch((error) => {
         console.error("Error when running get for api/todoItem:", error);
       });
-  }, []);
+  });
 
   useEffect(() => {
     console.log(open);
@@ -237,7 +237,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
         )}
         {todo ? (
           <Link to="/todo">
-            <button className="room-button todo">todo list</button>
+            <button className="room-button todo-button">todo list</button>
           </Link>
         ) : (
           <></>
