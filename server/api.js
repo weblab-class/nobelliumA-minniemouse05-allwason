@@ -15,6 +15,7 @@ const FriendList = require("./models/FriendList");
 const TodoItem = require("./models/TodoItem");
 const Achievement = require("./models/Achievement");
 const TopThree = require("./models/TopThree");
+const Folder = require("./models/Folder");
 
 //const UserProfile = require("./models/UserProfile");
 
@@ -155,11 +156,45 @@ router.get("/entry", (req, res) => {
     res.send(contents);
   });
 });
+router.get("/folder", (req, res) => {
+  Folder.find({ userId: req.query.userId })
+    .then((contents) => {
+      res.send(contents);
+    })
+    .catch(() => {
+      res.send({ folders: [] });
+    });
+});
+router.post("/folder", (req, res) => {
+  const update = {
+    $set: {
+      userId: req.body.userId,
+      folders: req.body.folders,
+    },
+  };
+  const query = {
+    userId: req.body.userId,
+  };
+  const options = {
+    upsert: true,
+  };
+  Folder.updateOne(query, update, options)
+    .then(() => {
+      res.send({
+        userId: req.body.userId,
+        folders: req.body.folders,
+      });
+    })
+    .catch(() => {
+      res.send({});
+    });
+});
 router.post("/newEntry", (req, res) => {
   const newEntry = new Entry({
     userId: req.body.userId,
     text: req.body.text,
     header: req.body.header,
+    folder: req.body.folder,
   });
   newEntry
     .save()
@@ -179,6 +214,7 @@ router.post("/deleteEntry", (req, res) => {
       res.send(e);
     });
 });
+
 router.post("/entry", (req, res) => {
   const update = {
     $set: {

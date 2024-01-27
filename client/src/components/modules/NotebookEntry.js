@@ -32,6 +32,7 @@ const NotebookEntry = (props) => {
       userId: props.userId,
       text: text,
       header: header,
+      folder: props.folder,
     }).then((entry) => {
       props.updateEntries(entry, props.index);
       console.log(props.entries);
@@ -44,10 +45,22 @@ const NotebookEntry = (props) => {
   const handleBack = () => {
     props.changePage("pages");
   };
+  const updateFolder = (value) => {
+    post("/api/entry", {
+      _id: props.entry._id,
+      userId: props.userId,
+      text: text,
+      header: header,
+      folder: value,
+    }).then((entry) => {
+      props.updateEntries(entry, props.index);
+      console.log(props.entries);
+    });
+  };
   return (
     <div id="full_editor">
       <QuillToolbar />
-      <Header header={header} changeHeader={changeHeader} />
+      <Header header={header} changeHeader={changeHeader} updateFolder={updateFolder} />
 
       <div id="scrollDiv">
         <Editor id="#quill" text={text} changeText={changeText} />

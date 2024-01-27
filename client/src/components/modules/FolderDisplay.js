@@ -1,9 +1,9 @@
 import "../../utilities.css";
-import "./NotebookUnit.css";
-import Page from "./Page.js";
+import "./FolderDisplay.css";
+import SingleFolder from "./SingleFolder";
 import React from "react";
 import { useEffect, useState } from "react";
-const NotebookUnit = (props) => {
+const FolderDisplay = (props) => {
   //console.log(props);
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
@@ -14,28 +14,28 @@ const NotebookUnit = (props) => {
     //console.log(index);
     //console.log("mkaing");
     return (
-      <Page
+      <SingleFolder
         key={_id}
-        header={props.entries[index].header}
+        header={props.folders[index]}
         index={index}
         changeMode={props.changeMode}
-        setIndex={props.setIndex}
-        changeHeader={props.changeHeader}
-        newEntry={props.newEntry}
+        setFolder={props.setFolder}
         changeIndex={props.changeIndex}
-        deleteEntry={props.deleteEntry}
+        newFolder={props.newFolder}
+        deleteFolder={props.deleteFolder}
+        changeFolder={props.changeFolder}
       />
     );
   };
-  const handleNewEntry = () => {
+  const handleNewFolder = () => {
     setToggle(!toggle);
   };
   return (
     <div className="u-flex-vertical u-flex-justifyCenter u-space-between chapter-container">
       <div>
-        {props.entries.map((entry, ind) => {
+        {props.folders.map((folder, ind) => {
           //console.log(ind);
-          return makePage(entry._id, ind);
+          return makePage(folder, ind);
         })}
       </div>
       {toggle && (
@@ -43,27 +43,17 @@ const NotebookUnit = (props) => {
           <input className="" value={text} onChange={handleChange} />
           <button
             onClick={() => {
-              props.newEntry({ header: text });
+              props.newFolder({ folder: text });
             }}
           >
             done
           </button>
         </div>
       )}
-      <div className="u-flex add-button-notebook">
-        <button
-          className=""
-          onClick={() => {
-            props.changeMode("folder");
-          }}
-        >
-          Back
-        </button>
-        <button className="" onClick={handleNewEntry}>
-          Add Entry
-        </button>
-      </div>
+      <button className="add-button-notebook" onClick={handleNewFolder}>
+        Add Folder
+      </button>
     </div>
   );
 };
-export default NotebookUnit;
+export default FolderDisplay;
