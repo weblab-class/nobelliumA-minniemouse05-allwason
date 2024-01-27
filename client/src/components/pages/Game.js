@@ -25,23 +25,10 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
 
   const [itemData, setItemData] = useState([]);
 
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    get("/api/todoItem", { userId: userId })
-      .then((itemData) => {
-        setItemData(itemData);
-      })
-      .catch((error) => {
-        console.error("Error when running get for api/todoItem:", error);
-      });
-  });
-
   useEffect(() => {
     console.log(open);
-
     if (open === "todo") {
-      console.log("todo");
-      setContent(
+      const todo = (
         <div className="content-layer">
           <div className=" u-flex-justifyCenter u-flex-alignCenter">
             <Todo
@@ -54,6 +41,28 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
           </div>
         </div>
       );
+      setContent(todo);
+    }
+  }, [itemData]);
+  useEffect(() => {
+    console.log(open);
+
+    if (open === "todo") {
+      console.log("todo");
+      const todo = (
+        <div className="content-layer">
+          <div className=" u-flex-justifyCenter u-flex-alignCenter">
+            <Todo
+              userId={userId}
+              tasks={itemData}
+              name={name}
+              totalExp={totalExp}
+              setTasks={setItemData}
+            />
+          </div>
+        </div>
+      );
+      setContent(todo);
       console.log(content);
     } else if (open === "notebook") {
       setContent(

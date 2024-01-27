@@ -49,7 +49,16 @@ const Todo = (props) => {
   //     setItemData(itemData);
   //   });
   // });
-
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    get("/api/todoItem", { userId: props.userId })
+      .then((itemData) => {
+        setTasks(itemData);
+      })
+      .catch((error) => {
+        console.error("Error when running get for api/todoItem:", error);
+      });
+  });
   // const [tasks, setTasks] = useState(props.tasks);
   const [filter, setFilter] = useState("All");
   const [tempEarnedExp, settempEarnedExp] = useState(0);
@@ -57,12 +66,14 @@ const Todo = (props) => {
   const addTask = (name) => {
     //const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
     const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
-    props.setTasks([...props.tasks, newTask]);
+    setTasks((arr) => [...props.tasks, newTask]);
   };
-
+  useEffect(() => {
+    console.log(taskList);
+  });
   const toggleTaskCompleted = (_id) => {
-    console.log(props.tasks);
-    const updatedTasks = props.tasks.map((task) => {
+    console.log(tasks);
+    const updatedTasks = tasks.map((task) => {
       if (task._id == _id) {
         if (task.completed == false) {
           settempEarnedExp(tempEarnedExp + 5);
@@ -74,29 +85,27 @@ const Todo = (props) => {
       }
       return task;
     });
-    props.setTasks(updatedTasks);
+    setTasks(updatedTasks);
   };
 
-  const deleteTask = (_id) => {
+  const deleteTask = async (_id) => {
     console.log("Todo.js deleteTask _id", _id);
-    const updatedTasks = props.tasks.filter((task) => _id !== task._id);
-    props.setTasks(updatedTasks);
 
-    post("/api/deleteItem", { _id: _id, userId: props.userId }).then(console.log("delete"));
-    // console.log(completed);
+    let x = await post("/api/deleteItem", { _id: _id, userId: props.userId });
+    const updatedTasks = tasks.filter((task) => _id !== task._id);
+    setTasks(updatedTasks);
   };
-
   const editTask = (_id, newName) => {
-    const editedTaskList = props.tasks.map((task) => {
+    const editedTaskList = tasks.map((task) => {
       if (task._id == _id) {
         return { ...task, name: newName };
       }
       return task;
     });
-    props.setTasks(editedTaskList);
+    setTasks(editedTaskList);
   };
 
-  const taskList = props.tasks
+  const taskList = tasks
     ?.filter(FILTER_MAP[filter])
     .map((task) => (
       <Item
