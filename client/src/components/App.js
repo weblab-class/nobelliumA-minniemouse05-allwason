@@ -41,7 +41,7 @@ const App = () => {
         //   return user;
         // }
       }
-    });
+    }, []);
     // .then((user) => {
     //   console.log("user then", user);
     //   if (user._id) {

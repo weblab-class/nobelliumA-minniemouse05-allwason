@@ -24,6 +24,8 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   const [content, setContent] = useState(<></>);
 
   const [itemData, setItemData] = useState([]);
+
+  const [index, setIndex] = useState(0);
   useEffect(() => {
     get("/api/todoItem", { userId: userId })
       .then((itemData) => {
@@ -90,15 +92,16 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   };
   const animateLeft = () => {
     intervalRef.current = setInterval(() => {
-      setLocationX((previousLocation) => previousLocation + 1);
+      setLocationX((previousLocation) => previousLocation + 2);
     }, 1000 / (60 * 10));
   };
 
-  const handleInput = (e, locX) => {
-    console.log("widths", image.width, locX, window.innerWidth);
+  const handleInput = (e, locX, locations1) => {
     const animateRight = () => {
-      setLocationX((previousLocation) => previousLocation - 1);
+      setLocationX((previousLocation) => previousLocation - 2);
     };
+    //https://stackoverflow.com/questions/68745579/how-to-capture-tab-key-press-in-react-component
+
     if (!intervalRef.current) {
       if (e.key === "ArrowLeft") {
         setBear(bear_left);
@@ -158,6 +161,12 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   function init() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    const newArr = [
+      leftBound + image.width / 1.3,
+      leftBound + image.width / 1.6,
+      leftBound + image.width / 2.5,
+      leftBound + image.width / 4,
+    ];
     if (locationX > leftBound + image.width) {
       setLocationX(leftBound + image.width);
     }
@@ -165,6 +174,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       setLocationX(leftBound);
     }
     setLeftBound(-image.width + window.innerWidth / 2);
+
     ctx.drawImage(image, locationX, 0, image.width, window.innerHeight);
 
     ctx.save();
@@ -209,13 +219,11 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
     };
   }, [locationX]);
   /*<img src={room} width="500" />*/
-  useEffect(() => {
-    console.log(open);
-  });
 
   useEffect(() => {
     init();
   }, []);
+
   return (
     <>
       <div id="canvas-div">
