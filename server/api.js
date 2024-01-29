@@ -152,9 +152,17 @@ router.post("/friend_requested", (req, res) => {
     });
 });
 router.get("/entry", (req, res) => {
-  Entry.find({ userId: req.query.userId }).then((contents) => {
-    res.send(contents);
-  });
+  if (req.query._id !== undefined) {
+    console.log("query by _id");
+    Entry.find({ _id: req.query._id }).then((contents) => {
+      res.send(contents);
+    });
+  } else if (req.query.userId !== undefined) {
+    console.log("query by userId");
+    Entry.find({ userId: req.query.userId }).then((contents) => {
+      res.send(contents);
+    });
+  }
 });
 router.get("/folder", (req, res) => {
   Folder.find({ userId: req.query.userId })
@@ -216,11 +224,14 @@ router.post("/deleteEntry", (req, res) => {
 });
 
 router.post("/entry", (req, res) => {
+  console.log(req.body);
+  console.log(req.body._id);
   const update = {
     $set: {
       userId: req.body.userId,
       text: req.body.text,
       header: req.body.header,
+      folder: req.body.folder,
     },
   };
   const query = {
@@ -236,6 +247,7 @@ router.post("/entry", (req, res) => {
         userId: req.body.userId,
         text: req.body.text,
         header: req.body.header,
+        folder: req.body.folder,
       });
     })
     .catch(() => {

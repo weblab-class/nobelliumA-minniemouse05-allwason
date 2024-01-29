@@ -5,8 +5,9 @@ input {
   font-family: "Cute Font", sans-serif;
   font-size: var(--xl);
   width: 100%;
+  border-bottom: var(--xs) solid var(--black);
+  padding: 0%;
 }
 .container {
-  border: var(--xs) solid var(--black);
-  padding: 0.5%;
+  top: 5vh;
 }
