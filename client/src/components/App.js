@@ -183,7 +183,7 @@ const App = () => {
                 handleLogout={handleLogout}
                 userId={userId}
               />
-              <Leaderboard userId={userId} name={userName} />
+              <Leaderboard userId={userId} name={userName} totalExp={totalExp} />
             </>
           }
         />
