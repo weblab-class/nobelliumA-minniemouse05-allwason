@@ -25,45 +25,55 @@ const SingleFolder = (props) => {
     }
   };
   const handleDelete = () => {
-    props.deleteFolder(props.index);
+    if (confirm("Are you sure you want to delete this folder?")) props.deleteFolder(props.index);
   };
   //https://stackoverflow.com/questions/38791919/call-a-function-after-leaving-input-field#:~:text=You%20can%20use%20onblur(),out%20of%20that%20text%20field.
   return (
     <>
-      <button className="chapter" onClick={handlePage}>
-        <div className="u-flexColumn">
-          <p>{order}</p>
+      <div className="folder">
+        <div className="chapter">
+          {props.header !== "Uncategorized" ? (
+            <button className="delete" onClick={handleDelete}>
+              delete
+            </button>
+          ) : (
+            <></>
+          )}
+          <button className="chapter-button" onClick={handlePage}>
+            <div className="u-flexColumn">
+              <p>{order}</p>
+            </div>
+          </button>
         </div>
-      </button>
 
-      <div className="u-flex">
-        {props.header === "Uncategorized" ? (
-          <>
-            <input
-              onFocus={() => {
-                props.changeIndex(props.index);
-                console.log(props.index);
-              }}
-              onBlur={handleHeader}
-              className="page-title"
-              value={text}
-            ></input>
-          </>
-        ) : (
-          <>
-            <button onClick={handleDelete}>x</button>
-            <input
-              onFocus={() => {
-                props.changeIndex(props.index);
-                console.log(props.index);
-              }}
-              onBlur={handleHeader}
-              className="page-title"
-              value={text}
-              onChange={handleChange}
-            ></input>
-          </>
-        )}
+        <div className="u-flex">
+          {props.header === "Uncategorized" ? (
+            <>
+              <input
+                onFocus={() => {
+                  props.changeIndex(props.index);
+                  console.log(props.index);
+                }}
+                onBlur={handleHeader}
+                className="page-title"
+                value={text}
+              ></input>
+            </>
+          ) : (
+            <>
+              <input
+                onFocus={() => {
+                  props.changeIndex(props.index);
+                  console.log(props.index);
+                }}
+                onBlur={handleHeader}
+                className="page-title"
+                value={text}
+                onChange={handleChange}
+              ></input>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

@@ -76,7 +76,9 @@ form {
 .u-flex {
   display: flex;
 }
-
+.u-ml-15 {
+  margin-left: 1.5vw;
+}
 .u-flexColumn {
   display: flex;
   flex-direction: column;

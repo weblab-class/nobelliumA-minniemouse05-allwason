@@ -1,10 +1,35 @@
 @import "../../utilities.css";
 .chapter-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 20px;
   width: 70vw;
   align-items: center;
-  align-content: center;
   justify-content: center;
+  padding: 20px;
+  overflow: scroll;
 }
+
 .add-button-notebook {
   margin-top: 2vw;
+}
+.folder-name-input {
+  padding: 10px 15px;
+
+  border-bottom: 2px solid #000000;
+  border-radius: 0px;
+  outline: none;
+  transition: border-color 0.3s;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 4vh;
+  width: 80%;
+}
+
+.folder-name-input:focus {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+.input-area {
+  margin-left: 6vw;
+  margin-right: 6vw;
 }

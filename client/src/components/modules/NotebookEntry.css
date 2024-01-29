@@ -2,19 +2,29 @@ textarea {
   width: 100%;
 }
 #scrollDiv {
-  height: 200px;
+  height: 40vh;
   flex: 1;
   min-height: 20rem;
   overflow: scroll;
-  position: relative;
 }
 #quill {
   flex: 1;
   overflow-y: scroll;
   width: 100%;
 }
+.button-div {
+  margin-right: 1.5vw;
+}
 /*code: https://stackoverflow.com/questions/66071101/how-to-remove-quill-js-toolbar-border*/
 .ql-container.ql-snow {
   height: auto;
   border: none !important;
+  width: 70vw;
+  margin-bottom: 10vh;
+}
+.ql-toolbar.ql-snow {
+  width: 70vw;
+}
+.toolbar {
+  justify-content: center;
 }

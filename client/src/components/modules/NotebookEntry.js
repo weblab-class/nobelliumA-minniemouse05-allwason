@@ -61,6 +61,7 @@ const NotebookEntry = (props) => {
   };
   return (
     <div id="full_editor">
+      <Header header={header} changeHeader={changeHeader} updateFolder={updateFolder} />
       <FolderScroll
         folder={props.folder}
         folders={props.folders}
@@ -69,14 +70,17 @@ const NotebookEntry = (props) => {
         entry={props.entry}
       />
       <QuillToolbar className="toolbar" />
-      <Header header={header} changeHeader={changeHeader} updateFolder={updateFolder} />
-
       <div id="scrollDiv">
         <Editor id="#quill" text={text} changeText={changeText} />
       </div>
-      <div className="u-flex">
-        <button onClick={submitEntry}>Save</button>
-        <button onClick={handleBack}>Back</button>
+
+      <div className="u-flex button-tools">
+        <button className="button-div" onClick={submitEntry}>
+          Save
+        </button>
+        <button className="button-div" onClick={handleBack}>
+          Back
+        </button>
       </div>
     </div>
   );

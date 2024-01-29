@@ -31,39 +31,43 @@ const NotebookUnit = (props) => {
     setToggle(!toggle);
   };
   return (
-    <div className="u-flexColumn u-flex-justifyCenter u-space-between chapter-container">
-      <div>
-        {props.entries.map((entry, ind) => {
-          //console.log(ind);
-          return makePage(entry._id, ind);
-        })}
+    <>
+      <div className="u-flexColumn u-flex-justifyCenter u-space-between chapter-container">
+        <div>
+          {props.entries.map((entry, ind) => {
+            //console.log(ind);
+            return makePage(entry._id, ind);
+          })}
+        </div>
       </div>
-      {toggle && (
-        <div className="u-flex">
-          <input className="" value={text} onChange={handleChange} />
+      <div>
+        {toggle && (
+          <div className="u-flex">
+            <input className="" value={text} onChange={handleChange} />
+            <button
+              onClick={() => {
+                props.newEntry({ header: text });
+              }}
+            >
+              done
+            </button>
+          </div>
+        )}
+        <div className="u-flex add-button-notebook">
           <button
+            className=""
             onClick={() => {
-              props.newEntry({ header: text });
+              props.changeMode("folder");
             }}
           >
-            done
+            Back
+          </button>
+          <button className="" onClick={handleNewEntry}>
+            Add Entry
           </button>
         </div>
-      )}
-      <div className="u-flex add-button-notebook">
-        <button
-          className=""
-          onClick={() => {
-            props.changeMode("folder");
-          }}
-        >
-          Back
-        </button>
-        <button className="" onClick={handleNewEntry}>
-          Add Entry
-        </button>
       </div>
-    </div>
+    </>
   );
 };
 export default NotebookUnit;

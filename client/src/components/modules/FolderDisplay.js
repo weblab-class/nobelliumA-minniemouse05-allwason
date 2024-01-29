@@ -33,17 +33,18 @@ const FolderDisplay = (props) => {
     setToggle(!toggle);
   };
   return (
-    <div className="u-flexColumn u-flex-justifyCenter u-space-between chapter-container">
-      <div>
+    <div>
+      <div className="u-flex-justifyCenter u-space-between chapter-container">
         {props.folders.map((folder, ind) => {
           //console.log(ind);
           return makePage(folder, ind);
         })}
       </div>
       {toggle && (
-        <div className="u-flex">
-          <input className="" value={text} onChange={handleChange} />
+        <div className="u-flex input-area">
+          <input className="folder-name-input" value={text} onChange={handleChange} />
           <button
+            className="u-ml-15"
             onClick={() => {
               if (!props.folders.includes(text)) props.newFolder({ folder: text });
               else {
