@@ -152,3 +152,6 @@ button {
 .u-space {
   margin-left: var(--l);
 }
+input {
+  background-color: transparent;
+}

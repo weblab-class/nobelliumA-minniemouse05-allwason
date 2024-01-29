@@ -8,10 +8,17 @@ import QuillToolbar from "./EditorToolbar.js";
 import Editor from "./Editor.js";
 import { Quill } from "react-quill";
 import { get, post } from "../../utilities";
+import FolderScroll from "./FolderScroll";
 const NotebookEntry = (props) => {
   //entryIndex
-  const [text, setText] = useState(props.entry.text);
-  const [header, setHeader] = useState(props.entry.header);
+  const [text, setText] = useState("");
+  const [header, setHeader] = useState("");
+  useEffect(() => {
+    if (props.entry) {
+      setText(props.entry.text);
+      setHeader(props.entry.header);
+    }
+  }, []);
 
   const changeText = (value) => {
     setText(value);
@@ -23,23 +30,17 @@ const NotebookEntry = (props) => {
   //Quill reference from: https://medium.com/@mircea.calugaru/react-quill-editor-with-full-toolbar-options-and-custom-buttons-undo-redo-176d79f8d375
   // reference from https://docs.google.com/presentation/d/1YdqKZHpXFjCzGkahZLPItHKyvqIcskcJJAZHKTf28BE/edit#slide=id.g28e8818bc95_0_55
   const submitEntry = () => {
-    console.log(props.index);
-    console.log(text);
-    console.log(header);
-    console.log(props);
     post("/api/entry", {
-      _id: props.entry._id,
+      _id: props._id,
       userId: props.userId,
       text: text,
       header: header,
       folder: props.folder,
     }).then((entry) => {
+      console.log(entry);
       props.updateEntries(entry, props.index);
       console.log(props.entries);
     });
-    //console.log("posted")
-
-    //console.log(state);
   };
 
   const handleBack = () => {
@@ -53,13 +54,21 @@ const NotebookEntry = (props) => {
       header: header,
       folder: value,
     }).then((entry) => {
+      console.log(entry);
       props.updateEntries(entry, props.index);
       console.log(props.entries);
     });
   };
   return (
     <div id="full_editor">
-      <QuillToolbar />
+      <FolderScroll
+        folder={props.folder}
+        folders={props.folders}
+        handleFolderChange={props.handleFolderChange}
+        text={props.text}
+        entry={props.entry}
+      />
+      <QuillToolbar className="toolbar" />
       <Header header={header} changeHeader={changeHeader} updateFolder={updateFolder} />
 
       <div id="scrollDiv">

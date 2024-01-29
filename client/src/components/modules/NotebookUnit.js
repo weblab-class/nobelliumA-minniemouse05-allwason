@@ -31,7 +31,7 @@ const NotebookUnit = (props) => {
     setToggle(!toggle);
   };
   return (
-    <div className="u-flex-vertical u-flex-justifyCenter u-space-between chapter-container">
+    <div className="u-flexColumn u-flex-justifyCenter u-space-between chapter-container">
       <div>
         {props.entries.map((entry, ind) => {
           //console.log(ind);

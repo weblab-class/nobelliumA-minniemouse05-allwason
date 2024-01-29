@@ -1,0 +1,7 @@
+.scroll-container {
+  width: 100%;
+  margin-bottom: 2vw;
+}
+.scroll-container {
+  overflow: auto;
+}

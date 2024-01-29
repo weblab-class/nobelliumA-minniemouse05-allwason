@@ -24,6 +24,8 @@ const FolderDisplay = (props) => {
         newFolder={props.newFolder}
         deleteFolder={props.deleteFolder}
         changeFolder={props.changeFolder}
+        folders={props.folders}
+        folder={props.folders[index]}
       />
     );
   };
@@ -31,7 +33,7 @@ const FolderDisplay = (props) => {
     setToggle(!toggle);
   };
   return (
-    <div className="u-flex-vertical u-flex-justifyCenter u-space-between chapter-container">
+    <div className="u-flexColumn u-flex-justifyCenter u-space-between chapter-container">
       <div>
         {props.folders.map((folder, ind) => {
           //console.log(ind);
@@ -43,7 +45,10 @@ const FolderDisplay = (props) => {
           <input className="" value={text} onChange={handleChange} />
           <button
             onClick={() => {
-              props.newFolder({ folder: text });
+              if (!props.folders.includes(text)) props.newFolder({ folder: text });
+              else {
+                alert("Duplicate folder name!");
+              }
             }}
           >
             done

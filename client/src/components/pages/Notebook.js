@@ -10,6 +10,7 @@ import FolderDisplay from "../modules/FolderDisplay.js";
 const Notebook = ({ userId }) => {
   const [mode, setMode] = useState("folder");
   const [index, setIndex] = useState(0);
+  const [findex, setFIndex] = useState(0);
   const [entries, setEntries] = useState([]);
   const [folders, setFolders] = useState([]);
   const [folder, setFolder] = useState("Uncategorized");
@@ -32,39 +33,46 @@ const Notebook = ({ userId }) => {
     });
   };
   const deleteEntry = (index) => {
-    post("/api/deleteEntry", entries[index])
+    const find = entries.filter((value, ind, b) => value.folder === folder)[index];
+    post("/api/deleteEntry", find)
       .then(() => {
         //console.log(entries);
         //console.log(entries[index]);
         console.log(index);
-        console.log(entries.filter((_, ind, b) => index !== ind));
+        console.log(
+          entries
+            .filter((value, ind, b) => value.folder === folder)
+            .filter((_, ind, b) => index !== ind)
+        );
 
-        const filtered = entries.filter((_, ind, b) => index !== ind);
+        const filtered = entries.filter((value, ind, b) => value.folder === folder);
+        let i = filtered.indexOf(folder);
         console.log(filtered);
-        setEntries((entries) => entries.filter((_, ind, b) => index !== ind));
+        setEntries((entries) => entries.filter((entry, ind, b) => entry._id !== find._id));
         console.log(entries);
       })
       .catch(console.log("oops"));
   };
-  const deleteFolder = async (index) => {
+  const deleteFolder = async (ind) => {
     let post1 = await post("/api/folder", {
       userId: userId,
-      folders: folders.filter((_, ind, b) => ind !== index),
+      folders: folders.filter((_, i, b) => i !== ind),
     });
     for (let i = 0; i++; i < entries.length) {
-      if (entries[i].folder === folders[index]) {
+      if (entries[i].folder === folders[ind]) {
         let x = await post("/api/entry", {
           _id: entries[i],
+          userId: userId,
           folder: "Uncategorized",
           header: entries[i].header,
           text: entry.text,
         });
       }
     }
-    setFolders(folders.filter((val, ind, b) => ind !== index));
+    setFolders(folders.filter((val, i, b) => i !== ind));
     let newEntries = entries.map((entry, i) =>
-      entry.folder === folders[index]
-        ? { text: entry.text, header: entry.header, folder: "Uncategorized" }
+      entry.folder === folders[ind]
+        ? { _id: entry._id, text: entry.text, header: entry.header, folder: "Uncategorized" }
         : entry
     );
     setEntries(newEntries);
@@ -72,9 +80,12 @@ const Notebook = ({ userId }) => {
     console.log(entries);
   };
 
-  useEffect(() => {
-    console.log(entries);
-  }, [entries]);
+  /*useEffect(() => {
+    get("/api/entry", { userId: userId }).then((content) => {
+      console.log(content);
+    });
+  }, [entries]);*/
+
   const changeMode = (value) => {
     setMode(value);
   };
@@ -82,38 +93,94 @@ const Notebook = ({ userId }) => {
     setEntries((entries) => entries.map((entry, i) => (i === entry_index ? value : entry)));
   };
   const changeHeader = (value) => {
-    post("/api/entry", { userId: userId, header: value, text: entries[index].text }).then(() => {
+    const find = entries.filter((value, ind, b) => value.folder === folder)[index];
+    post("/api/entry", {
+      userId: userId,
+      header: value,
+      text: find.text,
+      folder: find.folder,
+      _id: find._id,
+    }).then((entry) => {
+      console.log(entry);
       setEntries((entries) =>
-        entries.map((entry, i) => (i === index ? { text: entry.text, header: value } : entry))
+        entries.map((entry, i) =>
+          entry._id === find._id
+            ? { _id: entry._id, folder: entry.folder, text: entry.text, header: value }
+            : entry
+        )
       );
     });
   };
-  const changeFolder = async (value) => {
-    let post1 = await post("/api/folder", {
-      userId: userId,
-      folders: folders.map((folder, i) => (i === index ? value : folder)),
-    });
-    setEntries((entries) =>
-      entries.map((entry, i) =>
-        entry.folder === folders[index]
-          ? { header: entry.header, text: entry.text, folder: value }
-          : entry
-      )
-    );
-    for (let i = 0; i++; i < entries.length) {
-      if (entries[i].folder === folders[index]) {
+  const changeFolder = async (value, ind) => {
+    console.log(value);
+
+    console.log(folders[ind], entries.length);
+
+    for (let k = 0; k < entries.length; k++) {
+      console.log("bith");
+      console.log(entries[k].folder, folders[ind]);
+      if (entries[k].folder === folders[ind]) {
+        console.log("posting");
         let x = await post("/api/entry", {
-          _id: entries[i],
+          _id: entries[k]._id,
+          userId: userId,
           folder: value,
-          header: entries[i].header,
-          text: entry.text,
+          header: entries[k].header,
+          text: entries[k].text,
         });
       }
     }
 
-    setFolders((folders) => folders.map((folder, i) => (i === index ? value : folder)));
+    setEntries((entries) =>
+      entries.map((entry, i) =>
+        entry.folder === folders[ind]
+          ? { header: entry.header, text: entry.text, folder: value }
+          : entry
+      )
+    );
+    let post1 = await post("/api/folder", {
+      userId: userId,
+      folders: folders.map((folder, i) => (i === ind ? value : folder)),
+    });
+    setFolders((folders) => folders.map((folder, i) => (i === ind ? value : folder)));
+  };
+  const handleFolderChange = async (folder, entry) => {
+    try {
+      console.log("changing folder");
+      const updatedEntry = await updateEntryFolder(folder, entry);
+      console.log(updatedEntry);
+      console.log("posted");
+      console.log();
+      const ind = entries.indexOf(entry);
+      console.log(ind, entry);
+      setFolder(folder);
+      setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
+
+      console.log(entries);
+    } catch (error) {
+      console.error("Error handling folder change:", error);
+    }
   };
 
+  const updateEntryFolder = async (folder, entry) => {
+    console.log(entry);
+    const updatedEntryData = {
+      _id: entry._id,
+      userId: userId,
+      header: entry.header,
+      text: entry.text,
+      folder: folder,
+    };
+    console.log(updatedEntryData);
+
+    const updatedEntry = await post("/api/entry", updatedEntryData);
+    return updatedEntry;
+  };
+
+  const fetchAndDisplayEntries = async () => {
+    const content = await get("/api/entry", { userId: userId });
+    console.log(content);
+  };
   useEffect(() => {
     //console.log(entries);
     const populate = () => {
@@ -147,6 +214,8 @@ const Notebook = ({ userId }) => {
           index={index}
           entries={entries.filter((value, ind, b) => value.folder === folder)}
           folder={folder}
+          folders={folders}
+          handleFolderChange={handleFolderChange}
         />
       );
     } else {
@@ -160,7 +229,7 @@ const Notebook = ({ userId }) => {
         folders={folders}
         changeMode={changeMode}
         newFolder={newFolder}
-        changeIndex={setIndex}
+        changeIndex={setFIndex}
         deleteFolder={deleteFolder}
       />
     );

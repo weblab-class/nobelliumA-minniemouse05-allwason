@@ -16,7 +16,13 @@ const SingleFolder = (props) => {
   const handleHeader = () => {
     //console.log("onblur");
     console.log(props.index);
-    props.changeFolder(text);
+    if (!props.folders.includes(text)) props.changeFolder(text, props.index);
+    else {
+      if (text !== props.header) {
+        alert("Duplicate folder name!");
+        setText(props.header);
+      }
+    }
   };
   const handleDelete = () => {
     props.deleteFolder(props.index);
@@ -25,7 +31,7 @@ const SingleFolder = (props) => {
   return (
     <>
       <button className="chapter" onClick={handlePage}>
-        <div className="u-flex-vertical">
+        <div className="u-flexColumn">
           <p>{order}</p>
         </div>
       </button>

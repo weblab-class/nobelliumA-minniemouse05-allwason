@@ -6,6 +6,7 @@ textarea {
   flex: 1;
   min-height: 20rem;
   overflow: scroll;
+  position: relative;
 }
 #quill {
   flex: 1;
