@@ -3,7 +3,7 @@ import "../../utilities.css";
 import { useState, useEffect } from "react";
 import React from "react";
 import Header from "./Header";
-
+import FriendScroll from "./FriendScroll";
 import QuillToolbar from "./EditorToolbar.js";
 import Editor from "./Editor.js";
 import { Quill } from "react-quill";
@@ -61,14 +61,19 @@ const NotebookEntry = (props) => {
   };
   return (
     <div id="full_editor">
-      <Header header={header} changeHeader={changeHeader} updateFolder={updateFolder} />
-      <FolderScroll
-        folder={props.folder}
-        folders={props.folders}
-        handleFolderChange={props.handleFolderChange}
-        text={props.text}
-        entry={props.entry}
-      />
+      <div className="u-flex u-flex-justifyCenter send-div">
+        <Header header={header} changeHeader={changeHeader} updateFolder={updateFolder} />
+        <FriendScroll friends={props.friends} entry={props.entry} />
+      </div>
+      <div className="u-flex">
+        <FolderScroll
+          folder={props.folder}
+          folders={props.folders}
+          handleFolderChange={props.handleFolderChange}
+          text={props.text}
+          entry={props.entry}
+        />
+      </div>
       <QuillToolbar className="toolbar" />
       <div id="scrollDiv">
         <Editor id="#quill" text={text} changeText={changeText} />

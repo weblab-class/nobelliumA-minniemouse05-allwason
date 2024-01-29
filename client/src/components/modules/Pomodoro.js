@@ -27,6 +27,10 @@ const Pomodoro = (props) => {
   const handleChange1 = (e) => {
     if (!isNaN(Number(e.target.value))) setValue1(e.target.value);
   };
+  useEffect(() => {
+    setState("reset");
+    console.log(state);
+  }, [props.userId]);
   const changeMode = () => {
     if (mode == "work") {
       setMode("break");
@@ -107,7 +111,7 @@ const Pomodoro = (props) => {
               console.log(state);
             }}
           >
-            <span class="material-symbols-outlined">pause</span>
+            <span className="material-symbols-outlined">pause</span>
           </button>
           <button
             className="p-button"
@@ -116,7 +120,7 @@ const Pomodoro = (props) => {
               console.log(state);
             }}
           >
-            <span class="material-symbols-outlined">stop</span>
+            <span className="material-symbols-outlined">stop</span>
           </button>
         </div>
 
@@ -139,7 +143,7 @@ const Pomodoro = (props) => {
             setSettingsOpen(!settingsOpen);
           }}
         >
-          <span class="material-symbols-outlined">settings</span>
+          <span className="material-symbols-outlined">settings</span>
         </button>
       </div>
     </>

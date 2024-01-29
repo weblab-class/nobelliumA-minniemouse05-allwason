@@ -62,9 +62,13 @@ const NotebookUnit = (props) => {
           >
             Back
           </button>
-          <button className="" onClick={handleNewEntry}>
-            Add Entry
-          </button>
+          {props.folder !== "Shared" ? (
+            <button className="" onClick={handleNewEntry}>
+              Add Entry
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>

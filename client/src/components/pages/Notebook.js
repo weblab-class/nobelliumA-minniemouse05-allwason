@@ -14,6 +14,7 @@ const Notebook = ({ userId }) => {
   const [entries, setEntries] = useState([]);
   const [folders, setFolders] = useState([]);
   const [folder, setFolder] = useState("Uncategorized");
+  const [friends, setFriends] = useState([]);
   const navigate = useNavigate;
 
   const newEntry = (props) => {
@@ -186,7 +187,7 @@ const Notebook = ({ userId }) => {
     const populate = () => {
       get("/api/folder", { userId: userId }).then((folders_returned) => {
         if (folders_returned.length === 0) {
-          folders_returned = [{ folders: ["Uncategorized"] }];
+          folders_returned = [{ folders: ["Uncategorized", "Shared"] }];
         }
         console.log(folders_returned);
         setFolders(folders_returned[0].folders);
@@ -196,6 +197,9 @@ const Notebook = ({ userId }) => {
       get("/api/entry", { userId: userId }).then((entries_returned) => {
         console.log("returned", entries_returned);
         setEntries(entries_returned);
+      });
+      get("/api/friends", { userId: userId }).then((result) => {
+        setFriends(result.friends);
       });
     };
     populate();
@@ -216,6 +220,7 @@ const Notebook = ({ userId }) => {
           folder={folder}
           folders={folders}
           handleFolderChange={handleFolderChange}
+          friends={friends}
         />
       );
     } else {

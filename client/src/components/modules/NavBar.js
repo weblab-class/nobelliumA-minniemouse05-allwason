@@ -39,16 +39,23 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
                 <span className="material-symbols-outlined">person</span>
               </span>
             </Link>
+            <Link to={`/mail/${userId}`} className="NavBar-link pl-15 pr-15">
+              <span data-text="Mail" className="tooltip">
+                <span className="material-symbols-outlined">mail</span>
+              </span>
+            </Link>
             <Link to={`/friends/${userId}`} className="NavBar-link pl-15 pr-15">
               <span data-text="Friends" className="tooltip">
                 <span className="material-symbols-outlined">group</span>
               </span>
             </Link>
+
             <Link to={`/leaderboard/${userId}`} className="NavBar-link pl-15 pr-15">
               <span data-text="Leaderboard" className="tooltip">
                 <span className="material-symbols-outlined">leaderboard</span>
               </span>
             </Link>
+
             <span className="NavBar-link pl-15 pr-15">
               <span data-text="Logout" className="tooltip">
                 <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>

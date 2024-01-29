@@ -32,7 +32,7 @@ const SingleFolder = (props) => {
     <>
       <div className="folder">
         <div className="chapter">
-          {props.header !== "Uncategorized" ? (
+          {props.header !== "Uncategorized" && props.header !== "Shared" ? (
             <button className="delete" onClick={handleDelete}>
               delete
             </button>
@@ -47,7 +47,7 @@ const SingleFolder = (props) => {
         </div>
 
         <div className="u-flex">
-          {props.header === "Uncategorized" ? (
+          {props.header === "Uncategorized" && props.header === "Shared" ? (
             <>
               <input
                 onFocus={() => {

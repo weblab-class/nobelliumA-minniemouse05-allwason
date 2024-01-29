@@ -7,6 +7,9 @@ textarea {
   min-height: 20rem;
   overflow: scroll;
 }
+.send-div {
+  align-items: center;
+}
 #quill {
   flex: 1;
   overflow-y: scroll;

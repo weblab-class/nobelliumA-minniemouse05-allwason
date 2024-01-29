@@ -119,6 +119,7 @@ const App = () => {
   };
   const handleLogout = () => {
     setUserId(undefined);
+    setPomodoro(false);
     post("/api/logout");
   };
 
@@ -245,7 +246,7 @@ const App = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Pomodoro togglePomodoro={togglePomodoro} pomodoro={pomodoro} />
+      <Pomodoro togglePomodoro={togglePomodoro} pomodoro={pomodoro} userId={userId} />
     </>
   );
 };
