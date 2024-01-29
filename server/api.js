@@ -566,39 +566,73 @@ router.post("/updateItemName", async (req, res) => {
 router.get("/topThree", (req, res) => {
   TopThree.findOne({ arrayId: req.query.arrayId }).then((contents) => {
     res.send(contents.results);
-    console.log("get topThree, contets.results= ", contents.results);
+    //console.log("get topThree, contents.results= ", contents.results);
   });
 });
 
 router.post("/updateTopThree", async (req, res) => {
-  const TopThreeToUpdate = await TopThree.findById({ arrayId: req.body.arrayId });
+  const TopThreeToUpdate = await TopThree.findOne({ arrayId: req.body.arrayId });
+
   const userToAdd = req.body.userId;
   const nameToAdd = req.body.name;
   const userExp = req.body.totalExp;
   const newArrayElement = { userId: userToAdd, name: nameToAdd, exp: userExp };
 
-  const insertionIndex = TopThreeToUpdate.results.findIndex(
-    (obj) => newArrayElement.exp <= obj.size
-  );
+  const arrayOfUserId = TopThreeToUpdate.results.map((obj) => obj.userId);
+  console.log("arrayOfUserId= ", arrayOfUserId);
+  const arrayOfExp = TopThreeToUpdate.results.map((obj) => obj.exp);
+  console.log("arrayOfExp= ", arrayOfExp);
+  const currIndexOfUserId = arrayOfUserId.indexOf(userToAdd);
+  console.log("currIndexOfUserId= ", currIndexOfUserId);
 
-  // If insertionIndex is -1, it means the new element has the largest 'size' and should be inserted at the end
-  const finalIndex = insertionIndex !== -1 ? insertionIndex : TopThreeToUpdate.results.length;
+  if (currIndexOfUserId !== -1) {
+    const currExpOfUser = TopThreeToUpdate.results[currIndexOfUserId];
+    if (currExpOfUser !== userExp) {
+      const elementToUpdate = TopThreeToUpdate.results.find(
+        (element) => element.userId === userToAdd
+      );
+      elementToUpdate.exp = userExp;
+      TopThreeToUpdate.results.sort((a, b) => b.exp - a.exp);
+      console.log("index!==-1, final TopThreeToUpdate= ", TopThreeToUpdate.results);
 
-  // Insert the new element at the calculated index
-  TopThreeToUpdate.results.splice(finalIndex, 0, newArrayElement);
+      TopThreeToUpdate.save()
+        .then(() => {
+          console.log("saved NewUser, exp:", userExp);
+          console.log("final TopThreeToUpdate= ", TopThreeToUpdate.results);
+          res.send({});
+        })
+        .catch(() => {
+          console.log("catched NewUser");
+          res.send({});
+        });
+    }
+  } else {
+    const insertionIndex = TopThreeToUpdate.results.findIndex(
+      (obj) => newArrayElement.exp <= obj.size
+    );
+    console.log("insertionIndex= ", insertionIndex);
 
-  TopThreeToUpdate.results.pop();
+    // If insertionIndex is -1, it means the new element has the largest 'size' and should be inserted at the end
+    const finalIndex = insertionIndex !== -1 ? insertionIndex : 0;
+    console.log("finalIndex= ", finalIndex);
 
-  TopThreeToUpdate.results += amtToUpdate;
-  TopThreeToUpdate.save()
-    .then(() => {
-      console.log("saved NewUser, exp:", userToAdd.totalExp);
-      res.send({});
-    })
-    .catch(() => {
-      console.log("catched NewUser");
-      res.send({});
-    });
+    // Insert the new element at the calculated index
+    TopThreeToUpdate.results.splice(finalIndex, 0, newArrayElement);
+    console.log("TopThreeToUpdate= ", TopThreeToUpdate.results);
+
+    TopThreeToUpdate.results.pop();
+
+    TopThreeToUpdate.save()
+      .then(() => {
+        console.log("saved NewUser, exp:", userExp);
+        console.log("final TopThreeToUpdate= ", TopThreeToUpdate.results);
+        res.send({});
+      })
+      .catch(() => {
+        console.log("catched NewUser");
+        res.send({});
+      });
+  }
 });
 
 // anything else falls to this "not found" case
