@@ -24,9 +24,10 @@ const Profile = (props) => {
   //achievementData: array of ID's
   const [achievementData, setAchievementData] = useState([]);
   const [achievementInfo, setAchievementInfo] = useState([]);
+  const [content, setContent] = useState(<></>);
   // [{awardName: test, awardDescription: test}]
   //array of objects
-
+  const [displayMode, setDisplayMode] = useState("Achievements");
   useEffect(() => {
     console.log("props.userId in 1st useEffect", props.userId);
 
@@ -35,7 +36,21 @@ const Profile = (props) => {
       //console.log("just setAchievementData", achievementData);
     });
   }, [props.userId]);
-
+  useEffect(() => {
+    const data = { user: props.name };
+    const pipedreamUrl = "https://eoq3aoabm19zb51.m.pipedream.net/";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": data.length,
+      },
+      body: data,
+    };
+    fetch(pipedreamUrl, options).then((res) => {
+      console.log(res);
+    });
+  }, []);
   useEffect(() => {
     if (props.totalExp >= 5) {
       post("/api/addAchievement", { achievementId: 6, _id: props.userId });
@@ -80,7 +95,31 @@ const Profile = (props) => {
         console.error("Error when fetching achievements:", error);
       });
   }, [achievementData, props.userId]);
-
+  useEffect(() => {
+    if (displayMode === "Achievements") {
+      setContent(
+        <div>
+          <h1 className="u-textCenter u-xlarge">Achievements Earned</h1>
+          <div className="comment-section">
+            {achievementInfo && achievementInfo.length > 0 ? (
+              achievementInfo.map((ach, index) =>
+                makeSingleAchievement(ach.achievementId, ach.awardDescription, ach.awardName, index)
+              )
+            ) : (
+              <h1 className="u-textCenter">No achievements collected so far. Keep going!</h1>
+            )}
+          </div>
+        </div>
+      );
+    } else {
+      setContent(
+        <div>
+          <h1>Story</h1>
+          <p>{achievementInfo.length}</p>
+        </div>
+      );
+    }
+  }, [achievementInfo, displayMode]);
   const makeSingleAchievement = (achievementId, awardDescription, awardName) => {
     return (
       <SingleAchievement
@@ -95,7 +134,13 @@ const Profile = (props) => {
   // useEffect(() => {
   //   console.log("props.userId", props.userId);
   // }, [props.userId]);
-
+  const toggleDisplayMode = () => {
+    if (displayMode === "Achievements") {
+      setDisplayMode("Story");
+    } else {
+      setDisplayMode("Achievements");
+    }
+  };
   return (
     <div>
       {props.userId ? (
@@ -103,26 +148,11 @@ const Profile = (props) => {
           <div className="profile-container">
             <div className="left-half">
               <div className="board">
-                <div className="custom-scrollbar">
-                  <h1 className="u-textCenter u-xlarge">Achievements Earned</h1>
-                  <div className="comment-section">
-                    {achievementInfo && achievementInfo.length > 0 ? (
-                      achievementInfo.map((ach, index) =>
-                        makeSingleAchievement(
-                          ach.achievementId,
-                          ach.awardDescription,
-                          ach.awardName,
-                          index
-                        )
-                      )
-                    ) : (
-                      <h1 className="u-textCenter">
-                        No achievements collected so far. Keep going!
-                      </h1>
-                    )}
-                  </div>
-                </div>
+                <div className="custom-scrollbar">{content}</div>
               </div>
+              <button className="toggleButton" onClick={toggleDisplayMode}>
+                {displayMode}
+              </button>
             </div>
             <div className="right-half">
               <div className="userId u-flex">

@@ -29,7 +29,6 @@ const Pomodoro = (props) => {
   };
   useEffect(() => {
     setState("reset");
-    console.log(state);
   }, [props.userId]);
   const changeMode = () => {
     if (mode == "work") {

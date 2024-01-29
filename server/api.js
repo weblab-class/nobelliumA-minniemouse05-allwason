@@ -569,7 +569,6 @@ router.get("/topThree", (req, res) => {
     //console.log("get topThree, contents.results= ", contents.results);
   });
 });
-
 router.post("/updateTopThree", async (req, res) => {
   const TopThreeToUpdate = await TopThree.findOne({ arrayId: req.body.arrayId });
 

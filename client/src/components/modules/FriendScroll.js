@@ -9,13 +9,9 @@ const FriendScroll = (props) => {
     const getFriends = async () => {
       let arr = [];
       for (let i = 0; i < props.friends.length; i++) {
-        console.log("Fetching user for ID:", props.friends[i]);
         try {
           let response = await get("/api/user", { _id: props.friends[i] });
-          console.log("Response for user ID", props.friends[i], ":", response.user[0]);
-          console.log(response.user[0].name);
           arr.push(response.user[0].name);
-          console.log(arr);
         } catch (error) {
           console.error("Error fetching user:", error);
         }
@@ -39,7 +35,7 @@ const FriendScroll = (props) => {
       header: props.entry.header,
       folder: "Shared",
       userId: props.friends[ind],
-    }).then(() => console.log("posted"));
+    });
 
     setExpanded(false);
   };

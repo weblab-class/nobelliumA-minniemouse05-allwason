@@ -35,20 +35,6 @@ const FILTER_MAP = {
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 const Todo = (props) => {
-  // const [itemData, setItemData] = useState([]);
-  // //console.log("userId");
-  // //console.log(props.userId);
-
-  // useEffect(() => {
-  //   console.log("useEffect todo.js", props.userId);
-  //   //console.log("in display.js");
-  //   //console.log(props.userId);
-  //   get("/api/todoItem", { userId: props.userId }).then((itemData) => {
-  //     //console.log("useEffect");
-  //     //console.log(props.userId);
-  //     setItemData(itemData);
-  //   });
-  // });
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
     get("/api/todoItem", { userId: props.userId })
@@ -58,7 +44,7 @@ const Todo = (props) => {
       .catch((error) => {
         console.error("Error when running get for api/todoItem:", error);
       });
-  });
+  }, []);
   // const [tasks, setTasks] = useState(props.tasks);
   const [filter, setFilter] = useState("All");
   const [tempEarnedExp, settempEarnedExp] = useState(0);

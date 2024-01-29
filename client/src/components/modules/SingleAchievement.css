@@ -1,8 +1,10 @@
+@import "../../utilities.css";
 .comment {
   height: 10%;
   padding: 4%;
   margin: 4%;
-  background-color: #ffff;
-  color: black;
+  background-color: var(--dark);
+  border-radius: var(--xs);
   font-size: 2.2vw;
+  border: 1px, solid, black;
 }

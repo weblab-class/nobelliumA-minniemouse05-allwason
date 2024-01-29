@@ -29,7 +29,6 @@ const App = () => {
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
-        console.log("running api/whoami in app.js");
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
         setUserName(user.name);
@@ -106,9 +105,7 @@ const App = () => {
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
     const decodedCredential = jwt_decode(userToken);
-    console.log(`Logged in as ${decodedCredential.name}`);
     setUserName(decodedCredential.name);
-    console.log(userName);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
       post("/api/initsocket", { socketid: socket.id });
@@ -134,12 +131,6 @@ const App = () => {
       console.log("back to home");
     }
   };
-  useEffect(() => {
-    console.log(pomodoro);
-  });
-  useEffect(() => {
-    console.log(userId);
-  }, [userId]);
   return (
     <>
       <Routes>

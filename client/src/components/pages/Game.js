@@ -91,6 +91,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   //moving game logic
   const [flip, setFlip] = useState(0);
   const [framenum, setFrameNum] = useState(0);
+  const [iFrame, setIFrame] = useState(0);
   const [locationX, setLocationX] = useState(0);
   const [keyDown, setkeyDown] = useState(undefined);
   const intervalRef = useRef(null);
@@ -102,20 +103,31 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   const [keyIsDown, setKeyIsDown] = useState(false);
   // const [bear, setBear] = useState(bear_right);
   const [bear, setBear] = useState(bearsprite);
+
   const handleUp = (e) => {
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight")
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       intervalRef.current = clearInterval(intervalRef.current);
+      console.log("should clear interval");
+      console.log(intervalRef.current);
+      setFrameNum(0);
+
+      setIFrame(0);
+    }
     // framenum = 0;
     setKeyIsDown(false);
   };
 
   const animateBear = (ctx) => {
-    setFrameNum((prevnum) => prevnum + 1);
+    console.log(iFrame, framenum, Math.floor(iFrame) !== framenum);
     if (framenum >= 5) {
       setFrameNum(0);
+      setIFrame(0);
     }
-    if (keyIsDown) {
+    if (Math.floor(iFrame) !== framenum) {
+      console.log("updating");
+      setFrameNum(Math.floor(iFrame));
       window.requestAnimationFrame(() => animateBear(ctx));
+      return;
     }
   };
 
@@ -131,66 +143,59 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
     }, 1000 / (60 * 10));
   };
 
-  const handleInput = (e, locX, locations1) => {
+  const handleInput = (e, locX) => {
     //https://stackoverflow.com/questions/68745579/how-to-capture-tab-key-press-in-react-component
 
     if (!intervalRef.current) {
       if (e.key === "ArrowLeft") {
-        // setBear(bear_left);
-        // setBear(bearspriteleft);
         setKeyIsDown(true);
         setFlip(0);
         if (locX >= leftBound && locX <= image.width) {
           animateLeft();
-          // animateBear();
+        } else {
+          intervalRef.current = clearInterval(intervalRef.current);
+
+          console.log("clearing interval", intervalRef.current);
         }
       } else if (e.key === "ArrowRight") {
-        // setBear(bear_right);
-        // setBear(bearspriteright);
         setKeyIsDown(true);
         setFlip(1.1);
         if (locX >= leftBound && locX <= leftBound + image.width) {
-          // intervalRef.current = setInterval(() => {
           animateRight();
-          // animateBear();
-
-          // }, 1000 / (60 * 10));
         } else {
           intervalRef.current = clearInterval(intervalRef.current);
+
           console.log("clearing interval", intervalRef.current);
         }
       }
     }
   };
 
-  useEffect(() => {}, [keyDown]);
   //stuff for interacting w room
   useEffect(() => {
     init();
+    console.log("interacting w room");
     if (locationX < leftBound + image.width / 1.3 && locationX > leftBound + image.width / 1.4) {
-      console.log("todo");
       setClock(true);
     } else {
       setClock(false);
     }
     if (locationX < leftBound + image.width / 1.6 && locationX > leftBound + image.width / 1.9) {
-      console.log("todo");
       setTodo(true);
     } else {
       setTodo(false);
     }
     if (locationX < leftBound + image.width / 2.5 && locationX > leftBound + image.width / 3) {
-      console.log("calendar");
       setCalendar(true);
     } else {
       setCalendar(false);
     }
     if (locationX < leftBound + image.width / 4 && locationX > leftBound + image.width / 10) {
-      console.log("notebook");
       setNotebook(true);
     } else {
       setNotebook(false);
     }
+    console.log(intervalRef);
   }, [locationX]);
 
   //image stuff
@@ -205,6 +210,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
 
   ///init function (with draw stuff inside)
   function init() {
+    console.log("called");
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const newArr = [
@@ -242,8 +248,14 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       image_bear.width / (8 * scale),
       image_bear.height / (2.9 * scale)
     );
-
-    animateBear(ctx);
+    setIFrame((prevnum) => prevnum + 0.05);
+    setFrameNum(Math.floor(iFrame));
+    if (framenum >= 5) {
+      setFrameNum(0);
+      setIFrame(0);
+    }
+    console.log(iFrame, framenum);
+    //animateBear(ctx);
 
     ctx.restore();
     /*if (todo) {
@@ -262,7 +274,6 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       //ctx.canvas.height = image.height;
       canvas.width = window.innerWidth;
       canvas.height = image.height;
-      console.log("resizing");
       init();
     };
 
@@ -278,8 +289,9 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
     return () => {
       window.removeEventListener("keydown", keyDownEvent);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keyup", handleUp);
     };
-  }, [locationX]);
+  }, []);
   /*<img src={room} width="500" />*/
 
   useEffect(() => {

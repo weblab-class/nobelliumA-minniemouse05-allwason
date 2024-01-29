@@ -35,13 +35,9 @@ const Item = (props) => {
     post("/api/updateItemCheck", { _id: props._id, completed: !props.completed })
       .then(() => {
         if (props.completed === false) {
-          post("/api/addExp", { userId: props.userId, amtToUpdate: 5 }).then(() => {
-            console.log("updated add Exp");
-          });
+          post("/api/addExp", { userId: props.userId, amtToUpdate: 5 }).then(() => {});
         } else {
-          post("/api/addExp", { userId: props.userId, amtToUpdate: -5 }).then(() => {
-            console.log("updated add Exp");
-          });
+          post("/api/addExp", { userId: props.userId, amtToUpdate: -5 }).then(() => {});
         }
       })
       .catch((error) => {
@@ -51,11 +47,7 @@ const Item = (props) => {
   };
 
   const updateName = () => {
-    post("/api/updateItemName", { _id: props._id, name: newName }).then(
-      console.log("updated name")
-    );
-    console.log("updateName, props.name", props.name);
-    console.log("updateName, newName", newName);
+    post("/api/updateItemName", { _id: props._id, name: newName }).then();
   };
 
   const editingTemplate = (

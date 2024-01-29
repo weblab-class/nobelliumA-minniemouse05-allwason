@@ -32,7 +32,9 @@ const SingleAchievement = (props) => {
     <div>
       <div className="comment">
         <div className="u-bold u-large ">{props.awardName}</div>
-        <div className="u-med-large">{props.awardDescription}</div>
+        <div className="u-med-large" desc>
+          {props.awardDescription}
+        </div>
       </div>
     </div>
   );

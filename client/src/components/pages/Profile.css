@@ -7,27 +7,29 @@
 .profile-container {
   display: flex;
   justify-content: center;
+  align-content: center;
 }
 
 .left-half {
   flex: 1;
-  padding: 1rem;
+  margin-top: 2vh;
 }
 
 .right-half {
   flex: 1;
-
+  margin-top: 2vh;
   justify-content: center;
 }
 
 .board {
-  background: #b38977;
+  font-size: 3.2vw;
+  color: white;
+  background: var(--darker);
   padding: 5px;
-  width: 75%;
-  max-height: 65%;
+  width: 40vw;
+  height: 60vh;
   margin: auto;
-  margin-top: 4%;
-  border: 8px solid #594038;
+  border: 6px solid var(--black);
   border-radius: 15px;
   overflow-y: scroll;
 }

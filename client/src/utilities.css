@@ -19,13 +19,15 @@
 
 :root {
   --primary: #eeface;
-  --primary--dim: #a0c273;
+  --primary--dim: #bddeb3;
   --brown: #b38977;
-  --medgrey: #e0e0e0;
-  --grey: #f7f7f7;
-  --grey: #909090;
+  --medgrey: #5e8f8f;
+
+  --grey: #d5d6d0;
   --white: #fff;
-  --black: #000000;
+  --black: black;
+  --darker: #2f4858;
+  --dark: #008a82;
 
   --xs: 4px;
   --s: 8px;
@@ -54,15 +56,15 @@ form {
   flex-grow: 1;
 }
 .u-xlarge {
-  font-size: 3rem;
-  line-height: 2rem;
+  font-size: 4vw;
+  line-height: 2vw;
 }
 .u-med-large {
-  font-size: 24px;
+  font-size: 2vw;
   color: var(--grey);
 }
 .u-large {
-  font-size: var(--l);
+  font-size: 3vw;
 }
 .u-medium {
   font-size: var(--m);
@@ -124,11 +126,15 @@ form {
   color: var(--primary--dim);
 }
 button {
+  cursor: pointer;
   border: var(--xs) solid black;
   padding: var(--xs);
   border-radius: none;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
+}
+button:hover {
+  background-color: var(--primary--dim);
 }
 .u-overflow-scroll {
   overflow: scroll;
