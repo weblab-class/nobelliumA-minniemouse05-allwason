@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { get, post } from "../../utilities";
 import room from "./../../../dist/room.png";
-import bear_left from "./../../../dist/bear.png";
-import bear_right from "./../../../dist/bear-flipped.png";
+// import bear_left from "./../../../dist/bear.png";
+// import bear_right from "./../../../dist/bear-flipped.png";
+import bearsprite from "./../../../dist/bearsprite.svg";
+// import bearspriteleft from "./../../../dist/bearspriteleft.svg";
+// import bearspriteright from "./../../../dist/bearspriteright.svg";
 import "../../utilities.css";
 import "./Game.css";
 
@@ -86,6 +89,8 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   }, [open]);
 
   //moving game logic
+  const [flip, setFlip] = useState(0);
+  const [framenum, setFrameNum] = useState(0);
   const [locationX, setLocationX] = useState(0);
   const [keyDown, setkeyDown] = useState(undefined);
   const intervalRef = useRef(null);
@@ -94,35 +99,62 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   const [clock, setClock] = useState(false);
   const [notebook, setNotebook] = useState(false);
   const [calendar, setCalendar] = useState(false);
-  const [bear, setBear] = useState(bear_right);
+  const [keyIsDown, setKeyIsDown] = useState(false);
+  // const [bear, setBear] = useState(bear_right);
+  const [bear, setBear] = useState(bearsprite);
   const handleUp = (e) => {
     if (e.key === "ArrowLeft" || e.key === "ArrowRight")
       intervalRef.current = clearInterval(intervalRef.current);
+    // framenum = 0;
+    setKeyIsDown(false);
   };
+
+  const animateBear = (ctx) => {
+    setFrameNum((prevnum) => prevnum + 1);
+    if (framenum >= 5) {
+      setFrameNum(0);
+    }
+    if (keyIsDown) {
+      window.requestAnimationFrame(() => animateBear(ctx));
+    }
+  };
+
   const animateLeft = () => {
     intervalRef.current = setInterval(() => {
       setLocationX((previousLocation) => previousLocation + 2);
     }, 1000 / (60 * 10));
   };
 
-  const handleInput = (e, locX, locations1) => {
-    const animateRight = () => {
+  const animateRight = () => {
+    intervalRef.current = setInterval(() => {
       setLocationX((previousLocation) => previousLocation - 2);
-    };
+    }, 1000 / (60 * 10));
+  };
+
+  const handleInput = (e, locX, locations1) => {
     //https://stackoverflow.com/questions/68745579/how-to-capture-tab-key-press-in-react-component
 
     if (!intervalRef.current) {
       if (e.key === "ArrowLeft") {
-        setBear(bear_left);
+        // setBear(bear_left);
+        // setBear(bearspriteleft);
+        setKeyIsDown(true);
+        setFlip(0);
         if (locX >= leftBound && locX <= image.width) {
           animateLeft();
+          // animateBear();
         }
       } else if (e.key === "ArrowRight") {
-        setBear(bear_right);
+        // setBear(bear_right);
+        // setBear(bearspriteright);
+        setKeyIsDown(true);
+        setFlip(1.1);
         if (locX >= leftBound && locX <= leftBound + image.width) {
-          intervalRef.current = setInterval(() => {
-            animateRight();
-          }, 1000 / (60 * 10));
+          // intervalRef.current = setInterval(() => {
+          animateRight();
+          // animateBear();
+
+          // }, 1000 / (60 * 10));
         } else {
           intervalRef.current = clearInterval(intervalRef.current);
           console.log("clearing interval", intervalRef.current);
@@ -132,6 +164,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   };
 
   useEffect(() => {}, [keyDown]);
+  //stuff for interacting w room
   useEffect(() => {
     init();
     if (locationX < leftBound + image.width / 1.3 && locationX > leftBound + image.width / 1.4) {
@@ -159,6 +192,8 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       setNotebook(false);
     }
   }, [locationX]);
+
+  //image stuff
   const canvasRef = useRef(null);
   const image = new Image();
   //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
@@ -167,6 +202,8 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   image.src = room;
   const image_bear = new Image();
   image_bear.src = bear;
+
+  ///init function (with draw stuff inside)
   function init() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -184,17 +221,30 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
     }
     setLeftBound(-image.width + window.innerWidth / 2);
 
-    ctx.drawImage(image, locationX, 0, image.width, window.innerHeight);
+    ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, image.width, image.height);
 
     ctx.save();
     //ctx.scale(-1, 1);
+
+    //draw bear
+    const scale = 6;
+    const bearw = image_bear.width / 8;
+    const bearh = image_bear.height / 2.9;
+    // ctx.clearRect(0, 0, image.width, image.height);
     ctx.drawImage(
       image_bear,
+      141 + (bearw + bearw / 8.8) * framenum,
+      bearh * flip,
+      bearw,
+      bearh,
       window.innerWidth / 2 - image.height / 6,
       image.height - image.height / (4 / 1.9),
-      image.height / 3,
-      image.height / 3
+      image_bear.width / (8 * scale),
+      image_bear.height / (2.9 * scale)
     );
+
+    animateBear(ctx);
+
     ctx.restore();
     /*if (todo) {
       console.log("inside");
@@ -203,6 +253,8 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
     // Ensure the image is loaded before drawing it on the canvas
     // Set the canvas size to match the image size
   }
+  //init function ends
+
   useEffect(() => {
     const ctx = canvasRef.current.getContext("2d");
 
@@ -213,6 +265,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       console.log("resizing");
       init();
     };
+
     const keyDownEvent = (e) => {
       handleInput(e, locationX);
     };
