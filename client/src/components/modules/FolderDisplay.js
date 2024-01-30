@@ -1,41 +1,39 @@
 import "../../utilities.css";
 import "./FolderDisplay.css";
 import SingleFolder from "./SingleFolder";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 const FolderDisplay = (props) => {
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
+
   const handleChange = (e) => {
     setText(e.target.value);
   };
-  const makePage = (_id, index) => {
-    return (
-      <SingleFolder
-        key={_id}
-        header={props.folders[index]}
-        index={index}
-        changeMode={props.changeMode}
-        setFolder={props.setFolder}
-        changeIndex={props.changeIndex}
-        newFolder={props.newFolder}
-        deleteFolder={props.deleteFolder}
-        changeFolder={props.changeFolder}
-        folders={props.folders}
-        folder={props.folders[index]}
-      />
-    );
-  };
+
+  const makePage = (_id, index) => (
+    <SingleFolder
+      key={_id}
+      header={props.folders[index]}
+      index={index}
+      changeMode={props.changeMode}
+      setFolder={props.setFolder}
+      newFolder={props.newFolder}
+      deleteFolder={props.deleteFolder}
+      changeFolder={props.changeFolder}
+      folders={props.folders}
+      folder={props.folders[index]}
+    />
+  );
+
   const handleNewFolder = () => {
     setToggle(!toggle);
   };
+
   return (
     <div>
       <div className="u-flex-justifyCenter u-space-between chapter-container">
-        {props.folders.map((folder, ind) => {
-          //console.log(ind);
-          return makePage(folder, ind);
-        })}
+        {props.folders.map((folder, ind) => makePage(folder, ind))}
       </div>
       {toggle && (
         <div className="u-flex input-area">
@@ -59,4 +57,5 @@ const FolderDisplay = (props) => {
     </div>
   );
 };
+
 export default FolderDisplay;

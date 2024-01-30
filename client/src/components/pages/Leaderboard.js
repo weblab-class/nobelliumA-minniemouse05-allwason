@@ -23,8 +23,6 @@ const Leaderboard = (props) => {
     get("/api/topThree", { arrayId: 0 }).then((resultArray) => {
       setExpArray(resultArray);
       setLowestExpOfArray(resultArray[2].exp);
-      //console.log("just setExpArray", expArray);
-      //console.log("just set lowestExpOfArray", lowestExpOfArray);
     });
   }, [props.userId, expArray]);
 

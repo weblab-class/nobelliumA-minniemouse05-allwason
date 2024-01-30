@@ -11,7 +11,7 @@ const FolderScroll = (props) => {
 
   const handleFolderChange = (folder) => {
     props.handleFolderChange(folder, props.entry);
-    setExpanded(false); // Close dropdown after selection
+    setExpanded(false);
   };
 
   return (

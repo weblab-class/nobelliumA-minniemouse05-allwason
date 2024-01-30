@@ -60,28 +60,32 @@ const Todo = (props) => {
   useEffect(() => {
     console.log(taskList);
   });
-  const toggleTaskCompleted = (_id, userId, completed, name) => {
+  const toggleTaskCompleted = async (_id, userId, completed, name) => {
     console.log(tasks);
-    post("/api/updateItemToggle", {
+    let x = post("/api/updateItemToggle", {
       _id: _id,
       userId: userId,
       completed: !completed,
       name: name,
-    }).then(() => {
-      const updatedTasks = tasks.map((task) => {
-        if (task._id == _id) {
-          if (task.completed == false) {
-            settempEarnedExp(tempEarnedExp + 5);
-          }
-          if (task.completed == true) {
-            settempEarnedExp(tempEarnedExp - 5);
-          }
-          return { ...task, completed: !task.completed };
-        }
-        return task;
-      });
-      setTasks(updatedTasks);
     });
+    if (completed === false) {
+      let y = post("/api/addExp", { userId: userId, amtToUpdate: 5 });
+    } else {
+      let y = post("/api/addExp", { userId: userId, amtToUpdate: -5 });
+    }
+    const updatedTasks = tasks.map((task) => {
+      if (task._id == _id) {
+        if (task.completed === false) {
+          settempEarnedExp(tempEarnedExp + 5);
+        }
+        if (task.completed === true) {
+          settempEarnedExp(tempEarnedExp - 5);
+        }
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
   };
 
   const deleteTask = async (_id) => {

@@ -74,9 +74,6 @@ const Item = (props) => {
       </div>
     </form>
   );
-  useEffect(() => {
-    console.log("item.js props._id", props._id);
-  }, []);
 
   const viewTemplate = (
     <div className="todo-container">

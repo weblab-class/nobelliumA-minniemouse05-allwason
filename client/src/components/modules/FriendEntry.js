@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { get, post } from "../../utilities.js";
-
-import "../../utilities.css";
-import "./FriendEntry.css";
+import bear from "../../../dist/bear.png";
 import exp from "./../../../dist/EXP.png";
 import medal from "./../../../dist/medal.png";
-import { Link, useNavigate } from "react-router-dom";
+import "../../utilities.css";
+import "./FriendEntry.css";
+
 const FriendEntry = (props) => {
   let button = <></>;
+
   if (props.isRequest) {
     button = (
       <div className="u-flex">
@@ -30,8 +32,6 @@ const FriendEntry = (props) => {
       </div>
     );
   } else if (props.add && !props.requested && props.userId !== props.requestId) {
-    console.log(props.userId);
-    console.log(props.requestId);
     button = (
       <button className="add-button" onClick={props.addFriend}>
         +
@@ -55,27 +55,28 @@ const FriendEntry = (props) => {
       </button>
     );
   }
+
   let name = "unnamed friend";
   let achievements = 0;
   let totalexp = 0;
+
   if (props.info) {
     name = props.info.name;
     achievements = props.info.achievementArray.length;
     totalexp = props.info.totalExp;
   }
+
   return (
     <div className="FriendEntry u-flex">
-      <img
-        className="friend-class-image pr-15"
-        src="https://static.vecteezy.com/system/resources/previews/027/517/647/original/pixel-art-cute-fat-bear-character-2-png.png"
-      />
+      <img className="friend-class-image pr-15" src={bear} alt="Bear" />
       <h1 className="pr-20">{name}</h1>
-      <img className="friend-class-image pr-15" src={exp} />
+      <img className="friend-class-image pr-15" src={exp} alt="EXP" />
       <h1 className="pr-20">{totalexp}</h1>
-      <img className="friend-class-image" src={medal} />
+      <img className="friend-class-image" src={medal} alt="Medal" />
       <h1>{achievements}</h1>
       {button}
     </div>
   );
 };
+
 export default FriendEntry;

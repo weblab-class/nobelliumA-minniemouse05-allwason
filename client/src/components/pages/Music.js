@@ -1,12 +1,11 @@
 import React from "react";
+import "./Music.css";
 const Music = () => {
   return (
     <div>
-      <h1>Music</h1>
       <iframe
         src="https://open.spotify.com/embed/playlist/1E9PGL9rpWg53rnt0qQNeI?utm_source=generator"
-        width="1000"
-        height="450"
+        className="music"
         frameborder="0"
         allowtransparency="true"
         allow="encrypted-media"

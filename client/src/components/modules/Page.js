@@ -1,7 +1,6 @@
 import "./Page.css";
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 const Page = (props) => {
   const order = "Page " + String(props.index + 1);
   const [text, setText] = useState(props.header);
@@ -14,7 +13,6 @@ const Page = (props) => {
     props.setIndex(props.index);
   };
   const handleHeader = () => {
-    //console.log("onblur");
     console.log(props.index);
     props.changeHeader(text);
   };

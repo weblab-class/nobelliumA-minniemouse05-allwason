@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { post } from "../../utilities";
+import React from "react";
 import "../../utilities.css";
 import "./Form.css";
 

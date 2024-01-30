@@ -1,7 +1,6 @@
 import React from "react";
 import "../../utilities.css";
 import "./Header.css";
-import { useState, useEffect } from "react";
 const Header = (props) => {
   const handleChange = (e) => {
     props.changeHeader(e.target.value);

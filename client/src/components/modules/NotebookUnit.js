@@ -2,17 +2,14 @@ import "../../utilities.css";
 import "./NotebookUnit.css";
 import Page from "./Page.js";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const NotebookUnit = (props) => {
-  //console.log(props);
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
   const handleChange = (e) => {
     setText(e.target.value);
   };
   const makePage = (_id, index) => {
-    //console.log(index);
-    //console.log("mkaing");
     return (
       <Page
         key={_id}
@@ -35,7 +32,6 @@ const NotebookUnit = (props) => {
       <div className="u-flexColumn u-flex-justifyCenter u-space-between chapter-container">
         <div>
           {props.entries.map((entry, ind) => {
-            //console.log(ind);
             return makePage(entry._id, ind);
           })}
         </div>

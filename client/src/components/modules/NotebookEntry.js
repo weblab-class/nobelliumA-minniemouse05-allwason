@@ -6,11 +6,9 @@ import Header from "./Header";
 import FriendScroll from "./FriendScroll";
 import QuillToolbar from "./EditorToolbar.js";
 import Editor from "./Editor.js";
-import { Quill } from "react-quill";
-import { get, post } from "../../utilities";
+import { post } from "../../utilities";
 import FolderScroll from "./FolderScroll";
 const NotebookEntry = (props) => {
-  //entryIndex
   const [text, setText] = useState("");
   const [header, setHeader] = useState("");
   useEffect(() => {
@@ -22,7 +20,6 @@ const NotebookEntry = (props) => {
 
   const changeText = (value) => {
     setText(value);
-    console.log(`value: ${value}`);
   };
   const changeHeader = (value) => {
     setHeader(value);
@@ -37,9 +34,7 @@ const NotebookEntry = (props) => {
       header: header,
       folder: props.folder,
     }).then((entry) => {
-      console.log(entry);
       props.updateEntries(entry, props.index);
-      console.log(props.entries);
     });
   };
 
@@ -54,9 +49,7 @@ const NotebookEntry = (props) => {
       header: header,
       folder: value,
     }).then((entry) => {
-      console.log(entry);
       props.updateEntries(entry, props.index);
-      console.log(props.entries);
     });
   };
   return (
