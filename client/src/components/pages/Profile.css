@@ -62,3 +62,6 @@
   background-color: var(--primary--dim);
   border: var(--xs) solid black;
 }
+.story-div {
+  white-space: pre-line;
+}

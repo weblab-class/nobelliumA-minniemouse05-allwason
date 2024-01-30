@@ -25,7 +25,7 @@ const App = () => {
   const [userName, setUserName] = useState(undefined);
   const [open, setOpen] = useState("room");
   const [totalExp, setTotalExp] = useState(0);
-
+  const [generating, setGenerating] = useState(false);
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
@@ -79,15 +79,16 @@ const App = () => {
   });
   ////////////////////
 
-  // useEffect(() => {
-  //   post("/api/makeAchievement", {
-  //     achievementId: 42,
-  //     awardDescription: "test",
-  //     awardName: "test",
-  //   }).then((achievementData) => {
-  //     console.log("achievementData in App.js", achievementData);
-  //   });
-  // }, []);
+  /*useEffect(() => {
+    post("/api/makeAchievement", {
+      achievementId: 6,
+      awardDescription:
+        "You've officially embarked on your journey to success by completing your very 1st to-do item with RoomCraft!",
+      awardName: "First Steps",
+    }).then((achievementData) => {
+      console.log("achievementData in App.js", achievementData);
+    });
+  }, []);*/
 
   // useEffect(() => {
   //   get("/api/getAchievement", { achievementId: 0 }).then((achievementData) => {
@@ -159,7 +160,13 @@ const App = () => {
                 handleLogout={handleLogout}
                 userId={userId}
               />
-              <Profile userId={userId} name={userName} totalExp={totalExp} />
+              <Profile
+                generating={generating}
+                setGenerating={setGenerating}
+                userId={userId}
+                name={userName}
+                totalExp={totalExp}
+              />
             </>
           }
         />

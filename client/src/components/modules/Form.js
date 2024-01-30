@@ -25,7 +25,6 @@ const Form = (props) => {
   // };
 
   const submitTodo = () => {
-    console.log("Form.js / submitTodo userID, _id", props.userId);
     if (name === "") {
       alert("Enter a task description!");
     } else {
@@ -36,19 +35,10 @@ const Form = (props) => {
         completed: false,
       }).then(() => {
         setName("");
-        console.log("posted");
-        get("/api/todoItem", { userId: props.userId })
-          .then((itemData) => {
-            props.setTasks(itemData);
-            console.log("props have set tasks");
-          })
-          .catch((error) => {
-            console.error("Error when running get for api/todoItem:", error);
-          });
+
+        props.addTask({ userId: props.userId, name: name, completed: false });
       });
     }
-    console.log("submitTodo");
-    console.log(name);
     // console.log(completed);
   };
 

@@ -32,6 +32,7 @@
 }
 .delete:hover {
   color: red;
+  background-color: transparent;
 }
 
 .page-title {

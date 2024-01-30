@@ -16,6 +16,7 @@ const TodoItem = require("./models/TodoItem");
 const Achievement = require("./models/Achievement");
 const TopThree = require("./models/TopThree");
 const Folder = require("./models/Folder");
+const Story = require("./models/Story");
 
 //const UserProfile = require("./models/UserProfile");
 
@@ -65,7 +66,61 @@ router.get("/user", (req, res) => {
       console.log("catched after router.get for /user");
     });
 });
+router.post("/story", (req, res) => {
+  const update = {
+    $set: {
+      text: req.body.text,
+      length: req.body.length,
+    },
+  };
+  const query = {
+    userId: req.body.userId,
+  };
+  const options = {
+    upsert: true,
+  };
+  Story.updateOne(query, update, options)
+    .then(() => {
+      res.send({
+        userId: req.body.userId,
+        text: req.body.text,
+        length: req.body.length,
+      });
+    })
+    .catch(() => {
+      res.send({});
+    });
+});
+router.get("/story", (req, res) => {
+  Story.find({ userId: req.query.userId }).then((stories) => res.send(stories));
+});
 
+const { OpenAI } = require("openai");
+const openai = new OpenAI({ apiKey: "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" });
+
+async function main(content) {}
+
+router.get("/generate", async (req, res) => {
+  const content = req.query.content;
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are the AI narrator of an immersive, text-based RPG tale. Your role is to guide the player through the story of a main character who embarks on a quest filled with challenges. Your responses should be descriptive and engaging, providing a rich narrative with vivid worldbuilding and a detailed plot filled with intrigue. ",
+      },
+      {
+        role: "system",
+        content: `The character's name is: ${req.query.userName}. Use they/them pronouns, and use \n to add line breaks. Now, this is the epic tale of ${req.query.userName}.`,
+      },
+      { role: "user", content: content },
+    ],
+    model: "gpt-3.5-turbo",
+  });
+
+  console.log(completion.choices[0]);
+  res.send(completion.choices[0]);
+});
 router.get("/friends", (req, res) => {
   FriendList.findOne({ userId: req.query.userId })
     .then((contents) => {
@@ -304,10 +359,14 @@ router.post("/addAchievement", async (req, res) => {
 //gets the achievement entry based on the achievementId
 router.get("/getAchievement", (req, res) => {
   //console.log("getAchievement, achievementId= ", req.query.achievementId);
-  Achievement.findOne({ achievementId: req.query.achievementId }).then((achievementData) => {
-    //console.log("getAchievement, achievementData= ", achievementData);
-    res.send(achievementData);
-  });
+  Achievement.findOne({ achievementId: req.query.achievementId })
+    .then((achievementData) => {
+      console.log("getAchievement, achievementData= ", achievementData);
+      res.send(achievementData);
+    })
+    .catch((e) => {
+      console.log("fml");
+    });
 });
 
 //gets ALL achievements

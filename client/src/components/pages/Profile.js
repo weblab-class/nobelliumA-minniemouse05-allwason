@@ -3,7 +3,7 @@ import { get, post } from "../../utilities.js";
 import bear from "./../../../dist/bear.png";
 import "../../utilities.css";
 import "./Profile.css";
-import { useNavigate } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import SingleAchievement from "../modules/SingleAchievement.js";
 
 /**
@@ -25,6 +25,9 @@ const Profile = (props) => {
   const [achievementData, setAchievementData] = useState([]);
   const [achievementInfo, setAchievementInfo] = useState([]);
   const [content, setContent] = useState(<></>);
+  const [story, setStory] = useState({ text: "generating...", length: 0 });
+  const [loaded, setLoaded] = useState(false);
+
   // [{awardName: test, awardDescription: test}]
   //array of objects
   const [displayMode, setDisplayMode] = useState("Achievements");
@@ -37,20 +40,77 @@ const Profile = (props) => {
     });
   }, [props.userId]);
   useEffect(() => {
-    const data = { user: props.name };
-    const pipedreamUrl = "https://eoq3aoabm19zb51.m.pipedream.net/";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Length": data.length,
-      },
-      body: data,
+    const storyGenerate = async () => {
+      let x = await get("/api/story", { userId: props.userId });
+      console.log(x[0]);
+      if (x.length > 0 && x[0].text) {
+        setStory(x[0]);
+      } else {
+        setStory({
+          text: "The story has yet to begin. Earn achievements to unlock chapters.",
+          length: 0,
+        });
+      }
+      setLoaded(true);
     };
-    fetch(pipedreamUrl, options).then((res) => {
-      console.log(res);
-    });
+    storyGenerate();
   }, []);
+  useEffect(() => {
+    console.log(props.generating);
+  }, [props.generating]);
+  useEffect(() => {
+    console.log(story);
+  }, [story]);
+  useEffect(() => {
+    console.log(achievementData, story);
+
+    if (loaded && achievementData && achievementData.length > story.length && !props.generating) {
+      setStory({ text: "generating...", length: story.length });
+      props.setGenerating(true);
+      if (story.length == 0) {
+        get("/api/generate", {
+          content: "This is chapter 1 of the story: ",
+          userName: props.name,
+        }).then((response) => {
+          console.log("posting");
+          post("/api/story", {
+            userId: props.userId,
+            length: story.length + 1,
+            text: "\n\n\n" + response.message.content,
+          }).then(() => {
+            setStory({ length: story.length + 1, text: response.message.content });
+            console.log(response);
+            console.log(response.message);
+            props.setGenerating(false);
+          });
+        });
+      } else {
+        props.setGenerating(true);
+        get("/api/generate", {
+          userName: props.name,
+          content: "This is the story so far: '" + story.text + "' This is the next chapter: ",
+        }).then((response) => {
+          console.log("posting with story existing");
+          post("/api/story", {
+            userId: props.userId,
+            length: story.length + 1,
+            text: story.text + "\n\n\n" + response.message.content,
+          }).then(() => {
+            setStory({
+              text: story.text + "\n\n\n" + response.message.content,
+              length: story.length + 1,
+            });
+            props.setGenerating(false);
+            console.log(response);
+            console.log(response.message);
+          });
+
+          console.log(response);
+          console.log(response.message);
+        });
+      }
+    }
+  }, [achievementData, story, props.generating]);
   useEffect(() => {
     if (props.totalExp >= 5) {
       post("/api/addAchievement", { achievementId: 6, _id: props.userId });
@@ -115,11 +175,12 @@ const Profile = (props) => {
       setContent(
         <div>
           <h1>Story</h1>
-          <p>{achievementInfo.length}</p>
+
+          <p className="story-div">{story.text}</p>
         </div>
       );
     }
-  }, [achievementInfo, displayMode]);
+  }, [achievementInfo, displayMode, story]);
   const makeSingleAchievement = (achievementId, awardDescription, awardName) => {
     return (
       <SingleAchievement

@@ -4,15 +4,12 @@ import SingleFolder from "./SingleFolder";
 import React from "react";
 import { useEffect, useState } from "react";
 const FolderDisplay = (props) => {
-  //console.log(props);
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
   const handleChange = (e) => {
     setText(e.target.value);
   };
   const makePage = (_id, index) => {
-    //console.log(index);
-    //console.log("mkaing");
     return (
       <SingleFolder
         key={_id}

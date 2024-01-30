@@ -54,6 +54,9 @@ const Todo = (props) => {
     const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
     setTasks((arr) => [...props.tasks, newTask]);
   };
+  const addTask1 = (task) => {
+    setTasks((arr) => [...tasks, task]);
+  };
   useEffect(() => {
     console.log(taskList);
   });
@@ -124,7 +127,7 @@ const Todo = (props) => {
           totalExp={props.totalExp}
           tempEarnedExp={tempEarnedExp}
         />
-        <Form addTask={addTask} userId={props.userId} setTasks={props.setTasks} />
+        <Form addTask={addTask1} userId={props.userId} setTasks={props.setTasks} />
         <div className="filters btn-group stack-exception">{filterList}</div>
         <h2 id="list-heading">{headingText}</h2>
         <h2 id="list-heading">{congratsMessage}</h2>
