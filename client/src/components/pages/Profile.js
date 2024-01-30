@@ -189,9 +189,10 @@ const Profile = (props) => {
     );
   };
 
-  // useEffect(() => {
-  //   console.log("props.userId", props.userId);
-  // }, [props.userId]);
+  useEffect(() => {
+    console.log("profile.js props.totalExp", props.totalExp);
+  }, []);
+  
   const toggleDisplayMode = () => {
     if (displayMode === "Achievements") {
       setDisplayMode("Story");

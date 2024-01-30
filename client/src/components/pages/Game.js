@@ -82,7 +82,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
     } else if (open === "music") {
       setContent(
         <div className="content-layer">
-          <div className="gcal display-box u-flex">
+          <div className="display-box u-flex">
             <Music userId={userId} />
           </div>
         </div>

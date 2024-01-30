@@ -4,13 +4,23 @@
   flex-wrap: wrap;
 }
 
+.todo-border-button {
+  cursor: pointer;
+  border: 2px solid black;
+  padding: var(--s);
+  border-radius: 5px;
+  font-family: "Cute Font", sans-serif;
+  font-size: var(--l);
+  margin: 1.5px
+}
+
 .form-group {
   display: inline-block;
   margin-top: 0.4rem;
 }
 
 .edit-input-box {
-  border: 2px solid #404040;
+  border: 2.5px solid #404040;
   border-radius: 5px;
 }
 
@@ -25,8 +35,10 @@
 
 .checkbox-container {
   display: flex;
+  align-items: center;
 }
 
 .checkbox-style {
-  width: 50px;
+  width: 30px;
 }
+

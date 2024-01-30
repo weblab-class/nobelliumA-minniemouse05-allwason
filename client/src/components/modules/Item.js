@@ -96,10 +96,10 @@ const Item = (props) => {
         </label>
       </div>
       <div className="checkbox-container">
-        <button type="button" className="" onClick={() => setEditing(true)}>
+        <button type="button" className="todo-border-button" onClick={() => setEditing(true)}>
           Edit
         </button>
-        <button type="button" className="" onClick={() => props.deleteTask(props._id)}>
+        <button type="button" className="todo-border-button" onClick={() => props.deleteTask(props._id)}>
           Delete
         </button>
       </div>

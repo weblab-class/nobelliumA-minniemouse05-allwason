@@ -59,7 +59,7 @@ const Form = (props) => {
           onChange={handleChange}
           value={name}
         />
-        <button type="submit" className="add_button" onClick={submitTodo}>
+        <button type="submit" className="add_button todo-border-button" onClick={submitTodo}>
           Add
         </button>
       </div>

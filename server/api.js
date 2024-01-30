@@ -698,16 +698,17 @@ router.post("/updateTopThree", async (req, res) => {
     }
   } else {
     const insertionIndex = TopThreeToUpdate.results.findIndex(
-      (obj) => newArrayElement.exp <= obj.size
+      (item) => item.exp <= newArrayElement.exp
     );
     console.log("insertionIndex= ", insertionIndex);
 
     // If insertionIndex is -1, it means the new element has the largest 'size' and should be inserted at the end
-    const finalIndex = insertionIndex !== -1 ? insertionIndex : 0;
+    const finalIndex = insertionIndex !== -1 ? insertionIndex : TopThreeToUpdate.results.length;
     console.log("finalIndex= ", finalIndex);
 
     // Insert the new element at the calculated index
     TopThreeToUpdate.results.splice(finalIndex, 0, newArrayElement);
+
     console.log("TopThreeToUpdate= ", TopThreeToUpdate.results);
 
     TopThreeToUpdate.results.pop();

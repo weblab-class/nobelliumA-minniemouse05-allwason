@@ -6,7 +6,7 @@ function FilterButton(props) {
   return (
     <button
       type="button"
-      className=""
+      className="todo-border-button"
       aria-pressed={props.isPressed}
       onClick={() => props.setFilter(props.name)}
     >
