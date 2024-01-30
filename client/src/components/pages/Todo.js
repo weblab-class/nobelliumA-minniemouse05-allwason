@@ -19,6 +19,7 @@ import "./Todo.css";
  * @param {Array of objects} tasks
  * @param {String} name
  * @param {Number} totalExp
+ * @param {Function} setTotalExp
  * 
   //   { id: "todo-0", name: "Eat", completed: true },
   //   { id: "todo-1", name: "Sleep", completed: false },
@@ -34,12 +35,13 @@ const FILTER_MAP = {
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
-const Todo = (props) => {
-  const [tasks, setTasks] = useState([]);
+const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
+  console.log(setTotalExp);
   useEffect(() => {
-    get("/api/todoItem", { userId: props.userId })
+    get("/api/todoItem", { userId: userId })
       .then((itemData) => {
         setTasks(itemData);
+        console.log(itemData);
       })
       .catch((error) => {
         console.error("Error when running get for api/todoItem:", error);
@@ -49,11 +51,6 @@ const Todo = (props) => {
   const [filter, setFilter] = useState("All");
   const [tempEarnedExp, settempEarnedExp] = useState(0);
 
-  const addTask = (name) => {
-    //const newTask = { id: `todo-${nanoid()}`, name: name, completed: false };
-    const newTask = { _id: `todo-${nanoid()}`, name: name, completed: false };
-    setTasks((arr) => [...props.tasks, newTask]);
-  };
   const addTask1 = (task) => {
     setTasks((arr) => [...tasks, task]);
   };
@@ -62,17 +59,8 @@ const Todo = (props) => {
   });
   const toggleTaskCompleted = async (_id, userId, completed, name) => {
     console.log(tasks);
-    let x = post("/api/updateItemToggle", {
-      _id: _id,
-      userId: userId,
-      completed: !completed,
-      name: name,
-    });
-    if (completed === false) {
-      let y = post("/api/addExp", { userId: userId, amtToUpdate: 5 });
-    } else {
-      let y = post("/api/addExp", { userId: userId, amtToUpdate: -5 });
-    }
+
+    console.log(completed);
     const updatedTasks = tasks.map((task) => {
       if (task._id == _id) {
         if (task.completed === false) {
@@ -81,6 +69,7 @@ const Todo = (props) => {
         if (task.completed === true) {
           settempEarnedExp(tempEarnedExp - 5);
         }
+
         return { ...task, completed: !task.completed };
       }
       return task;
@@ -91,7 +80,7 @@ const Todo = (props) => {
   const deleteTask = async (_id) => {
     console.log("Todo.js deleteTask _id", _id);
 
-    let x = await post("/api/deleteItem", { _id: _id, userId: props.userId });
+    let x = await post("/api/deleteItem", { _id: _id, userId: userId });
     const updatedTasks = tasks.filter((task) => _id !== task._id);
     setTasks(updatedTasks);
   };
@@ -109,7 +98,7 @@ const Todo = (props) => {
     ?.filter(FILTER_MAP[filter])
     .map((task) => (
       <Item
-        userId={props.userId}
+        userId={userId}
         _id={task._id}
         name={task.name}
         completed={task.completed}
@@ -117,8 +106,11 @@ const Todo = (props) => {
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
         editTask={editTask}
+        totalExp={totalExp}
+        setTotalExp={setTotalExp}
       />
     ));
+  console.log(taskList);
 
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton key={name} name={name} isPressed={name === filter} setFilter={setFilter} />
@@ -128,17 +120,12 @@ const Todo = (props) => {
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
   const congratsMessage = taskList.length !== 0 ? " " : "Hip hip hooray!";
 
-  return props.userId ? (
+  return userId ? (
     <>
       <div className="todoapp stack-large">
         <h1>To-Do List</h1>
-        <ExpTracker
-          userId={props.userId}
-          name={props.name}
-          totalExp={props.totalExp}
-          tempEarnedExp={tempEarnedExp}
-        />
-        <Form addTask={addTask1} userId={props.userId} setTasks={props.setTasks} />
+        <ExpTracker userId={userId} name={name} totalExp={totalExp} tempEarnedExp={tempEarnedExp} />
+        <Form addTask={addTask1} userId={userId} setTasks={setTasks} />
         <div className="filters btn-group stack-exception">{filterList}</div>
         <h2 id="list-heading">{headingText}</h2>
         <h2 id="list-heading">{congratsMessage}</h2>

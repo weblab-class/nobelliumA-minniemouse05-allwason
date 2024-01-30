@@ -33,16 +33,21 @@ const Item = (props) => {
 
   const updateCheck = () => {
     post("/api/updateItemCheck", { _id: props._id, completed: !props.completed })
-      .then(() => {
+      .then((response) => {
+        console.log(response);
         if (props.completed === false) {
-          post("/api/addExp", { userId: props.userId, amtToUpdate: 5 }).then(() => {});
+          post("/api/addExp", { userId: props.userId, amtToUpdate: 5 }).then(
+            props.setTotalExp(props.totalExp + 5)
+          );
         } else {
-          post("/api/addExp", { userId: props.userId, amtToUpdate: -5 }).then(() => {});
+          post("/api/addExp", { userId: props.userId, amtToUpdate: -5 })
+            .then(() => {})
+            .then(props.setTotalExp(props.totalExp - 5));
         }
       })
       .catch((error) => {
         console.error("Error fetching updateItemCheck:", error);
-        // Handle the error here
+        console.log(props);
       });
   };
 
@@ -96,7 +101,11 @@ const Item = (props) => {
         <button type="button" className="todo-border-button" onClick={() => setEditing(true)}>
           Edit
         </button>
-        <button type="button" className="todo-border-button" onClick={() => props.deleteTask(props._id)}>
+        <button
+          type="button"
+          className="todo-border-button"
+          onClick={() => props.deleteTask(props._id)}
+        >
           Delete
         </button>
       </div>

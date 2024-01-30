@@ -28,10 +28,11 @@ const Form = (props) => {
         userId: props.userId,
         name: name,
         completed: false,
-      }).then(() => {
+      }).then((result) => {
         setName("");
 
-        props.addTask({ userId: props.userId, name: name, completed: false });
+        console.log(result);
+        props.addTask({ _id: result._id, userId: props.userId, name: name, completed: false });
       });
     }
   };

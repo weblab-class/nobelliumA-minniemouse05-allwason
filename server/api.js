@@ -535,9 +535,9 @@ router.post("/todoItem", (req, res) => {
   console.log(NewTodoItem);
 
   NewTodoItem.save()
-    .then(() => {
+    .then((result) => {
       console.log("saved");
-      res.send(NewTodoItem);
+      res.send(result);
     })
     .catch(() => {
       console.log("catched");

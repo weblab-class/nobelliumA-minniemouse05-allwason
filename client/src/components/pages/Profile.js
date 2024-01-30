@@ -158,7 +158,9 @@ const Profile = (props) => {
                 makeSingleAchievement(ach.achievementId, ach.awardDescription, ach.awardName, index)
               )
             ) : (
-              <h1 className="u-textCenter">No achievements collected so far. Keep going!</h1>
+              <h1 className="u-textCenter achievement-text">
+                No achievements collected so far. Keep going!
+              </h1>
             )}
           </div>
         </div>
@@ -212,12 +214,15 @@ const Profile = (props) => {
               </div>
             </div>
             <div className="right-half">
-              <img
-                src="https://i.ibb.co/h83sQhL/Screenshot-2024-01-30-at-11-57-01-AM.png"
-                alt="bear"
-                className="avatar-image"
-              />
-              <div className="name">{props.name}</div>
+              <div className="profile-image-text-container">
+                <img
+                  src="https://i.ibb.co/h83sQhL/Screenshot-2024-01-30-at-11-57-01-AM.png"
+                  alt="bear"
+                  className="avatar-image"
+                />
+                <div className="profile-overlay-text">{props.name}</div>
+              </div>
+
               <div className="exp">{"Total exp earned to date: " + props.totalExp}</div>
               <div className="new-userid"> UserId: {props.userId}</div>
             </div>

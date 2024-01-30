@@ -35,8 +35,11 @@ const App = () => {
         setUserName(user.name);
         setTotalExp(user.totalExp);
       }
-    }, []);
+    });
   }, []);
+  useEffect(() => {
+    console.log(totalExp);
+  }, [totalExp]);
   useEffect(() => {
     if (totalExp >= 5) {
       post("/api/addAchievement", { achievementId: 6, _id: userId });

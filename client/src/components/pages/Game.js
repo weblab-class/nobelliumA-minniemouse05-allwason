@@ -21,9 +21,11 @@ import Music from "./Music.js";
  * @param {String} userId
  *@param {String} name
  @param totalExp
+ @param setTotalExp
  */
-const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
+const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodoro }) => {
   //display stuff logic
+  console.log(setTotalExp);
   const [pomodoro, setPomodoro] = useState(false);
   const [content, setContent] = useState(<></>);
 
@@ -39,6 +41,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
               tasks={itemData}
               name={name}
               totalExp={totalExp}
+              setTotalExp={setTotalExp}
               setTasks={setItemData}
             />
           </div>
