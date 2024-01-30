@@ -11,6 +11,7 @@ import Leaderboard from "./pages/Leaderboard.js";
 import Friends from "./pages/Friends.js";
 import Pomodoro from "./modules/Pomodoro.js";
 import { useNavigate } from "react-router-dom";
+import Info from "./pages/Info.js";
 import "../utilities.css";
 
 import { socket } from "../client-socket.js";
@@ -122,6 +123,21 @@ const App = () => {
               setTotalExp={setTotalExp}
               togglePomodoro={togglePomodoro}
             />
+          }
+        />
+        <Route
+          path="/info"
+          element={
+            <>
+              <NavBar
+                path="/"
+                userName={name}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+              />
+              <Info />
+            </>
           }
         />
         <Route

@@ -26,7 +26,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar">
       <div className="NavBar-linkContainer u-flex u-flex-alignCenter ">
-        <h1 className="u-xlarge pl-20 pr-20 website-card">RoomCraft</h1>
+        <h1 className="pl-15 pr-15 website-card">RoomCraft</h1>
         {userId && !collapse && (
           <>
             <Link to="/" className="NavBar-link pl-15 pr-15">
@@ -50,7 +50,9 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
                 <span className="material-symbols-outlined">leaderboard</span>
               </span>
             </Link>
-
+            <Link to="/info" className="info NavBar-link pl-15 pr-15">
+              <span class="material-symbols-outlined">info</span>
+            </Link>
             <span className="NavBar-link pl-15 pr-15">
               <span data-text="Logout" className="tooltip">
                 <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>

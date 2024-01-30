@@ -31,6 +31,9 @@
   position: relative;
   border-bottom: 1 pm dashed #000;
 }
+.website-card {
+  font-size: 100%;
+}
 .tooltip:before {
   content: attr(data-text); /* here's the magic */
   position: absolute;
