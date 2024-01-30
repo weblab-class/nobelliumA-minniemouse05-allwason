@@ -12,9 +12,22 @@
 
 .left-half {
   flex: 1;
-  margin-top: 2vh;
+  margin-top: 4vh;
   display: flex;
   flex-direction: column;
+}
+
+.middle-half {
+  flex: 1;
+  margin-top: 0.5vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-half {
+  flex: 1;
+  margin-top: 0vh;
+  justify-content: center;
 }
 
 .toggle-button-container {
@@ -32,12 +45,6 @@
   margin-bottom: 10vh;
 }
 
-.right-half {
-  flex: 1;
-  margin-top: 2vh;
-  justify-content: center;
-}
-
 .board {
   font-size: 3.2vw;
   color: white;
@@ -51,26 +58,22 @@
   overflow-y: scroll;
 }
 
-.name {
-  font-family: "Cute Font", sans-serif;
-  font-size: 5.2vw;
-  margin-left: 13vw;
-}
-
 .exp {
   font-family: "Cute Font", sans-serif;
   font-size: 2.7vw;
   margin-left: 11.5vw;
+  color: #8e8e8e;
 }
 
 .new-userid {
   font-family: "Cute Font", sans-serif;
   font-size: 2.7vw;
   margin-left: 7vw;
+  color: #8e8e8e;
 }
 
 .avatar-image {
-  width: 65%;
+  width: 68%;
   display: block;
   font-size: 3.2vw;
   margin-left: 7vw;
@@ -87,4 +90,31 @@
 }
 .story-div {
   white-space: pre-line;
+}
+
+.profile-image-text-container {
+  position: relative;
+  display: inline-block;
+}
+
+.name {
+  font-family: "Cute Font", sans-serif;
+  font-size: 5.2vw;
+  margin-left: 13vw;
+}
+
+.profile-overlay-text {
+  position: absolute;
+  top: 35%; /* Adjust the value to vertically center the text */
+  left: 47%; /* Adjust the value to horizontally center the text */
+  transform: translate(-50%, -50%);
+  color: black; /* Text color */
+  font-size: 7.5vw; /* Adjust the font size as needed */
+  text-align: center;
+  white-space: nowrap;
+}
+
+.achievement-text {
+  margin-top: 8vw;
+  font-size: 3.5vw;
 }
