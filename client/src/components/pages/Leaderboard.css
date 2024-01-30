@@ -1,49 +1,49 @@
 .login {
   text-align: center;
   font-family: "Cute Font", sans-serif;
-  font-size: 40px;
+  font-size: 5vh;
 }
 
 .ranking {
-  width: 100%;
+  width: 100vw;
   height: auto;
   text-align: center;
   bottom: 0;
   left: 0;
-  margin-top: 20%;
+  margin-top: 10vh;
 }
 
 .leaderboard-container {
   display: flex;
-  height: 100vh; /* 100% of the viewport height */
+  height: 80vh; /* 100% of the viewport height */
 }
 
 .leaderboard-section {
   flex: 1; /* Each section takes equal space */
   /* border: 1px solid #ddd; /* Optional: Add borders for better visualization */
-  padding: 20px; /* Optional: Add padding for better spacing */
+  padding: 1vw; /* Optional: Add padding for better spacing */
 }
 
 .leaderboard-text-image-container {
   display: flex;
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
-  height: 100vh; /* 100% of the viewport height */
+  height: 80vh; /* 100% of the viewport height */
 }
 
 .leaderboard-text-image {
-  width: 180px; /* Set the desired width */
+  width: 20vw; /* Set the desired width */
   height: auto;
 }
 
 .leaderboard-board-image {
-  width: 650px; /* Set the desired width */
+  width: 50vw; /* Set the desired width */
   height: auto;
   object-fit: cover;
 }
 
 .leaderboard-avatar-image {
-  width: 150px; /* Set the desired width */
+  width: 20vw; /* Set the desired width */
   height: auto;
 }
 
@@ -57,7 +57,7 @@
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: black; /* Set the text color */
-  font-size: 24px; /* Set the text font size */
+  font-size: 3vw; /* Set the text font size */
   font-weight: bold; /* Set the text font weight */
   text-align: center; /* Center the text horizontally */
   z-index: 1; /* Place the text above the image */
@@ -69,7 +69,7 @@
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: #dfdede; /* Set the text color */
-  font-size: 14px; /* Set the text font size */
+  font-size: 2vw; /* Set the text font size */
   font-weight: bold; /* Set the text font weight */
   text-align: center; /* Center the text horizontally */
   z-index: 1; /* Place the text above the image */
@@ -81,7 +81,7 @@
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: black; /* Set the text color */
-  font-size: 24px; /* Set the text font size */
+  font-size: 3vw; /* Set the text font size */
   font-weight: bold; /* Set the text font weight */
   text-align: center; /* Center the text horizontally */
   z-index: 1; /* Place the text above the image */
@@ -93,7 +93,7 @@
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: #dfdede; /* Set the text color */
-  font-size: 14px; /* Set the text font size */
+  font-size: 2vw; /* Set the text font size */
   font-weight: bold; /* Set the text font weight */
   text-align: center; /* Center the text horizontally */
   z-index: 1; /* Place the text above the image */
@@ -105,7 +105,7 @@
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: black; /* Set the text color */
-  font-size: 24px; /* Set the text font size */
+  font-size: 3vw; /* Set the text font size */
   font-weight: bold; /* Set the text font weight */
   text-align: center; /* Center the text horizontally */
   z-index: 1; /* Place the text above the image */
@@ -117,7 +117,7 @@
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: #dfdede; /* Set the text color */
-  font-size: 14px; /* Set the text font size */
+  font-size: 2vw; /* Set the text font size */
   font-weight: bold; /* Set the text font weight */
   text-align: center; /* Center the text horizontally */
   z-index: 1; /* Place the text above the image */
@@ -128,12 +128,12 @@
   flex-direction: column; /* Stack items vertically */
   align-items: center; /* Center items horizontally */
   justify-content: center; /* Center items vertically */
-  height: 100vh; /* Adjust the height as needed */
+  height: 80vh; /* Adjust the height as needed */
 }
 
 .leaderboard-exp-text {
   margin-top: 1px; /* Adjust the space between image and text */
   text-align: center; /* Center the text */
   color: #767676;
-  font-size: 40px;
+  font-size: 4vw;
 }

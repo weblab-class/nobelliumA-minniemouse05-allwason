@@ -189,11 +189,11 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   const image_bear = new Image();
   image_bear.src = bear;
   useEffect(() => {
-    init(locationX);
+    init();
   }, []);
 
   ///init function (with draw stuff inside)
-  function init(locationX) {
+  function init() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     if (locationX > leftBound + image.width) {
