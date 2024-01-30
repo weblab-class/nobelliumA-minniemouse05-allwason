@@ -87,7 +87,9 @@ const Item = (props) => {
           type="checkbox"
           defaultChecked={props.completed}
           onClick={updateCheck}
-          onChange={() => props.toggleTaskCompleted(props._id)}
+          onChange={() =>
+            props.toggleTaskCompleted(props._id, props.userId, props.completed, props.name)
+          }
         />
         <label className="" htmlFor={props.id}>
           {props.name}

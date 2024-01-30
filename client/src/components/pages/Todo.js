@@ -60,21 +60,28 @@ const Todo = (props) => {
   useEffect(() => {
     console.log(taskList);
   });
-  const toggleTaskCompleted = (_id) => {
+  const toggleTaskCompleted = (_id, userId, completed, name) => {
     console.log(tasks);
-    const updatedTasks = tasks.map((task) => {
-      if (task._id == _id) {
-        if (task.completed == false) {
-          settempEarnedExp(tempEarnedExp + 5);
+    post("/api/updateItemToggle", {
+      _id: _id,
+      userId: userId,
+      completed: !completed,
+      name: name,
+    }).then(() => {
+      const updatedTasks = tasks.map((task) => {
+        if (task._id == _id) {
+          if (task.completed == false) {
+            settempEarnedExp(tempEarnedExp + 5);
+          }
+          if (task.completed == true) {
+            settempEarnedExp(tempEarnedExp - 5);
+          }
+          return { ...task, completed: !task.completed };
         }
-        if (task.completed == true) {
-          settempEarnedExp(tempEarnedExp - 5);
-        }
-        return { ...task, completed: !task.completed };
-      }
-      return task;
+        return task;
+      });
+      setTasks(updatedTasks);
     });
-    setTasks(updatedTasks);
   };
 
   const deleteTask = async (_id) => {

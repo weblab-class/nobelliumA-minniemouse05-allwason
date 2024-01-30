@@ -619,6 +619,38 @@ router.post("/updateItemName", async (req, res) => {
   //   res.status(500).json({ success: false, message: "Internal server error" });
   // }
 });
+router.post("/updateItemToggle", async (req, res) => {
+  const taskIdToUpdate = req.body._id; // Assuming taskId is sent in the request body
+  const updatedFieldValue = req.body.completed; // Assuming the updated field value is sent in the request body
+
+  TodoItem.updateOne({ _id: taskIdToUpdate }, { $set: { completed: updatedFieldValue } })
+    .then(() => {
+      res.send({
+        _id: req.body._id,
+        userId: req.body.userId,
+        name: req.body.name,
+        completed: req.body.completed,
+      });
+    })
+    .catch(() => {
+      res.send({});
+    });
+
+  // try {
+  //   const taskIdToUpdate = req.body._id; // Assuming taskId is sent in the request body
+  //   const updatedFieldValue = req.body.name; // Assuming the updated field value is sent in the request body
+  //   console.log("updateItemName", req.body._id, req.body.name);
+
+  //   // Update the specified task's field
+  //   const result = await TodoItem.updateOne(
+  //     { _id: taskIdToUpdate },
+  //     { $set: { name: updatedFieldValue } }
+  //   );
+  // } catch (error) {
+  //   console.error("Error updating task field:", error);
+  //   res.status(500).json({ success: false, message: "Internal server error" });
+  // }
+});
 
 /////////////////////// LEADERBOARD ///////////////////////
 
