@@ -30,6 +30,7 @@ const Leaderboard = (props) => {
 
   useEffect(() => {
     console.log("props.totalExp= ", props.totalExp);
+    console.log("lowestExpOfArray", lowestExpOfArray);
     if (props.totalExp > lowestExpOfArray) {
       console.log("running post api updateTopThree");
       post("/api/updateTopThree", {
@@ -55,28 +56,28 @@ const Leaderboard = (props) => {
           </section>
           <section className="leaderboard-section">
             <div className="leaderboard-text-image-container">
-              <div className='leaderboard-image-overlay'>
-              <img
-                className="leaderboard-board-image"
-                src="https://i.ibb.co/TrmqqBd/Screenshot-2024-01-29-at-10-07-27-PM.png"
-              />
-               <div class="first-leaderboard-text-overlay">{expArray[0].name} </div>
-               <div class="first-exp-text-overlay">{expArray[0].exp} exp </div>
-               <div class="second-leaderboard-text-overlay">{expArray[1].name} </div>
-               <div class="second-exp-text-overlay">{expArray[1].exp} exp </div>
-               <div class="third-leaderboard-text-overlay">{expArray[2].name} </div>
-               <div class="third-exp-text-overlay">{expArray[2].exp} exp </div>
+              <div className="leaderboard-image-overlay">
+                <img
+                  className="leaderboard-board-image"
+                  src="https://i.ibb.co/TrmqqBd/Screenshot-2024-01-29-at-10-07-27-PM.png"
+                />
+                <div class="first-leaderboard-text-overlay">{expArray[0].name} </div>
+                <div class="first-exp-text-overlay">{expArray[0].exp} exp </div>
+                <div class="second-leaderboard-text-overlay">{expArray[1].name} </div>
+                <div class="second-exp-text-overlay">{expArray[1].exp} exp </div>
+                <div class="third-leaderboard-text-overlay">{expArray[2].name} </div>
+                <div class="third-exp-text-overlay">{expArray[2].exp} exp </div>
               </div>
             </div>
           </section>
           <section className="leaderboard-section">
-            <div className="flex-leaderboard-text-container"> 
-
-              <img className="leaderboard-avatar-image" src="https://i.ibb.co/N3rSftn/Screenshot-2024-01-29-at-10-20-39-PM.png" />
-              <div className='leaderboard-exp-text'> {props.totalExp} EXP</div>
+            <div className="flex-leaderboard-text-container">
+              <img
+                className="leaderboard-avatar-image"
+                src="https://i.ibb.co/N3rSftn/Screenshot-2024-01-29-at-10-20-39-PM.png"
+              />
+              <div className="leaderboard-exp-text"> {props.totalExp} EXP</div>
             </div>
-
-
           </section>
         </div>
       ) : (

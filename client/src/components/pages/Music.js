@@ -4,7 +4,7 @@ const Music = () => {
     <div>
       <h1>Music</h1>
       <iframe
-        src="https://open.spotify.com/embed/playlist/2cqEPDvDX5WyRI3DOsqtlU?utm_source=generator"
+        src="https://open.spotify.com/embed/playlist/1E9PGL9rpWg53rnt0qQNeI?utm_source=generator"
         width="500"
         height="380"
         frameborder="0"
