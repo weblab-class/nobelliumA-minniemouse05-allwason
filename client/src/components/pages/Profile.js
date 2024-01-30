@@ -124,14 +124,10 @@ const Profile = (props) => {
   }, [achievementData, story, props.generating]);
 
   useEffect(() => {
-    //console.log("use effect for achievementData", achievementData);
-    //console.log("props.userId in 3rd useEffect", props.userId);
-
     // Create an array to store promises
     const fetchPromises = achievementData.map((achId) => {
       return get("/api/getAchievement", { achievementId: achId })
         .then((fetchedAward) => {
-          //console.log("fetchedAward= ", fetchedAward);
           return fetchedAward; // Return the fetched data
         })
         .catch((error) => {
@@ -146,7 +142,6 @@ const Profile = (props) => {
       .then((fetchedAwards) => {
         // Use the fetched awards to update the state
         setAchievementInfo((prevInfo) => [...prevInfo, ...fetchedAwards]);
-        //console.log("newAchievementInfo", achievementInfo);
       })
       .catch((error) => {
         console.error("Error when fetching achievements:", error);
@@ -224,8 +219,7 @@ const Profile = (props) => {
               />
               <div className="name">{props.name}</div>
               <div className="exp">{"Total exp earned to date: " + props.totalExp}</div>
-              <div className="new-userid"> UserId: {props.userId}
-              </div>
+              <div className="new-userid"> UserId: {props.userId}</div>
             </div>
           </div>
         </>

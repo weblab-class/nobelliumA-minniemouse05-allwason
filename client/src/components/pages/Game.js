@@ -105,7 +105,6 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   const [notebook, setNotebook] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [keyIsDown, setKeyIsDown] = useState(false);
-  // const [bear, setBear] = useState(bear_right);
   const [bear, setBear] = useState(bearsprite);
 
   const handleUp = (e) => {

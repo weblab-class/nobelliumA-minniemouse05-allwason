@@ -26,25 +26,11 @@ const GOOGLE_CLIENT_ID = "154522575589-2rkfiiho0carquu6j4suu809fsc5cnuc.apps.goo
  */
 
 const Room = ({ togglePomodoro, totalExp, userId, name, open, handleLogin, handleLogout, _id }) => {
-  // useEffect(() => {
-  //   console.log("Room.js useEffect", name, userId);
-  //   post("/api/updateExp", { name: name, userId: userId, totalExp: 0 });
-  // }, []);
-  /* */
-
   return (
     <div>
       <div className="welcome">
         {userId ? (
           <>
-            {/*<Display
-              className="display"
-              open={open}
-              userId={userId}
-              name={name}
-              totalExp={totalExp}
-              togglePomodoro={togglePomodoro}
-        />*/}
             <NavBar
               path="/"
               userName={name}
