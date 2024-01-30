@@ -13,6 +13,22 @@
 .left-half {
   flex: 1;
   margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle-button-container {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggleButton {
+  border-radius: 8px;
+  width: 150px;
 }
 
 .right-half {

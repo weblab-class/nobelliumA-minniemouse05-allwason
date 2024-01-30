@@ -192,7 +192,7 @@ const Profile = (props) => {
   useEffect(() => {
     console.log("profile.js props.totalExp", props.totalExp);
   }, []);
-  
+
   const toggleDisplayMode = () => {
     if (displayMode === "Achievements") {
       setDisplayMode("Story");
@@ -206,12 +206,18 @@ const Profile = (props) => {
         <>
           <div className="profile-container">
             <div className="left-half">
+
               <div className="board">
                 <div className="custom-scrollbar">{content}</div>
               </div>
-              <button className="toggleButton" onClick={toggleDisplayMode}>
-                {displayMode}
-              </button>
+
+              <div className="toggle-button-container">
+                <button className="toggleButton" onClick={toggleDisplayMode}>
+                  {displayMode}
+                </button>
+              </div>
+
+
             </div>
             <div className="right-half">
               <div className="userId u-flex">
