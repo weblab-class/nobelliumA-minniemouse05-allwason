@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
 import Notebook from "./Notebook.js";
 import Calendar from "./Calendar.js";
+import Music from "./Music.js";
 /**
  * Parent: Room
  *
@@ -78,6 +79,14 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
           </div>
         </div>
       );
+    } else if (open === "music") {
+      setContent(
+        <div className="content-layer">
+          <div className="gcal display-box u-flex">
+            <Music userId={userId} />
+          </div>
+        </div>
+      );
     } else {
       setContent(<></>);
     }
@@ -92,6 +101,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   const [leftBound, setLeftBound] = useState(-1200);
   const [todo, setTodo] = useState(false);
   const [clock, setClock] = useState(false);
+  const [music, setMusic] = useState(false);
   const [notebook, setNotebook] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [keyIsDown, setKeyIsDown] = useState(false);
@@ -156,7 +166,11 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
   //stuff for interacting w room
   useEffect(() => {
     init(locationX);
-
+    if (locationX < leftBound + image.width / 1.05 && locationX > leftBound + image.width / 1.25) {
+      setMusic(true);
+    } else {
+      setMusic(false);
+    }
     if (locationX < leftBound + image.width / 1.3 && locationX > leftBound + image.width / 1.4) {
       setClock(true);
     } else {
@@ -287,6 +301,13 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
           >
             pomodoro
           </button>
+        ) : (
+          <></>
+        )}
+        {music ? (
+          <Link to="/music">
+            <button className="room-button todo-button">music</button>
+          </Link>
         ) : (
           <></>
         )}

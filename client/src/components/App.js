@@ -26,6 +26,7 @@ const App = () => {
   const [open, setOpen] = useState("room");
   const [totalExp, setTotalExp] = useState(0);
   const [generating, setGenerating] = useState(false);
+  const [story, setStory] = useState({ text: "generating...", length: 0 });
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
@@ -235,6 +236,20 @@ const App = () => {
               handleLogin={handleLogin}
               handleLogout={handleLogout}
               open={"calendar"}
+              userId={userId}
+              name={userName}
+              totalExp={totalExp}
+              togglePomodoro={togglePomodoro}
+            />
+          }
+        />
+        <Route
+          path="/music"
+          element={
+            <Room
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              open={"music"}
               userId={userId}
               name={userName}
               totalExp={totalExp}
