@@ -151,13 +151,13 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       if (e.key === "ArrowLeft") {
         setKeyIsDown(true);
         setFlip(0);
-        if (locX >= leftBound && locX <= image.width) {
+        if (locX >= leftBound && locX <= leftBound + image.width) {
           animateLeft();
         }
       } else if (e.key === "ArrowRight") {
         setKeyIsDown(true);
         setFlip(1.1);
-        if (locX >= leftBound && locX <= leftBound + image.width) {
+        if (locX <= leftBound + image.width) {
           animateRight();
         }
       }
@@ -166,7 +166,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   //stuff for interacting w room
   useEffect(() => {
-    init(locationX);
+    init();
     if (locationX < leftBound + image.width / 1.05 && locationX > leftBound + image.width / 1.25) {
       setMusic(true);
     } else {
@@ -202,10 +202,10 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   // Hard code the image source
   image.src = room;
   const image_bear = new Image();
-  image_bear.src = bear;
   useEffect(() => {
+    image_bear.src = bear;
     init();
-  }, []);
+  }, [userId]);
 
   ///init function (with draw stuff inside)
   function init() {
@@ -257,7 +257,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const handleResize = (e) => {
       ctx.canvas.height = image.height;
       ctx.canvas.width = window.innerWidth;
-      init(locationX);
+      init();
     };
 
     const keyDownEvent = (e) => {
