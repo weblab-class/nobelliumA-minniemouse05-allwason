@@ -200,10 +200,8 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
   //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
   // Hard code the image source
-  image.src = room;
-  const image_bear = new Image();
+  image_bear.src = bear;
   useEffect(() => {
-    image_bear.src = bear;
     init();
   }, [userId]);
 
