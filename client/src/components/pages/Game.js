@@ -81,7 +81,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       );
     } else if (open === "music") {
       setContent(
-        <div className="content-layer">
+        <div className="content-layer music">
           <div className="display-box u-flex">
             <Music userId={userId} />
           </div>

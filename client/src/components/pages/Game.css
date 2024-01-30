@@ -45,6 +45,9 @@
 
   justify-content: center;
 }
+.music {
+  /*background-color: transparent !important;*/
+}
 .content-layer {
   padding: 3% 3% 3% 3%;
   /*font-size: 3vw;*/
@@ -57,7 +60,6 @@
   left: 50%;
   transform: translate(-50%);
   border: var(--xs) solid var(--black);
-  cursor: pointer;
   border-radius: 6px;
   font-family: "Cute Font", sans-serif;
 
