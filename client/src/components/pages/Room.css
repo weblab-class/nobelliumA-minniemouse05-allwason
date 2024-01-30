@@ -15,15 +15,21 @@
   width: 100%;
 }
 .login {
-  margin: 10% auto 10% auto;
+  margin: 5% auto 10% auto;
   width: 80%;
 }
 .display {
   margin-top: 30%;
 }
 .key_img {
-  width: 10%;
+  width: 8%;
+  height: auto;
 }
+
+.door_img {
+  width: 30%;
+}
+
 .textdisplay {
   margin-top: 0%;
   margin-bottom: 0%;
@@ -32,4 +38,45 @@
 }
 .game {
   overflow-x: hidden;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center; /* Adjust as needed: flex-start, flex-end, space-between, space-around, etc. */
+  align-items: center; /* Align vertically in the center */
+}
+
+.login-welcome-text {
+  margin-top: -20px;
+  font-size: 40px;
+  white-space: pre-line;
+}
+
+.login-roomcraft-text {
+  font-size: 80px;
+  margin-top: -20px;
+  margin-bottom: -10px;
+}
+
+.login-directions-text {
+  font-size: 20px;
+  margin-top: 0px;
+  color: #a1a1a1;
+}
+
+.login-directions2-text {
+  font-size: 20px;
+  margin-top: 0px;
+  color: #a1a1a1;
+  margin-bottom: 15px;
+}
+
+.login-text-container {
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  align-items: flex-start; /* Align items to the left horizontally */
+}
+
+.key-login-container {
+  display: flex;
 }
