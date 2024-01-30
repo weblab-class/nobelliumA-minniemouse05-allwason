@@ -211,15 +211,48 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   function init() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    if (locationX > leftBound + image.width) {
-      setLocationX(leftBound + image.width);
-    }
-    if (locationX < leftBound) {
-      setLocationX(leftBound);
-    }
-    setLeftBound(-image.width + window.innerWidth / 2);
 
-    ctx.drawImage(image, 0, 0, image.width, image.height, leftBound, 0, image.width, image.height);
+    setLeftBound(-image.width + window.innerWidth / 2);
+    if (locationX > -image.width + window.innerWidth / 2 + image.width) {
+      setLocationX(-image.width + window.innerWidth / 2 + image.width);
+      ctx.drawImage(
+        image,
+        0,
+        0,
+        image.width,
+        image.height,
+        -image.width + window.innerWidth / 2 + image.width,
+        0,
+        image.width,
+        image.height
+      );
+    }
+    if (locationX < -image.width + window.innerWidth / 2) {
+      setLocationX(-image.width + window.innerWidth / 2);
+      ctx.drawImage(
+        image,
+        0,
+        0,
+        image.width,
+        image.height,
+        -image.width + window.innerWidth / 2,
+        0,
+        image.width,
+        image.height
+      );
+    } else {
+      ctx.drawImage(
+        image,
+        0,
+        0,
+        image.width,
+        image.height,
+        locationX,
+        0,
+        image.width,
+        image.height
+      );
+    }
 
     ctx.save();
 
