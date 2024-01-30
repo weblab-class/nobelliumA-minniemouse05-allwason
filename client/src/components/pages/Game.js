@@ -99,7 +99,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   const [flip, setFlip] = useState(0);
   const [framenum, setFrameNum] = useState(0);
   const [iFrame, setIFrame] = useState(0);
-  const [locationX, setLocationX] = useState(0);
+  const [locationX, setLocationX] = useState(window.innerWidth / 2 - 80);
   const intervalRef = useRef(null);
   const [leftBound, setLeftBound] = useState(-1200);
   const [todo, setTodo] = useState(false);
@@ -193,7 +193,9 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       setNotebook(false);
     }
   }, [locationX]);
-
+  useEffect(() => {
+    init();
+  }, []);
   //image stuff
   const canvasRef = useRef(null);
   const image = new Image();
@@ -204,7 +206,45 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   const image_bear = new Image();
   image_bear.src = bear;
   useEffect(() => {
-    init();
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (locationX > leftBound + image.width) {
+      setLocationX(leftBound + image.width);
+    }
+    if (locationX < leftBound) {
+      setLocationX(leftBound);
+    }
+    setLeftBound(-image.width + window.innerWidth / 2);
+
+    ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, image.width, image.height);
+
+    ctx.save();
+
+    //draw bear
+    const scale = 6;
+    const bearw = image_bear.width / 8;
+    const bearh = image_bear.height / 2.9;
+
+    ctx.drawImage(
+      image_bear,
+      141 + (bearw + bearw / 8.8) * framenum,
+      bearh * flip,
+      bearw,
+      bearh,
+      window.innerWidth / 2 - image.height / (2 * scale),
+      image.height - image.height / (4 / 1.9),
+      image_bear.width / (8 * scale),
+      image_bear.height / (2.9 * scale)
+    );
+    setIFrame((prevnum) => prevnum + 0.05);
+
+    setFrameNum(Math.floor(iFrame));
+    if (framenum >= 5) {
+      setFrameNum(0);
+      setIFrame(0);
+    }
+
+    ctx.restore();
   }, []);
 
   ///init function (with draw stuff inside)

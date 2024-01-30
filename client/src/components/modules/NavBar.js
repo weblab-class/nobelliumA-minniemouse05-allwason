@@ -51,7 +51,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
               </span>
             </Link>
             <Link to="/info" className="info NavBar-link pl-15 pr-15">
-              <span class="material-symbols-outlined">info</span>
+              <span className="material-symbols-outlined">info</span>
             </Link>
             <span className="NavBar-link pl-15 pr-15">
               <span data-text="Logout" className="tooltip">
