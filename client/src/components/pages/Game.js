@@ -204,7 +204,9 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   useEffect(() => {
     init();
   }, [userId]);
-
+  useEffect(() => {
+    init();
+  }, []);
   ///init function (with draw stuff inside)
   function init() {
     const canvas = canvasRef.current;
