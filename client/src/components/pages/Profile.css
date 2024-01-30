@@ -37,24 +37,33 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .toggleButton {
   border-radius: 8px;
   width: 150px;
   margin-bottom: 10vh;
+
+  cursor: pointer;
+  border: 2px solid black;
+  padding: var(--xs);
+  border-radius: none;
+  font-family: "Cute Font", sans-serif;
+  font-size: var(--l);
 }
 
 .board {
   font-size: 3.2vw;
   color: white;
-  background: var(--darker);
+  background: #f5fde0;
   padding: 5px;
   width: 40vw;
   height: 60vh;
   margin: auto;
-  border: 6px solid var(--black);
-  border-radius: 15px;
+  border: 2px solid black;
+  /* border: 6px solid var(--black); */
+  border-radius: 25px;
   overflow-y: scroll;
 }
 
@@ -88,7 +97,12 @@
   background-color: var(--primary--dim);
   border: var(--xs) solid black;
 }
+.story-title {
+  color: black;
+}
+
 .story-div {
+  color: black;
   white-space: pre-line;
 }
 
@@ -101,6 +115,10 @@
   font-family: "Cute Font", sans-serif;
   font-size: 5.2vw;
   margin-left: 13vw;
+}
+
+.all-caps {
+  text-transform: uppercase;
 }
 
 .profile-overlay-text {
@@ -117,4 +135,20 @@
 .achievement-text {
   margin-top: 8vw;
   font-size: 3.5vw;
+}
+
+.achievement-earned-text {
+  color: black;
+  text-align: center;
+}
+
+.achievement-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.medal-image {
+  margin-left: 5%;
+  width: 20%;
+  height: auto;
 }

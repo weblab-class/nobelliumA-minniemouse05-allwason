@@ -151,7 +151,10 @@ const Profile = (props) => {
     if (displayMode === "Achievements") {
       setContent(
         <div>
-          <h1 className="u-textCenter u-xlarge">Achievements Earned</h1>
+          <div className="achievement-title-container">
+            <img className= "medal-image" src="https://i.ibb.co/pv6ykY2/Screenshot-2024-01-30-at-3-27-15-PM.png" />
+            <h1 className="achievement-earned-text u-xlarge">Achievements Earned</h1>
+          </div>
           <div className="comment-section">
             {achievementInfo && achievementInfo.length > 0 ? (
               achievementInfo.map((ach, index) =>
@@ -168,7 +171,7 @@ const Profile = (props) => {
     } else {
       setContent(
         <div>
-          <h1>Story</h1>
+          <h1 className='story-title'>Story</h1>
 
           <p className="story-div">{story.text}</p>
         </div>
@@ -220,7 +223,7 @@ const Profile = (props) => {
                   alt="bear"
                   className="avatar-image"
                 />
-                <div className="profile-overlay-text">{props.name}</div>
+                <div className="all-caps profile-overlay-text">{props.name}</div>
               </div>
 
               <div className="exp">{"Total exp earned to date: " + props.totalExp}</div>

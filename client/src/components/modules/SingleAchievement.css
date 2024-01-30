@@ -3,8 +3,16 @@
   height: 10%;
   padding: 4%;
   margin: 4%;
-  background-color: var(--dark);
+  background-color: #bddeb3;
   border-radius: var(--xs);
   font-size: 2.2vw;
   border: 1px, solid, black;
+}
+
+.comment-awardname {
+  color: black;
+}
+
+.comment-desc {
+  color: #8e8e8e;
 }
