@@ -22,28 +22,18 @@ const Friends = (props) => {
   const findFriend = () => {
     get("/api/user", { _id: text }).then((response) => {
       setSearched(true);
-      console.log(text);
-      console.log(response);
       if (response.user) {
         setFriendName(response.user[0].name);
         setFriendId(response.user[0]._id);
         setFound(true);
-        console.log(`Friend found: ${response.user[0].name}`);
-        console.log(response.user[0]);
         let newDict = { ...userDict };
         newDict[text] = response.user[0];
         setUserDict(newDict);
-        console.log(userDict);
       } else {
         setFound(false);
-        console.log(`Friend not found`);
-        console.log(text);
       }
     });
   };
-  useEffect(() => {
-    console.log(userDict[text]);
-  }, []);
   const addFriend = (async) => {
     //https://www.w3schools.com/jsref/jsref_includes_array.asp
     if (!requests.includes(friendId)) {
@@ -60,7 +50,6 @@ const Friends = (props) => {
         if (!friend_requested.requested) {
           friend_requested = { requested: [] };
         }
-        console.log(friend_requested);
         let final = await post("/api/friend_requested", {
           userId: friendId,
           requested: friend_requested.requested.concat(userId),
@@ -69,17 +58,10 @@ const Friends = (props) => {
       }
       updateRequests();
     } else {
-      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
-        () => {
-          setUserFriends(userFriends.concat(friendId));
-        }
-      );*/
       alert("friend already added!");
     }
   };
   const removeFriend = async (reqId) => {
-    console.log("called");
-    console.log(reqId);
     if (userFriends.includes(reqId)) {
       async function remove() {
         let req1 = await post("/api/friends", {
@@ -94,14 +76,6 @@ const Friends = (props) => {
         if (!friendlist) {
           friendlist = { friends: {} };
         }
-        console.log(friendlist.friends);
-        console.log(
-          friendlist.friends.filter(function (person) {
-            return person !== props.userId;
-          })
-        );
-        console.log(props.userId);
-        console.log(reqId);
         let req2 = await post("/api/friends", {
           userId: reqId,
           friends: friendlist.friends.filter(function (person) {
@@ -121,11 +95,8 @@ const Friends = (props) => {
   };
   const denyRequest = async (acceptId) => {
     //https://www.w3schools.com/jsref/jsref_includes_array.asp
-    console.log(requested);
-    console.log(acceptId);
 
     if (requested.includes(acceptId)) {
-      console.log(acceptId);
       async function updateRequests() {
         let req2 = await post("/api/friend_requested", {
           userId: props.userId,
@@ -138,9 +109,6 @@ const Friends = (props) => {
         if (!friend_request.requests) {
           friend_request = { requests: [] };
         }
-        console.log(friend_request);
-        console.log(props.userId);
-        console.log(acceptId);
         let final2 = await post("/api/friend_request", {
           userId: acceptId,
           requests: friend_request.requests.filter(function (person) {
@@ -155,22 +123,13 @@ const Friends = (props) => {
       }
       updateRequests();
     } else {
-      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
-        () => {
-          setUserFriends(userFriends.concat(friendId));
-        }
-      );*/
       alert("friend already added!");
     }
   };
+  //https://www.w3schools.com/jsref/jsref_includes_array.asp
   const acceptRequest = async (acceptId) => {
-    //https://www.w3schools.com/jsref/jsref_includes_array.asp
     if (!userFriends.includes(acceptId)) {
-      console.log(acceptId);
-      async function updateRequests() {
-        if (!requests) {
-          requests = [];
-        }
+      const updateRequests = async () => {
         let req1 = await post("/api/friends", {
           userId: props.userId,
           friends: userFriends.concat(acceptId),
@@ -180,51 +139,42 @@ const Friends = (props) => {
         if (!friend.friends) {
           friend = { friends: [] };
         }
-        console.log(friend);
+
         let final1 = await post("/api/friends", {
           userId: acceptId,
           friends: friend.friends.concat(props.userId),
         });
+
         setRequests(userFriends.concat(acceptId));
+
         if (!userFriends) {
           userFriends = [];
         }
+
         let req2 = await post("/api/friend_requested", {
           userId: props.userId,
-          requested: requested.filter(function (person) {
-            return person !== acceptId;
-          }),
+          requested: requested.filter((person) => person !== acceptId),
         });
+
         let friend_request = await get("/api/friends", { userId: acceptId });
 
         if (!friend_request.requests) {
           friend_request = { requests: [] };
         }
-        console.log(friend_request);
-        console.log(props.userId);
-        console.log(acceptId);
+
         let final2 = await post("/api/friend_request", {
           userId: acceptId,
-          requests: friend_request.requests.filter(function (person) {
-            return person !== props.userId;
-          }),
+          requests: friend_request.requests.filter((person) => person !== props.userId),
         });
-        setRequested(
-          requested.filter(function (person) {
-            return person !== acceptId;
-          })
-        );
-      }
+
+        setRequested(requested.filter((person) => person !== acceptId));
+      };
       updateRequests();
     } else {
-      /*post("/api/friends", { userId: props.userId, friends: userFriends.concat(friendId) }).then(
-        () => {
-          setUserFriends(userFriends.concat(friendId));
-        }
-      );*/
       alert("friend already added!");
     }
   };
+
   const handleChange = (e) => {
     setText(e.target.value);
   };
@@ -246,7 +196,6 @@ const Friends = (props) => {
         if (!friend_requested.requested) {
           friend_requested = { requested: [] };
         }
-        console.log(friend_requested);
         let final = await post("/api/friend_requested", {
           userId: friendId,
           requested: requests.filter(function (person) {
@@ -268,13 +217,11 @@ const Friends = (props) => {
     }
   };
   const populateInfo = (friend_id) => {
-    console.log(friend_id);
     if (userDict[friend_id] === undefined) {
       get("/api/user", { _id: friend_id }).then((response) => {
         let newDict = { ...userDict };
         newDict[friend_id] = response.user[0];
         setUserDict(newDict);
-        console.log(userDict);
       });
     }
   };
@@ -300,11 +247,9 @@ const Friends = (props) => {
         }
 
         if (content.requested) {
-          console.log(content.requested);
           setRequested(content.requested);
           for (let i = 0; i < content.requested.length; i++) {
             populateInfo(content.requested[i]);
-            console.log(content.requested[i]);
           }
         }
       });
@@ -348,8 +293,6 @@ const Friends = (props) => {
       />
     );
   };
-  //console.log(`text:${text}, friendId: ${friendId}, userDict: ${userDict} userDict[text]`);
-  //console.log(userDictRef.current[text]);
   return (
     <div>
       {props.userId || userId ? (
@@ -368,7 +311,6 @@ const Friends = (props) => {
         <div className="requests">
           <h1>{friendText}</h1>
           {requested.map((friend_id, ind) => {
-            //console.log(ind);
             return makeRequestEntry(friend_id, ind, true);
           })}
         </div>
@@ -410,7 +352,6 @@ const Friends = (props) => {
         <>
           <div className="friend-list u-flex-justifyCenter u-flex-vertical ">
             {userFriends.map((friend_id, ind) => {
-              //console.log(ind);
               return makeFriendEntry(friend_id, ind, false);
             })}
           </div>

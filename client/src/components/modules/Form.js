@@ -18,11 +18,6 @@ const Form = (props) => {
   const handleChange = (event) => {
     setName(event.target.value);
   };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   //props.addTask(name);
-  //   setName("");
-  // };
 
   const submitTodo = () => {
     if (name === "") {
@@ -39,7 +34,6 @@ const Form = (props) => {
         props.addTask({ userId: props.userId, name: name, completed: false });
       });
     }
-    // console.log(completed);
   };
 
   return (

@@ -1,80 +1,60 @@
-import React from "react";
-import { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./Timer.css";
+
 const Timer = ({ workSeconds, breakSeconds, changeMode, mode, seconds, current_state }) => {
   const interval = useRef(null);
   const [time, setTime] = useState("00:00");
-
   const [remain, setRemain] = useState(seconds);
-  let second = remain;
-  //second debugging: https://stackoverflow.com/questions/54069253/the-usestate-set-method-is-not-reflecting-a-change-immediately
-  useEffect(() => {
-    console.log(mode);
-    if (mode === "work") {
-      setRemain(workSeconds);
-      second = workSeconds;
-      clearInterval(interval.current);
 
+  useEffect(() => {
+    const handleInterval = () => {
       if (current_state === "start") {
         interval.current = setInterval(minusSecond, 1000);
-        alert("time to work!");
+        if (mode === "work") {
+          setRemain(workSeconds);
+          alert("Time to work!");
+        } else {
+          setRemain(breakSeconds);
+          alert("Time to take a break!");
+        }
+      } else if (current_state === "paused") {
+        clearInterval(interval.current);
+      } else if (current_state === "reset") {
+        clearInterval(interval.current);
+        if (mode === "work") {
+          setRemain(workSeconds);
+        } else {
+          setRemain(breakSeconds);
+        }
+        convertTime();
       }
-    } else {
-      setRemain(breakSeconds);
-      second = breakSeconds;
-      clearInterval(interval.current);
+    };
 
-      if (current_state === "start") {
-        interval.current = setInterval(minusSecond, 1000);
-        alert("time to take a break!");
-      }
-    }
-  }, [mode]);
-  useEffect(() => {
-    if (current_state === "paused") {
-      console.log("should clear interval");
-      console.log(second);
-      clearInterval(interval.current);
-      console.log(interval);
-      console.log(remain);
-      second = remain;
-    } else if (current_state === "reset") {
-      clearInterval(interval.current);
-      if (mode === "work") {
-        setRemain(workSeconds);
-      } else {
-        setRemain(breakSeconds);
-      }
+    handleInterval();
+  }, [mode, workSeconds, breakSeconds, current_state]);
 
-      convertTime();
-    } else if (current_state === "start") {
-      console.log("started");
-      console.log(remain);
-      interval.current = setInterval(minusSecond, 1000);
-    }
-  }, [current_state]);
   useEffect(() => {
     convertTime();
   }, [remain]);
+
   const convertTime = () => {
-    let remainder = 0;
-    remainder = (second % 60).toString();
-    if (remainder.length == 1) {
+    let remainder = (remain % 60).toString();
+    if (remainder.length === 1) {
       remainder = "0" + remainder;
     }
-    setTime(Math.floor(second / 60).toString() + ":" + remainder);
+    setTime(Math.floor(remain / 60).toString() + ":" + remainder);
   };
-  const minusSecond = () => {
-    //console.log(interval);
-    if (second > 0) {
-      second -= 1;
 
-      setRemain(second);
+  const minusSecond = () => {
+    if (remain > 0) {
+      setRemain((prev) => prev - 1);
     } else {
       clearInterval(interval.current);
       changeMode();
     }
   };
+
   return <h1 className="time-text">{time}</h1>;
 };
+
 export default Timer;

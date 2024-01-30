@@ -21,23 +21,6 @@ import room from "./../../../dist/room.png";
  */
 
 const Display = (props) => {
-  const [pomodoro, setPomodoro] = useState(false);
-  const togglePomodoro = () => {
-    setPomodoro(!pomodoro);
-  };
-  // const [totalExp, setTotalExp] = useState(0);
-
-  // useEffect(() => {
-  //   console.log("Room.js useEffect", props.name, props.userId);
-  //   post("/api/updateExp", { name: props.name, userId: props.userId, totalExp: 0 });
-  // }, []);
-
-  // const itemData = [
-  //   { id: "todo-0", name: "Eat", completed: true },
-  //   { id: "todo-1", name: "Sleep", completed: false },
-  //   { id: "todo-2", name: "Repeat", completed: false },
-  // ];
-
   const [itemData, setItemData] = useState([]);
 
   useEffect(() => {
@@ -50,17 +33,6 @@ const Display = (props) => {
       });
   });
 
-  // useEffect(() => {
-  //   //console.log("inside of useEffect in userprofiles display.js");
-  //   get("/api/exp", { userId: props.userId })
-  //     .then((userprofiles) => {
-  //       //console.log("userprofiles display.js", userprofiles.totalExp);
-  //       setTotalExp(userprofiles.totalExp);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error when running get for api/exp:", error);
-  //     });
-  // }, []);
   let content = <></>;
   if (props.open === "room") {
     content = (

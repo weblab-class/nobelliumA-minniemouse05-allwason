@@ -14,7 +14,6 @@ const SingleFolder = (props) => {
     props.setFolder(props.header);
   };
   const handleHeader = () => {
-    //console.log("onblur");
     console.log(props.index);
     if (!props.folders.includes(text)) props.changeFolder(text, props.index);
     else {
@@ -49,23 +48,11 @@ const SingleFolder = (props) => {
         <div className="u-flex">
           {props.header === "Uncategorized" && props.header === "Shared" ? (
             <>
-              <input
-                onFocus={() => {
-                  props.changeIndex(props.index);
-                  console.log(props.index);
-                }}
-                onBlur={handleHeader}
-                className="page-title"
-                value={text}
-              ></input>
+              <input onBlur={handleHeader} className="page-title" value={text}></input>
             </>
           ) : (
             <>
               <input
-                onFocus={() => {
-                  props.changeIndex(props.index);
-                  console.log(props.index);
-                }}
                 onBlur={handleHeader}
                 className="page-title"
                 value={text}

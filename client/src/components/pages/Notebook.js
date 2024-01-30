@@ -3,14 +3,12 @@ import { get, post } from "../../utilities.js";
 import "../../utilities.css";
 import "./Notebook.css";
 import NotebookUnit from "../modules/NotebookUnit";
-import Header from "../modules/Header";
 import { useNavigate } from "react-router-dom";
 import NotebookEntry from "../modules/NotebookEntry.js";
 import FolderDisplay from "../modules/FolderDisplay.js";
 const Notebook = ({ userId }) => {
   const [mode, setMode] = useState("folder");
   const [index, setIndex] = useState(0);
-  const [findex, setFIndex] = useState(0);
   const [entries, setEntries] = useState([]);
   const [folders, setFolders] = useState([]);
   const [folder, setFolder] = useState("Uncategorized");
@@ -80,12 +78,6 @@ const Notebook = ({ userId }) => {
 
     console.log(entries);
   };
-
-  /*useEffect(() => {
-    get("/api/entry", { userId: userId }).then((content) => {
-      console.log(content);
-    });
-  }, [entries]);*/
 
   const changeMode = (value) => {
     setMode(value);
@@ -178,15 +170,10 @@ const Notebook = ({ userId }) => {
     return updatedEntry;
   };
 
-  const fetchAndDisplayEntries = async () => {
-    const content = await get("/api/entry", { userId: userId });
-    console.log(content);
-  };
   useEffect(() => {
-    //console.log(entries);
     const populate = () => {
       get("/api/folder", { userId: userId }).then((folders_returned) => {
-        if (folders_returned.length === 0) {
+        if (folders_returned && folders_returned.length === 0) {
           folders_returned = [{ folders: ["Uncategorized", "Shared"] }];
         }
         console.log(folders_returned);
@@ -207,7 +194,7 @@ const Notebook = ({ userId }) => {
 
   let content;
   if (mode === "page") {
-    if (entries.length !== 0) {
+    if (entries && entries.length !== 0) {
       //console.log(entries);
       content = (
         <NotebookEntry
@@ -234,7 +221,6 @@ const Notebook = ({ userId }) => {
         folders={folders}
         changeMode={changeMode}
         newFolder={newFolder}
-        changeIndex={setFIndex}
         deleteFolder={deleteFolder}
       />
     );

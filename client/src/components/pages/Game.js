@@ -115,7 +115,6 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       setIFrame(0);
       setFrameNum(0);
     }
-    // framenum = 0;
     setKeyIsDown(false);
   };
 
@@ -221,13 +220,12 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
     ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, image.width, image.height);
 
     ctx.save();
-    //ctx.scale(-1, 1);
 
     //draw bear
     const scale = 6;
     const bearw = image_bear.width / 8;
     const bearh = image_bear.height / 2.9;
-    // ctx.clearRect(0, 0, image.width, image.height);
+
     ctx.drawImage(
       image_bear,
       141 + (bearw + bearw / 8.8) * framenum,
@@ -247,15 +245,7 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       setIFrame(0);
     }
 
-    //animateBear(ctx);
-
     ctx.restore();
-    /*if (todo) {
-      console.log("inside");
-      ctx.rect(locationX, 0, 100, 100);
-    }*/
-    // Ensure the image is loaded before drawing it on the canvas
-    // Set the canvas size to match the image size
   }
   //init function ends
 
@@ -283,7 +273,6 @@ const Game = ({ userId, name, totalExp, open, setOpen, togglePomodoro }) => {
       window.removeEventListener("keyup", handleUp);
     };
   }, [keyIsDown]);
-  /*<img src={room} width="500" />*/
 
   return (
     <>
