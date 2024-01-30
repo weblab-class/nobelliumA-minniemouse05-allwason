@@ -289,7 +289,9 @@ const Friends = (props) => {
             populateInfo(content.friends[i]);
           }
         }
-
+        if (content.friends && content.friends.length > 0) {
+          post("/api/addAchievement", { achievementId: 7, _id: userId });
+        }
         if (content.requests) {
           setRequests(content.requests);
           for (let i = 0; i < content.requests.length; i++) {

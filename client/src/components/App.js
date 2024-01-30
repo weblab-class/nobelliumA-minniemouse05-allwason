@@ -42,6 +42,7 @@ const App = () => {
         // }
       }
     }, []);
+
     // .then((user) => {
     //   console.log("user then", user);
     //   if (user._id) {
@@ -62,10 +63,25 @@ const App = () => {
     //   console.error("Error when running get for api/exp:", error);
     // });
   }, []);
-
+  useEffect(() => {
+    if (totalExp >= 5) {
+      post("/api/addAchievement", { achievementId: 6, _id: userId });
+    }
+    if (totalExp >= 25) {
+      post("/api/addAchievement", { achievementId: 0, _id: userId });
+    }
+    if (totalExp >= 50) {
+      post("/api/addAchievement", { achievementId: 2, _id: userId });
+    }
+    if (totalExp >= 125) {
+      post("/api/addAchievement", { achievementId: 3, _id: userId });
+    }
+  }, [userId, totalExp]);
   ////////////////
   useEffect(() => {
-    get("/api/whoami").then((user) => {
+    const setup = async () => {
+      let user = await get("/api/whoami");
+
       if (user._id) {
         get("/api/exp", { userId: user._id })
           .then((userInfo) => {
@@ -76,7 +92,12 @@ const App = () => {
             console.error("Error when running get for api/exp:", error);
           });
       }
-    });
+
+      let res = await get("/api/friends", { userId: userId });
+      if (res.friends.length > 0) {
+        post("/api/addAchievement", { achievementId: 7, _id: userId });
+      }
+    };
   });
   ////////////////////
 

@@ -4,6 +4,7 @@ const StorySchema = new mongoose.Schema({
   userId: String,
   text: String,
   length: Number,
+  latest: String,
 });
 
 // compile model from schema

@@ -25,7 +25,7 @@ const Profile = (props) => {
   const [achievementData, setAchievementData] = useState([]);
   const [achievementInfo, setAchievementInfo] = useState([]);
   const [content, setContent] = useState(<></>);
-  const [story, setStory] = useState({ text: "generating...", length: 0 });
+  const [story, setStory] = useState({ latest: "", text: "generating...", length: 0 });
   const [loaded, setLoaded] = useState(false);
 
   // [{awardName: test, awardDescription: test}]
@@ -49,6 +49,7 @@ const Profile = (props) => {
         setStory({
           text: "The story has yet to begin. Earn achievements to unlock chapters.",
           length: 0,
+          latest: "",
         });
       }
       setLoaded(true);
@@ -65,7 +66,7 @@ const Profile = (props) => {
     console.log(achievementData, story);
 
     if (loaded && achievementData && achievementData.length > story.length && !props.generating) {
-      setStory({ text: "generating...", length: story.length });
+      setStory({ text: "generating...", length: story.length, latest: story.length });
       props.setGenerating(true);
       if (story.length == 0) {
         get("/api/generate", {
@@ -76,9 +77,14 @@ const Profile = (props) => {
           post("/api/story", {
             userId: props.userId,
             length: story.length + 1,
+            latest: response.message.content,
             text: "\n\n\n" + response.message.content,
           }).then(() => {
-            setStory({ length: story.length + 1, text: response.message.content });
+            setStory({
+              length: story.length + 1,
+              text: response.message.content,
+              latest: response.message.content,
+            });
             console.log(response);
             console.log(response.message);
             props.setGenerating(false);
@@ -88,17 +94,22 @@ const Profile = (props) => {
         props.setGenerating(true);
         get("/api/generate", {
           userName: props.name,
-          content: "This is the story so far: '" + story.text + "' This is the next chapter: ",
+          content:
+            "This is the latest chapter: '" +
+            story.latest +
+            `' This is chapter: ${story.length + 1}`,
         }).then((response) => {
           console.log("posting with story existing");
           post("/api/story", {
             userId: props.userId,
             length: story.length + 1,
+            latest: response.message.content,
             text: story.text + "\n\n\n" + response.message.content,
           }).then(() => {
             setStory({
               text: story.text + "\n\n\n" + response.message.content,
               length: story.length + 1,
+              latest: response.message.content,
             });
             props.setGenerating(false);
             console.log(response);
@@ -111,20 +122,6 @@ const Profile = (props) => {
       }
     }
   }, [achievementData, story, props.generating]);
-  useEffect(() => {
-    if (props.totalExp >= 5) {
-      post("/api/addAchievement", { achievementId: 6, _id: props.userId });
-    }
-    if (props.totalExp >= 25) {
-      post("/api/addAchievement", { achievementId: 0, _id: props.userId });
-    }
-    if (props.totalExp >= 50) {
-      post("/api/addAchievement", { achievementId: 2, _id: props.userId });
-    }
-    if (props.totalExp >= 125) {
-      post("/api/addAchievement", { achievementId: 3, _id: props.userId });
-    }
-  }, [props.userId, props.totalExp]);
 
   useEffect(() => {
     //console.log("use effect for achievementData", achievementData);
