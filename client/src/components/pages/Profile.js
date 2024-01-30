@@ -206,7 +206,6 @@ const Profile = (props) => {
         <>
           <div className="profile-container">
             <div className="left-half">
-
               <div className="board">
                 <div className="custom-scrollbar">{content}</div>
               </div>
@@ -216,16 +215,17 @@ const Profile = (props) => {
                   {displayMode}
                 </button>
               </div>
-
-
             </div>
             <div className="right-half">
-              <div className="userId u-flex">
-                <h1>UserId: {props.userId}</h1>
-              </div>
-              <img src={bear} alt="bear" className="avatar-image" />
+              <img
+                src="https://i.ibb.co/h83sQhL/Screenshot-2024-01-30-at-11-57-01-AM.png"
+                alt="bear"
+                className="avatar-image"
+              />
               <div className="name">{props.name}</div>
               <div className="exp">{"Total exp earned to date: " + props.totalExp}</div>
+              <div className="new-userid"> UserId: {props.userId}
+              </div>
             </div>
           </div>
         </>
