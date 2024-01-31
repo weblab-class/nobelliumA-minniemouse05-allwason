@@ -154,10 +154,13 @@ const Notebook = ({ userId }) => {
   const handleFolderChange = async (folder, entry) => {
     try {
       console.log("changing folder");
-      setFolder(folder);
-      setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
+
       const updatedEntry = await updateEntryFolder(folder, entry);
       const ind = entries.indexOf(entry);
+      setFolder(folder);
+      setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
+      setMapped(entries.filter((value, ind, b) => value.folder === folder));
+      setIndex(entries.filter((value, ind, b) => value.folder === folder).length - 1);
       console.log(ind, entry);
     } catch (error) {
       console.error("Error handling folder change:", error);
@@ -212,7 +215,7 @@ const Notebook = ({ userId }) => {
           userId={userId}
           changePage={changeMode}
           index={index}
-          entries={entries.filter((value, ind, b) => value.folder === folder)}
+          entries={mapped}
           folder={folder}
           folders={folders}
           handleFolderChange={handleFolderChange}
