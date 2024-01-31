@@ -56,6 +56,10 @@
   width: 3vw;
   box-shadow: none;
 }
+.checkbox-style:hover {
+  width: 3vw;
+  box-shadow: none;
+}
 
 .item-entry-container {
   display: flex;
