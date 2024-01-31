@@ -79,4 +79,6 @@
 
 .key-login-container {
   display: flex;
+  justify-content: space-between; /* Adjust this property based on your alignment needs */
+  align-items: center;
 }
