@@ -170,6 +170,13 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("runing set time out");
+      handleInput({ key: "ArrowRight", locationX }), 3000;
+    });
+  }, []);
+
   //stuff for interacting w room
   useEffect(() => {
     const image = new Image();
@@ -206,60 +213,64 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       setNotebook(false);
     }
   }, [locationX]);
+
   useEffect(() => {
     init();
   }, []);
+
   //image stuff
   const canvasRef = useRef(null);
-  useEffect(() => {
-    console.log("canvas being made");
-    const image = new Image();
-    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
-    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
-    // Hard code the image source
-    image.src = room;
-    const image_bear = new Image();
-    image_bear.src = bear;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    if (locationX > leftBound + image.width) {
-      setLocationX(leftBound + image.width);
-    }
-    if (locationX < leftBound) {
-      setLocationX(leftBound);
-    }
-    setLeftBound(-image.width + window.innerWidth / 2);
 
-    ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, image.width, image.height);
+  // useEffect(() => {
+  //   console.log("canvas being made");
+  //   const image = new Image();
+  //   //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
+  //   //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
+  //   // Hard code the image source
+  //   image.src = room;
+  //   const image_bear = new Image();
+  //   image_bear.src = bear;
+  //   const canvas = canvasRef.current;
+  //   const ctx = canvas.getContext("2d");
+  //   if (locationX > leftBound + image.width) {
+  //     setLocationX(leftBound + image.width);
+  //   }
+  //   if (locationX < leftBound) {
+  //     setLocationX(leftBound);
+  //   }
+  //   setLeftBound(-image.width + window.innerWidth / 2);
 
-    ctx.save();
+  //   ctx.clearRect(0, 0, image.width, image.height);
+  //   ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, image.width, image.height);
 
-    //draw bear
-    const scale = 6;
-    const bearw = image_bear.width / 8;
-    const bearh = image_bear.height / 2.9;
+  //   ctx.save();
 
-    ctx.drawImage(
-      image_bear,
-      141 + (bearw + bearw / 8.8) * framenum,
-      bearh * flip,
-      bearw,
-      bearh,
-      window.innerWidth / 2 - image.height / (2 * scale),
-      image.height - image.height / (4 / 1.9),
-      image_bear.width / (8 * scale),
-      image_bear.height / (2.9 * scale)
-    );
-    setIFrame((prevnum) => prevnum + 0.05);
+  //   //draw bear
+  //   const scale = 6;
+  //   const bearw = image_bear.width / 8;
+  //   const bearh = image_bear.height / 2.9;
 
-    setFrameNum(Math.floor(iFrame));
-    if (framenum >= 5) {
-      setFrameNum(0);
-      setIFrame(0);
-    }
+  //   ctx.drawImage(
+  //     image_bear,
+  //     141 + (bearw + bearw / 8.8) * framenum,
+  //     bearh * flip,
+  //     bearw,
+  //     bearh,
+  //     window.innerWidth / 2 - image.height / (2 * scale),
+  //     image.height - image.height / (4 / 1.9),
+  //     image_bear.width / (8 * scale),
+  //     image_bear.height / (2.9 * scale)
+  //   );
+  //   setIFrame((prevnum) => prevnum + 0.05);
 
-    //ctx.restore();
-  }, []);
+  //   setFrameNum(Math.floor(iFrame));
+  //   if (framenum >= 5) {
+  //     setFrameNum(0);
+  //     setIFrame(0);
+  //   }
+
+  //   //ctx.restore();
+  // }, []);
 
   ///init function (with draw stuff inside)
   function init() {
@@ -280,8 +291,8 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     }
     setLeftBound(-image.width + window.innerWidth / 2);
 
+    ctx.clearRect(0, 0, image.width, image.height);
     ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, image.width, image.height);
-
     ctx.save();
 
     //draw bear

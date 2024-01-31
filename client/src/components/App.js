@@ -136,7 +136,7 @@ const App = () => {
                 handleLogout={handleLogout}
                 userId={userId}
               />
-              <Info />
+              <Info userId={userId} />
             </>
           }
         />
