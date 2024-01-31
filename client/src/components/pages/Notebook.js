@@ -159,7 +159,6 @@ const Notebook = ({ userId }) => {
       const ind = entries.indexOf(entry);
       setFolder(folder);
       setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
-      setMapped();
       console.log(ind, entry);
     } catch (error) {}
   };
