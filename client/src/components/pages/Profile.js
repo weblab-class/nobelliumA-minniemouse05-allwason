@@ -37,7 +37,7 @@ const Profile = (props) => {
   //array of objects
   const [displayMode, setDisplayMode] = useState("Achievements");
   useEffect(() => {
-    console.log("props.userId in 1st useEffect", props.userId);
+    //console.log("props.userId in 1st useEffect", props.userId);
 
     get("/api/userAchievements", { _id: props.userId }).then((achIdData) => {
       setAchievementData(achIdData);
@@ -47,7 +47,7 @@ const Profile = (props) => {
   useEffect(() => {
     const storyGenerate = async () => {
       let x = await get("/api/story", { userId: props.userId });
-      console.log(x[0]);
+      //console.log(x[0]);
       if (x.length > 0 && x[0].text) {
         setStory(x[0]);
       } else {
@@ -62,13 +62,13 @@ const Profile = (props) => {
     storyGenerate();
   }, []);
   useEffect(() => {
-    console.log(props.generating);
+    //console.log(props.generating);
   }, [props.generating]);
   useEffect(() => {
-    console.log(story);
+    //console.log(story);
   }, [story]);
   useEffect(() => {
-    console.log(achievementData, story);
+    //console.log(achievementData, story);
 
     if (loaded && achievementData && achievementData.length > story.length && !props.generating) {
       setStory({
@@ -82,7 +82,7 @@ const Profile = (props) => {
           content: "This is chapter 1 of the story: ",
           userName: props.name,
         }).then((response) => {
-          console.log("posting");
+          //console.log("posting");
           post("/api/story", {
             userId: props.userId,
             length: story.length + 1,
@@ -94,8 +94,8 @@ const Profile = (props) => {
               text: response.message.content,
               latest: response.message.content,
             });
-            console.log(response);
-            console.log(response.message);
+            //console.log(response);
+            //console.log(response.message);
             props.setGenerating(false);
           });
         });
@@ -108,7 +108,7 @@ const Profile = (props) => {
             story.latest +
             `' This is chapter: ${story.length + 1}`,
         }).then((response) => {
-          console.log("posting with story existing");
+          //console.log("posting with story existing");
           post("/api/story", {
             userId: props.userId,
             length: story.length + 1,
@@ -121,12 +121,12 @@ const Profile = (props) => {
               latest: response.message.content,
             });
             props.setGenerating(false);
-            console.log(response);
-            console.log(response.message);
+            //console.log(response);
+            //console.log(response.message);
           });
 
-          console.log(response);
-          console.log(response.message);
+          //console.log(response);
+          //console.log(response.message);
         });
       }
     }
@@ -140,7 +140,7 @@ const Profile = (props) => {
           return fetchedAward; // Return the fetched data
         })
         .catch((error) => {
-          console.log("setting fetchedAwards as none");
+          //console.log("setting fetchedAwards as none");
           console.error("Error when running get for api/getAchievement:", error);
           return null; // Handle errors by returning null or an appropriate value
         });
@@ -158,8 +158,8 @@ const Profile = (props) => {
   }, [achievementData, props.userId]);
   useEffect(() => {
     get("/api/user", { _id: props.userId }).then((result) => {
-      console.log("result after get user = ", result);
-      console.log("result[0] after get user = ", result[0]);
+      //console.log("result after get user = ", result);
+      //console.log("result[0] after get user = ", result[0]);
       setUserExp(result.user[0].totalExp);
       props.setTotalExp(result.user[0].totalExp);
     });
@@ -208,10 +208,6 @@ const Profile = (props) => {
       />
     );
   };
-
-  useEffect(() => {
-    console.log("profile.js props.totalExp", userExp);
-  }, []);
 
   const toggleDisplayMode = () => {
     if (displayMode === "Achievements") {

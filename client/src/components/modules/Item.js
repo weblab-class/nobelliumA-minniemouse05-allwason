@@ -34,7 +34,7 @@ const Item = (props) => {
   const updateCheck = () => {
     post("/api/updateItemCheck", { _id: props._id, completed: !props.completed })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         if (props.completed === false) {
           post("/api/addExp", { userId: props.userId, amtToUpdate: 5 }).then(
             props.setTotalExp(props.totalExp + 5)
@@ -46,8 +46,8 @@ const Item = (props) => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching updateItemCheck:", error);
-        console.log(props);
+        //console.error("Error fetching updateItemCheck:", error);
+        //console.log(props);
       });
   };
 

@@ -60,12 +60,12 @@ router.post("/initsocket", (req, res) => {
 router.get("/user", (req, res) => {
   User.find({ _id: req.query._id })
     .then((user) => {
-      console.log('running router.get("/user") ', req.query._id);
+      //console.log('running router.get("/user") ', req.query._id);
       res.send({ user });
     })
     .catch(() => {
       res.send({});
-      console.log("catched after router.get for /user");
+      //console.log("catched after router.get for /user");
     });
 });
 router.post("/story", (req, res) => {
@@ -120,7 +120,7 @@ router.get("/generate", async (req, res) => {
     model: "gpt-3.5-turbo",
   });
 
-  console.log(completion.choices[0]);
+  //console.log(completion.choices[0]);
   res.send(completion.choices[0]);
 });
 
@@ -128,13 +128,13 @@ router.get("/generate", async (req, res) => {
 
 //gets achievement based on user id
 router.get("/userAchievements", (req, res) => {
-  console.log('running router.get("/userAchievements"), req.query._id= ', req.query._id);
+  //console.log('running router.get("/userAchievements"), req.query._id= ', req.query._id);
   User.findOne({ _id: req.query._id })
     .then((allAchievements) => {
       res.send(allAchievements.achievementArray);
     })
     .catch(() => {
-      console.log('catching through router.get("/userAchievements")');
+      //console.log('catching through router.get("/userAchievements")');
       res.send({});
     });
 });
@@ -143,12 +143,12 @@ router.get("/userAchievements", (req, res) => {
 router.post("/addAchievement", async (req, res) => {
   try {
     const achievementIdToUpdate = req.body.achievementId;
-    console.log("addAchievement id", achievementIdToUpdate);
+    //console.log("addAchievement id", achievementIdToUpdate);
 
     const userToAward = await User.findById({ _id: req.body._id });
 
     if (!userToAward) {
-      console.log("running inside !userToAward");
+      //console.log("running inside !userToAward");
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
@@ -157,14 +157,14 @@ router.post("/addAchievement", async (req, res) => {
 
       await userToAward.save();
 
-      console.log("Saved new achievement, exp:", userToAward.achievementArray);
+      //console.log("Saved new achievement, exp:", userToAward.achievementArray);
       res.send({});
     } else {
-      console.log("Achievement already exists for the user");
+      //console.log("Achievement already exists for the user");
       res.send({});
     }
   } catch (error) {
-    console.log('catching error in router.post("/addAchievement"');
+    //console.log('catching error in router.post("/addAchievement"');
     //console.error("Error running addAchievement:", error);
     //res.status(500).json({ success: false, message: "Internal server error" });
   }
@@ -175,11 +175,11 @@ router.get("/getAchievement", (req, res) => {
   //console.log("getAchievement, achievementId= ", req.query.achievementId);
   Achievement.findOne({ achievementId: req.query.achievementId })
     .then((achievementData) => {
-      console.log("getAchievement, achievementData= ", achievementData);
+      //console.log("getAchievement, achievementData= ", achievementData);
       res.send(achievementData);
     })
     .catch((e) => {
-      console.log("fml");
+      //console.log("fml");
     });
 });
 
@@ -201,11 +201,11 @@ router.post("/makeAchievement", (req, res) => {
 
   NewAchievement.save()
     .then(() => {
-      console.log("saved NewAchievement");
+      //console.log("saved NewAchievement");
       res.send({});
     })
     .catch(() => {
-      console.log("catched NewAchievement");
+      //console.log("catched NewAchievement");
       res.send({});
     });
 });
@@ -299,12 +299,12 @@ router.post("/friend_requested", (req, res) => {
 //////////////// NOTEBOOK ///////////////
 router.get("/entry", (req, res) => {
   if (req.query._id !== undefined) {
-    console.log("query by _id");
+    //console.log("query by _id");
     Entry.find({ _id: req.query._id }).then((contents) => {
       res.send(contents);
     });
   } else if (req.query.userId !== undefined) {
-    console.log("query by userId");
+    //console.log("query by userId");
     Entry.find({ userId: req.query.userId }).then((contents) => {
       res.send(contents);
     });
@@ -353,7 +353,7 @@ router.post("/newEntry", (req, res) => {
   newEntry
     .save()
     .then((entry) => {
-      console.log(entry);
+      //console.log(entry);
       res.send(entry);
     })
     .catch(() => {
@@ -361,19 +361,19 @@ router.post("/newEntry", (req, res) => {
     });
 });
 router.post("/deleteEntry", (req, res) => {
-  console.log(req.body._id);
+  //console.log(req.body._id);
   Entry.deleteOne({ _id: req.body._id })
     .then(res.send({}))
     .catch((e) => {
-      console.log(e);
+      //console.log(e);
       res.send(e);
     });
 });
 
 router.post("/entry", (req, res) => {
-  console.log(req.body);
-  console.log(req.body.text);
-  console.log(req.body._id);
+  //console.log(req.body);
+  //console.log(req.body.text);
+  //console.log(req.body._id);
   const update = {
     $set: {
       userId: req.body.userId,
@@ -453,11 +453,11 @@ router.post("/addExp", async (req, res) => {
     userToAdd
       .save()
       .then(() => {
-        console.log("saved NewUser, exp:", userToAdd.totalExp);
+        //console.log("saved NewUser, exp:", userToAdd.totalExp);
         res.send({});
       })
       .catch(() => {
-        console.log("catched NewUser");
+        //console.log("catched NewUser");
         res.send({});
       });
   } catch (error) {
@@ -523,9 +523,9 @@ router.get("/todoItem", (req, res) => {
 });
 
 router.post("/todoItem", (req, res) => {
-  console.log(req.body.userId);
-  console.log(req.body.name);
-  console.log("starting post");
+  // console.log(req.body.userId);
+  // console.log(req.body.name);
+  // console.log("starting post");
 
   const NewTodoItem = new TodoItem({
     userId: req.body.userId,
@@ -533,23 +533,23 @@ router.post("/todoItem", (req, res) => {
     completed: req.body.completed,
   });
 
-  console.log("made new item");
-  console.log(NewTodoItem);
+  // console.log("made new item");
+  // console.log(NewTodoItem);
 
   NewTodoItem.save()
     .then((result) => {
-      console.log("saved");
+      //console.log("saved");
       res.send(result);
     })
     .catch(() => {
-      console.log("catched");
+      //console.log("catched");
       res.send({});
     });
 });
 
 router.post("/deleteItem", async (req, res) => {
   const _id = req.body._id;
-  console.log("deleteItem", req.body._id);
+  //console.log("deleteItem", req.body._id);
 
   TodoItem.findByIdAndDelete(_id)
     .then(() => {
@@ -568,7 +568,7 @@ router.post("/deleteItem", async (req, res) => {
 router.post("/updateItemCheck", async (req, res) => {
   const taskIdToUpdate = req.body._id; // Assuming taskId is sent in the request body
   const updatedFieldValue = req.body.completed; // Assuming the updated field value is sent in the request body
-  console.log("updateItemCheck", req.body._id, req.body.completed);
+  //console.log("updateItemCheck", req.body._id, req.body.completed);
 
   TodoItem.updateOne({ _id: taskIdToUpdate }, { $set: { completed: updatedFieldValue } })
     .then(() => {
@@ -587,7 +587,7 @@ router.post("/updateItemCheck", async (req, res) => {
 router.post("/updateItemName", async (req, res) => {
   const taskIdToUpdate = req.body._id; // Assuming taskId is sent in the request body
   const updatedFieldValue = req.body.name; // Assuming the updated field value is sent in the request body
-  console.log("updateItemName", req.body._id, req.body.name);
+  //console.log("updateItemName", req.body._id, req.body.name);
 
   TodoItem.updateOne({ _id: taskIdToUpdate }, { $set: { name: updatedFieldValue } })
     .then(() => {
@@ -636,11 +636,11 @@ router.post("/updateTopThree", async (req, res) => {
   const newArrayElement = { userId: userToAdd, name: nameToAdd, exp: userExp };
 
   const arrayOfUserId = TopThreeToUpdate.results.map((obj) => obj.userId);
-  console.log("arrayOfUserId= ", arrayOfUserId);
+  //console.log("arrayOfUserId= ", arrayOfUserId);
   const arrayOfExp = TopThreeToUpdate.results.map((obj) => obj.exp);
-  console.log("arrayOfExp= ", arrayOfExp);
+  //console.log("arrayOfExp= ", arrayOfExp);
   const currIndexOfUserId = arrayOfUserId.indexOf(userToAdd);
-  console.log("currIndexOfUserId= ", currIndexOfUserId);
+  //console.log("currIndexOfUserId= ", currIndexOfUserId);
 
   if (currIndexOfUserId !== -1) {
     const currExpOfUser = TopThreeToUpdate.results[currIndexOfUserId];
@@ -650,16 +650,16 @@ router.post("/updateTopThree", async (req, res) => {
       );
       elementToUpdate.exp = userExp;
       TopThreeToUpdate.results.sort((a, b) => b.exp - a.exp);
-      console.log("index!==-1, final TopThreeToUpdate= ", TopThreeToUpdate.results);
+      //console.log("index!==-1, final TopThreeToUpdate= ", TopThreeToUpdate.results);
 
       TopThreeToUpdate.save()
         .then(() => {
-          console.log("saved NewUser, exp:", userExp);
-          console.log("final TopThreeToUpdate= ", TopThreeToUpdate.results);
+          //console.log("saved NewUser, exp:", userExp);
+          //console.log("final TopThreeToUpdate= ", TopThreeToUpdate.results);
           res.send({});
         })
         .catch(() => {
-          console.log("catched NewUser");
+          //console.log("catched NewUser");
           res.send({});
         });
     }
@@ -667,27 +667,27 @@ router.post("/updateTopThree", async (req, res) => {
     const insertionIndex = TopThreeToUpdate.results.findIndex(
       (item) => item.exp <= newArrayElement.exp
     );
-    console.log("insertionIndex= ", insertionIndex);
+    //console.log("insertionIndex= ", insertionIndex);
 
     // If insertionIndex is -1, it means the new element has the largest 'size' and should be inserted at the end
     const finalIndex = insertionIndex !== -1 ? insertionIndex : TopThreeToUpdate.results.length;
-    console.log("finalIndex= ", finalIndex);
+    //console.log("finalIndex= ", finalIndex);
 
     // Insert the new element at the calculated index
     TopThreeToUpdate.results.splice(finalIndex, 0, newArrayElement);
 
-    console.log("TopThreeToUpdate= ", TopThreeToUpdate.results);
+    //console.log("TopThreeToUpdate= ", TopThreeToUpdate.results);
 
     TopThreeToUpdate.results.pop();
 
     TopThreeToUpdate.save()
       .then(() => {
-        console.log("saved NewUser, exp:", userExp);
-        console.log("final TopThreeToUpdate= ", TopThreeToUpdate.results);
+        //console.log("saved NewUser, exp:", userExp);
+        //console.log("final TopThreeToUpdate= ", TopThreeToUpdate.results);
         res.send({});
       })
       .catch(() => {
-        console.log("catched NewUser");
+        //console.log("catched NewUser");
         res.send({});
       });
   }
@@ -695,7 +695,7 @@ router.post("/updateTopThree", async (req, res) => {
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
-  console.log(`API route not found: ${req.method} ${req.url}`);
+  //console.log(`API route not found: ${req.method} ${req.url}`);
   res.status(404).send({ msg: "API route not found" });
 });
 

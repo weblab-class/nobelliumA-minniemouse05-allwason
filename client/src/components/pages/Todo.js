@@ -41,7 +41,7 @@ const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
     get("/api/todoItem", { userId: userId })
       .then((itemData) => {
         setTasks(itemData);
-        console.log(itemData);
+        //console.log(itemData);
       })
       .catch((error) => {
         console.error("Error when running get for api/todoItem:", error);
@@ -55,12 +55,12 @@ const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
     setTasks((arr) => [...tasks, task]);
   };
   useEffect(() => {
-    console.log(taskList);
+    //console.log(taskList);
   });
   const toggleTaskCompleted = async (_id, userId, completed, name) => {
-    console.log(tasks);
+    //console.log(tasks);
 
-    console.log(completed);
+    //console.log(completed);
     const updatedTasks = tasks.map((task) => {
       if (task._id == _id) {
         if (task.completed === false) {
@@ -78,7 +78,7 @@ const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
   };
 
   const deleteTask = async (_id) => {
-    console.log("Todo.js deleteTask _id", _id);
+    //console.log("Todo.js deleteTask _id", _id);
 
     let x = await post("/api/deleteItem", { _id: _id, userId: userId });
     const updatedTasks = tasks.filter((task) => _id !== task._id);
@@ -110,7 +110,7 @@ const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
         setTotalExp={setTotalExp}
       />
     ));
-  console.log(taskList);
+  //console.log(taskList);
 
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton key={name} name={name} isPressed={name === filter} setFilter={setFilter} />
