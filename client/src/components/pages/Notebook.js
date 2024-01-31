@@ -15,7 +15,6 @@ const Notebook = ({ userId }) => {
   const [folders, setFolders] = useState([]);
   const [folder, setFolder] = useState("Uncategorized");
   const [friends, setFriends] = useState([]);
-  const [mapped, setMapped] = useState([]);
   const navigate = useNavigate;
 
   const newEntry = (props) => {
@@ -159,14 +158,10 @@ const Notebook = ({ userId }) => {
       const updatedEntry = await updateEntryFolder(folder, entry);
       const ind = entries.indexOf(entry);
       setFolder(folder);
-
       setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
-      setMapped(entries.filter((value, ind, b) => value.folder === folder));
-      setIndex(entries.filter((value, ind, b) => value.folder === folder).length - 1);
+      setMapped();
       console.log(ind, entry);
-    } catch (error) {
-      console.error("Error handling folder change:", error);
-    }
+    } catch (error) {}
   };
 
   const updateEntryFolder = async (folder, entry) => {
@@ -217,7 +212,7 @@ const Notebook = ({ userId }) => {
           userId={userId}
           changePage={changeMode}
           index={index}
-          entries={mapped}
+          entries={entries.filter((value, ind, b) => value.folder === folder)}
           folder={folder}
           folders={folders}
           handleFolderChange={handleFolderChange}
