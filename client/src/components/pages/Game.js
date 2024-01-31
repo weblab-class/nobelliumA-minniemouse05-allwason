@@ -311,6 +311,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       image_bear.width / (8 * scale),
       image_bear.height / (2.9 * scale)
     );
+    console.log("running after ctx.draw bear");
     setIFrame((prevnum) => prevnum + 0.05);
 
     setFrameNum(Math.floor(iFrame));
@@ -332,6 +333,9 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
       // Hard code the image source
       image.src = room;
+      const image_bear = new Image();
+      image_bear.src = bear;
+
       console.log("height and innerWidth= ", image.height, window.innerWidth);
       ctx.canvas.height = image.height;
       ctx.canvas.width = window.innerWidth;
