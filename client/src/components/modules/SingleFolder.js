@@ -10,11 +10,11 @@ const SingleFolder = (props) => {
   };
   const handlePage = () => {
     props.changeMode("entry");
-    console.log(props.index);
+    //console.log(props.index);
     props.setFolder(props.header);
   };
   const handleHeader = () => {
-    console.log(props.index);
+    //console.log(props.index);
     if (!props.folders.includes(text)) props.changeFolder(text, props.index);
     else {
       if (text !== props.header) {

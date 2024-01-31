@@ -4,7 +4,7 @@ import "./Header.css";
 const Header = (props) => {
   const handleChange = (e) => {
     props.changeHeader(e.target.value);
-    console.log(e.target.value);
+    //console.log(e.target.value);
   };
   return (
     <>

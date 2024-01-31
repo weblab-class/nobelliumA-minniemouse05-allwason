@@ -30,7 +30,7 @@ const Leaderboard = (props) => {
 
   useEffect(() => {
     get("/api/user", { userId: props.userId }).then((result) => {
-      console.log(result);
+      //console.log(result);
       if (result.user && result.user[0]) {
         setTotalExp(result.user[0].totalExp);
         props.setTotalExp(result.user[0].totalExp);
@@ -38,10 +38,10 @@ const Leaderboard = (props) => {
     });
   }, []);
   useEffect(() => {
-    console.log("userExp= ", props.totalExp);
-    console.log("lowestExpOfArray", lowestExpOfArray);
+    //console.log("userExp= ", props.totalExp);
+    //console.log("lowestExpOfArray", lowestExpOfArray);
     if (props.totalExp > lowestExpOfArray) {
-      console.log("running post api updateTopThree");
+      //console.log("running post api updateTopThree");
       post("/api/updateTopThree", {
         arrayId: 0,
         userId: props.userId,

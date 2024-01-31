@@ -19,7 +19,7 @@ const FriendScroll = (props) => {
         }
       }
 
-      console.log("Final names array:", arr);
+      //console.log("Final names array:", arr);
       setNameArray(arr);
     };
     getFriends();
