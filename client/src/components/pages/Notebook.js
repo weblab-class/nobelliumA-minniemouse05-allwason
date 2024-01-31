@@ -79,7 +79,7 @@ const Notebook = ({ userId }) => {
     );
     setEntries(newEntries);
 
-    console.log(entries);
+    //console.log(entries);
   };
 
   const changeMode = (value) => {
@@ -97,7 +97,7 @@ const Notebook = ({ userId }) => {
       folder: find.folder,
       _id: find._id,
     }).then((entry) => {
-      console.log(entry);
+      //console.log(entry);
       setEntries((entries) =>
         entries.map((entry, i) =>
           entry._id === find._id
@@ -108,15 +108,15 @@ const Notebook = ({ userId }) => {
     });
   };
   const changeFolder = async (value, ind) => {
-    console.log(value);
+    // console.log(value);
 
-    console.log(folders[ind], entries.length);
+    // console.log(folders[ind], entries.length);
 
     for (let k = 0; k < entries.length; k++) {
-      console.log("bith");
-      console.log(entries[k].folder, folders[ind]);
+      //console.log("bith");
+      //console.log(entries[k].folder, folders[ind]);
       if (entries[k].folder === folders[ind]) {
-        console.log("posting");
+        //console.log("posting");
         let x = await post("/api/entry", {
           _id: entries[k]._id,
           userId: userId,
@@ -142,24 +142,21 @@ const Notebook = ({ userId }) => {
   };
   const handleFolderChange = async (folder, entry) => {
     try {
-      console.log("changing folder");
+      //console.log("changing folder");
       const updatedEntry = await updateEntryFolder(folder, entry);
-      console.log(updatedEntry);
-      console.log("posted");
-      console.log();
       const ind = entries.indexOf(entry);
-      console.log(ind, entry);
+      //console.log(ind, entry);
       setFolder(folder);
       setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
 
-      console.log(entries);
+      //console.log(entries);
     } catch (error) {
       console.error("Error handling folder change:", error);
     }
   };
 
   const updateEntryFolder = async (folder, entry) => {
-    console.log(entry);
+    //console.log(entry);
     const updatedEntryData = {
       _id: entry._id,
       userId: userId,
@@ -167,7 +164,7 @@ const Notebook = ({ userId }) => {
       text: entry.text,
       folder: folder,
     };
-    console.log(updatedEntryData);
+    //console.log(updatedEntryData);
 
     const updatedEntry = await post("/api/entry", updatedEntryData);
     return updatedEntry;
@@ -179,13 +176,13 @@ const Notebook = ({ userId }) => {
         if (folders_returned && folders_returned.length === 0) {
           folders_returned = [{ folders: ["Uncategorized", "Shared"] }];
         }
-        console.log(folders_returned);
+        //console.log(folders_returned);
         setFolders(folders_returned[0].folders);
-        console.log(folders_returned);
+        //console.log(folders_returned);
       });
 
       get("/api/entry", { userId: userId }).then((entries_returned) => {
-        console.log("returned", entries_returned);
+        //console.log("returned", entries_returned);
         setEntries(entries_returned);
       });
       get("/api/friends", { userId: userId }).then((result) => {
