@@ -109,7 +109,13 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   const [notebook, setNotebook] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [keyIsDown, setKeyIsDown] = useState(false);
-
+  const image = new Image();
+  //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
+  //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
+  // Hard code the image source
+  image.src = room;
+  const image_bear = new Image();
+  image_bear.src = bearsprite;
   const handleUp = (e) => {
     if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       intervalRef.current = clearInterval(intervalRef.current);
@@ -146,13 +152,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   const handleInput = (e, locX) => {
     //https://stackoverflow.com/questions/68745579/how-to-capture-tab-key-press-in-react-component
-    const image = new Image();
-    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
-    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
-    // Hard code the image source
-    image.src = room;
-    const image_bear = new Image();
-    image_bear.src = bearsprite;
+
     if (!intervalRef.current) {
       if (e.key === "ArrowLeft") {
         setKeyIsDown(true);
@@ -171,22 +171,43 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log("runing set time out");
-      handleInput({ key: "ArrowLeft", locationX }), 3000;
-      init();
-    });
+    console.log("init");
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(0, 0, width, height);
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0, width, height, locationX, 0, width, height);
+    };
+
+    ctx.save();
+    console.log(image_bear.width, image_bear.height);
+    //draw bear
+    const scale = 6;
+    const bearw = 942.625;
+    const bearh = 1684.1379310344828;
+    const bwidth = console.log("bear dim ", image_bear.width, image_bear.height);
+    console.log("image dim", image.width, image.height);
+    console.log(image_bear);
+    image_bear.onload = function () {
+      ctx.drawImage(
+        image_bear,
+        141 + (bearw + bearw / 8.8) * framenum,
+        bearh * flip,
+        bearw,
+        bearh,
+        window.innerWidth / 2 - height / (2 * scale),
+        height - height / 1.65,
+        7541 / (8 * scale * 0.8),
+        4884 / (2.9 * scale * 0.8)
+      );
+    };
+
+    //ctx.restore();
   }, []);
 
   //stuff for interacting w room
   useEffect(() => {
-    const image = new Image();
-    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
-    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
-    // Hard code the image source
-    image.src = room;
-    const image_bear = new Image();
-    image_bear.src = bearsprite;
     init();
     if (locationX < leftBound + image.width / 1.05 && locationX > leftBound + image.width / 1.25) {
       setMusic(true);
@@ -217,7 +238,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   useEffect(() => {
     init();
-    console.log(locationX, "locationX", leftBound, leftBound + width);
   }, []);
 
   //image stuff
@@ -279,13 +299,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     console.log("init");
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const image = new Image();
-    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
-    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
-    // Hard code the image source
-    image.src = room;
-    const image_bear = new Image();
-    image_bear.src = bearsprite;
+
     if (locationX > leftBound + width) {
       setLocationX(leftBound + width);
     }
@@ -295,6 +309,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     setLeftBound(-width + window.innerWidth / 2);
     console.log(window.innerWidth, -width + window.innerWidth / 2, leftBound, locationX);
     ctx.clearRect(0, 0, width, height);
+
     ctx.drawImage(image, 0, 0, width, height, locationX, 0, width, height);
     ctx.save();
     console.log(image_bear.width, image_bear.height);
@@ -305,19 +320,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const bwidth = console.log("bear dim ", image_bear.width, image_bear.height);
     console.log("image dim", image.width, image.height);
     console.log(image_bear);
-    image_bear.onload = function () {
-      ctx.drawImage(
-        image_bear,
-        141 + (bearw + bearw / 8.8) * framenum,
-        bearh * flip,
-        bearw,
-        bearh,
-        window.innerWidth / 2 - height / (2 * scale),
-        height - height / 1.65,
-        7541 / (8 * scale * 0.8),
-        4884 / (2.9 * scale * 0.8)
-      );
-    };
+
     ctx.drawImage(
       image_bear,
       141 + (bearw + bearw / 8.8) * framenum,
@@ -346,14 +349,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const ctx = canvasRef.current.getContext("2d");
 
     const handleResize = (e) => {
-      const image = new Image(754, 834);
-      //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
-      //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
-      // Hard code the image source
-      image.src = room;
-      const image_bear = new Image();
-      image_bear.src = bearsprite;
-
       console.log("height and innerWidth= ", image.height, window.innerWidth);
       ctx.canvas.height = image.height;
       ctx.canvas.width = window.innerWidth;
