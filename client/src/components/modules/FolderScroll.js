@@ -21,7 +21,7 @@ const FolderScroll = (props) => {
         {/* Added a down arrow for a visual cue */}
       </button>
       {expanded && (
-        <div className="dropdown-content">
+        <div className="dropdown-content1">
           {props.folders.map((entry, ind) => (
             <button key={entry} onClick={() => handleFolderChange(props.folders[ind])}>
               {props.folders[ind]}
