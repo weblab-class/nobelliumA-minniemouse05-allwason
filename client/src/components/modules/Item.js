@@ -82,32 +82,34 @@ const Item = (props) => {
 
   const viewTemplate = (
     <div className="todo-container">
-      <div className="checkbox-container">
-        <input
-          className="checkbox-style"
-          _id={props._id}
-          type="checkbox"
-          defaultChecked={props.completed}
-          onClick={updateCheck}
-          onChange={() =>
-            props.toggleTaskCompleted(props._id, props.userId, props.completed, props.name)
-          }
-        />
-        <label className="" htmlFor={props.id}>
-          {props.name}
-        </label>
-      </div>
-      <div className="checkbox-container">
-        <button type="button" className="todo-border-button" onClick={() => setEditing(true)}>
-          Edit
-        </button>
-        <button
-          type="button"
-          className="todo-border-button"
-          onClick={() => props.deleteTask(props._id)}
-        >
-          Delete
-        </button>
+      <div className="item-entry-container">
+        <div className="checkbox-container">
+          <input
+            className="checkbox-style"
+            _id={props._id}
+            type="checkbox"
+            defaultChecked={props.completed}
+            onClick={updateCheck}
+            onChange={() =>
+              props.toggleTaskCompleted(props._id, props.userId, props.completed, props.name)
+            }
+          />
+          <label className="" htmlFor={props.id}>
+            {props.name}
+          </label>
+        </div>
+        <div className="item-button-container">
+          <button type="button" className="todo-border-button" onClick={() => setEditing(true)}>
+            Edit
+          </button>
+          <button
+            type="button"
+            className="todo-border-button"
+            onClick={() => props.deleteTask(props._id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

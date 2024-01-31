@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 
 .todo-border-button {
@@ -11,7 +15,7 @@
   border-radius: 5px;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
-  margin: 1.5px
+  margin: 1.5px;
 }
 
 .form-group {
@@ -30,7 +34,9 @@
   flex-direction: column;
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 2px solid black;
 }
 
 .checkbox-container {
@@ -40,5 +46,16 @@
 
 .checkbox-style {
   width: 30px;
+}
+
+.item-entry-container {
+  display: flex;
+  justify-content: space-between; /* Adjust this property based on your alignment needs */
+  align-items: center;
+  width: 100%;
+}
+
+.item-button-container {
+  margin-left: auto;
 }
 
