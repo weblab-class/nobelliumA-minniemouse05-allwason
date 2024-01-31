@@ -125,12 +125,16 @@ const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
     <>
       <div className="todoapp stack-large">
         <ExitButton />
-        <h1>To-Do List</h1>
+        <div className="todo-title">To-Do List</div>
         <ExpTracker userId={userId} name={name} totalExp={totalExp} tempEarnedExp={tempEarnedExp} />
         <Form addTask={addTask1} userId={userId} setTasks={setTasks} />
         <div className="filters btn-group stack-exception">{filterList}</div>
-        <h2 id="list-heading">{headingText}</h2>
-        <h2 id="list-heading">{congratsMessage}</h2>
+        <h2 className="todo-heading" id="list-heading">
+          {headingText}
+        </h2>
+        <h2 className="todo-heading" id="list-heading">
+          {congratsMessage}
+        </h2>
         <ul
           role="list"
           className="todo-list stack-large stack-exception"
