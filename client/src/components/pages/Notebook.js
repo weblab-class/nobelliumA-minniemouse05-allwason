@@ -15,6 +15,7 @@ const Notebook = ({ userId }) => {
   const [folders, setFolders] = useState([]);
   const [folder, setFolder] = useState("Uncategorized");
   const [friends, setFriends] = useState([]);
+  const [mapped, setMapped] = useState([]);
   const navigate = useNavigate;
 
   const newEntry = (props) => {
