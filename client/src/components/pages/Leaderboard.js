@@ -18,6 +18,7 @@ const Leaderboard = (props) => {
   const navigate = useNavigate();
   const [expArray, setExpArray] = useState([]);
   const [lowestExpOfArray, setLowestExpOfArray] = useState(0);
+  //const [userExp, setUserExp] = useState(0);
 
   useEffect(() => {
     get("/api/topThree", { arrayId: 0 }).then((resultArray) => {
@@ -27,7 +28,7 @@ const Leaderboard = (props) => {
   }, [props.userId, expArray]);
 
   useEffect(() => {
-    console.log("props.totalExp= ", props.totalExp);
+    console.log("userExp= ", props.totalExp);
     console.log("lowestExpOfArray", lowestExpOfArray);
     if (props.totalExp > lowestExpOfArray) {
       console.log("running post api updateTopThree");
