@@ -239,6 +239,12 @@ const Friends = (props) => {
         if (content.friends && content.friends.length > 0) {
           post("/api/addAchievement", { achievementId: 7, _id: userId });
         }
+        if (content.friends && content.friends.length >= 5) {
+          post("/api/addAchievement", { achievementId: 5, _id: userId });
+        }
+        if (content.friends && content.friends.length >= 10) {
+          post("/api/addAchievement", { achievementId: 8, _id: userId });
+        }
         if (content.requests) {
           setRequests(content.requests);
           for (let i = 0; i < content.requests.length; i++) {

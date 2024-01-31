@@ -56,6 +56,12 @@ const App = () => {
     if (totalExp >= 125) {
       post("/api/addAchievement", { achievementId: 3, _id: userId });
     }
+    if (totalExp >= 500) {
+      post("/api/addAchievement", { achievementId: 9, _id: userId });
+    }
+    if (totalExp >= 2500) {
+      post("/api/addAchievement", { achievementId: 10, _id: userId });
+    }
   }, [userId, totalExp]);
   useEffect(() => {
     const setup = async () => {

@@ -107,6 +107,17 @@ const Notebook = ({ userId }) => {
       );
     });
   };
+  useEffect(() => {
+    if (entries && entries.length >= 1) {
+      post("/api/addAchievement", { achievementId: 4, _id: userId });
+    }
+    if (entries && entries.length >= 10) {
+      post("/api/addAchievement", { achievementId: 11, _id: userId });
+    }
+    if (entries && entries.length >= 100) {
+      post("/api/addAchievement", { achievementId: 12, _id: userId });
+    }
+  }, [entries]);
   const changeFolder = async (value, ind) => {
     // console.log(value);
 
