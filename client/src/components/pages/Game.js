@@ -311,9 +311,9 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       bearw,
       bearh,
       window.innerWidth / 2 - height / (2 * scale),
-      height - height / 1.85,
-      image_bear.width / (8 * scale),
-      image_bear.height / (2.9 * scale)
+      height - height / 1.65,
+      image_bear.width / (8 * scale * 0.8),
+      image_bear.height / (2.9 * scale * 0.8)
     );
     console.log("locationX", locationX);
     setIFrame((prevnum) => prevnum + 0.05);
