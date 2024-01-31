@@ -31,8 +31,8 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   const [content, setContent] = useState(<></>);
 
   const [itemData, setItemData] = useState([]);
-  const width = 1951;
-  const height = 960;
+  const width = (1951 * window.innerHeight) / 960;
+  const height = window.innerHeight;
   useEffect(() => {
     if (open === "todo") {
       const todo = (
@@ -158,13 +158,13 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       if (e.key === "ArrowLeft") {
         setKeyIsDown(true);
         setFlip(0);
-        if (locX >= leftBound && locX <= leftBound + image.width) {
+        if (locX >= leftBound && locX <= leftBound + width) {
           animateLeft();
         }
       } else if (e.key === "ArrowRight") {
         setKeyIsDown(true);
         setFlip(1.1);
-        if (locX <= leftBound + image.width) {
+        if (locX <= leftBound + width) {
           animateRight();
         }
       }
@@ -177,7 +177,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
     ctx.clearRect(0, 0, width, height);
     image.onload = function () {
-      ctx.drawImage(image, 0, 0, width, height, locationX, 0, width, height);
+      ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, width, height);
     };
 
     ctx.save();
@@ -212,23 +212,23 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   //stuff for interacting w room
   useEffect(() => {
     init();
-    if (locationX < leftBound + image.width / 1.05 && locationX > leftBound + image.width / 1.25) {
+    if (locationX < leftBound + width / 1.05 && locationX > leftBound + width / 1.25) {
       setMusic(true);
     } else {
       setMusic(false);
     }
-    if (locationX < leftBound + image.width / 1.3 && locationX > leftBound + image.width / 1.4) {
+    if (locationX < leftBound + width / 1.3 && locationX > leftBound + width / 1.4) {
       setClock(true);
     } else {
       setClock(false);
     }
-    if (locationX < leftBound + image.width / 1.6 && locationX > leftBound + image.width / 1.9) {
+    if (locationX < leftBound + width / 1.6 && locationX > leftBound + width / 1.9) {
       setTodo(true);
     } else {
       setTodo(false);
     }
 
-    if (locationX < leftBound + image.width / 4 && locationX > leftBound + image.width / 10) {
+    if (locationX < leftBound + width / 4 && locationX > leftBound + width / 10) {
       setNotebook(true);
     } else {
       setNotebook(false);
@@ -308,7 +308,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
     ctx.clearRect(0, 0, width, height);
 
-    ctx.drawImage(image, 0, 0, width, height, locationX, 0, width, height);
+    ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, width, height);
     ctx.save();
 
     //draw bear
@@ -342,7 +342,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const ctx = canvasRef.current.getContext("2d");
 
     const handleResize = (e) => {
-      ctx.canvas.height = image.height;
+      ctx.canvas.height = height;
       ctx.canvas.width = window.innerWidth;
       init();
     };
