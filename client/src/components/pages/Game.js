@@ -302,7 +302,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const scale = 6;
     const bearw = 942.625;
     const bearh = 1684.1379310344828;
-    console.log("bear dim ", bearw, bearh);
+    const bwidth = console.log("bear dim ", image_bear.width, image_bear.height);
     console.log("image dim", image.width, image.height);
     ctx.drawImage(
       image_bear,
@@ -312,8 +312,8 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       bearh,
       window.innerWidth / 2 - height / (2 * scale),
       height - height / 1.65,
-      image_bear.width / (8 * scale * 0.8),
-      image_bear.height / (2.9 * scale * 0.8)
+      7541 / (8 * scale * 0.8),
+      4884 / (2.9 * scale * 0.8)
     );
     console.log("locationX", locationX);
     setIFrame((prevnum) => prevnum + 0.05);
