@@ -18,6 +18,7 @@ const Leaderboard = (props) => {
   const navigate = useNavigate();
   const [expArray, setExpArray] = useState([]);
   const [lowestExpOfArray, setLowestExpOfArray] = useState(0);
+  const [totalExp, setTotalExp] = useState(0);
   //const [userExp, setUserExp] = useState(0);
 
   useEffect(() => {
@@ -27,6 +28,15 @@ const Leaderboard = (props) => {
     });
   }, [props.userId, expArray]);
 
+  useEffect(() => {
+    get("/api/user", { userId: props.userId }).then((result) => {
+      console.log(result);
+      if (result.user && result.user[0]) {
+        setTotalExp(result.user[0].totalExp);
+        props.setTotalExp(result.user[0].totalExp);
+      }
+    });
+  }, []);
   useEffect(() => {
     console.log("userExp= ", props.totalExp);
     console.log("lowestExpOfArray", lowestExpOfArray);
