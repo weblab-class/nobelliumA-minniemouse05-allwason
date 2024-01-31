@@ -293,7 +293,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       setLocationX(leftBound);
     }
     setLeftBound(-width + window.innerWidth / 2);
-
+    console.log(window.innerWidth, -width + window.innerWidth / 2, leftBound, locationX);
     ctx.clearRect(0, 0, width, height);
     ctx.drawImage(image, 0, 0, width, height, locationX, 0, width, height);
     ctx.save();
