@@ -13,7 +13,9 @@ const Info = (props) => {
         <>
           <div className="info-text-container">
             <div className="info-heading"> What is RoomCraft? </div>
-            <div className="info-productive-text">become the most productive version of yourself! </div>
+            <div className="info-productive-text">
+              become the most productive version of yourself!{" "}
+            </div>
 
             <div className="info-image-text-container">
               <img
@@ -25,6 +27,9 @@ const Info = (props) => {
                 <div className="instruction-container">
                   <div className="info-instruction-text">
                     - use the left and right key arrows to move your bear avatar around the room
+                  </div>
+                  <div className="info-instruction-text">
+                    - click on the X in the top corner or use the esc key to exit out of pages
                   </div>
                   <div className="info-instruction-text">
                     - when you walk near a certain feature, it’s button will pop up. click on the
