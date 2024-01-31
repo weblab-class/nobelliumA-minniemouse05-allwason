@@ -233,57 +233,73 @@ const Friends = (props) => {
       if (userFriends.length == 0 && requests.length == 0 && requested.length == 0) {
         let content = await get("/api/friends", { userId: props.userId });
         let newDict = { ...userDict };
-        if (content.friends) {
-          setUserFriends(content.friends);
+        console.log(content);
+        if (content === {}) {
+          if (content.friends) {
+            setUserFriends(content.friends);
 
-          for (let i = 0; i < content.friends.length; i++) {
-            let friend_id = content.friends[i];
+            for (let i = 0; i < content.friends.length; i++) {
+              let friend_id = content.friends[i];
 
-            if (userDict[friend_id] === undefined) {
-              let response = await get("/api/user", { _id: friend_id });
-              newDict[friend_id] = response.user[0];
+              if (userDict[friend_id] === undefined) {
+                let response = await get("/api/user", { _id: friend_id });
+                newDict[friend_id] = response.user[0];
+              }
             }
           }
-        }
-        if (content.friends && content.friends.length > 0) {
-          let x = await post("/api/addAchievement", { achievementId: 7, _id: userId });
-        }
-        if (content.friends && content.friends.length >= 5) {
-          let x = await post("/api/addAchievement", { achievementId: 5, _id: userId });
-        }
-        if (content.friends && content.friends.length >= 10) {
-          let x = await post("/api/addAchievement", { achievementId: 8, _id: userId });
-        }
-        console.log(newDict);
-        if (content.requests) {
-          setRequests(content.requests);
+          if (content.friends && content.friends.length > 0) {
+            let x = await post("/api/addAchievement", { achievementId: 7, _id: userId });
+          }
+          if (content.friends && content.friends.length >= 5) {
+            let x = await post("/api/addAchievement", { achievementId: 5, _id: userId });
+          }
+          if (content.friends && content.friends.length >= 10) {
+            let x = await post("/api/addAchievement", { achievementId: 8, _id: userId });
+          }
+          console.log(newDict);
+          if (content.requests) {
+            setRequests(content.requests);
 
-          for (let i = 0; i < content.requests.length; i++) {
-            let friend_id = content.requested[i];
-            if (userDict[friend_id] === undefined) {
-              let response = await get("/api/user", { _id: friend_id });
-              newDict[friend_id] = response.user[0];
+            for (let i = 0; i < content.requests.length; i++) {
+              let friend_id = content.requested[i];
+              if (userDict[friend_id] === undefined) {
+                let response = await get("/api/user", { _id: friend_id });
+                newDict[friend_id] = response.user[0];
+              }
             }
           }
-        }
-        console.log(newDict);
-        if (content.requested) {
-          setRequested(content.requested);
+          console.log(newDict);
+          if (content.requested) {
+            setRequested(content.requested);
 
-          for (let i = 0; i < content.requested.length; i++) {
-            let friend_id = content.requested[i];
-            if (userDict[friend_id] === undefined) {
-              let response = await get("/api/user", { _id: friend_id });
-              newDict[friend_id] = response.user[0];
+            for (let i = 0; i < content.requested.length; i++) {
+              let friend_id = content.requested[i];
+              if (userDict[friend_id] === undefined) {
+                let response = await get("/api/user", { _id: friend_id });
+                newDict[friend_id] = response.user[0];
+              }
             }
           }
+          setUserDict((old) => newDict);
+        } else {
+          let req1 = await post("/api/friends", {
+            userId: props.userId,
+            friends: [],
+          });
+          let req2 = await post("/api/friend_requested", {
+            userId: props.userId,
+            requested: [],
+          });
+
+          let final2 = await post("/api/friend_request", {
+            userId: props.userId,
+            requests: [],
+          });
         }
-        console.log(newDict);
-        setUserDict((old) => newDict);
       }
     };
     init();
-  });
+  }, []);
   let friendText = "";
   if (requested.length == 0) {
     friendText = "No incoming friend requests.";
