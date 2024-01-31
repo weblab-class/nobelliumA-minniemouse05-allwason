@@ -46,7 +46,7 @@ const FriendScroll = (props) => {
   return (
     <div className="scroll-container-friend u-flexColumn">
       <button onClick={toggleDropdown}>
-        <span class="material-symbols-outlined">send</span>
+        <span className="material-symbols-outlined">send</span>
       </button>
       {props.friends
         ? expanded && (

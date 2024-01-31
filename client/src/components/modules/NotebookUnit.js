@@ -30,6 +30,7 @@ const NotebookUnit = (props) => {
   };
   return (
     <>
+      <h2>Folder: {props.folder}</h2>
       <div className="u-flex-justifyCenter u-space-between chapter-container">
         {props.entries.map((entry, ind) => {
           return makePage(entry._id, ind);

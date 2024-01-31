@@ -142,14 +142,14 @@ const Notebook = ({ userId }) => {
   };
   const handleFolderChange = async (folder, entry) => {
     try {
-      //console.log("changing folder");
+      console.log("changing folder");
       const updatedEntry = await updateEntryFolder(folder, entry);
       const ind = entries.indexOf(entry);
-      //console.log(ind, entry);
+      console.log(ind, entry);
       setFolder(folder);
       setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
 
-      //console.log(entries);
+      console.log(entries);
     } catch (error) {
       console.error("Error handling folder change:", error);
     }
