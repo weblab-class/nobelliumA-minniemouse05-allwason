@@ -9,11 +9,11 @@ const Page = (props) => {
   };
   const handlePage = () => {
     props.changeMode("page");
-    console.log(props.index);
+    //console.log(props.index);
     props.setIndex(props.index);
   };
   const handleHeader = () => {
-    console.log(props.index);
+    //console.log(props.index);
     props.changeHeader(text);
   };
   const handleDelete = () => {
