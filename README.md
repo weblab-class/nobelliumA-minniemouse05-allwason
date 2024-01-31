@@ -10,7 +10,7 @@ We all are the main characters of our own stories. And we deserve a strong arsen
 
 Introducing: RoomCraft which uses gamification to help you be the most productive version of yourself, so you can slay the dragons of your life.
 
-Picture this: Your virtual room is a dynamic landscape, featuring sections tailored to your needs. Take class notes, play songs from Spotify with a single click, update your todo-list, all on the same website. 
+Picture this: Your virtual room is a dynamic landscape, featuring sections tailored to your needs. Take class notes, update your todo-list, and study with a pomodoro timer, all on the same website. 
 
 But RoomCraft is not just a solitary journey; just like in every adventure, you meet a wide array of friends along the way. Exchange notes and messages to your friends through the notebook feature and showcase your achievements on a leaderboard based on exp earned from completing todo-list items. Gain more achievements so that you can unlock more chapters in your very own hero's tale.
 
