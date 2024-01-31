@@ -109,7 +109,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   const [notebook, setNotebook] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [keyIsDown, setKeyIsDown] = useState(false);
-  const [bear, setBear] = useState(bearsprite);
 
   const handleUp = (e) => {
     if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
@@ -153,7 +152,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     // Hard code the image source
     image.src = room;
     const image_bear = new Image();
-    image_bear.src = bear;
+    image_bear.src = bearsprite;
     if (!intervalRef.current) {
       if (e.key === "ArrowLeft") {
         setKeyIsDown(true);
@@ -174,7 +173,8 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   useEffect(() => {
     setTimeout(() => {
       console.log("runing set time out");
-      handleInput({ key: "ArrowRight", locationX }), 3000;
+      handleInput({ key: "ArrowLeft", locationX }), 3000;
+      init();
     });
   }, []);
 
@@ -186,7 +186,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     // Hard code the image source
     image.src = room;
     const image_bear = new Image();
-    image_bear.src = bear;
+    image_bear.src = bearsprite;
     init();
     if (locationX < leftBound + image.width / 1.05 && locationX > leftBound + image.width / 1.25) {
       setMusic(true);
@@ -285,7 +285,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     // Hard code the image source
     image.src = room;
     const image_bear = new Image();
-    image_bear.src = bear;
+    image_bear.src = bearsprite;
     if (locationX > leftBound + width) {
       setLocationX(leftBound + width);
     }
@@ -305,6 +305,19 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const bwidth = console.log("bear dim ", image_bear.width, image_bear.height);
     console.log("image dim", image.width, image.height);
     console.log(image_bear);
+    image_bear.onload = function () {
+      ctx.drawImage(
+        image_bear,
+        141 + (bearw + bearw / 8.8) * framenum,
+        bearh * flip,
+        bearw,
+        bearh,
+        window.innerWidth / 2 - height / (2 * scale),
+        height - height / 1.65,
+        7541 / (8 * scale * 0.8),
+        4884 / (2.9 * scale * 0.8)
+      );
+    };
     ctx.drawImage(
       image_bear,
       141 + (bearw + bearw / 8.8) * framenum,
@@ -339,7 +352,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       // Hard code the image source
       image.src = room;
       const image_bear = new Image();
-      image_bear.src = bear;
+      image_bear.src = bearsprite;
 
       console.log("height and innerWidth= ", image.height, window.innerWidth);
       ctx.canvas.height = image.height;
@@ -370,7 +383,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
         <div>
           <canvas id="canvas" ref={canvasRef} alt="room" width="500" height="500">
             <img id="room" src={room} />
-            <img id="image_bear" src={bear} />
+            <img id="image_bear" src={bearsprite} />
           </canvas>
         </div>
         {clock ? (
