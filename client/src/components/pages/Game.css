@@ -26,6 +26,7 @@
   bottom: 35vh;
   left: 50%;
   transform: translate(-50%, 0);
+  background-image: url("./../../../dist/lightbulb.png");
 }
 .calendar {
   position: absolute;
@@ -51,6 +52,7 @@
 .room-button {
   border: var(--xs) solid var(--dark--pink);
   background-color: var(--pink);
+  background-image: url("./../../../dist/lightbulb.png");
   border-radius: 0px;
 }
 .room-button:hover {
@@ -62,6 +64,7 @@
 
   justify-content: center;
 }
+
 .content-layer {
   padding: 3% 3% 3% 3%;
   /*font-size: 3vw;*/

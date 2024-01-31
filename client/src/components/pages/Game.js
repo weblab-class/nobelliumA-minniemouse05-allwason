@@ -8,6 +8,7 @@ import bearsprite from "./../../../dist/bearsprite.svg";
 // import bearspriteright from "./../../../dist/bearspriteright.svg";
 import "../../utilities.css";
 import "./Game.css";
+import lightbulb from "./../../../dist/lightbulb.png";
 
 import { Link, useNavigate } from "react-router-dom";
 import Todo from "./Todo.js";
@@ -393,7 +394,10 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
         )}
         {todo ? (
           <Link to="/todo">
-            <button className="room-button todo-button">todo list</button>
+            <button className="room-button todo-button">
+              <image className=" img" src={lightbulb} />
+              todo list
+            </button>
           </Link>
         ) : (
           <></>

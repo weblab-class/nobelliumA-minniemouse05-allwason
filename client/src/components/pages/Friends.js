@@ -221,19 +221,28 @@ const Friends = (props) => {
       get("/api/user", { _id: friend_id }).then((response) => {
         let newDict = { ...userDict };
         newDict[friend_id] = response.user[0];
-        setUserDict(newDict);
+        setUserDict((old) => newDict);
       });
     }
   };
 
   useEffect(() => {
-    setUserId(props.userId);
-    if (userFriends.length == 0 && requests.length == 0 && requested.length == 0) {
-      get("/api/friends", { userId: props.userId }).then((content) => {
+    const init = async () => {
+      setUserId(props.userId);
+      if (userFriends.length == 0 && requests.length == 0 && requested.length == 0) {
+        let content = await get("/api/friends", { userId: props.userId });
         if (content.friends) {
           setUserFriends(content.friends);
+          let newDict = { ...userDict };
           for (let i = 0; i < content.friends.length; i++) {
-            populateInfo(content.friends[i]);
+            let friend_id = content.friends[i];
+
+            if (userDict[friend_id] === undefined) {
+              let response = await get("/api/user", { _id: friend_id });
+              newDict[friend_id] = response.user[0];
+
+              setUserDict(newDict);
+            }
           }
         }
         if (content.friends && content.friends.length > 0) {
@@ -258,8 +267,9 @@ const Friends = (props) => {
             populateInfo(content.requested[i]);
           }
         }
-      });
-    }
+      }
+    };
+    init();
   });
   let friendText = "";
   if (requested.length == 0) {
@@ -301,7 +311,7 @@ const Friends = (props) => {
   };
   return (
     <div>
-      {props.userId || userId ? (
+      {props.userId ? (
         <div className="u-flex find">
           <h1 className="pr-15">Enter Friend UserID:</h1>
           <div className="search-field">
@@ -313,7 +323,7 @@ const Friends = (props) => {
         <></>
       )}
 
-      {props.userId || userId ? (
+      {props.userId ? (
         <div className="requests">
           <h1>{friendText}</h1>
           {requested.map((friend_id, ind) => {
@@ -323,7 +333,7 @@ const Friends = (props) => {
       ) : (
         <></>
       )}
-      {(props.userId || userId) && searched && found ? (
+      {props.userId && searched && found ? (
         <div className="friend">
           <FriendEntry
             value={friendName}
@@ -349,12 +359,12 @@ const Friends = (props) => {
       ) : (
         <></>
       )}
-      {(props.userId || userId) && searched && !found ? (
+      {props.userId && searched && !found ? (
         <h1 className="not-found">Friend not found (check your inputted id!)</h1>
       ) : (
         <></>
       )}
-      {props.userId || userId ? (
+      {props.userId ? (
         <>
           <div className="friend-list u-flex-justifyCenter u-flex-vertical ">
             {userFriends.map((friend_id, ind) => {

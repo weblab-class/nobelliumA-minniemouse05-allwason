@@ -64,6 +64,8 @@ const FriendEntry = (props) => {
     name = props.info.name;
     achievements = props.info.achievementArray.length;
     totalexp = props.info.totalExp;
+  } else {
+    console.log(props.info);
   }
 
   return (
