@@ -274,6 +274,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   ///init function (with draw stuff inside)
   function init() {
+    console.log("init");
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const image = new Image();
@@ -299,7 +300,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const scale = 6;
     const bearw = image_bear.width / 8;
     const bearh = image_bear.height / 2.9;
-
+    console.log("bear dim ", bearw, bearh);
     ctx.drawImage(
       image_bear,
       141 + (bearw + bearw / 8.8) * framenum,
