@@ -29,6 +29,7 @@ const App = () => {
   const [generating, setGenerating] = useState(false);
   const [story, setStory] = useState({ text: "generating...", length: 0 });
   const [user, setUser] = useState(undefined);
+
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
@@ -36,6 +37,10 @@ const App = () => {
         setUserId(user._id);
         setUserName(user.name);
         setTotalExp(user.totalExp);
+        console.log(user.totalExp);
+        get("/api/friends", { userId: user._id }).then((response) => {
+          console.log(response);
+        });
       }
     });
   }, []);
@@ -55,31 +60,14 @@ const App = () => {
     if (totalExp >= 125) {
       post("/api/addAchievement", { achievementId: 3, _id: userId });
     }
-  }, [userId, totalExp]);
-  useEffect(() => {
-    const setup = async () => {
-      let user = await get("/api/whoami");
-      setUser(user);
-      if (user._id) {
-        get("/api/exp", { userId: user._id })
-          .then((userInfo) => {
-            setTotalExp(userInfo.totalExp);
-          })
-          .catch((error) => {
-            console.error("Error when running get for api/exp:", error);
-          });
-      }
 
-      let res = await get("/api/friends", { userId: userId });
-      if (res.friends && res.friends.length > 0) {
-        post("/api/addAchievement", { achievementId: 7, _id: userId });
-      }
-      if (res.friends && res.friends.length >= 5) {
-        post("/api/addAchievement", { achievementId: 5, _id: userId });
-      }
-    };
-    setup();
-  }, []);
+    /*if (userFriends && userFriends.length > 0) {
+      post("/api/addAchievement", { achievementId: 7, _id: userId });
+    }
+    if (userFriends && userFriends.length >= 5) {
+      post("/api/addAchievement", { achievementId: 5, _id: userId });
+    }*/
+  }, [userId, totalExp]);
 
   const [pomodoro, setPomodoro] = useState(false);
 

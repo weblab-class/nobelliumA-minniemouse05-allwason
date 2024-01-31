@@ -22,7 +22,7 @@ const Friends = (props) => {
   const findFriend = () => {
     get("/api/user", { _id: text }).then((response) => {
       setSearched(true);
-      if (response.user && response.user[0] && response.user[0].name) {
+      if (response.user && response.user[0]) {
         setFriendName(response.user[0].name);
         setFriendId(response.user[0]._id);
         setFound(true);
@@ -220,10 +220,7 @@ const Friends = (props) => {
     if (userDict[friend_id] === undefined) {
       get("/api/user", { _id: friend_id }).then((response) => {
         let newDict = { ...userDict };
-        if (response.user) {
-          newDict[friend_id] = response.user[0];
-        }
-
+        newDict[friend_id] = response.user[0];
         setUserDict(newDict);
       });
     }
