@@ -27,6 +27,7 @@ const Friends = (props) => {
         setFriendId(response.user[0]._id);
         setFound(true);
         let newDict = { ...userDict };
+        console.log(newDict);
         newDict[text] = response.user[0];
         setUserDict(newDict);
       } else {
@@ -231,42 +232,54 @@ const Friends = (props) => {
       setUserId(props.userId);
       if (userFriends.length == 0 && requests.length == 0 && requested.length == 0) {
         let content = await get("/api/friends", { userId: props.userId });
+        let newDict = { ...userDict };
         if (content.friends) {
           setUserFriends(content.friends);
-          let newDict = { ...userDict };
+
           for (let i = 0; i < content.friends.length; i++) {
             let friend_id = content.friends[i];
 
             if (userDict[friend_id] === undefined) {
               let response = await get("/api/user", { _id: friend_id });
               newDict[friend_id] = response.user[0];
-
-              setUserDict(newDict);
             }
           }
         }
         if (content.friends && content.friends.length > 0) {
-          post("/api/addAchievement", { achievementId: 7, _id: userId });
+          let x = await post("/api/addAchievement", { achievementId: 7, _id: userId });
         }
         if (content.friends && content.friends.length >= 5) {
-          post("/api/addAchievement", { achievementId: 5, _id: userId });
+          let x = await post("/api/addAchievement", { achievementId: 5, _id: userId });
         }
         if (content.friends && content.friends.length >= 10) {
-          post("/api/addAchievement", { achievementId: 8, _id: userId });
+          let x = await post("/api/addAchievement", { achievementId: 8, _id: userId });
         }
+        console.log(newDict);
         if (content.requests) {
           setRequests(content.requests);
+
           for (let i = 0; i < content.requests.length; i++) {
-            populateInfo(content.requests[i]);
+            let friend_id = content.requested[i];
+            if (userDict[friend_id] === undefined) {
+              let response = await get("/api/user", { _id: friend_id });
+              newDict[friend_id] = response.user[0];
+            }
           }
         }
-
+        console.log(newDict);
         if (content.requested) {
           setRequested(content.requested);
+
           for (let i = 0; i < content.requested.length; i++) {
-            populateInfo(content.requested[i]);
+            let friend_id = content.requested[i];
+            if (userDict[friend_id] === undefined) {
+              let response = await get("/api/user", { _id: friend_id });
+              newDict[friend_id] = response.user[0];
+            }
           }
         }
+        console.log(newDict);
+        setUserDict((old) => newDict);
       }
     };
     init();
