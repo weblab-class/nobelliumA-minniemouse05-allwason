@@ -41,6 +41,8 @@ const App = () => {
         get("/api/friends", { userId: user._id }).then((response) => {
           console.log(response);
         });
+      } else {
+        console.log("fuck");
       }
     });
   }, []);
