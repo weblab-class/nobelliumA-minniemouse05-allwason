@@ -73,6 +73,7 @@ router.post("/story", (req, res) => {
     $set: {
       text: req.body.text,
       length: req.body.length,
+      latest: req.body.latest,
     },
   };
   const query = {

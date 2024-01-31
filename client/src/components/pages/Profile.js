@@ -34,6 +34,7 @@ const Profile = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [button1, setButton1] = useState("#a1c374");
   const [button2, setButton2] = useState("#bddeb3");
+  const [storyText, setStoryText] = useState("");
 
   // [{awardName: test, awardDescription: test}]
   //array of objects
@@ -58,6 +59,7 @@ const Profile = (props) => {
           length: 0,
           latest: "",
         });
+        setStoryText("The story has yet to begin. Earn achievements to unlock chapters.");
       }
       setLoaded(true);
     };
@@ -73,11 +75,7 @@ const Profile = (props) => {
     //console.log(achievementData, story);
 
     if (loaded && achievementData && achievementData.length > story.length && !props.generating) {
-      setStory({
-        text: "generating... (stay on this page!)",
-        length: story.length,
-        latest: story.length,
-      });
+      setStoryText("generating... (stay on this page!)");
       props.setGenerating(true);
       if (story.length == 0) {
         get("/api/generate", {
@@ -96,6 +94,7 @@ const Profile = (props) => {
               text: response.message.content,
               latest: response.message.content,
             });
+            setStoryText(response.message.content);
             //console.log(response);
             //console.log(response.message);
             props.setGenerating(false);
@@ -122,6 +121,7 @@ const Profile = (props) => {
               length: story.length + 1,
               latest: response.message.content,
             });
+            setStoryText(story.text + "\n\n" + response.message.content);
             props.setGenerating(false);
             //console.log(response);
             //console.log(response.message);
@@ -200,7 +200,7 @@ const Profile = (props) => {
         <div className="story-container">
           <h1 className="story-title">Story</h1>
 
-          <p className="story-div">{story.text}</p>
+          <p className="story-div">{storyText}</p>
         </div>
       );
     }
