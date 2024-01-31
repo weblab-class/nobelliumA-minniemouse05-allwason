@@ -37,7 +37,8 @@ const App = () => {
         setTotalExp(user.totalExp);
       }
     });
-  }, []);
+  });
+
   useEffect(() => {
     console.log(totalExp);
   }, [totalExp]);
