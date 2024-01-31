@@ -24,7 +24,7 @@ const Profile = (props) => {
   //achievementData: array of ID's
   const [achievementData, setAchievementData] = useState([]);
   const [achievementInfo, setAchievementInfo] = useState([]);
-  const [userExp, setUserExp] = useState(0);
+  //const [userExp, setUserExp] = useState(0);
   const [content, setContent] = useState(<></>);
   const [story, setStory] = useState({
     latest: "",
@@ -209,7 +209,7 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
-    console.log("profile.js props.totalExp", userExp);
+    console.log("profile.js props.totalExp", props.totalExp);
   }, []);
 
   const toggleDisplayMode = () => {
@@ -245,7 +245,7 @@ const Profile = (props) => {
                 <div className="all-caps profile-overlay-text">{props.name}</div>
               </div>
 
-              <div className="exp">{"Total exp earned to date: " + userExp}</div>
+              <div className="exp">{"Total exp earned to date: " + props.totalExp}</div>
               <div className="new-userid"> UserId: {props.userId}</div>
             </div>
           </div>
