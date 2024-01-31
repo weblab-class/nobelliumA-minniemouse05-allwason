@@ -6,6 +6,7 @@ import { useState } from "react";
 const NotebookUnit = (props) => {
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
+  const toggled = toggle ? "#a1c374" : "#bddeb3";
   const handleChange = (e) => {
     setText(e.target.value);
   };
@@ -57,7 +58,11 @@ const NotebookUnit = (props) => {
             Back
           </button>
           {props.folder !== "Shared" ? (
-            <button className="button-div" onClick={handleNewEntry}>
+            <button
+              className="button-div"
+              style={{ "background-color": toggled }}
+              onClick={handleNewEntry}
+            >
               Add Entry
             </button>
           ) : (

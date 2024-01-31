@@ -10,6 +10,7 @@
 }
 
 .add-button-notebook {
+  justify-content: center;
   margin-top: 2vw;
 }
 .margin-button {

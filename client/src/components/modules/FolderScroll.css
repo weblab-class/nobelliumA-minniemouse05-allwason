@@ -1,6 +1,6 @@
 @import "../../utilities.css";
 .scroll-container > button {
-  background-color: var(--primary--dim);
+  background-color: var(--primary--dark);
   color: white;
   padding: 10px 15px;
   border: none;
@@ -8,7 +8,12 @@
   border-radius: 5px;
   margin-bottom: 5px;
 }
-
+.scroll-container {
+  justify-content: center;
+}
+.click {
+  color: var(--primary--dim);
+}
 .dropdown-content {
   display: block;
   position: absolute;
