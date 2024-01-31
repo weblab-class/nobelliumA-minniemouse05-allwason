@@ -4,17 +4,19 @@ import "./Timer.css";
 const Timer = ({ workSeconds, breakSeconds, changeMode, mode, seconds, current_state }) => {
   const interval = useRef(null);
   const [time, setTime] = useState("00:00");
-  const [remain, setRemain] = useState(seconds);
+  let remain = seconds;
 
   useEffect(() => {
     const handleInterval = () => {
       if (current_state === "start") {
+        interval.current = clearInterval(interval.current);
         interval.current = setInterval(minusSecond, 1000);
+
         if (mode === "work") {
-          setRemain(workSeconds);
+          remain = workSeconds;
           alert("Time to work!");
         } else {
-          setRemain(breakSeconds);
+          remain = breakSeconds;
           alert("Time to take a break!");
         }
       } else if (current_state === "paused") {
@@ -22,9 +24,9 @@ const Timer = ({ workSeconds, breakSeconds, changeMode, mode, seconds, current_s
       } else if (current_state === "reset") {
         clearInterval(interval.current);
         if (mode === "work") {
-          setRemain(workSeconds);
+          remain = workSeconds;
         } else {
-          setRemain(breakSeconds);
+          remain = breakSeconds;
         }
         convertTime();
       }
@@ -47,7 +49,7 @@ const Timer = ({ workSeconds, breakSeconds, changeMode, mode, seconds, current_s
 
   const minusSecond = () => {
     if (remain > 0) {
-      setRemain((prev) => prev - 1);
+      remain = remain - 1;
     } else {
       clearInterval(interval.current);
       changeMode();
