@@ -54,6 +54,7 @@
 
 .checkbox-style {
   width: 3vw;
+  box-shadow: none;
 }
 
 .item-entry-container {
