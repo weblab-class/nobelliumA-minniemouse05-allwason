@@ -133,7 +133,10 @@
 }
 
 .achievement-text {
-  margin-top: 8vw;
+  color: black;
+  align-items: center; /* Center items vertically */
+  justify-content: center;
+  margin-top: 4vw;
   font-size: 3.5vw;
 }
 
