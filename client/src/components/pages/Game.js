@@ -286,8 +286,8 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     image.src = room;
     const image_bear = new Image();
     image_bear.src = bear;
-    if (locationX > leftBound + image.width) {
-      setLocationX(leftBound + image.width);
+    if (locationX > leftBound + width) {
+      setLocationX(leftBound + width);
     }
     if (locationX < leftBound) {
       setLocationX(leftBound);
