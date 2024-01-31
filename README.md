@@ -1,96 +1,27 @@
-# How to code a webapp with this skeleton
+---
+runme:
+  id: 01HNFJM8VBRHGW2ZJ2MTWXA3KM
+  version: v2.2
+---
 
-## Initial setup
+# Welcome to RoomCraft!
 
-All teammates will need (explained in https://bit.ly/weblab-install)
+We all are the main characters of our own stories. And we deserve a strong arsenal of tools to accompany us on our hero’s journey.
 
-- A bash console (on Mac or Linux, this is Terminal. On Windows, we recommend Git Bash)
-- NodeJS version 18. If it is installed correctly, typing "node --version" should give v18.13.0 and "npm --version" should give 8.19.3
-- Visual Studio Code (or another code editor)
-- the Prettier VSCode extension
+Introducing: RoomCraft which uses gamification to help you be the most productive version of yourself, so you can slay the dragons of your life.
 
-Also, all of you will need to go through the MongoDB Atlas setup (https://bit.ly/mongo-setup).
+Picture this: Your virtual room is a dynamic landscape, featuring sections tailored to your needs. Take class notes, play songs from Spotify with a single click, update your todo-list, all on the same website. 
 
-Additionally for authentication, one of you will need to obtain a CLIENT_ID, instructions are at https://bit.ly/gauth-mit.
+But RoomCraft is not just a solitary journey; just like in every adventure, you meet a wide array of friends along the way. Exchange notes and messages to your friends through the notebook feature and showcase your achievements on a leaderboard based on exp earned from completing todo-list items. Gain more achievements so that you can unlock more chapters in your very own hero's tale.
 
-## Downloading these files
+Whether you're facing academic challenges, work projects, or personal goals, RoomCraft motivates you to be the most productive version of yourself. It's time to slay the dragons of procrastination, disorganization, and inefficiency. So what are you waiting for? Your journey begins now with RoomCraft!
 
-First, you probably have a team repository somewhere (the link looks like: https://github.com/weblab-class/teammate1-teammate2-teammate3). You each should clone this (empty) repository by navigating to where you want your folder to be (**NOT in catbook**) and typing: git clone https://github.com/weblab-class/teammate1-teammate2-teammate3.git <-- with the correct link.
+# Citations
 
-Then, one of your team members will need to do the following:
+“Material Symbols and Icons.” Google Fonts, Google, fonts.google.com/icons. Accessed 31 Jan. 2024. 
 
-First on GitHub, download the skeleton (this repository) as a zip file, by clicking Code -> Download as ZIP. (Do not clone it, since this will download extra files, like .git, which will lead to GitHub being confused).
+Mozilla. “Getting Started with React.” Mdn Web Docs, developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_getting_started. 
 
-Then, drag over all of the files in this skeleton into your team's folder. **Make sure to also drag over the hidden files!** To see these hidden files, navigate to the skeleton in Finder/File Explorer and press command+shift+period (mac) or View > Show > Hidden items (windows).
+“Text Generation.” Open AI, platform.openai.com/docs/guides/text-generation. Accessed 31 Jan. 2024. 
 
-The files/folders you must drag over are:
-
-- .babelrc (hidden)
-- .gitignore (hidden)
-- .npmrc (hidden)
-- .prettierrc (hidden)
-- client (folder)
-- package-lock.json
-- package.json
-- README.md
-- server (folder)
-- webpack.config.js
-
-Additionally, you must create a .env file in the root directory. See .env.example for an example of what this file should look like.
-
-Then, in terminal, navigate to your teams folder and push all of the files to your team's GitHub repository as usual:
-
-- git add -A
-- git commit -m "Skeleton code"
-- git push
-
-Now the rest of your teammates can pull all these files with a 'git pull'!
-
-Post on Piazza if you run into any issues
-
-## What you need to change in the skeleton
-
-- Change the Frontend CLIENT_ID (Skeleton.js) to your team's CLIENT_ID (obtain this at https://bit.ly/gauth-mit)
-- Change the Server CLIENT_ID to the same CLIENT_ID (auth.js)
-- Change the Database SRV (mongoConnectionURL) for Atlas (server.js). You got this in the MongoDB setup. remember to replace <password> and <dbname> (should be no < or > in your SRV) (From: https://bit.ly/mongo-setup)
-- Change the Database Name for MongoDB to whatever you put in the SRV to replace <dbname> (server.js)
-- (Optional) Add a favicon to your website at the path client/dist/favicon.ico
-- (Optional) Update website title in client/dist/index.html
-- (Optional) Update this README file ;)
-- (Optional) Update the package.json file with your app name :) (line 2)
-
-## How to run this skeleton
-
-First, 'npm install'
-Then open two seperate terminals, and 'npm run hotloader' in the first, and 'npm start' in the second.
-Then open http://localhost:5050
-
-<!-- ## How to go from this skeleton to your actual app
-
-Check out this [How to Get Started Guide](http://weblab.is/get-started) -->
-
-## Socket stuff
-
-Note: we'll be getting to this in lecture in week 2, so don't worry if you don't know it yet
-
-- If you're not using realtime updating or don't need server->client communication, you can remove socket entirely! (server-socket.js, client-socket.js, and anything that imports them)
-- If you are using sockets, consider what you want to do with the FIXME in server-socket.js
-
-## Edit at your own risk
-
-the following files students do not need to edit. feel free to read them if you would like.
-
-```
-client/src/index.js
-client/src/utilities.js
-client/src/client-socket.js
-server/validator.js
-server/server-socket.js
-.babelrc
-.npmrc
-.prettierrc
-package-lock.json
-webpack.config.js
-```
-
-## Good luck on your project :)
+Zenoamaro. “A Quill Component for React.” GitHub, github.com/zenoamaro/react-quill. Accessed 31 Jan. 2024. 
