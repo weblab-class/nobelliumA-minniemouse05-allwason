@@ -1,7 +1,8 @@
+@import "../../utilities.css";
 .exit-button {
   cursor: pointer;
   border: var(--xs) solid white;
-  background-color: white;
+  background-color: transparent;
   padding: 0;
   border-radius: none;
   font-family: "Cute Font", sans-serif;
@@ -9,6 +10,12 @@
   color: black;
   font-weight: bold;
 }
+
+.exit-button:hover {
+  background-color: transparent;
+  color: var(--dark--pink);
+}
+
 .todo-top-right {
   margin-top: 0; /* Reset default margin */
   margin-right: 0; /* Reset default margin */

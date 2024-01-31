@@ -31,7 +31,7 @@
   font-size: 3vh;
 }
 .delete:hover {
-  color: red;
+  color: var(--dark--pink);
   background-color: transparent;
 }
 
@@ -46,4 +46,18 @@
 .chapter-button {
   width: 100%;
   border: none;
+  background-color: transparent;
+}
+
+.chapter-button:hover {
+  background-color: transparent;
+}
+
+.folder-image {
+  width: 80%;
+}
+
+.folder-name {
+  margin-top: -40px;
+  margin-bottom: -20px;
 }

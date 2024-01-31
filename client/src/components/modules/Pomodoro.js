@@ -81,7 +81,7 @@ const Pomodoro = (props) => {
             </div>
             <h1>(press ok and then reset to update timer)</h1>
             <div className="ok-button u-flex">
-              <button onClick={changeTime}>ok</button>
+              <button className="pomodoro-button-styling" onClick={changeTime}>ok</button>
             </div>
           </div>
         </>
@@ -125,13 +125,14 @@ const Pomodoro = (props) => {
 
         {timer}
         <button
+        className='pomodoro-button-styling'
           onClick={() => {
             changeMode();
           }}
         >
           {mode}
         </button>
-        <button className="hide-button" onClick={props.togglePomodoro}>
+        <button className="pomodoro-button-styling  hide-button" onClick={props.togglePomodoro}>
           hide
         </button>
 

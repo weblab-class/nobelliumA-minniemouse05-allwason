@@ -39,7 +39,8 @@ const SingleFolder = (props) => {
             <></>
           )}
           <button className="chapter-button" onClick={handlePage}>
-            <div className="u-flexColumn">
+            <img className='folder-image' src="https://i.ibb.co/KjZnD7b/image-removebg-preview.png" />
+            <div className="folder-name u-flexColumn">
               <p>{order}</p>
             </div>
           </button>

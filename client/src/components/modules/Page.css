@@ -5,8 +5,47 @@
   width: 100%;
   border: 5 solid var(--primary--dim);
   border-radius: 0;
+  background-color: transparent;
 }
+
+.chapter:hover {
+  background-color: transparent;
+}
+
 .page-title {
   background-color: var(--primary--dim);
   text-align: center;
+}
+
+.file-image {
+  width: 80%;
+}
+
+.file-name {
+  margin-top: -60px;
+  margin-bottom: -20px;
+}
+
+.delete {
+  position: absolute; /* Absolute positioning for the button */
+  top: 0.1vh; /* Align to the top of the container */
+  right: 0.1vh; /* Align to the right of the container */
+  cursor: pointer; /* Optional: Changes the cursor on hover */
+  background-color: transparent;
+  border: none;
+  padding-top: 0vh;
+  font-size: 3vh;
+}
+
+.file-button-container {
+  padding: auto;
+  flex: 1;
+  width: 100%;
+  border: 5 solid var(--primary--dim);
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.file-button-container:hover {
+  background-color: transparent;
 }
