@@ -3,10 +3,10 @@
   cursor: pointer;
   border: 2px solid black;
   padding: var(--s);
-  border-radius: 5px;
+  border-radius: 6px;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
-  margin: 1.5px;
+  margin: 0.5vw;
   background-color: var(--primary);
 }
 
@@ -27,4 +27,7 @@
   font-weight: bold;
   margin-top: 12px;
   margin-bottom: -15px;
+}
+ul {
+  padding-left: 0vw !important;
 }

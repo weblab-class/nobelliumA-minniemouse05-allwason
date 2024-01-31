@@ -21,17 +21,17 @@ const Page = (props) => {
   };
   //https://stackoverflow.com/questions/38791919/call-a-function-after-leaving-input-field#:~:text=You%20can%20use%20onblur(),out%20of%20that%20text%20field.
   return (
-    <>
-    <div className="chapter"> 
-      <button className="delete" onClick={handleDelete}>
-        delete
-      </button>
-      <button className='file-button-container' onClick={handlePage}>
-        <img className="file-image" src="https://i.ibb.co/vmq3nN9/image-removebg-preview-2.png" />
-        <div className="file-name u-flex-vertical">
-          <p>{order}</p>
-        </div>
-      </button>
+    <div>
+      <div className="chapter">
+        <button className="delete" onClick={handleDelete}>
+          delete
+        </button>
+        <button className="file-button-container" onClick={handlePage}>
+          <img className="file-image" src="https://i.ibb.co/vmq3nN9/image-removebg-preview-2.png" />
+          <div className="file-name u-flex-vertical">
+            <p>{order}</p>
+          </div>
+        </button>
       </div>
 
       <div className="u-flex">
@@ -45,7 +45,7 @@ const Page = (props) => {
           onChange={handleChange}
         ></input>
       </div>
-    </>
+    </div>
   );
 };
 export default Page;

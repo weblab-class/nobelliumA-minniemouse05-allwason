@@ -37,7 +37,6 @@ const FILTER_MAP = {
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
-  console.log(setTotalExp);
   useEffect(() => {
     get("/api/todoItem", { userId: userId })
       .then((itemData) => {
