@@ -39,6 +39,8 @@ const FriendScroll = (props) => {
       folder: "Shared",
       userId: props.friends[ind],
     });
+    post("/api/addAchievement", { achievementId: 13, _id: userId });
+
     alert("Notebook entry shared!");
     setExpanded(false);
   };
