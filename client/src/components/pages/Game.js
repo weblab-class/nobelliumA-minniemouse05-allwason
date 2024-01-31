@@ -304,6 +304,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const bearh = 1684.1379310344828;
     const bwidth = console.log("bear dim ", image_bear.width, image_bear.height);
     console.log("image dim", image.width, image.height);
+    console.log(image_bear);
     ctx.drawImage(
       image_bear,
       141 + (bearw + bearw / 8.8) * framenum,
