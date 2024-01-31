@@ -144,7 +144,7 @@ const App = () => {
                 handleLogout={handleLogout}
                 userId={userId}
               />
-              <Info userId={userId} />
+              <Info userId={userId} setPomodoro={setPomodoro} />
             </>
           }
         />

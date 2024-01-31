@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import "../../utilities.css";
 import NavBar from "../modules/NavBar";
 import { generatePath, useNavigate } from "react-router-dom";
@@ -6,6 +7,9 @@ import { generatePath, useNavigate } from "react-router-dom";
 import "./Info.css";
 
 const Info = (props) => {
+  useEffect(() => {
+    props.setPomodoro(false);
+  }, []);
   const navigate = useNavigate();
   return (
     <div>
