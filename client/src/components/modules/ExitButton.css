@@ -1,0 +1,25 @@
+.exit-button {
+  cursor: pointer;
+  border: var(--xs) solid white;
+  background-color: white;
+  padding: 0;
+  border-radius: none;
+  font-family: "Cute Font", sans-serif;
+  font-size: var(--xl);
+  color: black;
+  font-weight: bold;
+}
+.todo-top-right {
+  margin-top: 0; /* Reset default margin */
+  margin-right: 0; /* Reset default margin */
+  margin-bottom: auto; /* Push text to the top */
+  margin-left: auto; /* Push text to the right */
+}
+
+.exitbutton-container {
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+  align-items: flex-start; /* Align items to the top */
+  height: 0px; /* Set a height for demonstration purposes */
+  /* border: 1px solid #ccc;  */
+}

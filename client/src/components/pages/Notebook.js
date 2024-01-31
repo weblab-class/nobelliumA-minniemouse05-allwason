@@ -6,6 +6,8 @@ import NotebookUnit from "../modules/NotebookUnit";
 import { useNavigate } from "react-router-dom";
 import NotebookEntry from "../modules/NotebookEntry.js";
 import FolderDisplay from "../modules/FolderDisplay.js";
+import ExitButton from "../modules/ExitButton";
+
 const Notebook = ({ userId }) => {
   const [mode, setMode] = useState("folder");
   const [index, setIndex] = useState(0);
@@ -238,7 +240,14 @@ const Notebook = ({ userId }) => {
       />
     );
   }
-  return userId ? <div>{content} </div> : <>{navigate("/")}</>;
+  return userId ? (
+    <div>
+      <ExitButton />
+      {content}
+    </div>
+  ) : (
+    <>{navigate("/")}</>
+  );
 };
 
 export default Notebook;

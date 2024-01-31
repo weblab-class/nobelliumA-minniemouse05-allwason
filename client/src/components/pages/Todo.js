@@ -7,6 +7,7 @@ import Item from "../modules/Item.js";
 import Form from "../modules/Form";
 import FilterButton from "../modules/FilterButton";
 import ExpTracker from "../modules/ExpTracker";
+import ExitButton from "../modules/ExitButton";
 
 import "../../utilities.css";
 import "./Todo.css";
@@ -123,6 +124,7 @@ const Todo = ({ tasks, setTasks, userId, name, totalExp, setTotalExp }) => {
   return userId ? (
     <>
       <div className="todoapp stack-large">
+        <ExitButton />
         <h1>To-Do List</h1>
         <ExpTracker userId={userId} name={name} totalExp={totalExp} tempEarnedExp={tempEarnedExp} />
         <Form addTask={addTask1} userId={userId} setTasks={setTasks} />
