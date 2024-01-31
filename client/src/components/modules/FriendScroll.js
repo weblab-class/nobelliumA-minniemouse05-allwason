@@ -32,17 +32,17 @@ const FriendScroll = (props) => {
     props.handleFolderChange(folder, props.entry);
     setExpanded(false); // Close dropdown after selection
   };
-  const sharePage = (ind) => {
-    post("/api/newEntry", {
+  const sharePage = async (ind) => {
+    let x = await post("/api/addAchievement", { achievementId: 13, _id: userId });
+    alert("Notebook entry shared!");
+    let y = await post("/api/newEntry", {
       text: props.entry.text,
       header: props.entry.header,
       folder: "Shared",
       userId: props.friends[ind],
-    }).then(() => {
-      post("/api/addAchievement", { achievementId: 13, _id: userId });
-      alert("Notebook entry shared!");
-      setExpanded(false);
     });
+
+    setExpanded(false);
   };
 
   return (
