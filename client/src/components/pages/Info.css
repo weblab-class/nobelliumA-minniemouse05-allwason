@@ -2,7 +2,7 @@
   font-size: 65px;
   font-weight: bold;
 }
-.About-typewriter {
+.info-productive-text {
   border-right: solid 3px #bddeb3;
   white-space: nowrap;
   overflow: hidden;
@@ -11,6 +11,23 @@
   color: black;
   animation: animated-text 4s steps(29, end) 1s 1 normal both,
     animated-cursor 600ms steps(29, end) infinite;
+}
+@keyframes animated-text {
+  from {
+    width: 0;
+  }
+  to {
+    width: 638px;
+  }
+}
+
+@keyframes animated-cursor {
+  from {
+    border-right-color: #bddeb3;
+  }
+  to {
+    border-right-color: transparent;
+  }
 }
 
 .info-navigate-container {
@@ -48,24 +65,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-@keyframes animated-text {
-  from {
-    width: 0;
-  }
-  to {
-    width: 638px;
-  }
-}
-
-@keyframes animated-cursor {
-  from {
-    border-right-color: #bddeb3;
-  }
-  to {
-    border-right-color: transparent;
-  }
 }
 
 .instruction-container {
