@@ -56,7 +56,11 @@
   width: 3vw;
   box-shadow: none;
 }
-.checkbox-style:hover {
+.checkbox-style .input {
+  width: 3vw;
+  box-shadow: none;
+}
+.checkbox-style:focus {
   width: 3vw;
   box-shadow: none;
 }
