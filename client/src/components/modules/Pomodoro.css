@@ -74,7 +74,6 @@ input {
   justify-content: center;
 }
 
-
 .pomodoro-button-styling {
   cursor: pointer;
   border: var(--xs) solid var(--black);
@@ -82,9 +81,20 @@ input {
   border-radius: none;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
-  background-color: #DDDDDD;
+  background-color: white;
 }
 
 .pomodoro-button-styling:hover {
-  background-color: #c0c0c0
+  background-color: whitesmoke;
+}
+.close-settings {
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 0;
+}
+.close-settings:hover {
+  color: var(--dark--pink);
+  background-color: transparent;
 }

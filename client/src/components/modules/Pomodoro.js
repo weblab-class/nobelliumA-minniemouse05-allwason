@@ -69,6 +69,14 @@ const Pomodoro = (props) => {
       {props.pomodoro && settingsOpen ? (
         <>
           <div className="settings-menu">
+            <button
+              className="close-settings"
+              onClick={() => {
+                setSettingsOpen(false);
+              }}
+            >
+              x
+            </button>
             <div className="u-flex entry">
               <h1 className="pr-15">work: </h1>
               <input value={value} onChange={handleChange}></input>
@@ -81,7 +89,9 @@ const Pomodoro = (props) => {
             </div>
             <h1>(press ok and then reset to update timer)</h1>
             <div className="ok-button u-flex">
-              <button className="pomodoro-button-styling" onClick={changeTime}>ok</button>
+              <button className="pomodoro-button-styling" onClick={changeTime}>
+                ok
+              </button>
             </div>
           </div>
         </>
@@ -125,7 +135,7 @@ const Pomodoro = (props) => {
 
         {timer}
         <button
-        className='pomodoro-button-styling'
+          className="pomodoro-button-styling"
           onClick={() => {
             changeMode();
           }}
