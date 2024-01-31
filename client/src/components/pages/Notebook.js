@@ -161,7 +161,6 @@ const Notebook = ({ userId }) => {
       setFolder(folder);
 
       setEntries((entries) => entries.map((e, i) => (i === ind ? { ...e, folder: folder } : e)));
-      setIndex(0);
       setMapped(entries.filter((value, ind, b) => value.folder === folder));
       setIndex(entries.filter((value, ind, b) => value.folder === folder).length - 1);
       console.log(ind, entry);
