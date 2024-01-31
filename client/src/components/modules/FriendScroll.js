@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../../utilities.css";
 import "./FriendScroll.css";
 import { get, post } from "../../utilities";
-
 const FriendScroll = (props) => {
   const [expanded, setExpanded] = useState(false);
   const [nameArray, setNameArray] = useState([]);
-
   useEffect(() => {
     const getFriends = async () => {
       let arr = [];
@@ -20,15 +18,20 @@ const FriendScroll = (props) => {
           }
         }
       }
+
+      console.log("Final names array:", arr);
       setNameArray(arr);
     };
     getFriends();
   }, []);
-
   const toggleDropdown = () => {
     setExpanded(!expanded);
   };
 
+  const handleFolderChange = (folder) => {
+    props.handleFolderChange(folder, props.entry);
+    setExpanded(false); // Close dropdown after selection
+  };
   const sharePage = (ind) => {
     post("/api/newEntry", {
       text: props.entry.text,
@@ -36,27 +39,32 @@ const FriendScroll = (props) => {
       folder: "Shared",
       userId: props.friends[ind],
     });
+
     setExpanded(false);
   };
 
   return (
     <div className="scroll-container-friend u-flexColumn">
       <button onClick={toggleDropdown}>
-        <span className="material-symbols-outlined">send</span>
+        <span class="material-symbols-outlined">send</span>
       </button>
-      {expanded && (
-        <div className="dropdown-content">
-          {props.friends.map((friend, ind) => (
-            <button
-              key={friend}
-              onClick={() => {
-                sharePage(ind);
-              }}
-            >
-              {nameArray[ind]}
-            </button>
-          ))}
-        </div>
+      {props.friends ? (
+        expanded && (
+          <div className="dropdown-content">
+            {props.friends.map((friend, ind) => (
+              <button
+                key={friend}
+                onClick={() => {
+                  sharePage(ind);
+                }}
+              >
+                {nameArray[ind]}
+              </button>
+            ))}
+          </div>
+        )
+      ) : (
+        <div className="dropdown-content">Add a friend to send your note!</div>
       )}
     </div>
   );
