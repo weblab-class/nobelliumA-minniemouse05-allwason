@@ -1,3 +1,4 @@
+@import "../../utilities.css";
 .login {
   text-align: center;
   font-family: "Cute Font", sans-serif;
@@ -74,14 +75,16 @@
   font-family: "Cute Font", sans-serif;
   font-size: 2.7vw;
   margin-left: 11.5vw;
-  color: #8e8e8e;
+  color: black;
 }
-
+.accent {
+  color: var(--dark--pink);
+}
 .new-userid {
   font-family: "Cute Font", sans-serif;
   font-size: 2.7vw;
   margin-left: 7vw;
-  color: #8e8e8e;
+  color: black;
 }
 
 .avatar-image {

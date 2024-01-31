@@ -264,8 +264,13 @@ const Profile = (props) => {
                 <div className="all-caps profile-overlay-text">{props.name}</div>
               </div>
 
-              <div className="exp">{"Total exp earned to date: " + userExp}</div>
-              <div className="new-userid"> UserId: {props.userId}</div>
+              <div className="exp">
+                Total exp earned to date: <span className="accent">{userExp}</span>
+              </div>
+              <div className="new-userid">
+                {" "}
+                UserId: <span className="accent">{props.userId}</span>
+              </div>
             </div>
           </div>
         </>
