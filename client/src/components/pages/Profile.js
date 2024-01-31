@@ -53,6 +53,7 @@ const Profile = (props) => {
       //console.log(x[0]);
       if (x.length > 0 && x[0].text) {
         setStory(x[0]);
+        setStoryText(x[0].text);
       } else {
         setStory({
           text: "The story has yet to begin. Earn achievements to unlock chapters.",
@@ -263,7 +264,6 @@ const Profile = (props) => {
                 />
                 <div className="all-caps profile-overlay-text">{props.name}</div>
               </div>
-
               <div className="exp">
                 Total exp earned to date: <span className="accent">{userExp}</span>
               </div>
