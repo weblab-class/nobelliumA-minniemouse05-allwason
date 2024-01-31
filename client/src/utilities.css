@@ -164,6 +164,20 @@ button:hover {
 .u-space {
   margin-left: var(--l);
 }
+
 input {
-  background-color: transparent;
+  padding: 10px 15px;
+
+  border-bottom: 2px solid #000000;
+  border-radius: 0px;
+  outline: none;
+  transition: border-color 0.3s;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 4vh;
+  width: 80%;
+}
+
+input:focus {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
