@@ -25,7 +25,11 @@ const Profile = (props) => {
   const [achievementData, setAchievementData] = useState([]);
   const [achievementInfo, setAchievementInfo] = useState([]);
   const [content, setContent] = useState(<></>);
-  const [story, setStory] = useState({ latest: "", text: "generating...", length: 0 });
+  const [story, setStory] = useState({
+    latest: "",
+    text: "generating... (stay on this page!)",
+    length: 0,
+  });
   const [loaded, setLoaded] = useState(false);
 
   // [{awardName: test, awardDescription: test}]
@@ -66,7 +70,11 @@ const Profile = (props) => {
     console.log(achievementData, story);
 
     if (loaded && achievementData && achievementData.length > story.length && !props.generating) {
-      setStory({ text: "generating...", length: story.length, latest: story.length });
+      setStory({
+        text: "generating... (stay on this page!)",
+        length: story.length,
+        latest: story.length,
+      });
       props.setGenerating(true);
       if (story.length == 0) {
         get("/api/generate", {
