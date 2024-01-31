@@ -146,7 +146,13 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   const handleInput = (e, locX) => {
     //https://stackoverflow.com/questions/68745579/how-to-capture-tab-key-press-in-react-component
-
+    const image = new Image();
+    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
+    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
+    // Hard code the image source
+    image.src = room;
+    const image_bear = new Image();
+    image_bear.src = bear;
     if (!intervalRef.current) {
       if (e.key === "ArrowLeft") {
         setKeyIsDown(true);
@@ -166,6 +172,13 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   //stuff for interacting w room
   useEffect(() => {
+    const image = new Image();
+    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
+    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
+    // Hard code the image source
+    image.src = room;
+    const image_bear = new Image();
+    image_bear.src = bear;
     init();
     if (locationX < leftBound + image.width / 1.05 && locationX > leftBound + image.width / 1.25) {
       setMusic(true);
@@ -198,14 +211,15 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   }, []);
   //image stuff
   const canvasRef = useRef(null);
-  const image = new Image();
-  //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
-  //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
-  // Hard code the image source
-  image.src = room;
-  const image_bear = new Image();
-  image_bear.src = bear;
   useEffect(() => {
+    console.log("canvas being made");
+    const image = new Image();
+    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
+    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
+    // Hard code the image source
+    image.src = room;
+    const image_bear = new Image();
+    image_bear.src = bear;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     if (locationX > leftBound + image.width) {
@@ -244,13 +258,20 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       setIFrame(0);
     }
 
-    ctx.restore();
+    //ctx.restore();
   }, []);
 
   ///init function (with draw stuff inside)
   function init() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    const image = new Image();
+    //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
+    //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
+    // Hard code the image source
+    image.src = room;
+    const image_bear = new Image();
+    image_bear.src = bear;
     if (locationX > leftBound + image.width) {
       setLocationX(leftBound + image.width);
     }
@@ -287,7 +308,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       setIFrame(0);
     }
 
-    ctx.restore();
+    //ctx.restore();
   }
   //init function ends
 
@@ -295,6 +316,12 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const ctx = canvasRef.current.getContext("2d");
 
     const handleResize = (e) => {
+      const image = new Image(754, 834);
+      //https://developer.mozilla.org/en-US/docs/Web/APhide%20imI/CanvasRenderingContext2D/drawImage
+      //https://codesandbox.io/p/sandbox/resizing-canvas-with-react-hooks-gizc5?file=%2Fsrc%2Findex.js%3A34%2C18-34%2C68
+      // Hard code the image source
+      image.src = room;
+      console.log("height and innerWidth= ", image.height, window.innerWidth);
       ctx.canvas.height = image.height;
       ctx.canvas.width = window.innerWidth;
       init();
@@ -303,6 +330,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const keyDownEvent = (e) => {
       handleInput(e, locationX);
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
 
@@ -319,10 +347,12 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   return (
     <>
       <div id="canvas-div">
-        <canvas id="canvas" ref={canvasRef} alt="room" width="500" height="500">
-          <img id="room" src={room} />
-          <img id="image_bear" src={bear} />
-        </canvas>
+        <div>
+          <canvas id="canvas" ref={canvasRef} alt="room" width="500" height="500">
+            <img id="room" src={room} />
+            <img id="image_bear" src={bear} />
+          </canvas>
+        </div>
         {clock ? (
           <button
             className="room-button clock"

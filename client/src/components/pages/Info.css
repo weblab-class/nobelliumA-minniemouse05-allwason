@@ -1,0 +1,39 @@
+.About-typewriter {
+  border-right: solid 3px #bddeb3;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: "Cute Font", sans-serif;
+  font-size: 30px;
+  color: black;
+  animation: animated-text 4s steps(29, end) 1s 1 normal both,
+    animated-cursor 600ms steps(29, end) infinite;
+}
+
+.info-heading {
+  font-size: 50px;
+}
+
+.info-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes animated-text {
+  from {
+    width: 0;
+  }
+  to {
+    width: 420px;
+  }
+}
+
+@keyframes animated-cursor {
+  from {
+    border-right-color: #bddeb3;
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
