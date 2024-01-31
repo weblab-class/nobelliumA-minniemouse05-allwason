@@ -27,7 +27,7 @@ const Friends = (props) => {
         setFriendId(response.user[0]._id);
         setFound(true);
         let newDict = { ...userDict };
-        console.log(newDict);
+        //console.log(newDict);
         newDict[text] = response.user[0];
         setUserDict(newDict);
       } else {
@@ -233,8 +233,8 @@ const Friends = (props) => {
       if (userFriends.length == 0 && requests.length == 0 && requested.length == 0) {
         let content = await get("/api/friends", { userId: props.userId });
         let newDict = { ...userDict };
-        console.log(content);
-        if (content === {}) {
+        //console.log(content);
+        if (content && Object.keys(content).length !== 0) {
           if (content.friends) {
             setUserFriends(content.friends);
 
@@ -256,7 +256,7 @@ const Friends = (props) => {
           if (content.friends && content.friends.length >= 10) {
             let x = await post("/api/addAchievement", { achievementId: 8, _id: userId });
           }
-          console.log(newDict);
+          //console.log(newDict);
           if (content.requests) {
             setRequests(content.requests);
 
@@ -268,7 +268,7 @@ const Friends = (props) => {
               }
             }
           }
-          console.log(newDict);
+          //console.log(newDict);
           if (content.requested) {
             setRequested(content.requested);
 
