@@ -50,6 +50,7 @@ const Timer = ({ workSeconds, breakSeconds, changeMode, mode, seconds, current_s
   const minusSecond = () => {
     if (remain > 0) {
       remain = remain - 1;
+      convertTime();
     } else {
       clearInterval(interval.current);
       changeMode();
