@@ -39,7 +39,7 @@ const FriendScroll = (props) => {
       folder: "Shared",
       userId: props.friends[ind],
     });
-
+    alert("Notebook entry shared!");
     setExpanded(false);
   };
 
