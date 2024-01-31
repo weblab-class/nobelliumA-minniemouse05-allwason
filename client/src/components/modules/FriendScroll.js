@@ -50,7 +50,7 @@ const FriendScroll = (props) => {
       <button onClick={toggleDropdown}>
         <span className="material-symbols-outlined">send</span>
       </button>
-      {props.friends
+      {props.friends && props.friends.length > 0
         ? expanded && (
             <div className="dropdown-content">
               {props.friends.map((friend, ind) => (
@@ -65,7 +65,16 @@ const FriendScroll = (props) => {
               ))}
             </div>
           )
-        : expanded && <div className="dropdown-content">Add a friend to send your note!</div>}
+        : expanded && (
+            <div
+              className="dropdown-content"
+              onBlur={() => {
+                setExpanded(false);
+              }}
+            >
+              Add a friend to send your note!
+            </div>
+          )}
     </div>
   );
 };
