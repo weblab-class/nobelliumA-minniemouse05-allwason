@@ -48,24 +48,22 @@ const FriendScroll = (props) => {
       <button onClick={toggleDropdown}>
         <span class="material-symbols-outlined">send</span>
       </button>
-      {props.friends ? (
-        expanded && (
-          <div className="dropdown-content">
-            {props.friends.map((friend, ind) => (
-              <button
-                key={friend}
-                onClick={() => {
-                  sharePage(ind);
-                }}
-              >
-                {nameArray[ind]}
-              </button>
-            ))}
-          </div>
-        )
-      ) : (
-        <div className="dropdown-content">Add a friend to send your note!</div>
-      )}
+      {props.friends
+        ? expanded && (
+            <div className="dropdown-content">
+              {props.friends.map((friend, ind) => (
+                <button
+                  key={friend}
+                  onClick={() => {
+                    sharePage(ind);
+                  }}
+                >
+                  {nameArray[ind]}
+                </button>
+              ))}
+            </div>
+          )
+        : expanded && <div className="dropdown-content">Add a friend to send your note!</div>}
     </div>
   );
 };

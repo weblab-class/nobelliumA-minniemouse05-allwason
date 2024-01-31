@@ -64,6 +64,7 @@ const NotebookEntry = (props) => {
       </div>
       <div className="u-flex">
         <FolderScroll
+          className="folderscroll"
           folder={props.folder}
           folders={props.folders}
           handleFolderChange={props.handleFolderChange}
