@@ -39,10 +39,7 @@ const Form = (props) => {
 
   return (
     <div>
-      <h2 className="">
-        <label htmlFor="new-todo-input" className="">
-          What needs to be done?
-        </label>
+      <h2 className="empty-h2">
       </h2>
       <div className="align">
         <input

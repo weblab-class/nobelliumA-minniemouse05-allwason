@@ -19,5 +19,9 @@
   border-radius: 5px;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
-  margin: 1.5px
+  margin: 1.5px;
+}
+
+.empty-h2 {
+  margin-bottom: -20px;
 }
