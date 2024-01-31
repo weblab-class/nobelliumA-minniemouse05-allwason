@@ -299,7 +299,21 @@ const Friends = (props) => {
       }
     };
     init();
-  }, []);
+  });
+  useEffect(() => {
+    post("/api/friends", { userId: props.userId, friends: userFriends })[userFriends];
+    const help = async () => {
+      for (let i = 0; i < userFriends.length; i++) {
+        let friend_id = userFriends[i];
+
+        if (userDict[friend_id] === undefined) {
+          let response = await get("/api/user", { _id: friend_id });
+          newDict[friend_id] = response.user[0];
+        }
+      }
+    };
+    help();
+  }, [userFriends]);
   let friendText = "";
   if (requested.length == 0) {
     friendText = "No incoming friend requests.";
