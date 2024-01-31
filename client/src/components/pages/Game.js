@@ -171,7 +171,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   };
 
   useEffect(() => {
-    console.log("init");
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -181,14 +180,11 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     };
 
     ctx.save();
-    console.log(image_bear.width, image_bear.height);
+
     //draw bear
     const scale = 6;
     const bearw = 942.625;
     const bearh = 1684.1379310344828;
-    const bwidth = console.log("bear dim ", image_bear.width, image_bear.height);
-    console.log("image dim", image.width, image.height);
-    console.log(image_bear);
     image_bear.onload = function () {
       ctx.drawImage(
         image_bear,
@@ -208,7 +204,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   useEffect(() => {
     setTimeout(() => {
-      console.log("runing set time out");
       handleInput({ key: "ArrowRight", locationX }), 3000;
     });
   }, []);
@@ -299,7 +294,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   ///init function (with draw stuff inside)
   function init() {
-    console.log("init");
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -310,20 +304,16 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       setLocationX(leftBound);
     }
     setLeftBound(-width + window.innerWidth / 2);
-    console.log(window.innerWidth, -width + window.innerWidth / 2, leftBound, locationX);
+
     ctx.clearRect(0, 0, width, height);
 
     ctx.drawImage(image, 0, 0, width, height, locationX, 0, width, height);
     ctx.save();
-    console.log(image_bear.width, image_bear.height);
+
     //draw bear
     const scale = 6;
     const bearw = 942.625;
     const bearh = 1684.1379310344828;
-    const bwidth = console.log("bear dim ", image_bear.width, image_bear.height);
-    console.log("image dim", image.width, image.height);
-    console.log(image_bear);
-
     ctx.drawImage(
       image_bear,
       141 + (bearw + bearw / 8.8) * framenum,
@@ -335,7 +325,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
       7541 / (8 * scale * 0.8),
       4884 / (2.9 * scale * 0.8)
     );
-    console.log("locationX", locationX);
     setIFrame((prevnum) => prevnum + 0.05);
 
     setFrameNum(Math.floor(iFrame));
@@ -352,7 +341,6 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     const ctx = canvasRef.current.getContext("2d");
 
     const handleResize = (e) => {
-      console.log("height and innerWidth= ", image.height, window.innerWidth);
       ctx.canvas.height = image.height;
       ctx.canvas.width = window.innerWidth;
       init();

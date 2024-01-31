@@ -161,6 +161,7 @@ const Profile = (props) => {
       console.log("result after get user = ", result);
       console.log("result[0] after get user = ", result[0]);
       setUserExp(result.user[0].totalExp);
+      props.setUserExp(result.user[0].totalExp);
     });
   });
   useEffect(() => {
