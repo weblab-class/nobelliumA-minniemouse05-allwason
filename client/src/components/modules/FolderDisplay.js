@@ -51,7 +51,6 @@ const FolderDisplay = (props) => {
           </button>
         </div>
       )}
-
       <button
         className="add-button-notebook"
         style={{ "background-color": toggled }}

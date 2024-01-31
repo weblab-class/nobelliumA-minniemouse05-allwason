@@ -17,7 +17,8 @@ const FolderScroll = (props) => {
   return (
     <div className="scroll-container u-flexColumn">
       <button onClick={toggleDropdown}>
-        Current Folder: {props.folder} (click to edit) {/* Added a down arrow for a visual cue */}
+        Current Folder: {props.folder} <span className="click">(click to edit)</span>{" "}
+        {/* Added a down arrow for a visual cue */}
       </button>
       {expanded && (
         <div className="dropdown-content">
