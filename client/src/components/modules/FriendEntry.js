@@ -12,7 +12,7 @@ const FriendEntry = (props) => {
 
   if (props.isRequest) {
     button = (
-      <div className="u-flex">
+      <div className="u-flex ui-button">
         <button
           className="accept"
           onClick={() => {
@@ -22,7 +22,7 @@ const FriendEntry = (props) => {
           ✓
         </button>
         <button
-          className="deny"
+          className="deny ui-button"
           onClick={() => {
             props.denyRequest(props.requestId);
           }}
@@ -39,7 +39,7 @@ const FriendEntry = (props) => {
     );
   } else if (props.requested) {
     button = (
-      <button className="add-button" onClick={props.removeRequest}>
+      <button className="add-button ui-button" onClick={props.removeRequest}>
         Requested
       </button>
     );

@@ -22,7 +22,7 @@ const Friends = (props) => {
   const findFriend = () => {
     get("/api/user", { _id: text }).then((response) => {
       setSearched(true);
-      if (response.user) {
+      if (response && response.user[0]) {
         setFriendName(response.user[0].name);
         setFriendId(response.user[0]._id);
         setFound(true);
