@@ -12,6 +12,8 @@
   animation: animated-text 4s steps(29, end) 1s 1 normal both,
     animated-cursor 600ms steps(29, end) infinite;
 }
+/*https://stackoverflow.com/questions/1202425/making-the-main-scrollbar-always-visible
+https://stackoverflow.com/questions/50817727/change-scrollbar-height*/
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 7px;

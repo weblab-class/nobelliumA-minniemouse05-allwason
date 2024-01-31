@@ -32,6 +32,8 @@ const Profile = (props) => {
     length: 0,
   });
   const [loaded, setLoaded] = useState(false);
+  const [button1, setButton1] = useState("#a1c374");
+  const [button2, setButton2] = useState("#bddeb3");
 
   // [{awardName: test, awardDescription: test}]
   //array of objects
@@ -165,7 +167,10 @@ const Profile = (props) => {
     });
   });
   useEffect(() => {
+    console.log(button1);
     if (displayMode === "Achievements") {
+      setButton1("#a1c374");
+      setButton2("#bddeb3");
       setContent(
         <div>
           <div className="achievement-title-container">
@@ -189,6 +194,8 @@ const Profile = (props) => {
         </div>
       );
     } else {
+      setButton2("#a1c374");
+      setButton1("#bddeb3");
       setContent(
         <div className="story-container">
           <h1 className="story-title">Story</h1>
@@ -226,9 +233,24 @@ const Profile = (props) => {
                 <div className="custom-scrollbar">{content}</div>
               </div>
 
-              <div className="toggle-button-container">
-                <button className="toggleButton" onClick={toggleDisplayMode}>
-                  {displayMode}
+              <div className="toggle-button-container u-flex">
+                <button
+                  className="toggleButton"
+                  onClick={() => {
+                    setDisplayMode("Achievements");
+                  }}
+                  style={{ "background-color": button1 }}
+                >
+                  Achievements
+                </button>
+                <button
+                  className="toggleButton"
+                  style={{ "background-color": button2 }}
+                  onClick={() => {
+                    setDisplayMode("Story");
+                  }}
+                >
+                  Story
                 </button>
               </div>
             </div>
