@@ -29,12 +29,10 @@ const NotebookUnit = (props) => {
   };
   return (
     <>
-      <div className="u-flexColumn u-flex-justifyCenter u-space-between chapter-container">
-        <div>
-          {props.entries.map((entry, ind) => {
-            return makePage(entry._id, ind);
-          })}
-        </div>
+      <div className="u-flex-justifyCenter u-space-between chapter-container">
+        {props.entries.map((entry, ind) => {
+          return makePage(entry._id, ind);
+        })}
       </div>
       <div>
         {toggle && (

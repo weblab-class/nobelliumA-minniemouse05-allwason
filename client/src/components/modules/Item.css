@@ -2,30 +2,37 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-left: 0vw;
+  margin-right: 0vw;
+  margin-top: 1vh;
+  margin-bottom: vh;
 }
 
 .todo-border-button {
   cursor: pointer;
-  border: 2px solid black;
+  border: var(--xs) solid black;
   padding: var(--s);
-  border-radius: 5px;
+  border-radius: var(--xs);
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
-  margin: 1.5px;
 }
 
 .form-group {
   display: inline-block;
   margin-top: 0.4rem;
 }
-
+.item-name {
+  font-size: var(--xl);
+}
 .edit-input-box {
   border: 2.5px solid #404040;
+  border-radius: var(--xs);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.edit-input-box:focus {
+  border: 2.5px solid #404040 !important;
   border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .todo-container {
@@ -34,9 +41,10 @@
   flex-direction: column;
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border: 2px solid black;
+  padding: 1vw;
+  /*border-top: 2px solid black;
+  border-bottom: 2px solid black;*/
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 }
 
 .checkbox-container {
@@ -45,7 +53,7 @@
 }
 
 .checkbox-style {
-  width: 30px;
+  width: 3vw;
 }
 
 .item-entry-container {
@@ -58,4 +66,3 @@
 .item-button-container {
   margin-left: auto;
 }
-

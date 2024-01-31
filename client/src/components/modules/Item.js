@@ -70,10 +70,10 @@ const Item = (props) => {
         />
       </div>
       <div className="">
-        <button type="button" className="" onClick={() => setEditing(false)}>
+        <button type="button" className="todo-border-button" onClick={() => setEditing(false)}>
           Cancel
         </button>
-        <button type="submit" className="" onClick={updateName}>
+        <button type="submit" className="todo-border-button" onClick={updateName}>
           Save
         </button>
       </div>
@@ -94,7 +94,7 @@ const Item = (props) => {
               props.toggleTaskCompleted(props._id, props.userId, props.completed, props.name)
             }
           />
-          <label className="" htmlFor={props.id}>
+          <label className="pl-20 item-name" htmlFor={props.id}>
             {props.name}
           </label>
         </div>
