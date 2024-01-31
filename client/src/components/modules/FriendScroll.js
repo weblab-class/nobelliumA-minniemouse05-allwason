@@ -33,7 +33,6 @@ const FriendScroll = (props) => {
     setExpanded(false); // Close dropdown after selection
   };
   const sharePage = async (ind) => {
-    let x = await post("/api/addAchievement", { achievementId: 13, _id: userId });
     alert("Notebook entry shared!");
     let y = await post("/api/newEntry", {
       text: props.entry.text,
@@ -41,6 +40,7 @@ const FriendScroll = (props) => {
       folder: "Shared",
       userId: props.friends[ind],
     });
+    let x = await post("/api/addAchievement", { achievementId: 13, _id: props.userId });
 
     setExpanded(false);
   };

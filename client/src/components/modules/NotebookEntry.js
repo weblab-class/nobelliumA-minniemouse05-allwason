@@ -60,7 +60,7 @@ const NotebookEntry = (props) => {
     <div id="full_editor">
       <div className="u-flex u-flex-justifyCenter send-div">
         <Header header={header} changeHeader={changeHeader} updateFolder={updateFolder} />
-        <FriendScroll friends={props.friends} entry={props.entry} />
+        <FriendScroll friends={props.friends} entry={props.entry} userId={props.userId} />
       </div>
       <div className="u-flex">
         <FolderScroll

@@ -2,6 +2,7 @@ textarea {
   width: 100%;
 }
 #scrollDiv {
+  border-radius: none;
   height: 40vh;
   flex: 1;
   min-height: 20rem;
