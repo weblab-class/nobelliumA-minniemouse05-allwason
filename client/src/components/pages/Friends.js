@@ -234,7 +234,7 @@ const Friends = (props) => {
         let content = await get("/api/friends", { userId: props.userId });
         let newDict = { ...userDict };
         //console.log(content);
-        if (content && Object.keys(content).length !== 0) {
+        if (Object.keys(content).length !== 0) {
           if (content.friends) {
             setUserFriends(content.friends);
 
