@@ -28,7 +28,7 @@
   width: 10%;
 }
 .accept {
-  font-size: 3vw;
+  font-size: 3vw !important;
   align-items: center;
   justify-content: center;
   align-content: center;
