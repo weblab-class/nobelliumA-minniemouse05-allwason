@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const FolderDisplay = (props) => {
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
-
+  const toggled = toggle ? "#a1c374" : "#bddeb3";
   const handleChange = (e) => {
     setText(e.target.value);
   };
@@ -51,7 +51,12 @@ const FolderDisplay = (props) => {
           </button>
         </div>
       )}
-      <button className="add-button-notebook" onClick={handleNewFolder}>
+
+      <button
+        className="add-button-notebook"
+        style={{ "background-color": toggled }}
+        onClick={handleNewFolder}
+      >
         Add Folder
       </button>
     </div>

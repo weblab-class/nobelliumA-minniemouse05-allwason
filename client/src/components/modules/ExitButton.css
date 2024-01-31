@@ -1,5 +1,8 @@
 @import "../../utilities.css";
 .exit-button {
+  position: absolute;
+  top: 0vh;
+  right: 1vh;
   cursor: pointer;
   border: var(--xs) solid white;
   background-color: transparent;

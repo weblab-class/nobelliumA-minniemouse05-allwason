@@ -12,6 +12,18 @@
 .add-button-notebook {
   margin-top: 2vw;
 }
+.margin-button {
+  margin-left: 2vw;
+}
+button {
+  cursor: pointer;
+  border: 2px solid black;
+  padding: var(--s);
+  border-radius: 5px;
+  font-family: "Cute Font", sans-serif;
+  font-size: var(--l);
+  margin: 1.5px;
+}
 .folder-name-input {
   padding: 10px 15px;
 
