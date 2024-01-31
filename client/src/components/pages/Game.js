@@ -394,10 +394,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
         )}
         {todo ? (
           <Link to="/todo">
-            <button className="room-button todo-button">
-              <image className=" img" src={lightbulb} />
-              todo list
-            </button>
+            <button className="room-button todo-button">todo list</button>
           </Link>
         ) : (
           <></>
