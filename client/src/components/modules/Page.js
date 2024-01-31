@@ -23,13 +23,16 @@ const Page = (props) => {
   return (
     <>
       <button className="chapter" onClick={handlePage}>
-        <div className="u-flex-vertical">
+        <button className="delete" onClick={handleDelete}>
+          delete
+        </button>
+        <img className="file-image" src="https://i.ibb.co/vmq3nN9/image-removebg-preview-2.png" />
+        <div className="file-name u-flex-vertical">
           <p>{order}</p>
         </div>
       </button>
 
       <div className="u-flex">
-        <button onClick={handleDelete}>x</button>
         <input
           onFocus={() => {
             props.changeIndex(props.index);
