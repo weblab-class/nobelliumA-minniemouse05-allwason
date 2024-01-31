@@ -17,14 +17,12 @@
   color: black;
   background: #f5fde0;
   padding: 8px;
-  width: 90vw;
-  height: 30vh;
-  margin: auto;
+  width: 40vw;
+  height: 40vh;
+  margin: 20px;
   border: 2px solid black;
   border-radius: 25px;
   overflow-y: scroll;
-  margin-top: 20px;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,4 +73,27 @@
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
+}
+
+.info-image-text-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.info-story-image {
+  width: 20%;
+  height: 20%;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.info-nav-image {
+  width: 20%;
+  height: 20%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-top: 40px;
 }
