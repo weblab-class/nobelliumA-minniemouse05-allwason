@@ -20,10 +20,12 @@
 :root {
   --primary: #eeface;
   --primary--dim: #bddeb3;
+  --pink: #ffdbf7;
+  --dark--pink: #c35ead;
   --brown: #b38977;
   --medgrey: #5e8f8f;
 
-  --grey: #d5d6d0;
+  --grey: #b3a896;
   --white: #fff;
   --black: black;
   --darker: #2f4858;
@@ -127,14 +129,15 @@ form {
 }
 button {
   cursor: pointer;
-  border: var(--xs) solid black;
+  border: var(--xs) solid var(--dark--pink);
   padding: var(--xs);
   border-radius: none;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
+  background-color: var(--pink);
 }
 button:hover {
-  background-color: var(--primary--dim);
+  background-color: var(--dark--pink);
 }
 .u-overflow-scroll {
   overflow: scroll;

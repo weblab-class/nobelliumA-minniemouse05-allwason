@@ -78,7 +78,7 @@ const Profile = (props) => {
             userId: props.userId,
             length: story.length + 1,
             latest: response.message.content,
-            text: "\n\n\n" + response.message.content,
+            text: "\n\n" + response.message.content,
           }).then(() => {
             setStory({
               length: story.length + 1,
@@ -104,10 +104,10 @@ const Profile = (props) => {
             userId: props.userId,
             length: story.length + 1,
             latest: response.message.content,
-            text: story.text + "\n\n\n" + response.message.content,
+            text: story.text + "\n\n" + response.message.content,
           }).then(() => {
             setStory({
-              text: story.text + "\n\n\n" + response.message.content,
+              text: story.text + "\n\n" + response.message.content,
               length: story.length + 1,
               latest: response.message.content,
             });
@@ -152,7 +152,10 @@ const Profile = (props) => {
       setContent(
         <div>
           <div className="achievement-title-container">
-            <img className= "medal-image" src="https://i.ibb.co/pv6ykY2/Screenshot-2024-01-30-at-3-27-15-PM.png" />
+            <img
+              className="medal-image"
+              src="https://i.ibb.co/pv6ykY2/Screenshot-2024-01-30-at-3-27-15-PM.png"
+            />
             <h1 className="achievement-earned-text u-xlarge">Achievements Earned</h1>
           </div>
           <div className="comment-section">
@@ -170,8 +173,8 @@ const Profile = (props) => {
       );
     } else {
       setContent(
-        <div>
-          <h1 className='story-title'>Story</h1>
+        <div className="story-container">
+          <h1 className="story-title">Story</h1>
 
           <p className="story-div">{story.text}</p>
         </div>

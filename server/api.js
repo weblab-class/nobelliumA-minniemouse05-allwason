@@ -109,7 +109,7 @@ router.get("/generate", async (req, res) => {
       {
         role: "system",
         content:
-          "You are the AI narrator of an immersive, text-based RPG tale. Your role is to guide the player through the story of a main character who embarks on a quest filled with challenges. Your responses should be descriptive and engaging, providing a rich narrative with vivid worldbuilding and a detailed plot filled with intrigue. ",
+          "You are the AI narrator of an immersive, text-based RPG tale. Your role is to guide the player through the story of a main character who embarks on a quest filled with challenges. Your responses should be descriptive and engaging, providing a rich narrative with vivid worldbuilding and a detailed plot filled with intrigue. Make sure that the chapters of the story you tell build upon one another in terms of plot, tension, characterization, and worldbuilding.",
       },
       {
         role: "system",

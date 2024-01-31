@@ -224,11 +224,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     } else {
       setTodo(false);
     }
-    if (locationX < leftBound + image.width / 2.5 && locationX > leftBound + image.width / 3) {
-      setCalendar(true);
-    } else {
-      setCalendar(false);
-    }
+
     if (locationX < leftBound + image.width / 4 && locationX > leftBound + image.width / 10) {
       setNotebook(true);
     } else {
@@ -407,13 +403,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
         ) : (
           <></>
         )}
-        {calendar ? (
-          <Link to="/calendar">
-            <button className="room-button calendar">calendar</button>{" "}
-          </Link>
-        ) : (
-          <></>
-        )}
+
         <Link to="notebook">
           {notebook ? <button className="room-button notes">notebook</button> : <></>}
         </Link>

@@ -29,7 +29,9 @@
   margin-top: 0vh;
   justify-content: center;
 }
-
+.story-container {
+  margin: 3vw;
+}
 .toggle-button-container {
   padding: 5px;
   display: flex;
