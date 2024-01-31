@@ -25,12 +25,13 @@ import Music from "./Music.js";
  */
 const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodoro }) => {
   //display stuff logic
-  console.log(setTotalExp);
+  //console.log(setTotalExp);
   const [pomodoro, setPomodoro] = useState(false);
   const [content, setContent] = useState(<></>);
 
   const [itemData, setItemData] = useState([]);
-
+  const width = 1951;
+  const height = 960;
   useEffect(() => {
     if (open === "todo") {
       const todo = (
@@ -99,9 +100,9 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
   const [flip, setFlip] = useState(0);
   const [framenum, setFrameNum] = useState(0);
   const [iFrame, setIFrame] = useState(0);
-  const [locationX, setLocationX] = useState(window.innerWidth / 2 - 80);
+  const [locationX, setLocationX] = useState(-width + window.innerWidth / 2 + width / 2);
   const intervalRef = useRef(null);
-  const [leftBound, setLeftBound] = useState(-1200);
+  const [leftBound, setLeftBound] = useState(-width + window.innerWidth / 2);
   const [todo, setTodo] = useState(false);
   const [clock, setClock] = useState(false);
   const [music, setMusic] = useState(false);
@@ -216,6 +217,7 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
 
   useEffect(() => {
     init();
+    console.log(locationX, "locationX", leftBound, leftBound + width);
   }, []);
 
   //image stuff
@@ -290,29 +292,30 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     if (locationX < leftBound) {
       setLocationX(leftBound);
     }
-    setLeftBound(-image.width + window.innerWidth / 2);
+    setLeftBound(-width + window.innerWidth / 2);
 
-    ctx.clearRect(0, 0, image.width, image.height);
-    ctx.drawImage(image, 0, 0, image.width, image.height, locationX, 0, image.width, image.height);
+    ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(image, 0, 0, width, height, locationX, 0, width, height);
     ctx.save();
-
+    console.log(image_bear.width, image_bear.height);
     //draw bear
     const scale = 6;
-    const bearw = image_bear.width / 8;
-    const bearh = image_bear.height / 2.9;
+    const bearw = 942.625;
+    const bearh = 1684.1379310344828;
     console.log("bear dim ", bearw, bearh);
+    console.log("image dim", image.width, image.height);
     ctx.drawImage(
       image_bear,
       141 + (bearw + bearw / 8.8) * framenum,
       bearh * flip,
       bearw,
       bearh,
-      window.innerWidth / 2 - image.height / (2 * scale),
-      image.height - image.height / (4 / 1.9),
+      window.innerWidth / 2 - height / (2 * scale),
+      height - height / 1.85,
       image_bear.width / (8 * scale),
       image_bear.height / (2.9 * scale)
     );
-    console.log("running after ctx.draw bear");
+    console.log("locationX", locationX);
     setIFrame((prevnum) => prevnum + 0.05);
 
     setFrameNum(Math.floor(iFrame));
