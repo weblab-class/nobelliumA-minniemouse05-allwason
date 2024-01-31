@@ -31,7 +31,7 @@ const Calendar = () => {
           setShow(!show);
         })
         .catch((error) => {
-          console.log(error);
+          //console.log(error);
         });
     } else if (name === "sign-out") {
       apiCalendar.handleSignoutClick();
@@ -67,10 +67,10 @@ const Calendar = () => {
                   apiCalendar
                     .createEvent(eventFromNow)
                     .then((result) => {
-                      console.log(result);
+                      //console.log(result);
                     })
                     .catch((error) => {
-                      console.log(error);
+                      //console.log(error);
                     });
                 }}
               >
@@ -81,7 +81,7 @@ const Calendar = () => {
               <button
                 onClick={(e) => {
                   apiCalendar.listUpcomingEvents(10).then(({ result }) => {
-                    console.log("result.items= ", result.items);
+                    //console.log("result.items= ", result.items);
                     setEvents(result.items);
                   });
                 }}

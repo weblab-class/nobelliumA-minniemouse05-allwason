@@ -31,7 +31,7 @@ const Form = (props) => {
       }).then((result) => {
         setName("");
 
-        console.log(result);
+        //console.log(result);
         props.addTask({ _id: result._id, userId: props.userId, name: name, completed: false });
       });
     }

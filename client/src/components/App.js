@@ -39,9 +39,10 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(totalExp);
-  }, [totalExp]);
+  // useEffect(() => {
+  //   console.log(totalExp);
+  // }, [totalExp]);
+
   useEffect(() => {
     if (totalExp >= 5) {
       post("/api/addAchievement", { achievementId: 6, _id: userId });
@@ -105,7 +106,7 @@ const App = () => {
   const _handleKeyDown = (event) => {
     if (event.keyCode === ESCAPE_KEY) {
       navigate("/");
-      console.log("back to home");
+      //console.log("back to home");
     }
   };
   return (

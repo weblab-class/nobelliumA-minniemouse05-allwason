@@ -107,7 +107,7 @@ const Pomodoro = (props) => {
             className="p-button"
             onClick={() => {
               setState("paused");
-              console.log(state);
+              //console.log(state);
             }}
           >
             <span className="material-symbols-outlined">pause</span>
@@ -116,7 +116,7 @@ const Pomodoro = (props) => {
             className="p-button"
             onClick={() => {
               setState("reset");
-              console.log(state);
+              //console.log(state);
             }}
           >
             <span className="material-symbols-outlined">stop</span>

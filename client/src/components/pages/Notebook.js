@@ -20,10 +20,10 @@ const Notebook = ({ userId }) => {
   const newEntry = (props) => {
     post("/api/newEntry", { userId: userId, text: "", header: props.header, folder: folder }).then(
       (entry) => {
-        console.log(entry);
+        //console.log(entry);
         setEntries(entries.concat([entry]));
 
-        console.log(entries.concat([entry]));
+        //console.log(entries.concat([entry]));
       }
     );
   };
@@ -31,7 +31,7 @@ const Notebook = ({ userId }) => {
     post("/api/folder", { userId: userId, folders: folders.concat(props.folder) }).then((entry) => {
       setFolders(folders.concat(props.folder));
 
-      console.log(folders.concat(props.folder));
+      //(folders.concat(props.folder));
     });
   };
   const deleteEntry = (index) => {
@@ -40,20 +40,20 @@ const Notebook = ({ userId }) => {
       .then(() => {
         //console.log(entries);
         //console.log(entries[index]);
-        console.log(index);
-        console.log(
-          entries
-            .filter((value, ind, b) => value.folder === folder)
-            .filter((_, ind, b) => index !== ind)
-        );
+        //console.log(index);
+        // console.log(
+        //   entries
+        //     .filter((value, ind, b) => value.folder === folder)
+        //     .filter((_, ind, b) => index !== ind)
+        // );
 
         const filtered = entries.filter((value, ind, b) => value.folder === folder);
         let i = filtered.indexOf(folder);
-        console.log(filtered);
+        //console.log(filtered);
         setEntries((entries) => entries.filter((entry, ind, b) => entry._id !== find._id));
-        console.log(entries);
+        //console.log(entries);
       })
-      .catch(console.log("oops"));
+      .catch();
   };
   const deleteFolder = async (ind) => {
     let post1 = await post("/api/folder", {
