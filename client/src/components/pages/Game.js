@@ -206,6 +206,13 @@ const Game = ({ userId, name, totalExp, setTotalExp, open, setOpen, togglePomodo
     //ctx.restore();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("runing set time out");
+      handleInput({ key: "ArrowRight", locationX }), 3000;
+    });
+  }, []);
+
   //stuff for interacting w room
   useEffect(() => {
     init();
