@@ -20,6 +20,7 @@ const Notebook = ({ userId }) => {
   const newEntry = (props) => {
     post("/api/newEntry", { userId: userId, text: "", header: props.header, folder: folder }).then(
       (entry) => {
+        console.log(entry);
         setEntries(entries.concat([entry]));
 
         console.log(entries.concat([entry]));
@@ -129,7 +130,7 @@ const Notebook = ({ userId }) => {
     setEntries((entries) =>
       entries.map((entry, i) =>
         entry.folder === folders[ind]
-          ? { header: entry.header, text: entry.text, folder: value }
+          ? { _id: entry._id, header: entry.header, text: entry.text, folder: value }
           : entry
       )
     );
@@ -210,6 +211,7 @@ const Notebook = ({ userId }) => {
           folders={folders}
           handleFolderChange={handleFolderChange}
           friends={friends}
+          _id={entries.filter((value, ind, b) => value.folder === folder)[index]._id}
         />
       );
     } else {

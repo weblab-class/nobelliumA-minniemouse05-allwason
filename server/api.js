@@ -353,6 +353,7 @@ router.post("/newEntry", (req, res) => {
   newEntry
     .save()
     .then((entry) => {
+      console.log(entry);
       res.send(entry);
     })
     .catch(() => {
@@ -371,6 +372,7 @@ router.post("/deleteEntry", (req, res) => {
 
 router.post("/entry", (req, res) => {
   console.log(req.body);
+  console.log(req.body.text);
   console.log(req.body._id);
   const update = {
     $set: {
