@@ -13,6 +13,12 @@
   background-color: transparent;
   border: none;
 }
+
+.p-button:hover {
+  color: white;
+  background-color: transparent;
+}
+
 .material-symbols-outlined {
   vertical-align: middle;
 }
@@ -66,4 +72,19 @@ input {
   color: white;
   align-items: center;
   justify-content: center;
+}
+
+
+.pomodoro-button-styling {
+  cursor: pointer;
+  border: var(--xs) solid var(--black);
+  padding: var(--xs);
+  border-radius: none;
+  font-family: "Cute Font", sans-serif;
+  font-size: var(--l);
+  background-color: #DDDDDD;
+}
+
+.pomodoro-button-styling:hover {
+  background-color: #c0c0c0
 }
