@@ -13,7 +13,7 @@ const Info = (props) => {
         <>
           <div className="info-text-container">
             <div className="info-heading"> What is RoomCraft? </div>
-            <div className="About-typewriter">become the most productive version of yourself! </div>
+            <div className="info-productive-text">become the most productive version of yourself! </div>
 
             <div className="info-image-text-container">
               <img
