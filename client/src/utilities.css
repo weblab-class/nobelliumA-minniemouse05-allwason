@@ -20,6 +20,7 @@
 :root {
   --primary: #eeface;
   --primary--dim: #bddeb3;
+  --primary--dark: #a1c374;
   --pink: #ffdbf7;
   --dark--pink: #c35ead;
   --brown: #b38977;
@@ -129,15 +130,15 @@ form {
 }
 button {
   cursor: pointer;
-  border: var(--xs) solid var(--dark--pink);
+  border: var(--xs) solid var(--black);
   padding: var(--xs);
   border-radius: none;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
-  background-color: var(--pink);
+  background-color: var(--primary--dim);
 }
 button:hover {
-  background-color: var(--dark--pink);
+  background-color: var(--primary--dark);
 }
 .u-overflow-scroll {
   overflow: scroll;

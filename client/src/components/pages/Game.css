@@ -48,9 +48,13 @@
 .bear {
   width: 20%;
 }
-
+.room-button {
+  border: var(--xs) solid var(--dark--pink);
+  background-color: var(--pink);
+}
 .room-button:hover {
   border: var(--xs) solid var(--black);
+  background-color: var(--dark--pink);
 }
 .display-box {
   padding: 0% 3% 3% 3%;
