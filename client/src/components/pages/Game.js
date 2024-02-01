@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { get, post } from "../../utilities";
-import room from "./../../../dist/room.png";
+// import room from "./../../../dist/room.png";
+import room from "./../../../dist/roomwcoffeeanimate2.gif";
 // import bear_left from "./../../../dist/bear.png";
 // import bear_right from "./../../../dist/bear-flipped.png";
 import bearsprite from "./../../../dist/bearsprite.svg";
