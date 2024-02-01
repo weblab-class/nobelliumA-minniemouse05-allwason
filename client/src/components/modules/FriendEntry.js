@@ -17,13 +17,13 @@ const FriendEntry = (props) => {
   const [requested, setRequested] = useState(false);
   const [normal, setNormal] = useState(false);
   useEffect(() => {
-    console.log(props);
+    //console.log(props);
 
     if (props.isRequest || request) {
       setRequest(true);
       setRequested(false);
       setNormal(false);
-      console.log("should be rendered");
+      //console.log("should be rendered");
       setButton(
         <div className="u-flex ui-button">
           <button
