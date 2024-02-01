@@ -36,7 +36,7 @@ const Leaderboard = (props) => {
         props.setTotalExp(result.user[0].totalExp);
       }
     });
-  }, []);
+  }, [props.totalExp]);
   useEffect(() => {
     //console.log("userExp= ", props.totalExp);
     //console.log("lowestExpOfArray", lowestExpOfArray);
