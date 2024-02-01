@@ -262,7 +262,7 @@ const Profile = (props) => {
                   alt="bear"
                   className="avatar-image"
                 />
-                <div className="all-caps profile-overlay-text">{props.name}</div>
+                <div className="all-caps profile-overlay-text profile-animated-text">{props.name}</div>
               </div>
               <div className="user-box">
                 <div className="exp">

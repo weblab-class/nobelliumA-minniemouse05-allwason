@@ -74,7 +74,7 @@ https://stackoverflow.com/questions/50817727/change-scrollbar-height*/
 
 .info-instruction-text {
   font-size: 35px;
-  color: #626262;
+  color: var(--newgrey);
   padding: 5px;
   margin-left: 2.5vw;
   margin-right: 2vw;

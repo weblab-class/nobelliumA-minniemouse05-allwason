@@ -133,7 +133,7 @@
 
 .profile-overlay-text {
   position: absolute;
-  top: 35%; /* Adjust the value to vertically center the text */
+  top: 45%; /* Adjust the value to vertically center the text */
   left: 54.5%; /* Adjust the value to horizontally center the text */
   transform: translate(-50%, -50%);
   color: black; /* Text color */
@@ -164,4 +164,28 @@
   margin-left: 5%;
   width: 20%;
   height: auto;
+}
+
+.profile-animated-text {
+  animation: move-text-color 0.75s forwards;
+  opacity: 0;
+}
+
+@keyframes move-text-color {
+  0% {
+    bottom: -0.2em;
+    opacity: 1;
+    color: #3e5c76;
+  }
+
+  50% {
+    bottom: 0.2em;
+    color: var(--dark--pink);
+  }
+
+  100% {
+    bottom: 0;
+    opacity: 1;
+    color: var(--primary--dark);
+  }
 }
