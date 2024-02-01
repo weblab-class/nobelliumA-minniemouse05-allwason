@@ -1,8 +1,9 @@
 @import "../../utilities.css";
 .todo-border-button {
   cursor: pointer;
-  border: 2px solid black;
+  border: none;
   padding: var(--s);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);

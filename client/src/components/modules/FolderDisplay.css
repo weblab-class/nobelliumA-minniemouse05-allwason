@@ -12,11 +12,21 @@
 
 .add-button-notebook {
   margin-top: 2vw;
+  border-radius: var(--xs);
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.add-button-notebook:hover {
+  margin-top: 2vw;
+  border-radius: var(--xs);
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .folder-name-input {
   padding: 10px 15px;
 
-  border-bottom: 2px solid #000000;
+  border-bottom: none;
   border-radius: 0px;
   outline: none;
   transition: border-color 0.3s;
@@ -25,7 +35,11 @@
   height: 4vh;
   width: 80%;
 }
-
+.done {
+  border-radius: var(--xs);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: none;
+}
 .folder-name-input:focus {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }

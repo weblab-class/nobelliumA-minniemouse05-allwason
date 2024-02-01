@@ -18,6 +18,10 @@ textarea {
 }
 .button-div {
   margin-right: 0.5vw;
+  border: none;
+  border-radius: var(--xs);
+  padding: var(--xs);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 /*code: https://stackoverflow.com/questions/66071101/how-to-remove-quill-js-toolbar-border*/
 .ql-container.ql-snow {

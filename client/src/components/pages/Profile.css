@@ -59,6 +59,10 @@
 
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
+.toggleButton:hover {
+  color: white;
+  transition: 0.5s;
+}
 .rightButton {
   margin-left: 1vw;
 }

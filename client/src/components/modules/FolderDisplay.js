@@ -39,7 +39,7 @@ const FolderDisplay = (props) => {
         <div className="u-flex input-area">
           <input className="folder-name-input" value={text} onChange={handleChange} />
           <button
-            className="u-ml-15"
+            className="u-ml-15 done"
             onClick={() => {
               if (!props.folders.includes(text)) props.newFolder({ folder: text });
               else {

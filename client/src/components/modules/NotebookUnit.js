@@ -50,7 +50,7 @@ const NotebookUnit = (props) => {
             </button>
           </div>
         )}
-        <div className="u-flex add-button-notebook">
+        <div className="u-flex add-button-notebook1">
           <button
             className="margin-button button-div notebook-button"
             onClick={() => {
