@@ -41,6 +41,7 @@ const NotebookUnit = (props) => {
           <div className="u-flex input-area">
             <input className="folder-name-input" value={text} onChange={handleChange} />
             <button
+              className="notebook-button"
               onClick={() => {
                 props.newEntry({ header: text });
               }}
@@ -51,7 +52,7 @@ const NotebookUnit = (props) => {
         )}
         <div className="u-flex add-button-notebook">
           <button
-            className="margin-button button-div"
+            className="margin-button button-div notebook-button"
             onClick={() => {
               props.changeMode("folder");
             }}
@@ -60,7 +61,7 @@ const NotebookUnit = (props) => {
           </button>
           {props.folder !== "Shared" ? (
             <button
-              className="button-div"
+              className="button-div notebook-button"
               style={{ "background-color": toggled }}
               onClick={handleNewEntry}
             >

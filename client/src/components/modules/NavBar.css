@@ -25,6 +25,9 @@
 .NavBar-link:hover {
   color: var(--dark--pink);
 }
+button {
+  box-shadow: none;
+}
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 10, "opsz" 24;

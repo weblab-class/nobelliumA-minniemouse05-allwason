@@ -351,7 +351,9 @@ const Friends = (props) => {
           <div className="search-field">
             <input value={text} onChange={handleChange}></input>
           </div>
-          <button onClick={findFriend}>search</button>
+          <button className="search" onClick={findFriend}>
+            search
+          </button>
         </div>
       ) : (
         <></>
