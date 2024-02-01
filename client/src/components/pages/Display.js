@@ -9,6 +9,7 @@ import Todo from "./Todo.js";
 import Notebook from "./Notebook.js";
 import Calendar from "./Calendar.js";
 import room from "./../../../dist/room.png";
+// import room from "./../../../dist/roomwcoffeeanimate2.gif";
 
 /**
  * Parent: Room
