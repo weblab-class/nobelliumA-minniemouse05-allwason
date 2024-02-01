@@ -1,3 +1,4 @@
+@import "../../utilities.css";
 .info-heading {
   font-size: 65px;
   font-weight: bold;
@@ -43,7 +44,7 @@ https://stackoverflow.com/questions/50817727/change-scrollbar-height*/
   margin-right: 1vw;
 }
 .info-navigate-container ::-webkit-scrollbar-thumb {
-  border-radius: 4px;
+  border-radius: var(--xs);
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
@@ -56,7 +57,7 @@ https://stackoverflow.com/questions/50817727/change-scrollbar-height*/
   height: 40vh;
   margin: 20px;
   border: 2px solid black;
-  border-radius: 25px;
+  border-radius: var(--s);
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -68,6 +69,7 @@ https://stackoverflow.com/questions/50817727/change-scrollbar-height*/
   padding-top: 11px;
   padding-bottom: 5px;
   font-size: 40px;
+  color: var(--primary--dark);
 }
 
 .info-instruction-text {

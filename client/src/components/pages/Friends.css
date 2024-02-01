@@ -4,7 +4,8 @@
   height: 50vh;
   margin-left: 10vw;
   margin-right: 10vw;
-  border: var(--xs) solid black;
+  border: 2px solid black;
+  border-radius: var(--s);
   background-color: var(--primary--dim);
 }
 .find {
@@ -14,8 +15,13 @@
 .search-field {
   margin-right: 1.5vw;
 }
+
 .friend {
-  border: var(--xs) solid black;
+  border: 2px solid black;
+  border-radius: var(--s);
+  box-shadow: 4px 4px 10px var(--primary--dim);
+  background-color: var(--primary);
+
   margin-left: 10vw;
   margin-right: 10vw;
   margin-bottom: 2vh;
@@ -28,6 +34,7 @@
   margin-left: 10vw;
   margin-right: 10vw;
   text-align: center;
-  border: var(--xs) solid black;
+  border: 2px solid black;
+  border-radius: var(--s);
   margin-bottom: 5vh;
 }

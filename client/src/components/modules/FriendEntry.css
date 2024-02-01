@@ -4,7 +4,7 @@
 .FriendEntry {
   font-size: var(--xl);
   height: 5vh;
-  width: 67vw;
+  width: 65vw;
   padding: 4%;
   margin: 4%;
   background-color: var(--primary);
@@ -28,7 +28,7 @@
   width: 10%;
 }
 .accept {
-  font-size: 3vw !important;
+  font-size: 3vw;
   align-items: center;
   justify-content: center;
   align-content: center;

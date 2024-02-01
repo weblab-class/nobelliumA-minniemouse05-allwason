@@ -359,7 +359,7 @@ const Friends = (props) => {
 
       {props.userId ? (
         <div className="requests">
-          <h1>{friendText}</h1>
+          <h1 className="friend-text">{friendText}</h1>
           {requested.map((friend_id, ind) => {
             return makeRequestEntry(friend_id, ind, true);
           })}
