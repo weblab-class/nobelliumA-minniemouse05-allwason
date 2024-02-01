@@ -4,7 +4,8 @@
   height: 50vh;
   margin-left: 10vw;
   margin-right: 10vw;
-  border: 2px solid black;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  border: none;
   border-radius: var(--s);
   background-color: var(--primary--dim);
 }
@@ -17,11 +18,11 @@
 }
 
 .friend {
-  border: 2px solid black;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: var(--s);
-  box-shadow: 4px 4px 10px var(--primary--dim);
+  box-shadow: 4px 4px 10px var(--dark--pink);
   background-color: var(--primary);
-
+  /*border: 1px solid var(--dark--pink);*/
   margin-left: 10vw;
   margin-right: 10vw;
   margin-bottom: 2vh;
@@ -34,7 +35,16 @@
   margin-left: 10vw;
   margin-right: 10vw;
   text-align: center;
-  border: 2px solid black;
+  border: 3px solid var(--primary--dim);
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: var(--s);
   margin-bottom: 5vh;
+}
+.search {
+  border: none;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: var(--xs);
 }

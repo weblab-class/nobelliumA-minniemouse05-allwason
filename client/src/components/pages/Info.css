@@ -52,11 +52,12 @@ https://stackoverflow.com/questions/50817727/change-scrollbar-height*/
 .info-navigate-container {
   color: black;
   background: #f5fde0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   padding: 8px;
   width: 40vw;
   height: 40vh;
   margin: 20px;
-  border: 2px solid black;
+  border: none;
   border-radius: var(--s);
   overflow-y: scroll;
   display: flex;

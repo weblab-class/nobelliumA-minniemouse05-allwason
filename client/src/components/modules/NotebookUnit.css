@@ -16,9 +16,10 @@
 .margin-button {
   margin-left: 2vw;
 }
-button {
+.notebook-button {
   cursor: pointer;
-  border: 2px solid black;
+  border: none;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   padding: var(--s);
   border-radius: 5px;
   font-family: "Cute Font", sans-serif;

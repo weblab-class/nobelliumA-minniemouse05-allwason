@@ -23,6 +23,7 @@
   --primary--dark: #a1c374;
   --primary--darker: #316747;
   --pink: #ffdbf7;
+  --muted--pink: #dcb2d4;
   --dark--pink: #c35ead;
   --brown: #b38977;
   --medgrey: #5e8f8f;
@@ -133,7 +134,7 @@ form {
 }
 button {
   cursor: pointer;
-  border: var(--xs) solid var(--black);
+
   padding: var(--xs);
   border-radius: none;
   font-family: "Cute Font", sans-serif;
@@ -171,7 +172,7 @@ button:hover {
 input {
   padding: 10px 15px;
 
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid var(--newgrey);
   border-radius: 0px;
   outline: none;
   transition: border-color 0.3s;
