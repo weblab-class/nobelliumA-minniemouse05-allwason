@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cute+Font&family=Open+Sans:wght@400;600&display=swap");
+@import "../../utilities.css";
 
 /* Fill me in :) */
 .welcome {
@@ -50,12 +51,14 @@
   margin-top: -20px;
   font-size: 40px;
   white-space: pre-line;
+  color: black;
 }
 
 .login-roomcraft-text {
   font-size: 80px;
   margin-top: -20px;
   margin-bottom: -10px;
+  color: black;
 }
 
 .login-directions-text {

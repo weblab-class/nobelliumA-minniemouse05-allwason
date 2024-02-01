@@ -61,13 +61,12 @@ const Room = ({
           <div className="login-container login">
             <img
               className="door_img"
-              src="https://i.ibb.co/2yLRQRw/Screenshot-2024-01-30-at-2-29-58-PM.png"
+              src="https://i.ibb.co/89fmNkK/Screenshot-2024-02-01-at-2-14-17-AM.png"
             />
             <div className="login-text-container">
               <div className="login-welcome-text"> Welcome to</div>
-              <div className="login-roomcraft-text"> RoomCraft! </div>
-              <div className="login-directions-text"> use arrow keys to move around the room! </div>
-              <div className="login-directions2-text"> click around to interact! </div>
+              <div className="login-roomcraft-text"> RoomCraft </div>
+              <div className="login-directions-text"> </div>{" "}
               <div className="key-login-container">
                 <img className="key_img pr-15" src={key} />
                 <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>

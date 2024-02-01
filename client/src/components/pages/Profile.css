@@ -78,7 +78,7 @@
   font-family: "Cute Font", sans-serif;
   font-size: 4vh;
   margin-left: 11.5vh;
-  color: black;
+  color: var(--newgrey);
 }
 .accent {
   color: var(--dark--pink);
@@ -88,7 +88,7 @@
   font-family: "Cute Font", sans-serif;
   font-size: 4vh;
   margin-left: 11.5vh;
-  color: black;
+  color: var(--newgrey);
 }
 
 .avatar-image {
@@ -186,6 +186,6 @@
   100% {
     bottom: 0;
     opacity: 1;
-    color: var(--primary--dark);
+    color: black;
   }
 }
