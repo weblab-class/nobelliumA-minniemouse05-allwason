@@ -56,15 +56,15 @@ const FriendEntry = (props) => {
     );
   }
 
-  let name = "unnamed friend";
-  let achievements = 0;
-  let totalexp = 0;
-
+  let name, achievements, totalexp;
   if (props.info) {
     name = props.info.name;
     achievements = props.info.achievementArray.length;
     totalexp = props.info.totalExp;
   } else {
+    name = "unnamed friend";
+    achievements = 0;
+    totalexp = 0;
     //console.log(props.info);
   }
 
