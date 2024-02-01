@@ -38,7 +38,7 @@
 .toggle-button-container {
   padding: 5px;
   display: flex;
-  width: 100%;
+  width: 50vw;
   align-items: center;
   justify-content: center;
   margin-top: 30px;
@@ -46,7 +46,7 @@
 
 .toggleButton {
   border-radius: 8px;
-  width: 150px;
+  width: 20vw;
   margin-bottom: 10vh;
 
   cursor: pointer;
@@ -67,7 +67,7 @@
   margin: auto;
   border: 2px solid black;
   /* border: 6px solid var(--black); */
-  border-radius: 25px;
+  border-radius: var(--s);
   overflow-y: scroll;
 }
 .comment-section {
@@ -76,23 +76,24 @@
 
 .exp {
   font-family: "Cute Font", sans-serif;
-  font-size: 2.7vw;
-  margin-left: 11.5vw;
+  font-size: 4vh;
+  margin-left: 11.5vh;
   color: black;
 }
 .accent {
   color: var(--dark--pink);
 }
+
 .new-userid {
   font-family: "Cute Font", sans-serif;
-  font-size: 2.7vw;
-  margin-left: 7vw;
+  font-size: 4vh;
+  margin-left: 11.5vh;
   color: black;
 }
 
 .avatar-image {
-  width: 68%;
-  display: block;
+  height: 64vh;
+  /*display: block;*/
   font-size: 3.2vw;
   margin-left: 7vw;
   justify-content: center;
@@ -122,7 +123,7 @@
 
 .name {
   font-family: "Cute Font", sans-serif;
-  font-size: 5.2vw;
+  font-size: 2.2vh;
   margin-left: 13vw;
 }
 
@@ -133,10 +134,10 @@
 .profile-overlay-text {
   position: absolute;
   top: 35%; /* Adjust the value to vertically center the text */
-  left: 47%; /* Adjust the value to horizontally center the text */
+  left: 54.5%; /* Adjust the value to horizontally center the text */
   transform: translate(-50%, -50%);
   color: black; /* Text color */
-  font-size: 7.5vw; /* Adjust the font size as needed */
+  font-size: 12vh; /* Adjust the font size as needed */
   text-align: center;
   white-space: nowrap;
 }

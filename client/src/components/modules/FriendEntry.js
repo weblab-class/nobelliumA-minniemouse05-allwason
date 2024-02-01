@@ -15,12 +15,14 @@ const FriendEntry = (props) => {
   const [request, setRequest] = useState(false);
   const [button, setButton] = useState(<></>);
   const [requested, setRequested] = useState(false);
+  const [normal, setNormal] = useState(false);
   useEffect(() => {
     console.log(props);
 
     if (props.isRequest || request) {
       setRequest(true);
       setRequested(false);
+      setNormal(false);
       console.log("should be rendered");
       setButton(
         <div className="u-flex ui-button">
@@ -48,15 +50,19 @@ const FriendEntry = (props) => {
           +
         </button>
       );
-    } else if (props.requested) {
+    } else if (requested || props.requested) {
       setRequested(true);
       setRequest(false);
+      setNormal(false);
       setButton(
         <button className="add-button ui-button" onClick={props.removeRequest}>
           Requested
         </button>
       );
-    } else if (props.userId !== props.requestId) {
+    } else if (props.userId !== props.requestId || normal) {
+      setNormal(true);
+      setRequest(false);
+      setRequested(false);
       setButton(
         <button
           className="x-button"
