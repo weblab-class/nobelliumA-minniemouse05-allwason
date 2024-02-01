@@ -265,7 +265,9 @@ const Friends = (props) => {
               let friend_id = content.requested[i];
               if (userDict[friend_id] === undefined) {
                 let response = await get("/api/user", { _id: friend_id });
-                newDict[friend_id] = response.user[0];
+                if (response.user) {
+                  newDict[friend_id] = response.user[0];
+                }
               }
             }
           }
@@ -282,6 +284,7 @@ const Friends = (props) => {
             }
           }
           setUserDict((old) => newDict);
+          console.log(newDict);
         } else {
           let req1 = await post("/api/friends", {
             userId: props.userId,
