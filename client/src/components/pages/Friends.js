@@ -230,7 +230,7 @@ const Friends = (props) => {
   useEffect(() => {
     const init = async () => {
       setUserId(props.userId);
-      let newuDict = { ...userDict };
+      let newDict = { ...userDict };
       if (userFriends.length == 0 && requests.length == 0 && requested.length == 0) {
         let content = await get("/api/friends", { userId: props.userId });
 
