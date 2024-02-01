@@ -51,13 +51,17 @@
   margin-bottom: 10vh;
 
   cursor: pointer;
-  border: 2px solid black;
+  border: none;
   padding: var(--xs);
   border-radius: none;
   font-family: "Cute Font", sans-serif;
   font-size: var(--l);
-}
 
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.rightButton {
+  margin-left: 1vw;
+}
 .board {
   font-size: 3.2vw;
   color: white;
@@ -66,10 +70,11 @@
   width: 40vw;
   height: 60vh;
   margin-left: 5vw;
-  border: 2px solid black;
+  border: none;
   /* border: 6px solid var(--black); */
   border-radius: var(--s);
   overflow-y: scroll;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 .comment-section {
   overflow-y: scroll;

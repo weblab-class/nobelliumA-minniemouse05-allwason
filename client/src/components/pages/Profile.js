@@ -266,7 +266,7 @@ const Profile = (props) => {
                   Achievements
                 </button>
                 <button
-                  className="toggleButton"
+                  className="toggleButton rightButton"
                   style={{ "background-color": button2 }}
                   onClick={() => {
                     setDisplayMode("Story");
