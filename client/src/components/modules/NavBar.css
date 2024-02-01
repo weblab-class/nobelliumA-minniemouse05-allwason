@@ -19,12 +19,20 @@
 .NavBar-link,
 .NavBar-link:visited {
   color: var(--black);
-  opacity: 0.6;
+  opacity: 1;
   text-decoration: none;
+}
+.NavBar-link:hover {
+  color: var(--dark--pink);
 }
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 10, "opsz" 24;
+  color: black;
+}
+.material-symbols-outlined:hover {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 10, "opsz" 24;
+  color: var(--dark--pink);
 }
 
 .tooltip {

@@ -23,34 +23,34 @@
 
 .todo-button {
   position: absolute;
-  bottom: 37vh;
+  bottom: 40vh;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-35%, 0);
   background-image: url("./../../../dist/lightbulb.png");
 }
 .calendar {
   position: absolute;
-  bottom: 37vh;
+  bottom: 40vh;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-35%, 0);
 }
 .notes {
   position: absolute;
-  bottom: 37vh;
+  bottom: 40vh;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-35%, 0);
 }
 .clock {
   position: absolute;
-  bottom: 37vh;
+  bottom: 40vh;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-35%, 0);
 }
 .bear {
   width: 20%;
 }
 .room-button {
-  border: var(--xs) solid var(--dark--pink);
+  border: var(--s) solid var(--dark--pink);
   background-color: var(--pink);
   background-image: url("./../../../dist/lightbulb.png");
   border-radius: 0px;
