@@ -37,7 +37,7 @@
 }
 
 .leaderboard-board-image {
-  width: 50vw; /* Set the desired width */
+  width: 48vw; /* Set the desired width */
   height: auto;
   object-fit: cover;
 }
@@ -53,7 +53,7 @@
 
 .first-leaderboard-text-overlay {
   position: absolute;
-  top: 21.3%; /* Adjust to vertically center the text */
+  top: 19.3%; /* Adjust to vertically center the text */
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: black; /* Set the text color */
@@ -65,7 +65,7 @@
 
 .first-exp-text-overlay {
   position: absolute;
-  top: 26%; /* Adjust to vertically center the text */
+  top: 24.1%; /* Adjust to vertically center the text */
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: #dfdede; /* Set the text color */
@@ -77,7 +77,7 @@
 
 .second-leaderboard-text-overlay {
   position: absolute;
-  top: 43.7%; /* Adjust to vertically center the text */
+  top: 43%; /* Adjust to vertically center the text */
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: black; /* Set the text color */
@@ -89,7 +89,7 @@
 
 .second-exp-text-overlay {
   position: absolute;
-  top: 48%; /* Adjust to vertically center the text */
+  top: 47.7%; /* Adjust to vertically center the text */
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: #dfdede; /* Set the text color */
@@ -101,7 +101,7 @@
 
 .third-leaderboard-text-overlay {
   position: absolute;
-  top: 65%; /* Adjust to vertically center the text */
+  top: 66.2%; /* Adjust to vertically center the text */
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: black; /* Set the text color */
@@ -113,7 +113,7 @@
 
 .third-exp-text-overlay {
   position: absolute;
-  top: 69.4%; /* Adjust to vertically center the text */
+  top: 70.7%; /* Adjust to vertically center the text */
   left: 50%; /* Adjust to horizontally center the text */
   transform: translate(-50%, -50%); /* Center the text using translation */
   color: #dfdede; /* Set the text color */

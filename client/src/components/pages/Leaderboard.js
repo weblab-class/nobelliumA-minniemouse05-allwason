@@ -68,7 +68,7 @@ const Leaderboard = (props) => {
               <div className="leaderboard-image-overlay">
                 <img
                   className="leaderboard-board-image"
-                  src="https://i.ibb.co/TrmqqBd/Screenshot-2024-01-29-at-10-07-27-PM.png"
+                  src="https://i.ibb.co/7y1yTjs/pixil-frame-0-1.png"
                 />
                 <div class="first-leaderboard-text-overlay">{expArray[0].name} </div>
                 <div class="first-exp-text-overlay">{expArray[0].exp} exp </div>
