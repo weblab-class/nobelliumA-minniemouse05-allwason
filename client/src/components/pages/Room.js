@@ -63,9 +63,11 @@ const Room = ({
               className="door_img"
               src="https://i.ibb.co/89fmNkK/Screenshot-2024-02-01-at-2-14-17-AM.png"
             />
-            <div className="login-text-container">
-              <div className="login-welcome-text"> Welcome to</div>
-              <div className="login-roomcraft-text"> RoomCraft </div>
+            <div className="login-text-container ">
+              <div className="room-animation">
+                <div className="login-welcome-text"> Welcome to</div>
+                <div className="login-roomcraft-text"> RoomCraft </div>
+              </div>
               <div className="login-directions-text"> </div>{" "}
               <div className="key-login-container">
                 <img className="key_img pr-15" src={key} />
