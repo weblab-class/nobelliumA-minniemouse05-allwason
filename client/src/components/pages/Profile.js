@@ -199,7 +199,7 @@ const Profile = (props) => {
       setButton1("#bddeb3");
       setContent(
         <div className="story-container">
-          <h1 className="story-title">Story</h1>
+          <h1 className="story-title">Journey Log</h1>
 
           <p className="story-div">{storyText}</p>
         </div>
@@ -229,6 +229,27 @@ const Profile = (props) => {
       {props.userId ? (
         <>
           <div className="profile-container u-flex">
+            <div className="right-half">
+              <div className="profile-image-text-container">
+                <img
+                  src="https://i.ibb.co/BnnZJfL/Screenshot-2024-02-01-at-2-53-27-AM.png"
+                  alt="bear"
+                  className="avatar-image"
+                />
+                <div className="all-caps profile-overlay-text profile-animated-text">
+                  {props.name}
+                </div>
+              </div>
+              <div className="user-box">
+                <div className="exp">
+                  Total exp earned to date: <span className="accent">{userExp}</span>
+                </div>
+                <div className="new-userid">
+                  {" "}
+                  UserId: <span className="accent">{props.userId}</span>
+                </div>
+              </div>
+            </div>
             <div className="left-half">
               <div className="board">
                 <div className="custom-scrollbar">{content}</div>
@@ -251,27 +272,8 @@ const Profile = (props) => {
                     setDisplayMode("Story");
                   }}
                 >
-                  Story
+                  Journey Log
                 </button>
-              </div>
-            </div>
-            <div className="right-half">
-              <div className="profile-image-text-container">
-                <img
-                  src="https://i.ibb.co/h83sQhL/Screenshot-2024-01-30-at-11-57-01-AM.png"
-                  alt="bear"
-                  className="avatar-image"
-                />
-                <div className="all-caps profile-overlay-text profile-animated-text">{props.name}</div>
-              </div>
-              <div className="user-box">
-                <div className="exp">
-                  Total exp earned to date: <span className="accent">{userExp}</span>
-                </div>
-                <div className="new-userid">
-                  {" "}
-                  UserId: <span className="accent">{props.userId}</span>
-                </div>
               </div>
             </div>
           </div>

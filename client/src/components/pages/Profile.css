@@ -29,6 +29,7 @@
 .right-half {
   flex: 1;
   margin-top: 0vh;
+  margin-left: 5vw;
   justify-content: center;
   height: 80vh;
 }
@@ -78,7 +79,7 @@
   font-family: "Cute Font", sans-serif;
   font-size: 4vh;
   margin-left: 11.5vh;
-  color: var(--newgrey);
+  color: black;
 }
 .accent {
   color: var(--dark--pink);
@@ -88,7 +89,7 @@
   font-family: "Cute Font", sans-serif;
   font-size: 4vh;
   margin-left: 11.5vh;
-  color: var(--newgrey);
+  color: black;
 }
 
 .avatar-image {
@@ -109,6 +110,8 @@
 }
 .story-title {
   color: black;
+  font-size: 5vw;
+  text-align: center;
 }
 
 .story-div {
@@ -123,7 +126,7 @@
 
 .name {
   font-family: "Cute Font", sans-serif;
-  font-size: 2.2vh;
+  font-size: 2.2vw;
   margin-left: 13vw;
 }
 
@@ -133,11 +136,11 @@
 
 .profile-overlay-text {
   position: absolute;
-  top: 45%; /* Adjust the value to vertically center the text */
+  top: 50%; /* Adjust the value to vertically center the text */
   left: 54.5%; /* Adjust the value to horizontally center the text */
   transform: translate(-50%, -50%);
   color: black; /* Text color */
-  font-size: 12vh; /* Adjust the font size as needed */
+  font-size: 10vh; /* Adjust the font size as needed */
   text-align: center;
   white-space: nowrap;
 }
@@ -186,6 +189,6 @@
   100% {
     bottom: 0;
     opacity: 1;
-    color: black;
+    color: var(--black);
   }
 }
