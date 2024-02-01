@@ -14,5 +14,5 @@
 }
 
 .comment-desc {
-  color: #8e8e8e;
+  color: var(--newgrey);
 }
