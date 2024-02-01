@@ -56,7 +56,7 @@
   border-radius: 0px;
 }
 .room-button:hover {
-  border: var(--xs) solid var(--black);
+  border: var(--s) solid var(--black);
   background-color: var(--dark--pink);
 }
 
